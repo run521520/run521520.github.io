@@ -71,6 +71,168 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ida使用文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/22/ida%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2025-09-21T17:43:33.000Z" itemprop="datePublished">2025-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/09/22/ida%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">ida使用文档</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>打开解析程序之后：</p>
+<p>左边的是函数窗口：<br> 	按Ctrl + f  为查找函数名字，只要是表格窗口都可以用 Ctrl + f 搜索</p>
+<p>IDA-View窗口：<br> 	汇编代码窗口，按空格键切换图形模式和文本模式</p>
+<p>Pseudocode窗口：<br>伪代码窗口，在伪代码位置按下 tab 键可以切换到对应的汇编窗口，这里面就是我们学到的c&#x2F;c++语言窗口了；</p>
+<p> 	点击关键词后按 N 键，可将关键词重命名；也可右键选择 “Rename global item”<br> <br>字符串窗口：<br> 	列举程序代码所引用到的字符串常量<br> 	Shift + F12 打开字符串窗口<br> 	Ctrl + F 可以弹出底部搜索小窗口，这里注意的是，因为是包含ida所识别的所有字符串，所以我们可以根据程序运行时，所给出的提示，来搜索相关的函数<br> <br>其他窗口：HEX View  ， Exports ， Imports ， Structures</p>
+<p>菜单项 View 菜单中可以找到 IDA绝大部分窗口入口</p>
+<!-- 其次是便捷键介绍 -->
+<!-- Ctrl + X 交叉引用，按住某个字符串或变量，按Ctrl+x 会弹出引用该变量的函数
+
+Ctrl + Z 撤回操作的意思
+
+Alt + t 查找汇编指令，按F3可以直接找下一个(文本查找),当然也可以直接 Ctrl + F来搜
+
+Alt + m 制作一个标签，添加描述
+
+Ctrl + m 搜索标签，跳转到任意标签
+
+\键  隐藏 *(_DWORD *)v3 = -858993460; 中的*(_DWORD *)  再次按 \ 又会出现
+
+f5(相当于Tab键，如果F5没反应，那可能是你的f5有设置其他的快捷键) 反编译出类似于c代码的窗口
+
+h键(记住Hex-View是16进制窗口便可记住,h相当于Hex-View的快捷键显示16进制) 10进制和16进制互换
+
+d键 将IDA view-RIP解面的单个字节进行转换，可转换为2个，3个，4个，甚至更多个字节。
+
+u键 将多个字节数据，甚至是汇编字节码进行拆分为单个字节的。
+
+c键 重新分析为汇编代码
+
+/键 在汇编解密也可以看到f5的伪代码，方便在汇编界面调试，前提是代码能f5
+
+r键 转换为字符串类型的样子。
+
+n键 修改变量 函数名称
+
+y键 修改变量类型，使代码更加好看
+
+m键 查看一些api的参数名称
+
+p键 重新生成函数
+
+还有些set ip呀，重新定义数组呀之类操作。 -->
+
+<p>IDA调试器特性：<br>1.软件断点 &#x2F; 硬件断点 &#x2F; 条件断点 &#x2F; 脚本断点<br>2.步入 &#x2F; 步过 &#x2F; 步出函数 &#x2F; 执行到光标位置<br>3.汇编级 &#x2F; 伪代码级 &#x2F; 源码级<br>4.寄存器 &#x2F; 内存读写<br>5.启动进程调试 &#x2F; 附加调试</p>
+<!-- 调试按钮介绍 -->
+<!-- 
+开始调试：
+
+找到 debugger 后点击只有一个，然后选择 Local Windows debugger , 这样就可以调试了，
+
+在要断点的地方按 F2 改行会显示红色
+
+然后 点击 debugger 会有很多选项 找到 Start process 程序会运行到 断点处
+
+选项：
+
+1. Quick debug view
+快速调试视图，一般用于快速查看调试过程中的关键信息，比如寄存器状态、内存数据等相关的概要信息，方便调试者快速定位和了解当前程序调试的状态。
+2. Debugger windows
+提供了与调试相关的各种子窗口，例如反汇编窗口、寄存器窗口、内存窗口等，通过这些子菜单可以打开或切换不同的调试辅助窗口，帮助调试人员从不同角度观察程序在调试过程中的运行情况。
+3. Breakpoints
+New breakpoint：设置新的断点，通过指定代码地址、条件等信息，让程序在运行到该位置时暂停，方便调试者检查此时的程序状态。
+Edit breakpoint：编辑已有的断点属性，比如修改断点的触发条件、是否启用等。
+Delete breakpoint：删除指定的断点。
+Manage breakpoints：管理所有断点，可能包括批量操作断点（如全部禁用、全部删除等）、查看断点列表及其详细信息等功能。
+4. Watches
+观察窗口，用于添加要监视的变量、表达式等。在调试过程中，可以实时查看这些被监视对象的值的变化情况，帮助调试者了解程序运行时特定数据的状态。
+5. Tracing
+追踪调试功能，开启后可以记录程序执行的轨迹，比如记录程序执行过的指令序列等信息。这对于分析程序的执行流程、查找逻辑错误等非常有帮助，调试人员可以事后查看追踪记录来分析程序的行为。
+6. Start process
+按 F9 键可以触发该功能，用于启动一个新的进程并附加调试器，开始对新启动的进程进行调试。这是开始调试一个尚未运行的可执行程序的常用方式。
+7. Attach to process
+Start a new process in the debugger：在调试器中启动一个新进程，和 Start process 功能类似，都是启动新进程进行调试，但可能在一些启动参数设置、与现有调试环境的交互方式上略有差异。
+Attach to running process：将调试器附加到一个已经在运行的进程上，从而可以对该进程进行调试。这适用于调试已经启动并在运行中的程序，比如分析某个服务程序运行时出现的问题。
+Attach to remote process：连接到远程机器上正在运行的进程进行调试，在调试跨机器环境或者需要调试远程服务器上的程序时会用到。
+8. Process options...
+用于配置与进程调试相关的选项，例如设置调试进程的环境变量、工作目录，以及对调试进程的其他运行时参数进行调整，以满足特定的调试需求。
+9. Pause process
+暂停正在调试的进程，暂停后可以检查程序的当前状态，比如查看内存、寄存器、变量值等，方便定位问题。
+10. Terminate process
+终止正在调试的进程，结束该进程的运行，一般在调试过程中发现问题需要重新开始，或者确认程序出现严重错误无法继续调试时使用。
+11. Detach from process
+将调试器从正在调试的进程上分离，进程会继续按照正常的方式运行，而调试器不再对其进行控制。常用于调试过程中需要暂时停止调试但又不希望终止进程的情况。
+12. Refresh memory
+刷新内存视图，当程序运行过程中内存数据发生变化，而调试器的内存显示没有及时更新时，使用该功能可以重新读取内存数据并更新显示，确保调试人员看到的内存数据是最新的。
+13. Take memory snapshot
+对当前进程的内存状态进行快照，记录下某个时刻的内存数据。可以用于对比不同时刻的内存状态，查找内存泄漏、数据篡改等问题。
+14. Step into
+按 F7 键执行，单步调试进入函数内部，即当遇到函数调用时，调试器会进入被调用的函数，逐行执行函数内部的代码，方便调试者查看函数内部的执行逻辑和数据变化。
+15. Step over
+按 F8 键执行，单步调试但不进入函数内部。当遇到函数调用时，会把函数作为一个整体执行完，直接跳到函数调用后的下一条指令，适用于不想深入查看某个函数内部逻辑，只想快速跳过该函数调用继续调试后续代码的情况。
+16. Run until return
+按 Ctrl+F7 键执行，让程序继续运行，直到当前函数返回。常用于快速跳过某个函数内部的代码执行，直接查看函数执行完成后的状态。
+17. Run to cursor
+按 F4 键执行，让程序运行到光标所在的位置暂停，方便调试者快速定位到代码中的某个特定位置进行检查，而不需要逐行单步调试。
+18. Switch to source
+切换到对应的源代码视图，如果调试的程序有对应的源代码，并且调试器能够关联上，使用该功能可以快速跳转到与当前反汇编代码对应的源代码位置，方便调试人员对照查看。
+19. Use source-level debugging
+启用源码级调试模式，在该模式下，调试器会尽量按照源代码的逻辑来展示调试信息，以源代码行作为调试的基本单位，便于调试人员从更直观的源码角度来理解程序的执行过程。
+20. Open source file...
+打开指定的源代码文件，用于手动关联或查看与调试程序相关的源代码文件。
+21. Debugger options...
+打开调试器的全局配置选项，用于设置调试器的各种行为，比如设置内存显示格式、调试输出的详细程度、断点的默认属性等，以满足不同调试场景和个人习惯的需求。
+22. Switch debugger...
+切换调试器，当 IDA 支持多种调试器时（比如本地调试器、远程调试器等不同类型），使用该功能可以在不同的调试器之间进行切换，以适应不同的调试环境和需求。
+
+-->
+<p>在 Hex View 表中可以修改内存从而修改值<br>找到要修改的位置  按 F2 便可以修改了，之后在按 F2 便可修改成功 ， 或者右键找到 Edit 也可以<br>同时有一个插件 lazyIDA 可以直接将要修改的内容粘贴，不用一个一个修改 </p>
+<!-- ida调试技巧-通过修改eip寄存器的值强制运行程序中存在但未被调用的函数 -->
+<!-- 
+eip寄存器用来存储CPU要读取指令的地址，CPU通过EIP寄存器读取即将要执行的指令，故而修改eip寄存器的值可以让cpu直接执行某函数
+程序是32位时叫：eip
+程序是64位时叫：rip
+
+第一步找到要调用的函数地址(十六进制的)复制
+
+然后找到要插入的位置，找到对应的汇编，设置断点，然后开始调试
+右边会出现寄存器窗口，找到 EIP(RIP)双击值会出现窗口将值改变到要运行的函数地址
+双击不行的话，点击 EIP(RIP)后 点击 edit(添加导出) 里面有一个 ...space 我忘记了，快捷键是右键
+
+之后将断点取消，运行就行
+ -->
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/22/ida%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/" data-id="cuid_rmjOURgO9YnODWyPAtew" data-title="ida使用文档" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/09/21/hello-world/" class="article-date">
@@ -151,6 +313,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/09/22/ida%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">ida使用文档</a>
+          </li>
         
           <li>
             <a href="/2025/09/21/hello-world/">Hello World</a>

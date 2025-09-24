@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="//github.githubassets.com">
+  <link rel="preconnect" href="https://github.githubassets.com">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/09/24/RC4%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-24T13:07:15.051Z">
+<meta property="article:modified_time" content="2025-08-02T14:07:27.371Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-RC4加密算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/24/RC4%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2025-09-24T13:07:15.051Z" itemprop="datePublished">2025-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>RC4 是典型的对称加密算法</strong></p>
+<p>对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中：</p>
+<p>发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输；</p>
+<p>接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。</p>
+<p><strong>RC4 算法特性与安全性</strong></p>
+<p>RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 256 字节（对应 8 - 2048 比特） 。加密时，会依据密钥及密钥长度生成密钥流，且密钥流长度与明文长度严格匹配，加密和解密流程复用同一算法逻辑，密钥流的生成完全由密钥内容与长度决定。</p>
+<p>在现代技术环境下，当密钥长度达到 128 比特时，暴力枚举密钥的攻击方式已不具备可行性 。由于暴力破解需尝试近乎 “2^128” 数量级的密钥组合，计算量超乎现有算力承载极限，因此可预见在未来较长周期内，RC4 算法凭借其密钥长度设计，能够抵御暴力密钥搜索攻击。截至目前，针对 128 比特密钥长度的 RC4 加密，尚未出现经实践验证的有效攻击手段，一定程度上保障了算法应用的安全性。</p>
+<p><strong>RC4 算法核心组成</strong></p>
+<p>RC4 加密流程主要由两部分构成：</p>
+<p>初始化算法（KSA，Key - Scheduling Algorithm）：负责对初始的密钥状态进行处理，基于输入密钥打乱内部状态数组，为后续生成密钥流做准备；</p>
+<p>加密算法（PRGA，Pseudo - Random Generation Algorithm ，实际常与 KSA 协同表述）：依托 KSA 初始化后的状态，逐字节生成伪随机密钥流，通过密钥流与明文的按位异或（XOR）操作，完成加密（解密为逆过程，复用相同密钥流与异或逻辑 ），最终输出密文（或还原明文 ）。</p>
+<p>#include&lt;stdio.h&gt;</p>
+<p>#include&lt;string.h&gt;</p>
+<p>&#x2F;&#x2F; 初始化RC4的S盒</p>
+<p>void rc4_init(unsigned char *s, unsigned char *key, unsigned long key_len) {</p>
+<p>&nbsp;   int i &#x3D; 0, j &#x3D; 0;</p>
+<p>&nbsp;   unsigned char k[256] &#x3D; {0};</p>
+<p>&nbsp;   unsigned char temp &#x3D; 0;</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   &#x2F;&#x2F; 初始化S盒和K盒</p>
+<p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p>
+<p>&nbsp;       s[i] &#x3D; i;</p>
+<p>&nbsp;       k[i] &#x3D; key[i % key_len];  &#x2F;&#x2F; 用密钥循环填充K盒</p>
+<p>&nbsp;   }</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   &#x2F;&#x2F; 打乱S盒</p>
+<p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p>
+<p>&nbsp;       j &#x3D; (j + s[i] + k[i]) % 256;</p>
+<p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p>
+<p>&nbsp;       temp &#x3D; s[i];</p>
+<p>&nbsp;       s[i] &#x3D; s[j];</p>
+<p>&nbsp;       s[j] &#x3D; temp;</p>
+<p>&nbsp;   }</p>
+<p>}</p>
+<p>&#x2F;&#x2F; RC4加解密（数据会被直接修改）</p>
+<p>void rc4_crypt(unsigned char *s, unsigned char *data, unsigned long len) {</p>
+<p>&nbsp;   int i &#x3D; 0, j &#x3D; 0, t &#x3D; 0;</p>
+<p>&nbsp;   unsigned long k &#x3D; 0;</p>
+<p>&nbsp;   unsigned char temp;</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   for (k &#x3D; 0; k &lt; len; k++) {</p>
+<p>&nbsp;       i &#x3D; (i + 1) % 256;</p>
+<p>&nbsp;       j &#x3D; (j + s[i]) % 256;</p>
+<p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p>
+<p>&nbsp;       temp &#x3D; s[i];</p>
+<p>&nbsp;       s[i] &#x3D; s[j];</p>
+<p>&nbsp;       s[j] &#x3D; temp;</p>
+<p>&nbsp;       &#x2F;&#x2F; 生成密钥流并异或</p>
+<p>&nbsp;       t &#x3D; (s[i] + s[j]) % 256;</p>
+<p>&nbsp;       data[k] ^&#x3D; s[t];</p>
+<p>&nbsp;   }</p>
+<p>}</p>
+<p>int main() {</p>
+<p>&nbsp;   unsigned char s[256] &#x3D; {0};</p>
+<p>&nbsp;   char key[] &#x3D; “zhaosh”;               &#x2F;&#x2F; 密钥</p>
+<p>&nbsp;   unsigned char data[] &#x3D; {12, 23, 3, 4, 4, 4, 3, 0x7F, 12, 1, 21, 3, 23};  &#x2F;&#x2F; 修正超出char范围的值</p>
+<p>&nbsp;   unsigned long data_len &#x3D; sizeof(data);  &#x2F;&#x2F; 用sizeof计算二进制数据长度</p>
+<p>&nbsp;   unsigned long key_len &#x3D; strlen(key);</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   &#x2F;&#x2F; 加密过程</p>
+<p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);</p>
+<p>&nbsp;   rc4_crypt(s, data, data_len);</p>
+<p>&nbsp;   printf(“加密后数据（十六进制）：”);</p>
+<p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p>
+<p>&nbsp;       printf(“%02X “, data[i]);  &#x2F;&#x2F; 用十六进制显示二进制数据</p>
+<p>&nbsp;   }</p>
+<p>&nbsp;   printf(“\n”);</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   &#x2F;&#x2F; 解密过程（需要重新初始化S盒）</p>
+<p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);  &#x2F;&#x2F; 重新初始化</p>
+<p>&nbsp;   rc4_crypt(s, data, data_len);</p>
+<p>&nbsp;   printf(“解密后数据（十进制）：”);</p>
+<p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p>
+<p>&nbsp;       printf(“%d “, data[i]);</p>
+<p>&nbsp;   }</p>
+<p>&nbsp;   printf(“\n”);</p>
+<p>&nbsp;   </p>
+<p>&nbsp;   return 0;</p>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/24/RC4%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-id="cuidfq2geRJyKLRPK_mknFcN1" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/09/24/TEA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/09/22/ida%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ida使用文档</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/09/24/%E4%B8%80%E4%BA%9B%E8%BE%B9%E9%97%A8%E7%9A%84%E8%BF%90%E7%AE%97/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/%E6%B1%87%E7%BC%96/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/Upx%E8%84%B1%E5%A3%B3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/TEA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="//github.githubassets.com">
+  <link rel="preconnect" href="https://github.githubassets.com">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="寄存器：在x86架构中，寄存器是cpu内部的高速存储区域，用常用于存放数据，指令地址和计算结果。 寄存器的大小通常与cpu的位数相关： 在32位x86架构中，寄存器的大小是32位（内存地址也是） 在64位x86架构中，寄存器的大小是64位（内存地址也是） x86寄存器中可以分以下几类： eax(EAX)：累加寄存器，常用于算数运算，I&#x2F;O操作。(windows中常用于存放结果返回值) e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/09/24/%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="寄存器：在x86架构中，寄存器是cpu内部的高速存储区域，用常用于存放数据，指令地址和计算结果。 寄存器的大小通常与cpu的位数相关： 在32位x86架构中，寄存器的大小是32位（内存地址也是） 在64位x86架构中，寄存器的大小是64位（内存地址也是） x86寄存器中可以分以下几类： eax(EAX)：累加寄存器，常用于算数运算，I&#x2F;O操作。(windows中常用于存放结果返回值) e">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-24T13:07:15.099Z">
+<meta property="article:modified_time" content="2025-09-23T21:17:15.084Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-汇编" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/24/%E6%B1%87%E7%BC%96/" class="article-date">
+  <time class="dt-published" datetime="2025-09-24T13:07:15.099Z" itemprop="datePublished">2025-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="寄存器："><a href="#寄存器：" class="headerlink" title="寄存器："></a><strong>寄存器：</strong></h3><p>在x86架构中，寄存器是cpu内部的高速存储区域，用常用于存放数据，指令地址和计算结果。</p>
+<p>寄存器的大小通常与cpu的位数相关：</p>
+<p>在32位x86架构中，寄存器的大小是32位（内存地址也是）</p>
+<p>在64位x86架构中，寄存器的大小是64位（内存地址也是）</p>
+<p><strong>x86寄存器中可以分以下几类：</strong></p>
+<p>eax(EAX)：累加寄存器，常用于算数运算，I&#x2F;O操作。(windows中常用于存放结果返回值)</p>
+<p>ebx(EBX)：基址寄存器，用于指向数组或数据结构的基址</p>
+<p>ecx(ECX)：在windows中通常用于循环计数器或移位操作</p>
+<p>edx(EDX)：数据寄存器，用于存储乘法，除法的结果</p>
+<p>esi(ESI)：源索引寄存器用于指向源操作数，尤其是在字符串操作中。</p>
+<p>edx(EDX)：目的索引寄存器，用于指向目标操作数，尤其是在字符串操作中</p>
+<p>ebp(EBP)：基指针寄存器，用于保存栈帧的基地址（尤其是函数调用时，栈的管理非常依赖它）。栈底 — 因为 EBP 指向栈这种数据结构的底部，所以叫栈底</p>
+<p>esp(ESP)：堆栈指针寄存器，用于指向当前栈顶位置，栈的 push&#x2F;pop 操作都依赖于它。栈顶 — 因为 ESP 指向栈这种数据结构的顶部，所以叫栈顶</p>
+<p>在 x86-64（64 位）架构中，寄存器的名称略有变化，但功能类似：</p>
+<p>RAX, RBX, RCX, RDX, RSI, RDI, RBP, RSP —— 这些是 64 位的扩展版本。</p>
+<p><strong>指令指针寄存器：</strong></p>
+<p>EIP:指令指针寄存器，它指向cpu正在执行的下一条指令的内存地址在64位中变为RIP</p>
+<p>EIP只存在于cpu中，并没有汇编指令能直接修改它，</p>
+<p>但是通常异常处理机制可以修改EIP</p>
+<p><strong>标志寄存器：</strong></p>
+<p>用于储存cpu执行后的状态信息，常见用途是在条件跳转如JZ,JC中判断依据</p>
+<h3 id="汇编语言的基本结构："><a href="#汇编语言的基本结构：" class="headerlink" title="汇编语言的基本结构："></a><strong>汇编语言的基本结构：</strong></h3><p><strong>指令，操作数，标签，操作符</strong></p>
+<p><strong>指令：</strong></p>
+<p>指令代表cpu执行的一个操作，每条指令通常由操作码和操作数组成。</p>
+<p>操作码：告诉cpu执行什么操作</p>
+<p> 	如 MOV(数据传送)，ADD(加法)，SUB(减法)等</p>
+<p>操作数：操作数可以是寄存器，内存地址，立即数(常数)，就是指定操作对象</p>
+<p>列如：MOV EAX , 5</p>
+<p>操作码：MOV 表示将数据传送到寄存器</p>
+<p>操作数：EAX(寄存器) , 5(立即数)   表示将常数 5 立即存入 EAX中</p>
+<p><strong>操作数：</strong></p>
+<p>操作数是指令的参数，表示指令操作的对象。操作数通常有以下几种类型：</p>
+<p>寄存器：如EAX , EBX表示cpu内部的寄存器 如： MOV EAX,EBX</p>
+<p>内存地址：如 0X40100000</p>
+<p> 	MOV EAX , 0X40100000</p>
+<p>立即数就是常数</p>
+<p><strong>操作符：</strong></p>
+<p>操作符是汇编语言中执行运算的符号。</p>
+<p>它可以是算术运算符(加，减)，逻辑操作符(与，或，非)，移位操作符(按位，或非)</p>
+<p>常见的算数操作符： 常见的位操作符：</p>
+<p>ADD: 加法							AND :按位与</p>
+<p>SUB: 减法							OR: 按位与</p>
+<p>MUL: 无符号乘法					XOR: 按位异或</p>
+<p>DIV: 无符号除法					SHL: 逻辑左移</p>
+<p>INC:自增								    SHR: 逻辑右移</p>
+<p>DEC:自减</p>
+<p><strong>mul</strong> <strong>作为无符号乘法 默认 EAX作为被乘数，操作数为乘数</strong></p>
+<p>mov eax , 5</p>
+<p>mov ecx , 2</p>
+<p>mul ecx</p>
+<p>&#x2F;&#x2F;eax &#x3D; 10 ,结果储存在EAX（低32位），高位结果储存在 EDX</p>
+<p><strong>imul 有符号乘法 支持单操作，双操作，三操作</strong></p>
+<p>单操作：默认被乘数在EAX</p>
+<p>双操作：imul dest , src      dest作为目标寄存器储存结果</p>
+<p>三操作：imul dest , src ,imm   将src*imm的结果储存到dest</p>
+<p><strong>div 无符号除法 被除数 默认是 EDX:EAX 组成的64位整数，低32位在EAX</strong></p>
+<p><strong>商储存在EAX , 余数储存在 EDX</strong></p>
+<p><strong>需要确保 EDX 被清零（或正确设置），否则结果可能出错。</strong></p>
+<p>mov edx , 0         &#x2F;&#x2F;这里是高位清零</p>
+<p>mov eax , 15</p>
+<p>mov ecx , 3</p>
+<p>div ecx </p>
+<p>eax &#x3D; eax &#x2F; ecx    ,   edx &#x3D; eax % ecx</p>
+<p><strong>idiv 有符号除法 ，与div 类似，需要设置EDX,且结果符号由操作数符号决定</strong></p>
+<p><strong>确保EDX符号开启：cdq 指令</strong></p>
+<p>mov eax , -15</p>
+<p>cdq</p>
+<p>mov ecx , 3</p>
+<p>idiv ecx</p>
+<p>eax &#x3D; eax &#x2F; ecx &#x3D; -5   ,  edx &#x3D; eax % ecx &#x3D;0</p>
+<p><strong>mul、imul、div 和 idiv 在反汇编技术和安全对抗中，既可以作为分析目标，也能用作保护手段：</strong></p>
+<p><strong>攻击者可能利用它们的异常特性（如除零）或溢出特性来制造漏洞或反调试逻辑。</strong></p>
+<p><strong>恶意软件可能使用这些指令混淆数据流，隐藏真实逻辑。</strong></p>
+<p><strong>逆向工程师需要通过静态和动态分析工具，还原这些指令的逻辑和用途，从而解读隐藏意图。</strong></p>
+<p><strong>栈：</strong></p>
+<p><strong>push（入栈）将数据压入栈顶</strong></p>
+<p><strong>pop（出栈） 将数据移除并返回</strong></p>
+<p>他们操作的寄存器都是：esp 因为栈的特性是栈顶，而esp是控制栈顶的</p>
+<p>所以 都是操作esp 的 ebp是栈底</p>
+<p>mov 将数据从源传输到目的地位置 mov eax, ebx</p>
+<p>push 将数据压入栈      push eax</p>
+<p>pop  从栈中弹出数据到目的地 push eax</p>
+<p>xchg 交换两个操作数的值  xchg eax,ebx</p>
+<p>lea 取地址  lea eax,[ebx+4] 将ebx的地址加4给到eax</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/24/%E6%B1%87%E7%BC%96/" data-id="cuidevV3xGvx22NF6YHDtSfwZ" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/09/24/%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/09/24/Upx%E8%84%B1%E5%A3%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/09/24/%E4%B8%80%E4%BA%9B%E8%BE%B9%E9%97%A8%E7%9A%84%E8%BF%90%E7%AE%97/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/%E6%B1%87%E7%BC%96/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/Upx%E8%84%B1%E5%A3%B3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/TEA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -4,20 +4,7 @@
   
   
   <entry>
-    <title></title>
-    <link href="/2025/10/04/Base64%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
-    <url>/2025/10/04/Base64%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
-    
-    <content type="html"><![CDATA[<p><strong>MD5和SHA256加密是不可逆的</strong></p><p><strong>base64是可逆的</strong></p><p>在python脚本中</p><p>开始要引入 base64</p><p>import 是引入的意思；</p><p><strong>import base64</strong></p><p>开始默认映射的是顺序是 <strong>“ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;“</strong></p><p>要解密的为data</p><p><strong>data &#x3D; “SGVsbG8gV29ybGQ&#x3D;”</strong></p><p>则flag为</p><p><strong>flag_byte &#x3D; base64.b64decode(data)</strong></p><p>这里是base64调用 b64decode()函数 ，该函数是将已经加密的字符返回</p><p>b64decode() 函数返回的是字节，需要经过 decode(“utf-8”) 转换为字符串</p><p><strong>flag &#x3D; flag_byte.decode(“utf-8”)</strong></p><p><strong>print(flag)</strong></p><p>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</p><p><strong>有一些的变形：</strong></p><h4 id="映射改变了"><a href="#映射改变了" class="headerlink" title="映射改变了"></a><strong>映射改变了</strong></h4><p><strong>T1 &#x3D; “&#x2F;T+US9VR8WQ7XP6YO5ZN4aM3bL2cK1dJ0eIzfHygGxhFwiEvjDukCtlBsmArnqop”</strong></p><p><strong>target &#x3D; “NHPNOt5VdCixcy5JclLJLVHyLyauLMmC3CWeKl4lPRC&#x2F;“</strong></p><p>原本的是 :</p><p><strong>alphabet &#x3D; “ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;“</strong></p><p>创建映射表并转换：</p><p><strong>创建映射表：str.maketrans(x,y)</strong></p><p>x中的第一个字符映射到y中的第一个字符，以此类推</p><p><strong>根据映射表替换字符串中的字符: string.translate(table)</strong></p><p><strong>translation_table &#x3D; str.maketrans(T1,alphabet)</strong></p><p><strong>standard_encoded &#x3D; target.translate(translation_table)</strong></p><p><strong>解码：</strong></p><p><strong>decoded_bytes &#x3D; base64.b64decode(standard_encoded)</strong></p><p><strong>flag &#x3D; decoded_bytes.decode(‘utf-8’)</strong></p><p><strong>print(flag)</strong></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title></title>
+    <title>TEA加密算法</title>
     <link href="/2025/10/04/TEA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
     <url>/2025/10/04/TEA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
     
@@ -30,7 +17,7 @@
   
   
   <entry>
-    <title></title>
+    <title>RC4加密算法</title>
     <link href="/2025/10/04/RC4%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
     <url>/2025/10/04/RC4%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
     
@@ -48,6 +35,19 @@
     <url>/2025/10/04/post/</url>
     
     <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Base64加密算法</title>
+    <link href="/2025/10/04/Base64%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
+    <url>/2025/10/04/Base64%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p><strong>MD5和SHA256加密是不可逆的</strong></p><p><strong>base64是可逆的</strong></p><p>在python脚本中</p><p>开始要引入 base64</p><p>import 是引入的意思；</p><p><strong>import base64</strong></p><p>开始默认映射的是顺序是 <strong>“ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;“</strong></p><p>要解密的为data</p><p><strong>data &#x3D; “SGVsbG8gV29ybGQ&#x3D;”</strong></p><p>则flag为</p><p><strong>flag_byte &#x3D; base64.b64decode(data)</strong></p><p>这里是base64调用 b64decode()函数 ，该函数是将已经加密的字符返回</p><p>b64decode() 函数返回的是字节，需要经过 decode(“utf-8”) 转换为字符串</p><p><strong>flag &#x3D; flag_byte.decode(“utf-8”)</strong></p><p><strong>print(flag)</strong></p><p>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;</p><p><strong>有一些的变形：</strong></p><h4 id="映射改变了"><a href="#映射改变了" class="headerlink" title="映射改变了"></a><strong>映射改变了</strong></h4><p><strong>T1 &#x3D; “&#x2F;T+US9VR8WQ7XP6YO5ZN4aM3bL2cK1dJ0eIzfHygGxhFwiEvjDukCtlBsmArnqop”</strong></p><p><strong>target &#x3D; “NHPNOt5VdCixcy5JclLJLVHyLyauLMmC3CWeKl4lPRC&#x2F;“</strong></p><p>原本的是 :</p><p><strong>alphabet &#x3D; “ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;“</strong></p><p>创建映射表并转换：</p><p><strong>创建映射表：str.maketrans(x,y)</strong></p><p>x中的第一个字符映射到y中的第一个字符，以此类推</p><p><strong>根据映射表替换字符串中的字符: string.translate(table)</strong></p><p><strong>translation_table &#x3D; str.maketrans(T1,alphabet)</strong></p><p><strong>standard_encoded &#x3D; target.translate(translation_table)</strong></p><p><strong>解码：</strong></p><p><strong>decoded_bytes &#x3D; base64.b64decode(standard_encoded)</strong></p><p><strong>flag &#x3D; decoded_bytes.decode(‘utf-8’)</strong></p><p><strong>print(flag)</strong></p>]]></content>
     
     
     

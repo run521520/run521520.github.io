@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-10T06:46:41.000Z">
-<meta property="article:modified_time" content="2025-10-10T12:07:03.665Z">
+<meta property="article:modified_time" content="2025-10-10T12:14:00.874Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -298,9 +298,11 @@
 <p>就像中文，英文，日文一样，指令架构也有不同如x86,x64,ARM,MIPS等<br>这里就不细讲，因为我也不知道，还待学~。</p>
 <h2 id="2-最简函数"><a href="#2-最简函数" class="headerlink" title="2. 最简函数"></a>2. 最简函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">fun</span><span class="hljs-params">()</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;&#125;<br><span class="hljs-comment">//非常简单的自定义函数</span><br></code></pre></td></tr></table></figure>
 <h3 id="用x86表现"><a href="#用x86表现" class="headerlink" title="用x86表现"></a>用x86表现</h3><p>GCC是用于反编译x86汇编指令的编译器</p>
-<p>f:<br>	mov		eax,  123<br>	ret<br>	<br>MSVC编译器的和上面一样。<br>分析一下：这个函数仅由两条指令构成：第一条将<strong>123</strong>存放到EAX寄存器里；根据函数调用约定<br>后面一条指令会把EAX的值当作返回值传递给调用者函数，而调用者函数(caller)会从EAX寄存器<br>里取值，把它当作返回结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">f:<br>	mov		eax,  123<br>	ret<br><br></code></pre></td></tr></table></figure>
+<p>MSVC编译器的和上面一样。<br>分析一下：这个函数仅由两条指令构成：第一条将<strong>123</strong>存放到EAX寄存器里；根据函数调用约定<br>后面一条指令会把EAX的值当作返回值传递给调用者函数，而调用者函数(caller)会从EAX寄存器<br>里取值，把它当作返回结果。</p>
 <h3 id="用ARM表现"><a href="#用ARM表现" class="headerlink" title="用ARM表现"></a>用ARM表现</h3><p>Keil编译器</p>
-<p>f PROC<br>		MOV		r0,#0x7b ; 123<br>		BX      lr<br>		ENDP</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm">f <span class="hljs-meta">PROC</span><br>		<span class="hljs-keyword">MOV</span>		<span class="hljs-built_in">r0</span>,<span class="hljs-number">#0x7b</span> <span class="hljs-comment">; 123</span><br>		<span class="hljs-keyword">BX</span>      <span class="hljs-built_in">lr</span><br>		<span class="hljs-meta">ENDP</span><br></code></pre></td></tr></table></figure>
+
 <p>ARM程序使用R0寄存器传递函数返回值，所以指令把数值123赋值给R0<br>ARM程序使用LR寄存器储存函数结束之后的返回地址。x86程序使用<strong>栈</strong><br>结构储存上述返回地址。 BX LR 指令的作用是跳转到返回地址，即返回到调用<br>者函数，然后继续执行后续命令</p>
 <h3 id="用MIPS表现"><a href="#用MIPS表现" class="headerlink" title="用MIPS表现"></a>用MIPS表现</h3><p>博主等以后在学，现在用不到，用到什么学什么</p>
 <h2 id="3-Hello-world"><a href="#3-Hello-world" class="headerlink" title="3. Hello,world!"></a>3. Hello,world!</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello,world!\n&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//非常著名的程序</span><br></code></pre></td></tr></table></figure>
@@ -313,10 +315,17 @@
 <li><p>在_TEXT段：<br>只有一个函数 即主函数main()。在汇编中，主函数的函数体有标志性的<strong>函数序言</strong>和<strong>函数尾声</strong><br>通过push指令将变量$SG3830压入栈。这样_printf就可以调用栈中的指针即’Hello,world!’<br>的地址，调用完成后，$SG3830仍然在栈中，这时候就需要调整栈指针(ESP里的值)，来释放<br>这个指针，所以下一条语句 add esp,4 就是栈指针里的值加4(因为x86是32位4字节)，<br>相当于POP出栈，但是不同是本例是舍弃栈里的数据而POP还要把寄存器里的值存储到既定寄存器<br>然后便是 xor 异或 xor eax , eax 值为0</p>
 </li>
 </ul>
-<h4 id="用GCC编译"><a href="#用GCC编译" class="headerlink" title="- 用GCC编译"></a>- 用GCC编译</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs asm">Main    proc near<br>var 10  =  dword ptr-10h<br>		push ebp<br>		mov  ebp, esp<br>		and  esp, OFFFFFFF0h<br>		sub  esp, 10h<br>		mov  eax, offset aHelloWorld; &quot;Hello,world!\n&quot;<br>		mov  [esp+10h+var_10], eax<br>		call  printf<br>		mov  eax, 0<br>		leave<br>		retn<br>main    endp<br></code></pre></td></tr></table></figure>
+<h4 id="用GCC编译"><a href="#用GCC编译" class="headerlink" title="- 用GCC编译"></a>- 用GCC编译</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs asm">Main    proc near<br>var 10  =  dword ptr-10h<br>		push ebp<br>		mov  ebp, esp<br>		and  esp, OFFFFFFF0h<br>		sub  esp, 10h<br>		mov  eax, offset aHelloWorld; &quot;Hello,world!\n&quot;<br>		mov  [esp+10h+var_10], eax<br>		call  printf<br>		mov  eax, 0<br>		leave<br>		retn<br>main    endp<br><br></code></pre></td></tr></table></figure>
+
 <pre><code class="hljs">GCC生成的汇编指令，与MSVC生成的基本相同,开头 AND ESP, OFFFFFFF0h 指令。它令栈地址
 </code></pre>
-<p>(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。<br>	SUB ESP,10h 在栈中分配16个字节(这里10h &#x3D; hex(10))，而后便是将字符串地址(指针的值)<br>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。<br>	mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数<br>	mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2</p>
+<p>(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。</p>
+<pre><code class="hljs">SUB ESP,10h 在栈中分配16个字节(这里10h = hex(10))，而后便是将字符串地址(指针的值)
+</code></pre>
+<p>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。</p>
+<pre><code class="hljs">mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数
+mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2
+</code></pre>
 <h4 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h4><h2 id="4-函数序言和函数尾声"><a href="#4-函数序言和函数尾声" class="headerlink" title="4. 函数序言和函数尾声"></a>4. 函数序言和函数尾声</h2><h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><h2 id="6-异常处理"><a href="#6-异常处理" class="headerlink" title="6. 异常处理"></a>6. 异常处理</h2>
                 
               </div>
@@ -383,8 +392,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/02_RC4/" title="RC4加密算法">
-                        <span class="hidden-mobile">RC4加密算法</span>
+                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
+                        <span class="hidden-mobile">ida使用文档</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

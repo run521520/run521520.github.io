@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-10T06:46:41.000Z">
-<meta property="article:modified_time" content="2025-10-10T12:14:00.874Z">
+<meta property="article:modified_time" content="2025-10-10T12:19:43.156Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -317,15 +317,9 @@
 </ul>
 <h4 id="用GCC编译"><a href="#用GCC编译" class="headerlink" title="- 用GCC编译"></a>- 用GCC编译</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs asm">Main    proc near<br>var 10  =  dword ptr-10h<br>		push ebp<br>		mov  ebp, esp<br>		and  esp, OFFFFFFF0h<br>		sub  esp, 10h<br>		mov  eax, offset aHelloWorld; &quot;Hello,world!\n&quot;<br>		mov  [esp+10h+var_10], eax<br>		call  printf<br>		mov  eax, 0<br>		leave<br>		retn<br>main    endp<br><br></code></pre></td></tr></table></figure>
 
-<pre><code class="hljs">GCC生成的汇编指令，与MSVC生成的基本相同,开头 AND ESP, OFFFFFFF0h 指令。它令栈地址
-</code></pre>
-<p>(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。</p>
-<pre><code class="hljs">SUB ESP,10h 在栈中分配16个字节(这里10h = hex(10))，而后便是将字符串地址(指针的值)
-</code></pre>
-<p>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。</p>
-<pre><code class="hljs">mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数
-mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2
-</code></pre>
+<p>GCC生成的汇编指令，与MSVC生成的基本相同,开头 AND ESP, OFFFFFFF0h 指令。它令栈地址(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。</p>
+<p>SUB ESP,10h 在栈中分配16个字节(这里10h &#x3D; hex(10))，而后便是将字符串地址(指针的值)<br>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。</p>
+<p>mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数<br>mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2</p>
 <h4 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h4><h2 id="4-函数序言和函数尾声"><a href="#4-函数序言和函数尾声" class="headerlink" title="4. 函数序言和函数尾声"></a>4. 函数序言和函数尾声</h2><h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><h2 id="6-异常处理"><a href="#6-异常处理" class="headerlink" title="6. 异常处理"></a>6. 异常处理</h2>
                 
               </div>
@@ -392,8 +386,8 @@ mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
-                        <span class="hidden-mobile">ida使用文档</span>
+                      <a href="/2025/10/04/03_Base64/" title="Base64加密算法">
+                        <span class="hidden-mobile">Base64加密算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

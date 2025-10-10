@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-10T06:46:41.000Z">
-<meta property="article:modified_time" content="2025-10-10T12:19:43.156Z">
+<meta property="article:modified_time" content="2025-10-10T12:57:54.347Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          4.5k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          22 分钟
+          38 分钟
         
       </span>
     
@@ -320,7 +320,27 @@
 <p>GCC生成的汇编指令，与MSVC生成的基本相同,开头 AND ESP, OFFFFFFF0h 指令。它令栈地址(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。</p>
 <p>SUB ESP,10h 在栈中分配16个字节(这里10h &#x3D; hex(10))，而后便是将字符串地址(指针的值)<br>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。</p>
 <p>mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数<br>mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2</p>
-<h4 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h4><h2 id="4-函数序言和函数尾声"><a href="#4-函数序言和函数尾声" class="headerlink" title="4. 函数序言和函数尾声"></a>4. 函数序言和函数尾声</h2><h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><h2 id="6-异常处理"><a href="#6-异常处理" class="headerlink" title="6. 异常处理"></a>6. 异常处理</h2>
+<h3 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h3><h4 id="64位下的MSVC编译器"><a href="#64位下的MSVC编译器" class="headerlink" title="- 64位下的MSVC编译器"></a>- 64位下的MSVC编译器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>$SG2989 	DB   &#x27;hello, world&#x27;, ООH<br>main 		PROC<br>			sub rsp, 40<br>			lea rcx, OFFSET FLAT:$SG2989<br>			call printf<br>			xor eax, eax<br>			add rsp, 40<br>			ret 0<br>main 		ENDP<br><br></code></pre></td></tr></table></figure>
+<p>x86-64 框架的CPU 里,所有的物理寄存器都被扩展为64位寄存器。程序可通过R-字头的名称直接调用整<br>个64位寄存器。为了尽可能充分地利用寄存器、减少访问内存数据的次数,编译器会充分利用寄存器传递函数参<br>数。。也就是说,编译器会优先使用寄存器传递部分参数,再利用内存(数据线)传递其余的参数。<br>Win64的程序还会使用 RCX、RDX、R8、R9这4个寄存器来存放函数参数<br>如： printf()使用 RCX 寄存器传递参数,而没有像32位程序那样使用栈传递数据。</p>
+<p>main()函数的返回值是整数类型的零,但是出于兼容性和可移植性的考虑,C语言的编译器仍将使用 32<br>位的零。换而言之,即使是64位的应用程序,在程序结束时 EAX 的值是零,而RAX 的值不一定会是零。<br>此时,数据栈的对应空间里仍留有40字节的数据。这部分数据空间有个专用的名词,即阴影空间</p>
+<h4 id="GCC"><a href="#GCC" class="headerlink" title="- GCC"></a>- GCC</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>.string &quot;hello, world\n&quot;<br>main:<br>		sub 	rsp, 8<br>		mov 	edi, OFFSET FLAT:.LCO; &quot;hello, world&quot;<br>		xor 	eax, eax ; number of vector registers passed<br>		call 	printf<br>		xor 	eax, eax<br>		add 	rsp, 8<br>		ret<br><br></code></pre></td></tr></table></figure>
+<p>Linux、BSD 和 Mac OS X 系统中的应用程序,会优先使用RDI、RSI、RDX、RCX、R8、R9这6个<br>寄存器传递函数所需的头6个参数,然后使用数据栈传递其余的参数。<br>因此,64位的GCC 编译器使用 EDI 寄存器(寄存器的32位)存储字符串指针。EDI不过是RDI 寄<br>存器中地址位较低的32位地址部分。为何GCC 不直接使用整个RDI 寄存器?<br>需要注意的是,64位汇编指令 MOV 在写入R-寄存器的低32位地址位的时候,即对E-寄存器进行写<br>操作的时候,会同时清除R寄存器中的高32位地址位。所以,“MOV EAX, 011223344h”能够对 RAX<br>寄存器进行正确的赋值操作,因为该指令会清除(置零)高地址位的内容。</p>
+<h3 id="GCC的其他特性"><a href="#GCC的其他特性" class="headerlink" title="GCC的其他特性"></a>GCC的其他特性</h3><p>只要c语言代码里使用了字符串常量，编译器就会把这个字符串常量置于常量字段，<br>以保证其内容不会发生变化。不过GCC可能会把字符串拆出来单独使用，当还有其他<br>字符串，且里面内容部分相同时</p>
+<h3 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h3><p>等以后再学，目前主要是学习x86,x64</p>
+<h2 id="4-函数序言和函数尾声"><a href="#4-函数序言和函数尾声" class="headerlink" title="4. 函数序言和函数尾声"></a>4. 函数序言和函数尾声</h2><p>函数序言是函数在启动的时候运行的一系列指令。其汇编指令大致如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push  ebp<br>mov   ebp, esp<br>sub   esp, X<br><br></code></pre></td></tr></table></figure>
+
+<p>这些指令的功能是：在栈里保存EBP寄存器的内容,将ESP的值复制到EBP寄存器,然后修改栈的高度<br>以便为本函数的局部变量申请空间</p>
+<p>想象一下，函数开始执行时，它需要一张干净的桌子（栈空间）来摆放自己的东西（局部变量）。<br>但问题是，这张桌子是共用的，上一个函数刚用完，上面可能很乱。<br>函数序言就是为当前函数布置一个稳定、独立工作区的过程。</p>
+<p>在函数执行期间,EBP寄存器不受函数运行的影响，它是函数访问局部变量和函数参数的基准值。<br>虽然我们也可便中 ESP 寄存器存储局部变量和运行参数,但是ESP 寄存器的值总是会发生变化,使用起来并不方便。</p>
+<p>函数在退出时,要做启动过程的反操作,释放栈中申请的内存,还原EBP 寄存器的值,将代码控制权<br>还原给调用者函数(callee)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>mov   esp, ebp<br>pop   ebp<br>ret   0<br><br></code></pre></td></tr></table></figure>
+
+<p><code>mov   esp, ebp</code>相当于我们一下子，将桌子高变为0，ebp是桌底，赋值给esp是桌高<br>这时栈里的就是进函数时存的ebp，将这弹出赋值给ebp<br>借助函数序言和函数尾声的有关特征,我们可以在汇编语言里识别各个函数。</p>
+<h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><p>从技术上说,栈就是CPU 寄存器里的某个指针所指向的一片内存区域。这里所说的“某个指针”通常<br>位于x86&#x2F;x64平台的ESP 寄存器&#x2F;RSP寄存器,以及ARM 平台的SP寄存器。</p>
+<p>操作栈的最常见的指令是PUSH 和POP,在x86 和ARM Thumb 模式的指令集里都有这两条指令。PUSH<br>指令会对 ESP&#x2F;RSP&#x2F;SP 寄存器的值进行减法运算,使之减去4(32位)或8(64位),然后将操作数写到上<br>述寄存器里的指针所指向的内存中。</p>
+<p>POP 指令是PUSH 指令的逆操作:它先从栈指针(Stack Pointer,上面三个寄存器之一)指向的内存中<br>读取数据,用以备用(通常是写到其他寄存器里),然后再将栈指针的数值加上4或8。</p>
+<h2 id="6-异常处理"><a href="#6-异常处理" class="headerlink" title="6. 异常处理"></a>6. 异常处理</h2>
                 
               </div>
             
@@ -386,8 +406,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/03_Base64/" title="Base64加密算法">
-                        <span class="hidden-mobile">Base64加密算法</span>
+                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
+                        <span class="hidden-mobile">ida使用文档</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

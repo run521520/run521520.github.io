@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-10T06:46:41.000Z">
-<meta property="article:modified_time" content="2025-10-10T12:57:54.347Z">
+<meta property="article:modified_time" content="2025-10-11T18:29:05.181Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k 字
+          8.2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          38 分钟
+          69 分钟
         
       </span>
     
@@ -337,9 +337,54 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>mov   esp, ebp<br>pop   ebp<br>ret   0<br><br></code></pre></td></tr></table></figure>
 
 <p><code>mov   esp, ebp</code>相当于我们一下子，将桌子高变为0，ebp是桌底，赋值给esp是桌高<br>这时栈里的就是进函数时存的ebp，将这弹出赋值给ebp<br>借助函数序言和函数尾声的有关特征,我们可以在汇编语言里识别各个函数。</p>
-<h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><p>从技术上说,栈就是CPU 寄存器里的某个指针所指向的一片内存区域。这里所说的“某个指针”通常<br>位于x86&#x2F;x64平台的ESP 寄存器&#x2F;RSP寄存器,以及ARM 平台的SP寄存器。</p>
+<h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="- 简单介绍"></a>- 简单介绍</h3><p>从技术上说,栈就是CPU 寄存器里的某个指针所指向的一片内存区域。这里所说的“某个指针”通常<br>位于x86&#x2F;x64平台的ESP 寄存器&#x2F;RSP寄存器,以及ARM 平台的SP寄存器。</p>
 <p>操作栈的最常见的指令是PUSH 和POP,在x86 和ARM Thumb 模式的指令集里都有这两条指令。PUSH<br>指令会对 ESP&#x2F;RSP&#x2F;SP 寄存器的值进行减法运算,使之减去4(32位)或8(64位),然后将操作数写到上<br>述寄存器里的指针所指向的内存中。</p>
 <p>POP 指令是PUSH 指令的逆操作:它先从栈指针(Stack Pointer,上面三个寄存器之一)指向的内存中<br>读取数据,用以备用(通常是写到其他寄存器里),然后再将栈指针的数值加上4或8。</p>
+<p>在分配栈的空间之后,栈指针,即 Stack Pointer 所指向的地址是栈的底部。<br>栈底在高地址，栈顶在低地址，PUSH 使 SP 减小（向低地址移动），POP使SP增大（向高地址移动）<br>不理解没关系，看下面。</p>
+<p>多数人想象中的“增长”,是栈从低地址位向高地址位增长,似乎这样才符合自然规律。然而研究过栈<br>的人知道,多数的栈是逆增长的,它会从高地址向低地址增长。也就是说，在PUSH栈，栈指针会减小<br>因为最开始,计算机还是房子的时候,内存由两部分**堆(heap)<strong>和</strong>栈(stack)**构成,比如你<br>只有一个笔记本,但是要记录两门课,怎么办？一门从头开始记,另一门则是从后往前进,所以栈就是<br>这么从以前的习惯保存下来的。</p>
+<h3 id="栈的用途"><a href="#栈的用途" class="headerlink" title="-栈的用途"></a>-栈的用途</h3><h4 id="X86-1"><a href="#X86-1" class="headerlink" title="- X86"></a>- X86</h4><p>当程序使用call调用函数时,call指令结束后的返回地址将被保存在栈里(就是call的下一条指令地址)<br>函数结束后,程序将无条件跳转指令,跳到call的下一条指令。</p>
+<p>CALL指令等价于 “PUSH 返回地址” 和 “JMP 函数地址” 的指令对(组合的意思)。</p>
+<p>被调用函数里的RET 指令,会从栈中读取返回地址然后跳转到这个地址,相当于：<br>“POP 返回地址” + “JMP 返回地址” 指令。</p>
+<p>栈是会溢出的,无限递归就行了，但是这里MSVC编译器会报错,但是GCC不会报错</p>
+<h4 id="ARM-1"><a href="#ARM-1" class="headerlink" title="- ARM"></a>- ARM</h4><p>x86 的一些函数 </p>
+<ul>
+<li>malloc(size)函数： 从堆中申请内存,并返回指向该空间的起始地址指针,但是它只负责分配<br>不负责初始化内容,内存中的值不确定(可能是垃圾值),可使用calloc()来初始化。</li>
+<li>alloca(size)函数： 直接使用栈来分配内存，除此之外和malloc()函数没有显著区别。</li>
+<li>calloc(num,size)函数： 与malloc类似,但是会自动将分配的内存初始化为0。</li>
+<li>printf()函数： 将输出结果输出到stdout(终端)。</li>
+<li>snprint()函数： 将结果输出到buf数组(人工设定的缓冲区),通过puts()将buf输出到stdout.</li>
+</ul>
+<h2 id="说一下"><a href="#说一下" class="headerlink" title="说一下"></a>说一下</h2><p><strong>这本书,有些东西是错的,我也不知道到是翻译的错,还是作者的错；其次有些东西我已经学过几遍了</strong><br><strong>所以就没记录笔记,所以有时候会感觉不全，东一块西一块</strong></p>
+<h2 id="6-条件转移指令"><a href="#6-条件转移指令" class="headerlink" title="6. 条件转移指令"></a>6. 条件转移指令</h2><p>这里会围绕这个c语言来理解</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">f_signed</span> <span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>&#123;<br>	<span class="hljs-keyword">if</span> (a&gt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&gt;b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a==b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a==b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a&lt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&lt;b\n&quot;</span>);<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">f_unsigned</span> <span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> a, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> b)</span>&#123;<br>	<span class="hljs-keyword">if</span> (a&gt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&gt;b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a==b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a==b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a&lt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&lt;b\n&quot;</span>);<br>&#125;<br><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span>&#123;<br><br>	f_signed(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>	f_unsigned(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="用MSVC来编译f-signed"><a href="#用MSVC来编译f-signed" class="headerlink" title="用MSVC来编译f_signed"></a>用MSVC来编译f_signed</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs asm">a$ = 8<br>b$= 12<br>_f_signed PROC<br>		push ebp<br>		mov ebp, esp<br>		mov eax, DWORD PTR _a$[ebp]<br>		cmp eax, DWORD PTR _b$ [ebp]<br>		jle SHORT $LN3@f_signed<br>		push OFFSET $SG737			;&#x27;a&gt;b&#x27;<br>		call printf<br>		add esp, 4<br>		<br>$LN3@f_signed:<br>		mov ecx, DWORD PTR _a$ [ebp]<br>		cmp ecx, DWORD PTR _b$ [ebp]<br>		jne SHORT $LN2@f_signed<br>		push OFFSET $SG739          ;&#x27;a==b&#x27;<br>		call printf<br>		add esp, 4<br><br>$LN2@f_signed:<br>		mov edx, DWORD PTR _a$ [ebp]<br>		cmp edx, DWORD PTR _b$ [ebp]<br>		jge SHORT $LN4@f_signed<br>		push OFFSET $SG741 			;&#x27;a&lt;b&#x27;<br>		call _printf<br>		add esp, 4<br><br>$LN4@f_signed:<br>		pop ebp<br>		ret<br>_f_signed ENDP<br><br></code></pre></td></tr></table></figure>
+
+<p>第一个条件转移指令是JLE,即“Jump if Less or Equal”。如果上一条 CMP 指令的第一个操作表达式<br>小于或等于(不大于)第二个表达式,JLE 将跳转到指令所标明的地址;如果不满足上述条件,则运行下<br>一条指令,本列<strong>1&lt;2</strong>会执行JLE跳转到**$LN3@f_signed**,JNE，“ump if Not Equa”,如果<br>上一条CMP的两个操作符不相等则跳转,<strong>1&lt;2</strong>继续跳**$LN2@f_signed**,这次是JGE意思是<br>“Jump if Greater or Equa”,”。如果CMP 的第一个表达式大于或等于第二个表达式,则进行跳转</p>
+<p><strong>f_unsigned</strong>函数的汇编和<strong>f_signed</strong>差不多,f_nsinged()函数的使用的条件转移指令<br>是JBE 和JAE,而f_signed()函数使用的条件转移指令则是JLE 和JGE</p>
+<h3 id="GCC编译f-unsigned"><a href="#GCC编译f-unsigned" class="headerlink" title="GCC编译f_unsigned"></a>GCC编译f_unsigned</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>_a$ = 8 ; size = 4<br>b$ = 12 ; size = 4<br><br>_f_unsigned PROC<br>push ebp<br>		push ebp<br>		mov ebp, esp<br>		mov eax, DWORD PTR _a$[ebp]<br>		cmp eax, DWORD PTR _b$[ebp]<br>		jbe SHORT $LN3@f_unsigned<br>		push OFFSET $SG2761 ; &#x27;a&gt;b&#x27;<br>		call printf<br>		add esp, 4<br>		<br>$LN3@f_unsigned:<br>		mov ecx, DWORD PTR _a$[ebp]<br>		cmp ecx, DWORD PTR _b$ [ebp]<br>		jne SHORT $LN2@f_unsigned<br>		push OFFSET $SG2763 ; &#x27;a==b&#x27;<br>		call _printf<br>		add esp, 4<br>		<br>$LN2@f_unsigned:<br>		mov edx, DWORD PTR _a$ [ebp]<br>		cmp edx, DWORD PTR _b$ [ebp]<br>		jae SHORT $LN4@f_unsigned<br>		push OFFSET $SG2765 ;&#x27;a&lt;b<br>		call _printf<br>		add esp, 4<br>		<br>LN4@f_unsigned:<br>		Pop ebp<br>		Ret 0<br>_f_unsigned ENDP<br><br><br></code></pre></td></tr></table></figure>
+
+<p>GCC 编译的结果与MSVC 编译的结果基本相同。</p>
+<p>经 GCC 编译后,f_unsigned函数使用的条件转移指令是JBE (Jump if Below or Equal,相当于JLE)<br>和JAE(Jump if Above or Equal,相当于JGE)。JA&#x2F;JAE&#x2F;JB&#x2F;JBE 与 JG&#x2F;JGE&#x2F;JL&#x2F;JLE 的区别,在于它们检查的<br>标志位不同:前者检查借&#x2F;进位标志位CF(1意味着小于)和零标志位 ZF(1意味着相等),后者检查“SF<br>XOR OF” (1意味着异号)和ZF。从指令参数的角度看,前者适用于 unsigned (无符号)类型数据的(CMP)<br>运算,而后者的适用于signed (有符号)类型数据的运算。</p>
+<p>main函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>_main PROC<br>		push 	ebp<br>		mov 	ebp, esp<br>		push 	2<br>		push 	1<br>		call 	_f_signed<br>		add 	esp, 8<br>		push 	2<br>		push 	1<br>		call 	_f_unsigned<br>		add 	esp, 8<br>		xor 	eax, eax<br>		pop 	ebp<br>		ret 	0<br>_main ENDP<br><br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="无符号和有符号的不同"><a href="#无符号和有符号的不同" class="headerlink" title="无符号和有符号的不同"></a>无符号和有符号的不同</h3><h4 id="无符号数比较（JA-JB-系列）"><a href="#无符号数比较（JA-JB-系列）" class="headerlink" title="- 无符号数比较（JA&#x2F;JB 系列）"></a>- 无符号数比较（JA&#x2F;JB 系列）</h4><ul>
+<li>无符号数没有正负之分，比较时仅通过进位 &#x2F; 借位判断大小： <ul>
+<li>若 a &lt; b，CMP a, b 会产生借位（CF &#x3D; 1），对应 JB 跳转。</li>
+<li>若 a &gt; b，无借位（CF &#x3D; 0）且不相等（ZF &#x3D; 0），对应 JA 跳转。</li>
+</ul>
+</li>
+</ul>
+<h4 id="有符号数比较（JG-JL-系列）"><a href="#有符号数比较（JG-JL-系列）" class="headerlink" title="- 有符号数比较（JG&#x2F;JL 系列）"></a>- 有符号数比较（JG&#x2F;JL 系列）</h4><ul>
+<li><p>有符号数需考虑正负和溢出，通过符号标志与溢出标志的组合判断：</p>
+<ul>
+<li>若 a &lt; b，当无溢出时 SF &#x3D; 1（结果为负），当溢出时 SF &#x3D; 0（结果符号反转），统一用 SF !&#x3D; OF 判断（JL 跳转）。</li>
+<li>若 a &gt; b，则需 SF &#x3D;&#x3D; OF 且 ZF &#x3D; 0（JG 跳转）。</li>
+</ul>
+</li>
+</ul>
+<p>所以有时候我们可以修改<strong>标志寄存器</strong>就是前面的(CF,SF,ZF等),来执行想要的<strong>语句</strong></p>
 <h2 id="6-异常处理"><a href="#6-异常处理" class="headerlink" title="6. 异常处理"></a>6. 异常处理</h2>
                 
               </div>

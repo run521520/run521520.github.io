@@ -27,7 +27,7 @@
 <meta property="og:description" content="IDA 使用文档一、窗口介绍1. 函数窗口 功能：显示所有函数列表。 快捷键：Ctrl + F 查找函数名（所有表格窗口均支持）。  2. IDA-View 窗口 功能：显示汇编代码。 快捷键：空格键 切换图形模式与文本模式。  3. Pseudocode（伪代码）窗口 功能：显示 C&#x2F;C++ 伪代码。 快捷键：Tab 切换到对应汇编窗口。 重命名：选中关键词后按 N，或右键选择“Ren">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-04T18:19:03.454Z">
+<meta property="article:modified_time" content="2025-10-15T05:30:04.770Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.8k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -381,6 +381,10 @@
 <td><code>P</code></td>
 <td>重新生成函数</td>
 </tr>
+<tr>
+<td><code>Ctrl +Alt + K</code></td>
+<td>修改汇编指令</td>
+</tr>
 </tbody></table>
 <hr>
 <h2 id="三、IDA-调试器功能"><a href="#三、IDA-调试器功能" class="headerlink" title="三、IDA 调试器功能"></a>三、IDA 调试器功能</h2><ol>
@@ -434,6 +438,12 @@
 <li>取消断点，继续运行即可。</li>
 </ol>
 <hr>
+<h2 id="六、博主见到的一些情况："><a href="#六、博主见到的一些情况：" class="headerlink" title="六、博主见到的一些情况："></a>六、博主见到的一些情况：</h2><ul>
+<li><p>**堆栈问题：**当你在汇编中看到一大串的数据的时候,可能是堆栈问题,可能会有提示,<br>只需选中数据按c,重新分析为汇编就行了</p>
+</li>
+<li><p>**动态调式：**在做题的时候,可能会有静态里找不到需要的信息,或程序运行时发生改变,<br>比如简单的base64,它可能会在程序运行时原来的映射表给换了,所以你怎么也解不出,所以需要你动态<br>的调试一下,还有一些题会靠你远程调试之类的</p>
+</li>
+</ul>
 <blockquote>
 <p>本文档适用于 IDA Pro 基础及进阶使用，欢迎在博客留言交流更多技巧！</p>
 </blockquote>

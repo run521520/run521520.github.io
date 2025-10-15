@@ -19,21 +19,21 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模">
+    <meta name="description" content="__gmpz_init_set_str用于初始化大整数并为其设置字符串表示的值。int __gmpz_init_set_str (mpz_t rop, const char *str, int base)  rop: 要初始化的mpz_t类型的大整数变量 str: 包含数字和字符串(可包含可选符号) base: 数值的进制基数(2-62,或0表示自动检测) 成功返回0,失败返回-1  123456">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些偏门的运算">
-<meta property="og:url" content="http://run521520.github.io/2025/10/04/SomeNicheOperations/index.html">
+<meta property="og:title" content="run521">
+<meta property="og:url" content="http://run521520.github.io/2025/10/14/06_GMP/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模">
+<meta property="og:description" content="__gmpz_init_set_str用于初始化大整数并为其设置字符串表示的值。int __gmpz_init_set_str (mpz_t rop, const char *str, int base)  rop: 要初始化的mpz_t类型的大整数变量 str: 包含数字和字符串(可包含可选符号) base: 数值的进制基数(2-62,或0表示自动检测) 成功返回0,失败返回-1  123456">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-04T18:19:39.301Z">
+<meta property="article:published_time" content="2025-10-14T12:38:24.000Z">
+<meta property="article:modified_time" content="2025-10-14T12:58:12.820Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>一些偏门的运算 - run521</title>
+  <title>run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="一些偏门的运算"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-04 22:12" pubdate>
-          2025年10月4日 晚上
+        <time datetime="2025-10-14 20:38" pubdate>
+          2025年10月14日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          524 字
+          928 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          8 分钟
         
       </span>
     
@@ -274,26 +274,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">一些偏门的运算</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h5 id="模运算的逆运算："><a href="#模运算的逆运算：" class="headerlink" title="模运算的逆运算："></a><strong>模运算的逆运算：</strong></h5><p><strong>加密后 &#x3D; (原始值 + 偏移) % 模值</strong>     </p>
-<p>**原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数</p>
-<p>这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景；</p>
-<p>当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模值*k) % 模值 ,**你可以自己写一下数字，模拟一下；</p>
-<h5 id="生成随机数："><a href="#生成随机数：" class="headerlink" title="生成随机数："></a><strong>生成随机数：</strong></h5><p><strong>rand(),srand()</strong></p>
-<p>rand_num &#x3D; rand() % num +a  这里的num是生成数的区间，a是区间的左区间</p>
-<p>对于区间[a, b)的随机整数：(rand() % (b-a)) + a</p>
-<p>对于区间[a, b]的随机整数：(rand() % (b-a+1)) + a</p>
-<p>srand()函数用于设置rand()函数生成随机数时所用的种子,</p>
-<p>当用rand而不设种子时，后面的随机数是相同的，可以理解为rand函数是根据时间轴而生成数的，</p>
-<p>rand生成数的时间轴需要srand来更换</p>
-<p><strong>用法：</strong></p>
-<p>用rand 需要引入头文件stdlib</p>
-<p>需要引入<strong>time</strong>头文件，在开头写入<strong>srand((unsigned)time(NULL));</strong> 就行</p>
-<h4 id="使用-Python-的numpy库直接求解线性方程组"><a href="#使用-Python-的numpy库直接求解线性方程组" class="headerlink" title="使用 Python 的numpy库直接求解线性方程组"></a>使用 Python 的numpy库直接求解线性方程组</h4><p>当有解方程组是多元的时候就用</p>
+                <h2 id="gmpz-init-set-str"><a href="#gmpz-init-set-str" class="headerlink" title="__gmpz_init_set_str"></a>__gmpz_init_set_str</h2><p>用于初始化大整数并为其设置字符串表示的值。<br><code>int __gmpz_init_set_str (mpz_t rop, const char *str, int base)</code></p>
+<ul>
+<li>rop: 要初始化的<strong>mpz_t</strong>类型的大整数变量</li>
+<li>str: 包含数字和字符串(可包含可选符号)</li>
+<li>base: 数值的进制基数(2-62,或0表示自动检测)</li>
+<li>成功返回0,失败返回-1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;gmp.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">mpz_t</span> big_num;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;123456789012345678901234567890&quot;</span>;<br>    <span class="hljs-comment">// 初始化大整数并设置十进制字符串值</span><br>    <span class="hljs-keyword">if</span> (__gmpz_init_set_str(big_num, str, <span class="hljs-number">10</span>) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 使用 big_num...</span><br>        gmp_printf(<span class="hljs-string">&quot;Value: %Zd\n&quot;</span>, big_num);<br>    &#125;<br>    <br>    mpz_clear(big_num);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">//这在编译器可能运行不了,意思就是记住 big_num = 123456789012345678901234567890</span><br><span class="hljs-comment">//</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="相关的函数："><a href="#相关的函数：" class="headerlink" title="相关的函数："></a>相关的函数：</h3><ul>
+<li><code>__gmpz_init</code> 仅初始化大整数</li>
+<li><code>__gmpz_set_str</code> 为已初始化的大整数设置值</li>
+<li><code>__gmpz_clear</code> 清理大整数内存</li>
+</ul>
+<hr>
+<h2 id="gmpz-powm"><a href="#gmpz-powm" class="headerlink" title="__gmpz_powm"></a>__gmpz_powm</h2><p>是 GMP库中用于<strong>模幂运算</strong> 的函数</p>
+<p><code>void __gmpz_powm (mpz_t rop, const mpz_t base, const mpz_t exp, const mpz_t mod)</code></p>
+<ul>
+<li>rop:结果变量,储存计算结果</li>
+<li>base:底数</li>
+<li>exp:指数</li>
+<li>mod:模数<br><strong><code>rop = base^exp mod mod</code></strong></li>
+</ul>
+<p>运用在:RSA、ElGamal、DSA等公钥密码,Diffie-Hellman密钥交换,数字签名</p>
+<h2 id="gmpz-cmp"><a href="#gmpz-cmp" class="headerlink" title="__gmpz_cmp"></a>__gmpz_cmp</h2><p>GMP库中用于比较两个大整数的函数<br><code>int __gmpz_cmp (const mpz_t op1, const mpz_t op2)</code></p>
+<p>如果 op1 &#x2F;&gt; op2 为正数<br>如果 op1 &#x3D;&#x3D; op2 为0<br>如果 op1 &#x2F;&lt; op2 为负数</p>
 
                 
               </div>
@@ -311,8 +322,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一些偏门的运算</div>
-      <div>http://run521520.github.io/2025/10/04/SomeNicheOperations/</div>
+      <div></div>
+      <div>http://run521520.github.io/2025/10/14/06_GMP/</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月4日</div>
+          <div>2025年10月14日</div>
         </div>
       
       
@@ -356,18 +367,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/05_Upx/" title="Upx脱壳">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Upx脱壳</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/dataStorage/" title="数据储存">
-                        <span class="hidden-mobile">数据储存</span>
+                      <a href="/2025/10/10/reverse_books/" title="逆向工程权威指南上">
+                        <span class="hidden-mobile">逆向工程权威指南上</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

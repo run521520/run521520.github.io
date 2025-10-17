@@ -19,21 +19,21 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码 首先将文件拖入PE中查看是否加壳和位数在最后一行的info信息中如果出现upx，那就代表经过了upx加壳 有针对脱壳的工具upx-5.0.2-win64  找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中然后会自动脱壳，如果失败">
+    <meta name="description" content="打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Upx脱壳">
-<meta property="og:url" content="http://run521520.github.io/2025/10/04/05_Upx/index.html">
+<meta property="og:title" content="一些做题的经验或心得">
+<meta property="og:url" content="http://run521520.github.io/2025/10/17/07_mybook/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码 首先将文件拖入PE中查看是否加壳和位数在最后一行的info信息中如果出现upx，那就代表经过了upx加壳 有针对脱壳的工具upx-5.0.2-win64  找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中然后会自动脱壳，如果失败">
+<meta property="og:description" content="打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-04T18:18:15.467Z">
+<meta property="article:published_time" content="2025-10-17T10:36:25.000Z">
+<meta property="article:modified_time" content="2025-10-17T10:55:05.863Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Upx脱壳 - run521</title>
+  <title>一些做题的经验或心得 - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Upx脱壳"></span>
+            <span id="subtitle" data-typed-text="一些做题的经验或心得"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-04 22:12" pubdate>
-          2025年10月4日 晚上
+        <time datetime="2025-10-17 18:36" pubdate>
+          2025年10月17日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          820 字
+          281 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          7 分钟
+          3 分钟
         
       </span>
     
@@ -274,19 +274,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Upx脱壳</h1>
+            <h1 id="seo-header">一些做题的经验或心得</h1>
             
             
               <div class="markdown-body">
                 
-                <p>upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码</p>
-<p>首先将文件拖入PE中查看是否加壳和位数<br>在最后一行的info信息中如果出现upx，那就代表经过了upx加壳</p>
-<p>有针对脱壳的工具upx-5.0.2-win64 </p>
-<p>找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称<br>这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中<br>然后会自动脱壳，如果失败，根据提示具体解决<br>当然也有反upx脱壳工具的程序，也会导致脱壳失败，这是需要手动脱壳</p>
-<p>OEP(Original Entry Point)是程序的原始入口点的位置，EP(Entry Point)是程序的入口点，加壳之后，程序的入口点会被改动，所以有OEP，<br>需要从OEP开始脱壳，有两个指令，一个是pushad，还有popad，从pushad开始找，一直运行到结束</p>
-<p>OEP：(Original Entry Point)，程序的原始入口点，软件加壳就是隐藏了EP， 只要我们找到程序的OEP，就可以立刻脱壳。<br>PUSHAD （压栈） 代表程序的入口点，POPAD （出栈） 代表程序的出口点，与PUSHAD相对应，一般找到这个OEP就在附近啦。</p>
-<p>进入到程序里面后找到文件的入口<br>pushad意味着upx壳解压缩代码的入口。<br>64位程序中没有pushad，而是用几个push汇编代码替代。32位程序中存在pushad。<br>像这样的：<br>	push rbx;<br>	push rsi;<br>	push rdi;<br>	push rbp;  几个连一起的</p>
-<p>第一就是用x32|64 找到入口：<br>点击断点 -&gt; 查找入口 -&gt; 找到之后点进去将第一行设为原始断点 EIP<br>-&gt; 之后按F8步过直到 ESP(FPU窗口) 发生变化 -&gt; 点击ESP右键找到”在内存窗口中转到” 点击<br>-&gt; 在地址窗口中将该地址右键 -&gt; 找到断点 -&gt;访问 -&gt; 2字节 -&gt; 之后便是运行会出现真正的函数窗口<br>-&gt; 之后便是用 Scylla x86 来将程序修复</p>
+                <h2 id="打印输出方式"><a href="#打印输出方式" class="headerlink" title="打印输出方式"></a>打印输出方式</h2><p>在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**<br>的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印<br>字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,<br>在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,<br>不是四个,所以把它一个一个打印就行了,但是我要是一开始就遍历打印的话可能就没问题把,<br>所以有时候你的flag是求对了,但是储存在数组中可能有<code>0x00</code>这时候<code>printf</code>会停到那里,<br>所以可以的话还是用循环遍历打印。</p>
 
                 
               </div>
@@ -304,8 +297,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Upx脱壳</div>
-      <div>http://run521520.github.io/2025/10/04/05_Upx/</div>
+      <div>一些做题的经验或心得</div>
+      <div>http://run521520.github.io/2025/10/17/07_mybook/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +310,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月4日</div>
+          <div>2025年10月17日</div>
         </div>
       
       
@@ -349,18 +342,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ida使用文档</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
-                        <span class="hidden-mobile">TEA加密算法</span>
+                      <a href="/2025/10/14/06_GMP/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

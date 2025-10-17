@@ -228,6 +228,39 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/10/17/07_mybook/" target="_self">
+          一些做题的经验或心得
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/17/07_mybook/" target="_self">
+        <div>
+          打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-17 18:36" pubdate>
+              2025-10-17
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/10/14/06_GMP/" target="_self">
           
         </a>
@@ -279,39 +312,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2025-10-10 14:46" pubdate>
               2025-10-10
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/04/01_ida/" target="_self">
-          ida使用文档
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/01_ida/" target="_self">
-        <div>
-          IDA 使用文档一、窗口介绍1. 函数窗口 功能：显示所有函数列表。 快捷键：Ctrl + F 查找函数名（所有表格窗口均支持）。  2. IDA-View 窗口 功能：显示汇编代码。 快捷键：空格键 切换图形模式与文本模式。  3. Pseudocode（伪代码）窗口 功能：显示 C&#x2F;C++ 伪代码。 快捷键：Tab 切换到对应汇编窗口。 重命名：选中关键词后按 N，或右键选择“Ren
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-04 22:12" pubdate>
-              2025-10-04
             </time>
           </div>
         
@@ -393,15 +393,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/10/04/04_TEA/" target="_self">
-          TEA加密算法
+        <a href="/2025/10/04/01_ida/" target="_self">
+          ida使用文档
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/04_TEA/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/01_ida/" target="_self">
         <div>
-          TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活
+          IDA 使用文档一、窗口介绍1. 函数窗口 功能：显示所有函数列表。 快捷键：Ctrl + F 查找函数名（所有表格窗口均支持）。  2. IDA-View 窗口 功能：显示汇编代码。 快捷键：空格键 切换图形模式与文本模式。  3. Pseudocode（伪代码）窗口 功能：显示 C&#x2F;C++ 伪代码。 快捷键：Tab 切换到对应汇编窗口。 重命名：选中关键词后按 N，或右键选择“Ren
         </div>
       </a>
 
@@ -459,15 +459,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/10/04/SomeNicheOperations/" target="_self">
-          一些偏门的运算
+        <a href="/2025/10/04/04_TEA/" target="_self">
+          TEA加密算法
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/SomeNicheOperations/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/04_TEA/" target="_self">
         <div>
-          模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模
+          TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活
         </div>
       </a>
 
@@ -492,15 +492,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/10/04/dataStorage/" target="_self">
-          数据储存
+        <a href="/2025/10/04/SomeNicheOperations/" target="_self">
+          一些偏门的运算
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/dataStorage/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/SomeNicheOperations/" target="_self">
         <div>
-          数据在内存中的表示方式bit(比特&#x2F;位)bit是计算机中最小的数据单位，只有两种状态开(1)关(1)计算机底层是数字电路，由晶体管组成，它们的工作状态(导通&#x2F;截止)非常适用01byte(字节)1byte由8个bit组成，这是计算机信息处理的基本单位为什么是1byte&#x3D;8bit ， 因为 1bit有两种状态则8bit，组合一起就是2^8 &#x3D; 256这256中状
+          模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模
         </div>
       </a>
 
@@ -553,6 +553,12 @@
   </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 

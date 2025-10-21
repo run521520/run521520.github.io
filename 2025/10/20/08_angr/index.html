@@ -19,21 +19,21 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我">
+    <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源安装的话就补说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些做题的经验或心得">
-<meta property="og:url" content="http://run521520.github.io/2025/10/17/07_mybook/index.html">
+<meta property="og:title" content="angr">
+<meta property="og:url" content="http://run521520.github.io/2025/10/20/08_angr/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我">
+<meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源安装的话就补说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-17T10:36:25.000Z">
-<meta property="article:modified_time" content="2025-10-17T10:55:05.863Z">
+<meta property="article:published_time" content="2025-10-20T11:37:41.000Z">
+<meta property="article:modified_time" content="2025-10-21T09:00:32.494Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>一些做题的经验或心得 - run521</title>
+  <title>angr - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="一些做题的经验或心得"></span>
+            <span id="subtitle" data-typed-text="angr"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-17 18:36" pubdate>
-          2025年10月17日 晚上
+        <time datetime="2025-10-20 19:37" pubdate>
+          2025年10月20日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          281 字
+          1.8k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          15 分钟
         
       </span>
     
@@ -274,13 +274,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">一些做题的经验或心得</h1>
+            <h1 id="seo-header">angr</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="打印输出方式"><a href="#打印输出方式" class="headerlink" title="打印输出方式"></a>打印输出方式</h2><p>在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**<br>的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印<br>字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,<br>在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,<br>不是四个,所以把它一个一个打印就行了,但是我要是一开始就遍历打印的话可能就没问题把,<br>所以有时候你的flag是求对了,但是储存在数组中可能有<code>0x00</code>这时候<code>printf</code>会停到那里,<br>所以可以的话还是用循环遍历打印。</p>
-
+                <p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a><br>安装的话就补说了，因为博主也是看着网上的安装的。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>什么是符号执行：<br>符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。<br>使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。<br>在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到可以触发目标代码的具体值。<br>符号模拟技术（symbolic simulation）则把类似的思想用于硬件分析。<br>符号计算（Symbolic computation）则用于数学表达式分析。我理解为更厉害的爆破。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52369224/article/details/121319151">原文链接</a></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用angr分析的大致流程：</p>
+<ol>
+<li>导入angr</li>
+<li>导入二进制文件</li>
+<li>创建程序入口点的状态(state)</li>
+<li>将要求解的变量符号化,定义符号变量并与二进制文件相联系</li>
+<li>建立simgr,用于管理state</li>
+<li>通过.active的变化来找到满足我们要求的目标状态</li>
+<li>求解程序执行行到state时,符号化变量所需的目标状态</li>
+<li>解出约束条件,获取目标状态的数值</li>
+</ol>
+<h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数<br>我没学。感觉用的话得不偿失。<br><code>p = angr.Project(&#39;/text&#39;)</code></p>
+<hr>
+<h3 id="2-设置state"><a href="#2-设置state" class="headerlink" title="2. 设置state"></a>2. 设置state</h3><p>创建项目之后,需要一个工厂来解决问题,创建一个状态，默认是程序的入口地址,<br>这个状态保存着程序运行到某一阶段的信息,且可以通过修改这一状态进而修改上下文的信息。</p>
+<p><code>state = p.factory.entry_state()</code><br>也可以指定一个地址作为入口地址<br><code>state = p.factory.entry_state(addr=0x110110)</code><br>比如这里就指定0x110110作为入口地址,一般地址设为加密的函数入口。</p>
+<ul>
+<li><p>entry_state:做一些初始化工作，然后在程序的入口停下。<br>在创建完entry_state，之后就可以通过这个state对象，获取或者修改此时程序的运行状态。</p>
+</li>
+<li><p>state对象一般是符号执行开始前创建,用来初始化一些数据,或者是在路劲探索结束后,返回一个state<br>对象供用户提取需要的值,或进行约束求解.<br>创建完之后便是寻找路劲。程序当前的状态有多种表示。<br>**step()**表示向下执行一个block(42bytes)，**step()**函数产生active状态，<br>表示该分支在执行中。<br>**run()**表示运行到结束，**run()**函数产生deadended状态，表示分支结束。<br>**explore()**可以对地址进行限制以减少符号执行遍历的路径。**explore()**产生found状态<br>表示探索的结果等等。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-设置Simulation-Managers，进行路径探索的对象"><a href="#3-设置Simulation-Managers，进行路径探索的对象" class="headerlink" title="3. 设置Simulation Managers，进行路径探索的对象"></a>3. 设置Simulation Managers，进行路径探索的对象</h3><p>这个对象用于具体的路径探索<br><code>sm = p.factory.simulation_manager(state)</code><br>指定我们想要走到的位置：（使用explore执行模拟器，find和avoid用来作为约束条件）<br><code>res = sm.explore(find = 0x4005fb, avoid = 0x400607)</code><br>执行len(res.found)输出为1，可以知道found了一个结果,我们把找到的这个结果输出：<br><code>res.found[0].posix.dumps(0).strip(&quot;\x00&quot;)</code></p>
+<hr>
+<p>所以大致流程代码就是上面的了。<br><strong>简单的一个模板:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr						<span class="hljs-comment">#导angr包</span><br><br>p = angr.Project(<span class="hljs-string">&#x27;/root&#x27;</span>)   	<span class="hljs-comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span><br>state = p.factory.entry_state() <span class="hljs-comment">#建工厂,就是初始化状态</span><br><br>sm = p.factory.simulation_manager(state)  <span class="hljs-comment">#创建模拟管理器</span><br>sm.explore(find=<span class="hljs-number">0x110110</span>)		<span class="hljs-comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span><br><br>st = sm.found[<span class="hljs-number">0</span>]<br><br><span class="hljs-built_in">print</span>(st.posix.dumps(<span class="hljs-number">0</span>).strip(<span class="hljs-string">&quot;\x00&quot;</span>))<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -297,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一些做题的经验或心得</div>
-      <div>http://run521520.github.io/2025/10/17/07_mybook/</div>
+      <div>angr</div>
+      <div>http://run521520.github.io/2025/10/20/08_angr/</div>
     </div>
     <div class="license-meta">
       
@@ -310,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月17日</div>
+          <div>2025年10月20日</div>
         </div>
       
       
@@ -342,18 +368,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/20/08_angr/" title="angr">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">angr</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/14/06_GMP/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2025/10/17/07_mybook/" title="一些做题的经验或心得">
+                        <span class="hidden-mobile">一些做题的经验或心得</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

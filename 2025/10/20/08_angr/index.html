@@ -19,15 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源安装的话就补说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到">
+    <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下starrysky 安装的话就不说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angr">
 <meta property="og:url" content="http://run521520.github.io/2025/10/20/08_angr/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源安装的话就补说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到">
+<meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下starrysky 安装的话就不说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-20T11:37:41.000Z">
-<meta property="article:modified_time" content="2025-10-21T09:00:32.494Z">
+<meta property="article:modified_time" content="2025-10-23T09:49:41.487Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          4.3k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          15 分钟
+          36 分钟
         
       </span>
     
@@ -279,7 +279,9 @@
             
               <div class="markdown-body">
                 
-                <p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a><br>安装的话就补说了，因为博主也是看着网上的安装的。</p>
+                <p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a></p>
+<p>这个博主写的也不错,可以看一下<a target="_blank" rel="noopener" href="https://starrysky1004.github.io/2024/12/17/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/#toc-heading-16">starrysky</a></p>
+<p>安装的话就不说了，因为博主也是看着网上的安装的。</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>什么是符号执行：<br>符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。<br>使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。<br>在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到可以触发目标代码的具体值。<br>符号模拟技术（symbolic simulation）则把类似的思想用于硬件分析。<br>符号计算（Symbolic computation）则用于数学表达式分析。我理解为更厉害的爆破。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52369224/article/details/121319151">原文链接</a></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用angr分析的大致流程：</p>
 <ol>
@@ -292,9 +294,8 @@
 <li>求解程序执行行到state时,符号化变量所需的目标状态</li>
 <li>解出约束条件,获取目标状态的数值</li>
 </ol>
-<h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数<br>我没学。感觉用的话得不偿失。<br><code>p = angr.Project(&#39;/text&#39;)</code></p>
-<hr>
-<h3 id="2-设置state"><a href="#2-设置state" class="headerlink" title="2. 设置state"></a>2. 设置state</h3><p>创建项目之后,需要一个工厂来解决问题,创建一个状态，默认是程序的入口地址,<br>这个状态保存着程序运行到某一阶段的信息,且可以通过修改这一状态进而修改上下文的信息。</p>
+<h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数<br>我没学。<br><code>p = angr.Project(&#39;/text&#39;)</code></p>
+<h2 id="project只是加载二进制文件，实际是对simstate对象操作simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量"><a href="#project只是加载二进制文件，实际是对simstate对象操作simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量" class="headerlink" title="project只是加载二进制文件，实际是对simstate对象操作simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量"></a>project只是加载二进制文件，实际是对simstate对象操作<br>simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量</h2><h3 id="2-设置state"><a href="#2-设置state" class="headerlink" title="2. 设置state"></a>2. 设置state</h3><p>创建项目之后,需要一个工厂来解决问题,创建一个状态，默认是程序的入口地址,<br>这个状态保存着程序运行到某一阶段的信息,且可以通过修改这一状态进而修改上下文的信息。</p>
 <p><code>state = p.factory.entry_state()</code><br>也可以指定一个地址作为入口地址<br><code>state = p.factory.entry_state(addr=0x110110)</code><br>比如这里就指定0x110110作为入口地址,一般地址设为加密的函数入口。</p>
 <ul>
 <li><p>entry_state:做一些初始化工作，然后在程序的入口停下。<br>在创建完entry_state，之后就可以通过这个state对象，获取或者修改此时程序的运行状态。</p>
@@ -305,8 +306,54 @@
 <hr>
 <h3 id="3-设置Simulation-Managers，进行路径探索的对象"><a href="#3-设置Simulation-Managers，进行路径探索的对象" class="headerlink" title="3. 设置Simulation Managers，进行路径探索的对象"></a>3. 设置Simulation Managers，进行路径探索的对象</h3><p>这个对象用于具体的路径探索<br><code>sm = p.factory.simulation_manager(state)</code><br>指定我们想要走到的位置：（使用explore执行模拟器，find和avoid用来作为约束条件）<br><code>res = sm.explore(find = 0x4005fb, avoid = 0x400607)</code><br>执行len(res.found)输出为1，可以知道found了一个结果,我们把找到的这个结果输出：<br><code>res.found[0].posix.dumps(0).strip(&quot;\x00&quot;)</code></p>
 <hr>
-<p>所以大致流程代码就是上面的了。<br><strong>简单的一个模板:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr						<span class="hljs-comment">#导angr包</span><br><br>p = angr.Project(<span class="hljs-string">&#x27;/root&#x27;</span>)   	<span class="hljs-comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span><br>state = p.factory.entry_state() <span class="hljs-comment">#建工厂,就是初始化状态</span><br><br>sm = p.factory.simulation_manager(state)  <span class="hljs-comment">#创建模拟管理器</span><br>sm.explore(find=<span class="hljs-number">0x110110</span>)		<span class="hljs-comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span><br><br>st = sm.found[<span class="hljs-number">0</span>]<br><br><span class="hljs-built_in">print</span>(st.posix.dumps(<span class="hljs-number">0</span>).strip(<span class="hljs-string">&quot;\x00&quot;</span>))<br><br></code></pre></td></tr></table></figure>
+<p>所以大致流程代码就是上面的了。</p>
+<h2 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h2><h3 id="简单的一个模板"><a href="#简单的一个模板" class="headerlink" title="简单的一个模板:"></a><strong>简单的一个模板:</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr						<span class="hljs-comment">#导angr包</span><br><br>p = angr.Project(<span class="hljs-string">&#x27;/root&#x27;</span>)   	<span class="hljs-comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span><br>state = p.factory.entry_state() <span class="hljs-comment">#建工厂,就是初始化状态</span><br><br>sm = p.factory.simulation_manager(state)  <span class="hljs-comment">#创建模拟管理器</span><br>sm.explore(find=<span class="hljs-number">0x110110</span>)		<span class="hljs-comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span><br><br>st = sm.found[<span class="hljs-number">0</span>]<br><br><span class="hljs-built_in">print</span>(st.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
+
+<p>当程序中出现多个 <code>Try again</code> 和 <code>Good job</code>,就不能再添目标地址了,<br>因为explore发现第一个成功就没了,所以针对这种情况,将这两种情况判断写<br>成函数作为<code>find</code>和<code>avoid</code>的参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br>project = angr.Project(<span class="hljs-string">&#x27;./text&#x27;</span>)<br>simgr = project.factory.simulation_manager()  <span class="hljs-comment">#这是允许的可以一步到位</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="绕过输入-操控寄存器"><a href="#绕过输入-操控寄存器" class="headerlink" title="绕过输入,操控寄存器"></a>绕过输入,操控寄存器</h3><p>就是angr的输入格式不是很好,所以为了不出现问题,不从输入入手,<br>因为输入的数据是存在寄存器中然后传递给栈,所以找到存储的寄存器就行了<br>从传递寄存器参数给栈的位置开始执行,避开输入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//输入数据<br><br>.text:08048937                 mov     ecx, [ebp+var_18]<br>.text:0804893A                 mov     eax, ecx<br>.text:0804893C                 mov     ecx, [ebp+var_14]<br>.text:0804893F                 mov     ebx, ecx<br>.text:08048941                 mov     ecx, [ebp+var_10]<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//传递给栈<br><br>.text:0804897B                 call    get_user_input<br>.text:08048980                 mov     [ebp+var_14], eax<br>.text:08048983                 mov     [ebp+var_10], ebx<br>.text:08048986                 mov     [ebp+var_C], edx<br><br></code></pre></td></tr></table></figure>
+
+<p>这里讲一下,一些相关的函数(这里是按照顺序写的):</p>
+<ul>
+<li><p>entry_state() 从程序入口开始执行<br><code>entry_state = project.factory.entry_state()</code><br><code>project</code>是引入文件的设置的变量名。</p>
+</li>
+<li><p>blank_state() 从特殊位置开始<br><code>initial_state = project.factory.blank_state(addr=0x8048000)</code><br>就是用于绕过某些函数,和步骤之类的。</p>
+</li>
+<li><p>claripy.BVS(name,bit) 函数 用于创建位向量符号变量 就是一个变量<br>第一个参数变量名,第二个是字节数多少位。<br><code>arg1 = claripy.BVS(&#39;arg1&#39;, 32)</code></p>
+</li>
+<li><p>state.regs 后面根cpu寄存器,作用是访问和设置寄存器的值<br>支持的寄存器: <code>eax, ebx, ecx, edx, esi, edi, esp, ebp, eip等</code><br>主要用于符号化寄存器输入,模拟函数参数传递。<br>设置寄存器变量：<code>initial_state.regs.eax = arg1</code></p>
+</li>
+<li><p>simgr &#x3D; simulation_manager 模拟管理器<br>就是我们已经创建好了变量寄存器符号后,需要对它进行模拟(就是爆破的意思)<br>就是用 simgr来实现的 <code>simgr = simulation_manager</code>意思是说 它们两个写<br>哪一个都行,在要求较为准确的文档,或其它中是  <code>simulation_manager</code>，但是写脚本<br>之类的不严谨的时候 常用 <code>simgr</code>因为前者容易写错,后者好记。</p>
+</li>
+</ul>
+<p><code>simgr = project.factory.simulation_manager(initial_state)</code></p>
+<ul>
+<li>simgr.explore(find,avoid) 自动探索执行路线，寻找目标状态<br>find和avoid的参数可以是目标地址,同时也可以是函数,当程序中成功后的提示<br>只调用一次时便可使用<code>目标地址</code>反而就用函数,为什么呢?我们的<code>目标地址</code>其实就是<br>成功的提示,当提示被调用多次时,那怎么办,所以用函数自定义来区分到底哪一个是正确的。</li>
+</ul>
+<p><code>目标地址</code>很好写,找到函数地址填上去就行了。<br><code>函数定义</code>下面就是一个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment">#假设成功的提示有 Good 失败的有 Try</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br></code></pre></td></tr></table></figure>
+<ol>
+<li><code>state.posix</code> 	访问POSIX相关的抽象</li>
+<li><code>dumps(num)</code> <ul>
+<li>num &#x3D; 0 代表输入,就是flag</li>
+<li>num &#x3D; 1 代表输出,就是提示</li>
+<li>num &#x3D; 2 标准错误</li>
+</ul>
+</li>
+<li><code>b&#39;Good&#39; in ...</code> 则是检查输出中是否含有字符串’Good’</li>
+</ol>
+<ul>
+<li>simgr.found 存储成功的列表<br>专门来存储成功的信息的,我们从中取第一个信息,就是flag<br><code>solution = simgr.found[0]</code> 这时<code>solution</code>就包含flag了<br>正常的输入就直接打印了,但是如果不正常就是输入是十六十六进制的,需要转换一下</li>
+</ul>
+<p>从上文中我们模拟了一个 <code>eax</code> 寄存器的变量 <code>arg1</code> 所以要从 <code>solution</code>中取出来<br>用到了<code>solver.eval()</code></p>
+<ul>
+<li><code>solver.eval()</code> 求解符号表达式在当前状态下的具体值<br><code>arg = solution.solver.eval(arg1)</code><br><code>print(hex(arg))</code><br>这样子就行了</li>
+</ul>
+
                 
               </div>
             

@@ -2149,52 +2149,6 @@ input[type=checkbox] {
   margin-left: 0;
   margin-right: 0;
 }
-.parent-category {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.parent-name {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  color: #23395b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.post-count {
-  font-size: 14px;
-  color: #888;
-  background: #f5f5f5;
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-.child-categories {
-  display: flex;
-  flex-wrap: wrap; /* 自动换行 */
-  gap: 10px; /* 子分类间距 */
-}
-.child-category {
-  display: inline-block;
-  padding: 5px 12px;
-  background: #f8f9fa;
-  border-radius: 4px;
-  color: #555;
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.2s;
-}
-.child-category:hover {
-  background: #e9ecef;
-  color: #23395b;
-}
-.child-count {
-  color: #888;
-  margin-left: 5px;
-  font-size: 12px;
-}
 .tagcloud {
   padding: 1rem 5%;
 }

@@ -223,120 +223,142 @@
 <div class="cats-wrapper">
   <header class="cats-header">
     <h1>categories</h1>
-    <p class="cats-sub">分类：卡片 / 折叠两种展示（已做错误保护与安全数据注入）</p>
-    <div class="view-switch">
-      <button class="view-btn" data-view="cards">卡片</button>
-      <button class="view-btn" data-view="accordion">折叠</button>
-    </div>
+    <p class="cats-sub">卡片网格展示：每个分类一张卡片，显示分类名与计数，点击卡片进入该分类页面</p>
   </header>
 
   <main class="cats-main">
-    <section id="cardsView" class="view" aria-hidden="false"></section>
-    <section id="accordionView" class="view" aria-hidden="true"></section>
+    <section id="cardGridRoot" class="card-grid-root" aria-live="polite"></section>
   </main>
 </div>
 
 
 
 <style>
-.cats-wrapper{ max-width:1100px; margin:24px auto; padding:20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial; color:#222; box-sizing:border-box; }
-.cats-header{ text-align:center; margin-bottom:14px; }
-.view-switch{ display:inline-flex; gap:8px; margin-top:8px; }
-.view-btn{ padding:8px 12px; border-radius:999px; border:0; cursor:pointer; background:#f0f2f5; }
-.view-btn.active{ background:linear-gradient(90deg,#7cf9ff,#8b66ff); color:#fff; box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+/* Card grid 样式（使用系统字体，易于主题融合） */
+.cats-wrapper{
+  max-width: 1180px;
+  margin: 28px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  color: var(--text-color, #222);
+}
+.cats-header{ text-align: left; margin-bottom: 12px; }
+.cats-header h1{ font-size: 1.9rem; margin: 0 0 6px; color: var(--title-color, #0b2033); }
+.cats-sub{ margin: 0 0 18px; color: rgba(34,34,34,0.6); }
 
-/* 卡片网格 */
-.card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px; }
-.cat-card{ background:#fff; border-radius:10px; padding:16px; box-shadow:0 8px 26px rgba(15,23,42,0.06); transition:transform .12s; }
-.cat-card:hover{ transform:translateY(-6px); }
-.cat-name{ font-weight:700; font-size:1.02rem; color:#0b3; background:linear-gradient(90deg,#7cf9ff,#8b66ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.cat-meta{ color:#667; margin-top:8px; }
+/* 卡片网格容器 */
+.card-grid-root .card-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
 
-/* 折叠样式 */
-.accordion{ margin-top:18px; background:transparent; }
-.ac-item{ background:#fff; border-radius:10px; margin-bottom:10px; overflow:hidden; box-shadow:0 8px 26px rgba(15,23,42,0.06); }
-.ac-trigger{ display:flex; justify-content:space-between; padding:12px 14px; cursor:pointer; font-weight:700; }
-.ac-panel{ padding:10px 14px; border-top:1px solid rgba(0,0,0,0.04); display:none; color:#444; }
+/* 单张卡片 */
+.cat-card{
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 26px rgba(15,23,42,0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 96px;
+}
+.cat-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(15,23,42,0.10);
+}
+.cat-card a{ text-decoration: none; color: inherit; display:block; flex:1; }
+
+/* 分类名样式（渐变文字） */
+.cat-name{
+  font-weight: 700;
+  font-size: 1.04rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg,#7cf9ff 0%, #8b66ff 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 子行：描述与操作 */
+.cat-meta{
+  color: rgba(34,34,34,0.6);
+  font-size: 0.92rem;
+  margin-top: 6px;
+}
+
+/* 右侧计数角标 */
+.cat-footer{
+  display:flex;
+  align-items:center;
+  justify-content: flex-end;
+  gap:8px;
+}
+.count-badge{
+  background: #fff;
+  color: #071026;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+}
+
+/* 响应 */
+@media (max-width:820px){
+  .cats-header h1{ font-size:1.6rem; }
+  .cat-meta{ font-size:0.9rem; }
+}
 </style>
 
 <script>
-/* 安全注入：不要改这里的注入写法 */
-var catsData = [{"name":"加密算法","url":"/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":5},{"name":"其它","url":"/categories/%E5%85%B6%E5%AE%83/","count":3},{"name":"逆向软件使用","url":"/categories/%E9%80%86%E5%90%91%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/","count":1},{"name":"Angr","url":"/categories/Angr/","count":1}] || [];
+/* 安全地把服务端数据注入前端变量（不要改写此注入方式） */
+var categoriesData = [{"name":"加密算法","url":"/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":5},{"name":"其它","url":"/categories/%E5%85%B6%E5%AE%83/","count":3},{"name":"逆向软件使用","url":"/categories/%E9%80%86%E5%90%91%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/","count":1},{"name":"Angr","url":"/categories/Angr/","count":1}] || [];
 
 (function(){
-  // simple helpers
-  function el(t, cls, html){ var d=document.createElement(t); if(cls) d.className=cls; if(html!==undefined) d.innerHTML=html; return d; }
+  'use strict';
+  function el(tag, cls, html){
+    var d = document.createElement(tag);
+    if(cls) d.className = cls;
+    if(html !== undefined) d.innerHTML = html;
+    return d;
+  }
 
-  // render functions
-  function renderCards(root, data){
-    root.innerHTML = '';
+  function renderCardGrid(container, data){
+    if(!container) return;
+    container.innerHTML = '';
     var grid = el('div','card-grid');
     data.forEach(function(c){
       var card = el('div','cat-card');
-      var a = el('a','', '');
-      a.href = c.url;
-      a.style.textDecoration = 'none';
-      a.style.color = 'inherit';
+      var link = el('a','', '');
+      link.href = c.url;
+      // 点击卡片时可增加跟踪或动画
       var name = el('div','cat-name', c.name);
       var meta = el('div','cat-meta', '包含 ' + c.count + ' 篇文章');
-      a.appendChild(name);
-      a.appendChild(meta);
-      card.appendChild(a);
+      link.appendChild(name);
+      link.appendChild(meta);
+
+      var footer = el('div','cat-footer','');
+      var badge = el('div','count-badge', c.count);
+      footer.appendChild(badge);
+
+      card.appendChild(link);
+      card.appendChild(footer);
       grid.appendChild(card);
     });
-    root.appendChild(grid);
+    container.appendChild(grid);
   }
 
-  function renderAccordion(root, data){
-    root.innerHTML = '';
-    var wrap = el('div','accordion');
-    data.forEach(function(c, idx){
-      var item = el('div','ac-item');
-      var trigger = el('div','ac-trigger', '<span>' + c.name + '</span>');
-      var badge = el('span','', c.count);
-      badge.style.background = '#f0f2f5';
-      badge.style.padding = '6px 10px';
-      badge.style.borderRadius = '999px';
-      trigger.appendChild(badge);
-      var panel = el('div','ac-panel','<div>点击分类进入查看相关文章</div>');
-      item.appendChild(trigger);
-      item.appendChild(panel);
-      wrap.appendChild(item);
-
-      trigger.addEventListener('click', function(){
-        var opened = panel.style.display === 'block';
-        // close all
-        Array.prototype.slice.call(wrap.querySelectorAll('.ac-panel')).forEach(function(p){ p.style.display = 'none'; });
-        if(!opened) panel.style.display = 'block';
-      });
-
-      // clicking the badge goes to category page
-      badge.addEventListener('click', function(e){ e.stopPropagation(); window.location = c.url; });
-    });
-    root.appendChild(wrap);
-  }
-
-  // init
   document.addEventListener('DOMContentLoaded', function(){
-    var cardsRoot = document.getElementById('cardsView');
-    var accRoot = document.getElementById('accordionView');
-    // render both (will hide via view switch)
-    renderCards(cardsRoot, catsData);
-    renderAccordion(accRoot, catsData);
+    var root = document.getElementById('cardGridRoot');
+    if(!root) return;
+    renderCardGrid(root, Array.isArray(categoriesData) ? categoriesData : []);
 
-    // view switching
-    var btns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
-    function setView(v){
-      document.querySelectorAll('.view').forEach(function(x){ x.style.display = 'none'; x.setAttribute('aria-hidden','true'); });
-      if(v === 'cards'){ cardsRoot.style.display = ''; cardsRoot.setAttribute('aria-hidden','false'); }
-      else { accRoot.style.display = ''; accRoot.setAttribute('aria-hidden','false'); }
-      btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view') === v); });
-      try{ localStorage.setItem('hexo_categories_view', v); }catch(e){}
-    }
-    btns.forEach(function(b){ b.addEventListener('click', function(){ setView(b.getAttribute('data-view')); }); });
-    var last = 'cards';
-    try{ last = localStorage.getItem('hexo_categories_view') || 'cards'; }catch(e){}
-    setView(last);
+    // 可选：如果分类很多，按需分页或懒加载，这里占位供后续扩展
   });
 })();
 </script>

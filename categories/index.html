@@ -222,48 +222,121 @@
 
 <div class="cats-wrapper">
   <header class="cats-header">
-    <p></p>
-   
+    <h1>categories</h1>
+    <p class="cats-sub">分类：卡片 / 折叠两种展示（已做错误保护与安全数据注入）</p>
+    <div class="view-switch">
+      <button class="view-btn" data-view="cards">卡片</button>
+      <button class="view-btn" data-view="accordion">折叠</button>
+    </div>
   </header>
 
-  
+  <main class="cats-main">
+    <section id="cardsView" class="view" aria-hidden="false"></section>
+    <section id="accordionView" class="view" aria-hidden="true"></section>
+  </main>
+</div>
+
+
 
 <style>
-.cats-wrapper{ padding:28px; max-width:1200px; margin:0 auto; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#eef6ff; }
-.card-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; }
-.cat-card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,0.25); transition:transform .14s; }
-.cat-card:hover{ transform: translateY(-6px); }
-.cat-name{ font-weight:700; background: linear-gradient(90deg,#7cf9ff, #8b66ff); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:1.05rem; }
-.cat-meta{ color: rgba(255,255,255,0.72); margin-top:8px; }
-.cat-actions{ margin-top:12px; display:flex; gap:8px; }
-.chip{ display:inline-block; padding:6px 8px; border-radius:999px; background: rgba(255,255,255,0.03); color:#fff; font-size:0.9rem; text-decoration:none; }
-.count-badge{ margin-left:auto; background:#fff; color:#071026; padding:6px 10px; border-radius:999px; font-weight:700; }
+.cats-wrapper{ max-width:1100px; margin:24px auto; padding:20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial; color:#222; box-sizing:border-box; }
+.cats-header{ text-align:center; margin-bottom:14px; }
+.view-switch{ display:inline-flex; gap:8px; margin-top:8px; }
+.view-btn{ padding:8px 12px; border-radius:999px; border:0; cursor:pointer; background:#f0f2f5; }
+.view-btn.active{ background:linear-gradient(90deg,#7cf9ff,#8b66ff); color:#fff; box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+
+/* 卡片网格 */
+.card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px; }
+.cat-card{ background:#fff; border-radius:10px; padding:16px; box-shadow:0 8px 26px rgba(15,23,42,0.06); transition:transform .12s; }
+.cat-card:hover{ transform:translateY(-6px); }
+.cat-name{ font-weight:700; font-size:1.02rem; color:#0b3; background:linear-gradient(90deg,#7cf9ff,#8b66ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.cat-meta{ color:#667; margin-top:8px; }
+
+/* 折叠样式 */
+.accordion{ margin-top:18px; background:transparent; }
+.ac-item{ background:#fff; border-radius:10px; margin-bottom:10px; overflow:hidden; box-shadow:0 8px 26px rgba(15,23,42,0.06); }
+.ac-trigger{ display:flex; justify-content:space-between; padding:12px 14px; cursor:pointer; font-weight:700; }
+.ac-panel{ padding:10px 14px; border-top:1px solid rgba(0,0,0,0.04); display:none; color:#444; }
 </style>
 
-<div class="card-grid" id="cardGridRoot"></div>
-
 <script>
+/* 安全注入：不要改这里的注入写法 */
 var catsData = [{"name":"加密算法","url":"/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":5},{"name":"其它","url":"/categories/%E5%85%B6%E5%AE%83/","count":3},{"name":"逆向软件使用","url":"/categories/%E9%80%86%E5%90%91%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/","count":1},{"name":"Angr","url":"/categories/Angr/","count":1}] || [];
+
 (function(){
+  // simple helpers
   function el(t, cls, html){ var d=document.createElement(t); if(cls) d.className=cls; if(html!==undefined) d.innerHTML=html; return d; }
-  var root = document.getElementById('cardGridRoot');
-  catsData.forEach(function(c){
-    var card = el('div','cat-card');
-    var a = el('a','', '');
-    a.href = c.url;
-    var name = el('div','cat-name', c.name);
-    var meta = el('div','cat-meta', '包含 ' + c.count + ' 篇文章');
-    var foot = el('div','cat-actions', '');
-    var btn = el('a','chip','查看');
-    btn.href = c.url;
-    var badge = el('div','count-badge', c.count);
-    foot.appendChild(btn);
-    foot.appendChild(badge);
-    a.appendChild(name);
-    a.appendChild(meta);
-    card.appendChild(a);
-    card.appendChild(foot);
-    root.appendChild(card);
+
+  // render functions
+  function renderCards(root, data){
+    root.innerHTML = '';
+    var grid = el('div','card-grid');
+    data.forEach(function(c){
+      var card = el('div','cat-card');
+      var a = el('a','', '');
+      a.href = c.url;
+      a.style.textDecoration = 'none';
+      a.style.color = 'inherit';
+      var name = el('div','cat-name', c.name);
+      var meta = el('div','cat-meta', '包含 ' + c.count + ' 篇文章');
+      a.appendChild(name);
+      a.appendChild(meta);
+      card.appendChild(a);
+      grid.appendChild(card);
+    });
+    root.appendChild(grid);
+  }
+
+  function renderAccordion(root, data){
+    root.innerHTML = '';
+    var wrap = el('div','accordion');
+    data.forEach(function(c, idx){
+      var item = el('div','ac-item');
+      var trigger = el('div','ac-trigger', '<span>' + c.name + '</span>');
+      var badge = el('span','', c.count);
+      badge.style.background = '#f0f2f5';
+      badge.style.padding = '6px 10px';
+      badge.style.borderRadius = '999px';
+      trigger.appendChild(badge);
+      var panel = el('div','ac-panel','<div>点击分类进入查看相关文章</div>');
+      item.appendChild(trigger);
+      item.appendChild(panel);
+      wrap.appendChild(item);
+
+      trigger.addEventListener('click', function(){
+        var opened = panel.style.display === 'block';
+        // close all
+        Array.prototype.slice.call(wrap.querySelectorAll('.ac-panel')).forEach(function(p){ p.style.display = 'none'; });
+        if(!opened) panel.style.display = 'block';
+      });
+
+      // clicking the badge goes to category page
+      badge.addEventListener('click', function(e){ e.stopPropagation(); window.location = c.url; });
+    });
+    root.appendChild(wrap);
+  }
+
+  // init
+  document.addEventListener('DOMContentLoaded', function(){
+    var cardsRoot = document.getElementById('cardsView');
+    var accRoot = document.getElementById('accordionView');
+    // render both (will hide via view switch)
+    renderCards(cardsRoot, catsData);
+    renderAccordion(accRoot, catsData);
+
+    // view switching
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
+    function setView(v){
+      document.querySelectorAll('.view').forEach(function(x){ x.style.display = 'none'; x.setAttribute('aria-hidden','true'); });
+      if(v === 'cards'){ cardsRoot.style.display = ''; cardsRoot.setAttribute('aria-hidden','false'); }
+      else { accRoot.style.display = ''; accRoot.setAttribute('aria-hidden','false'); }
+      btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view') === v); });
+      try{ localStorage.setItem('hexo_categories_view', v); }catch(e){}
+    }
+    btns.forEach(function(b){ b.addEventListener('click', function(){ setView(b.getAttribute('data-view')); }); });
+    var last = 'cards';
+    try{ last = localStorage.getItem('hexo_categories_view') || 'cards'; }catch(e){}
+    setView(last);
   });
 })();
 </script>

@@ -20,7 +20,7 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="分类">
+<meta property="og:title" content="categories">
 <meta property="og:url" content="http://run521520.github.io/categories/index.html">
 <meta property="og:site_name" content="run521">
 <meta property="og:locale" content="zh_CN">
@@ -29,7 +29,7 @@
   
   
   
-  <title>分类 - run521</title>
+  <title>categories - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -83,7 +83,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 100vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="分类"></span>
+            <span id="subtitle" data-typed-text="categories"></span>
           
         </div>
 
@@ -213,107 +213,60 @@
     
       <div class="container nopadding-x-md">
         <div id="board"
-          >
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
+<div class="cats-wrapper">
+  <header class="cats-header">
+    <h1>categories</h1>
+    <p class="cats-sub">卡片网格展示，每个卡片显示分类名与计数，点击卡片展开或跳转</p>
+  </header>
 
-
-
-
-<div class="category-list">
   
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="(逆向，加密算法)"
-        id="heading-20955c52ca820e6c09c4c5e657a0ba13" role="tab" data-toggle="collapse" href="#collapse-20955c52ca820e6c09c4c5e657a0ba13"
-        aria-expanded="false"
-      >
-        (逆向，加密算法)
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E9%80%86%E5%90%91%EF%BC%8C%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-20955c52ca820e6c09c4c5e657a0ba13"
-           role="tabpanel" aria-labelledby="heading-20955c52ca820e6c09c4c5e657a0ba13">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2025/10/04/02_RC4/" title="RC4加密算法"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">RC4加密算法</span>
-        </a>
-      
-    
-  </div>
 
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="(逆向，软件)"
-        id="heading-22ecf42727527bfca81cb9243e663be5" role="tab" data-toggle="collapse" href="#collapse-22ecf42727527bfca81cb9243e663be5"
-        aria-expanded="false"
-      >
-        (逆向，软件)
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E9%80%86%E5%90%91%EF%BC%8C%E8%BD%AF%E4%BB%B6/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-22ecf42727527bfca81cb9243e663be5"
-           role="tabpanel" aria-labelledby="heading-22ecf42727527bfca81cb9243e663be5">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2025/10/04/01_ida/" title="ida使用文档"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ida使用文档</span>
-        </a>
-      
-    
-  </div>
+<style>
+.cats-wrapper{ padding:28px; max-width:1200px; margin:0 auto; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#eef6ff; }
+.card-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; }
+.cat-card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,0.25); transition:transform .14s; }
+.cat-card:hover{ transform: translateY(-6px); }
+.cat-name{ font-weight:700; background: linear-gradient(90deg,#7cf9ff, #8b66ff); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:1.05rem; }
+.cat-meta{ color: rgba(255,255,255,0.72); margin-top:8px; }
+.cat-actions{ margin-top:12px; display:flex; gap:8px; }
+.chip{ display:inline-block; padding:6px 8px; border-radius:999px; background: rgba(255,255,255,0.03); color:#fff; font-size:0.9rem; text-decoration:none; }
+.count-badge{ margin-left:auto; background:#fff; color:#071026; padding:6px 10px; border-radius:999px; font-weight:700; }
+</style>
 
-        
-      </div>
-    </div>
-  
-</div>
+<div class="card-grid" id="cardGridRoot"></div>
 
-
+<script>
+var catsData = [{"name":"(逆向，软件)","url":"/categories/%E9%80%86%E5%90%91%EF%BC%8C%E8%BD%AF%E4%BB%B6/","count":1},{"name":"(逆向，加密算法)","url":"/categories/%E9%80%86%E5%90%91%EF%BC%8C%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":1}] || [];
+(function(){
+  function el(t, cls, html){ var d=document.createElement(t); if(cls) d.className=cls; if(html!==undefined) d.innerHTML=html; return d; }
+  var root = document.getElementById('cardGridRoot');
+  catsData.forEach(function(c){
+    var card = el('div','cat-card');
+    var a = el('a','', '');
+    a.href = c.url;
+    var name = el('div','cat-name', c.name);
+    var meta = el('div','cat-meta', '包含 ' + c.count + ' 篇文章');
+    var foot = el('div','cat-actions', '');
+    var btn = el('a','chip','查看');
+    btn.href = c.url;
+    var badge = el('div','count-badge', c.count);
+    foot.appendChild(btn);
+    foot.appendChild(badge);
+    a.appendChild(name);
+    a.appendChild(meta);
+    card.appendChild(a);
+    card.appendChild(foot);
+    root.appendChild(card);
+  });
+})();
+</script>
               </div>
             </div>
           </div>

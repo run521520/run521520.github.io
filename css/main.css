@@ -2085,108 +2085,12 @@ input[type=checkbox] {
 .category-bar .list-group-item-action:hover {
   background-color: initial;
 }
-.category-page {
-  padding: 30px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.category-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 自动适应宽度的网格布局 */
-  gap: 20px; /* 分类卡片间距 */
-  margin-top: 20px;
-}
-.category-item {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-.category-item .category-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #23395b; /* 和标签云颜色呼应 */
-}
-.category-item .category-meta {
-  color: #888;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-.category-item .post-preview {
-  padding-left: 10px;
-  border-left: 2px solid #eee;
-}
-.category-item .post-preview a {
-  display: block;
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 5px;
-  transition: color 0.2s;
-}
-.category-item .post-preview a:hover {
-  color: #6a85b6; /*  hover时变色 */
-  text-decoration: none;
-}
-.category-item:hover {
-  transform: translateY(-5px); /* 轻微上浮 */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
 .category-chains {
   display: flex;
   flex-wrap: wrap;
 }
 .category-chains > *:not(:last-child) {
   margin-right: 1em;
-}
-.category-page {
-  padding: 30px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.category-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 自动适应宽度的网格布局 */
-  gap: 20px; /* 分类卡片间距 */
-  margin-top: 20px;
-}
-.category-item {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-.category-item .category-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #23395b; /* 和标签云颜色呼应 */
-}
-.category-item .category-meta {
-  color: #888;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-.category-item .post-preview {
-  padding-left: 10px;
-  border-left: 2px solid #eee;
-}
-.category-item .post-preview a {
-  display: block;
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 5px;
-  transition: color 0.2s;
-}
-.category-item .post-preview a:hover {
-  color: #6a85b6; /*  hover时变色 */
-  text-decoration: none;
-}
-.category-item:hover {
-  transform: translateY(-5px); /* 轻微上浮 */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 .category:not(:last-child) {
   margin-bottom: 1rem;
@@ -2245,53 +2149,45 @@ input[type=checkbox] {
   margin-left: 0;
   margin-right: 0;
 }
-.category-page {
-  padding: 30px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
 .category-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 自动适应宽度的网格布局 */
-  gap: 20px; /* 分类卡片间距 */
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
 }
 .category-item {
   background: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
-.category-item .category-name {
-  font-size: 18px;
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.category-name {
+  font-size: 20px;
   font-weight: 600;
+  color: #23395b;
   margin-bottom: 10px;
-  color: #23395b; /* 和标签云颜色呼应 */
 }
-.category-item .category-meta {
-  color: #888;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-.category-item .post-preview {
+.post-preview {
+  margin-top: 10px;
   padding-left: 10px;
   border-left: 2px solid #eee;
 }
-.category-item .post-preview a {
+.post-preview a {
   display: block;
   color: #555;
   font-size: 14px;
   margin-bottom: 5px;
   transition: color 0.2s;
 }
-.category-item .post-preview a:hover {
-  color: #6a85b6; /*  hover时变色 */
+.post-preview a:hover {
+  color: #3498db;
   text-decoration: none;
-}
-.category-item:hover {
-  transform: translateY(-5px); /* 轻微上浮 */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 .tagcloud {
   padding: 1rem 5%;

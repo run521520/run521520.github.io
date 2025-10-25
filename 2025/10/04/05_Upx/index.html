@@ -19,21 +19,22 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="title: Upx脱壳date: 2025-10-04 22:12:41tags: [UPX脱壳]categories: 加密算法 UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标">
+    <meta name="description" content="UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。 查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。  常用脱壳（自动）如果程序确认为 UPX 压缩，可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="run521">
-<meta property="og:url" content="http://run521520.github.io/2025/10/05/05_Upx/index.html">
+<meta property="og:title" content="Upx脱壳">
+<meta property="og:url" content="http://run521520.github.io/2025/10/04/05_Upx/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="title: Upx脱壳date: 2025-10-04 22:12:41tags: [UPX脱壳]categories: 加密算法 UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标">
+<meta property="og:description" content="UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。 查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。  常用脱壳（自动）如果程序确认为 UPX 压缩，可">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T18:14:44.826Z">
-<meta property="article:modified_time" content="2025-10-25T16:53:57.615Z">
+<meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
+<meta property="article:modified_time" content="2025-10-25T17:06:15.191Z">
 <meta property="article:author" content="youduck7">
+<meta property="article:tag" content="UPX脱壳">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>run521</title>
+  <title>Upx脱壳 - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="Upx脱壳"></span>
           
         </div>
 
@@ -210,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-05 02:14" pubdate>
-          2025年10月5日 凌晨
+        <time datetime="2025-10-04 22:12" pubdate>
+          2025年10月4日 晚上
         </time>
       </span>
     
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          767 字
+          706 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -274,13 +275,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">Upx脱壳</h1>
             
             
               <div class="markdown-body">
                 
-                <p>title: Upx脱壳<br>date: 2025-10-04 22:12:41<br>tags: [UPX脱壳]<br>categories: 加密算法</p>
-<p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p>
+                <p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p>
 <h2 id="快速检测"><a href="#快速检测" class="headerlink" title="快速检测"></a>快速检测</h2><ol>
 <li>使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。</li>
 <li>查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。</li>
@@ -316,6 +316,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UPX%E8%84%B1%E5%A3%B3/" class="print-no-link">#UPX脱壳</a>
+      
+    </div>
   
 </div>
 
@@ -325,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://run521520.github.io/2025/10/05/05_Upx/</div>
+      <div>Upx脱壳</div>
+      <div>http://run521520.github.io/2025/10/04/05_Upx/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月5日</div>
+          <div>2025年10月4日</div>
         </div>
       
       
@@ -370,9 +398,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/10/reverse_books/" title="逆向工程权威指南上">
+                      <a href="/2025/10/04/03_Base64/" title="Base64加密算法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">逆向工程权威指南上</span>
+                        <span class="hidden-mobile">Base64加密算法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -380,8 +408,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/03_Base64/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
+                        <span class="hidden-mobile">TEA加密算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

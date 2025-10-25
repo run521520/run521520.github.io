@@ -223,77 +223,82 @@
 <div class="tags-wrapper">
   <header class="tags-header">
     <h1>tags</h1>
-    <p class="tags-sub">三种展示：卡片网格 · 瀑布 Masonry · 计数气泡（点击切换）</p>
+    <p class="tags-sub">两种展示：卡片网格 · 瀑布 Masonry（点击切换）</p>
 
-    <div class="view-switch">
-      <button class="view-btn" data-view="grid">卡片网格</button>
-      <button class="view-btn" data-view="masonry">瀑布 Masonry</button>
-      <button class="view-btn" data-view="bubble">计数气泡</button>
+    <div class="view-switch" role="tablist" aria-label="Tag view switch">
+      <button class="view-btn" data-view="grid" role="tab" aria-selected="true">卡片网格</button>
+      <button class="view-btn" data-view="masonry" role="tab" aria-selected="false">瀑布 Masonry</button>
     </div>
   </header>
 
   <main class="tags-main">
-    <!-- Containers for three views -->
     <section id="tagGridView" class="view view-grid" aria-hidden="false"></section>
     <section id="tagMasonryView" class="view view-masonry" aria-hidden="true"></section>
-    <section id="tagBubbleView" class="view view-bubble" aria-hidden="true"></section>
   </main>
 </div>
 
 
 
 <style>
+/* 引入现代字体（可按需替换或删除） */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 :root{
-  --bg-1: #071026;
-  --card-bg: rgba(255,255,255,0.04);
+  --bg: #071026;
+  --card-bg: rgba(255,255,255,0.03);
   --accent1: linear-gradient(90deg,#7cf9ff 0%, #8b66ff 35%, #ff6ec7 70%);
-  --muted: rgba(255,255,255,0.7);
+  --muted: rgba(255,255,255,0.72);
+  --btn-bg: rgba(255,255,255,0.03);
 }
 .tags-wrapper{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: #eef6ff;
-  padding: 32px 18px;
-  background: linear-gradient(180deg, var(--bg-1) 0%, #071225 100%);
+  padding: 28px 18px;
+  background: linear-gradient(180deg, var(--bg) 0%, #071225 100%);
   min-height: 60vh;
   box-sizing: border-box;
 }
-.tags-header{ text-align:center; margin-bottom:20px; }
-.tags-header h1{ font-size:2rem; margin:0; color:#fff; text-shadow:0 6px 18px rgba(0,0,0,0.6); }
+.tags-header{ text-align:center; margin-bottom:18px; }
+.tags-header h1{ font-size:2rem; margin:0; color:#fff; text-shadow:0 6px 18px rgba(0,0,0,0.6); font-weight:600; }
 .tags-sub{ margin:6px 0 12px; color:var(--muted); font-size:0.95rem; }
 
 /* view switch */
 .view-switch{ display:inline-flex; gap:8px; margin-top:12px; }
 .view-btn{
-  border:0; cursor:pointer; padding:8px 12px; border-radius:999px; color:#fff;
-  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border:0; cursor:pointer; padding:8px 14px; border-radius:999px; color:#fff; font-weight:600;
+  background: var(--btn-bg);
   box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-  transition: transform .18s, box-shadow .18s, opacity .18s;
+  transition: transform .18s, box-shadow .18s, opacity .18s, background .18s;
 }
-.view-btn.active{ box-shadow: 0 14px 30px rgba(18,20,40,0.6); transform: translateY(-3px); background: var(--accent1); }
+.view-btn.active{ box-shadow: 0 14px 30px rgba(18,20,40,0.6); transform: translateY(-3px); background: var(--accent1); color:#fff; }
 .view-btn:focus{ outline:2px solid rgba(255,255,255,0.06); }
 
 /* ====== 卡片网格（Grid） ====== */
 .view-grid { max-width:1100px; margin: 22px auto; padding: 10px; }
-.card-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; }
+.card-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
 .tag-card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
-  border-radius:12px; padding:16px; display:flex; justify-content:space-between; align-items:center;
-  gap:12px; box-shadow: 0 10px 26px rgba(2,6,23,0.5);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px; padding:14px; display:flex; justify-content:space-between; align-items:center;
+  gap:12px; box-shadow: 0 8px 28px rgba(2,6,23,0.45);
   transition: transform .16s ease, box-shadow .16s ease;
 }
 .tag-card:hover{ transform: translateY(-8px); box-shadow: 0 28px 60px rgba(2,6,23,0.6); }
 .tag-card a{ text-decoration:none; color:inherit; display:flex; gap:12px; align-items:center; width:100%; }
+
+/* left: name + desc */
 .tag-name{
   font-weight:700; font-size:1.02rem;
   background-image: var(--accent1); -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .tag-desc{ color: rgba(255,255,255,0.72); font-size:0.88rem; margin-top:6px; }
+
+/* right: count badge */
 .tag-count{
   min-width:44px; height:44px; border-radius:999px; display:flex; align-items:center; justify-content:center;
-  font-weight:700; color:#0b0f1a; background: white; box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+  font-weight:700; color:#0b0f1a; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 
-/* ====== 瀑布 Masonry（列） ====== */
+/* ====== 瀑布 Masonry（CSS columns） ====== */
 .view-masonry{ max-width:1100px; margin: 22px auto; padding:10px; }
 .masonry {
   column-width: 260px;
@@ -310,42 +315,34 @@
   transition: transform .16s;
 }
 .masonry-item:hover{ transform: translateY(-6px); }
-.masonry-item .m-name{ font-weight:700; color:#fff; background: linear-gradient(90deg,#fff 0%, #fff 0%); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:1.02rem; }
+.masonry-item .m-name{ font-weight:700; font-size:1.02rem; background: var(--accent1); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .masonry-item .m-meta{ color: rgba(255,255,255,0.72); margin-top:8px; font-size:0.9rem; }
 
-/* ====== 计数气泡（Bubble Cloud） ====== */
-.view-bubble{ max-width:1100px; margin:22px auto; padding:10px; min-height:360px; position:relative; }
-.bubble-stage{ position:relative; width:100%; height:420px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); overflow:hidden; }
-.bubble{ position:absolute; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#04111a; font-weight:700; cursor:pointer; box-shadow: 0 12px 42px rgba(2,6,23,0.55); transition: transform .22s, box-shadow .22s; text-decoration:none; }
-.bubble:hover{ transform: translateY(-8px) scale(1.06); box-shadow: 0 28px 64px rgba(2,6,23,0.65); z-index:60; }
-.bubble .b-name{ color: transparent; background-image: var(--accent1); -webkit-background-clip:text; background-clip:text; padding:4px 6px; font-size:0.95rem; }
-.bubble-foot{ margin-top:10px; color:var(--muted); font-size:0.92rem; text-align:center; }
-
-/* ====== 通用响应 ====== */
+/* 响应 */
 @media (max-width:820px){
   .card-grid{ grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); }
-  .bubble-stage{ height:360px; }
 }
 @media (max-width:520px){
   .view-switch{ display:flex; flex-wrap:wrap; justify-content:center; }
-  .bubble-stage{ height:300px; }
 }
 </style>
 
 <script>
-/* 安全地把服务端数据注入到前端变量 */
-var tagsData = [{"name":"加密算法","url":"/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":3},{"name":"Base64","url":"/tags/Base64/","count":1},{"name":"IDA使用","url":"/tags/IDA%E4%BD%BF%E7%94%A8/","count":1},{"name":"TEA","url":"/tags/TEA/","count":1},{"name":"RC4","url":"/tags/RC4/","count":1},{"name":"UPX脱壳","url":"/tags/UPX%E8%84%B1%E5%A3%B3/","count":1},{"name":"angr","url":"/tags/angr/","count":1},{"name":"逆向","url":"/tags/%E9%80%86%E5%90%91/","count":1},{"name":"一些运算技巧","url":"/tags/%E4%B8%80%E4%BA%9B%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/","count":1}] || [];
+/* 安全注入服务端 tags 数据到前端变量 */
+var tagsData = [{"name":"加密算法","url":"/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/","count":3},{"name":"RC4","url":"/tags/RC4/","count":1},{"name":"IDA使用","url":"/tags/IDA%E4%BD%BF%E7%94%A8/","count":1},{"name":"TEA","url":"/tags/TEA/","count":1},{"name":"Base64","url":"/tags/Base64/","count":1},{"name":"UPX脱壳","url":"/tags/UPX%E8%84%B1%E5%A3%B3/","count":1},{"name":"一些运算技巧","url":"/tags/%E4%B8%80%E4%BA%9B%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/","count":1},{"name":"angr","url":"/tags/angr/","count":1},{"name":"逆向","url":"/tags/%E9%80%86%E5%90%91/","count":1}] || [];
+
 (function(){
-  // Utilities
+  // Helper
   function el(tag, cls, html){ var d=document.createElement(tag); if(cls) d.className=cls; if(html!==undefined) d.innerHTML=html; return d; }
 
-  // --- RENDER: Card Grid ---
+  // Render: Card Grid
   function renderCardGrid(container, tags){
+    if(!container) return;
     container.innerHTML = '';
     var grid = el('div','card-grid');
     tags.forEach(function(t){
       var card = el('div','tag-card');
-      var a = el('a', '', '');
+      var a = el('a','', '');
       a.href = t.url;
       var left = el('div','tag-left');
       var name = el('div','tag-name', t.name);
@@ -361,8 +358,9 @@ var tagsData = [{"name":"加密算法","url":"/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%
     container.appendChild(grid);
   }
 
-  // --- RENDER: Masonry (CSS columns) ---
+  // Render: Masonry (CSS columns)
   function renderMasonry(container, tags){
+    if(!container) return;
     container.innerHTML = '';
     var box = el('div','masonry');
     tags.forEach(function(t){
@@ -379,89 +377,27 @@ var tagsData = [{"name":"加密算法","url":"/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%
     container.appendChild(box);
   }
 
-  // --- RENDER: Bubble Cloud ---
-  function renderBubbles(container, tags){
-    container.innerHTML = '';
-    var stage = el('div','bubble-stage');
-    container.appendChild(stage);
-
-    var maxBubbles = Math.min(tags.length, 70);
-    var sliced = tags.slice(0, maxBubbles);
-
-    // find counts range
-    var counts = sliced.map(function(t){ return t.count; });
-    var max = counts.length ? Math.max.apply(null, counts) : 1;
-    var min = counts.length ? Math.min.apply(null, counts) : 1;
-
-    function mapSize(c){
-      if(max === min) return 48;
-      var t = (c - min) / (max - min);
-      return Math.round(36 + t * (120 - 36));
-    }
-
-    // compute stage size after appended
-    var rect = {w: 1100, h:420};
-    var computed = stage.getBoundingClientRect();
-    if(computed && computed.width > 0) rect.w = computed.width;
-    if(computed && computed.height > 0) rect.h = computed.height;
-
-    sliced.forEach(function(t, i){
-      var size = mapSize(t.count);
-      var bubble = el('a','bubble');
-      bubble.href = t.url;
-      bubble.style.width = size + 'px';
-      bubble.style.height = size + 'px';
-      bubble.style.lineHeight = size + 'px';
-      // random position, keep padding
-      var pad = 12;
-      var x = Math.random() * Math.max(0, (rect.w - size - pad*2)) + pad;
-      var y = Math.random() * Math.max(0, (rect.h - size - pad*2)) + pad;
-      bubble.style.left = x + 'px';
-      bubble.style.top = y + 'px';
-      var rot = (Math.random()-0.5) * 20;
-      bubble.style.transform = 'rotate(' + rot + 'deg)';
-      var span = el('span','b-name', t.name);
-      var hue = Math.round(220 + (i / sliced.length) * 120);
-      bubble.style.background = 'linear-gradient(135deg, hsla(' + hue + ',90%,76%,0.95), hsla(' + (hue+30) + ',80%,66%,0.95))';
-      bubble.appendChild(span);
-      stage.appendChild(bubble);
-
-      // floating animation (Web Animations API)
-      var totalDur = (6 + Math.random()*6)*1000;
-      bubble.animate([
-        { transform: bubble.style.transform + ' translateY(0px)' },
-        { transform: bubble.style.transform + ' translateY(-12px)' },
-        { transform: bubble.style.transform + ' translateY(0px)' }
-      ], { duration: totalDur, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
-
-      bubble.addEventListener('mouseenter', function(){ bubble.style.transform = 'rotate(0deg) scale(1.03)'; });
-      bubble.addEventListener('mouseleave', function(){ bubble.style.transform = 'rotate(' + rot + 'deg)'; });
-    });
-
-    var foot = el('div','bubble-foot','说明：气泡大小按标签文章数映射，最多显示前 ' + maxBubbles + ' 个标签。');
-    container.appendChild(foot);
-  }
-
-  // --- Initialization & View Switching ---
+  // Init & view switching
   document.addEventListener('DOMContentLoaded', function(){
     var gridC = document.getElementById('tagGridView');
     var masonC = document.getElementById('tagMasonryView');
-    var bubbC = document.getElementById('tagBubbleView');
     var btns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
-
-    var tags = (Array.isArray(tagsData) ? tagsData : []).slice();
+    var tags = Array.isArray(tagsData) ? tagsData.slice() : [];
 
     // initial render
     renderCardGrid(gridC, tags);
     renderMasonry(masonC, tags);
-    renderBubbles(bubbC, tags);
 
     function setView(view){
       document.querySelectorAll('.view').forEach(function(v){ v.style.display='none'; v.setAttribute('aria-hidden','true'); });
-      var id = (view === 'grid') ? 'tagGridView' : (view === 'masonry') ? 'tagMasonryView' : 'tagBubbleView';
+      var id = (view === 'grid') ? 'tagGridView' : 'tagMasonryView';
       var elv = document.getElementById(id);
       if(elv){ elv.style.display = ''; elv.setAttribute('aria-hidden','false'); }
-      btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view')===view); });
+      btns.forEach(function(b){
+        var is = b.getAttribute('data-view') === view;
+        b.classList.toggle('active', is);
+        b.setAttribute('aria-selected', is ? 'true' : 'false');
+      });
       try{ localStorage.setItem('hexo_tags_view', view); }catch(e){}
     }
 
@@ -474,14 +410,13 @@ var tagsData = [{"name":"加密算法","url":"/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%
     try{ last = localStorage.getItem('hexo_tags_view') || 'grid'; }catch(e){}
     setView(last);
 
-    // ensure masonry and bubble re-render/rescale on window resize (debounced)
+    // on resize re-render masonry (simple debounce)
     var resizeTimer;
     window.addEventListener('resize', function(){
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function(){
         renderMasonry(masonC, tags);
-        renderBubbles(bubbC, tags);
-      }, 300);
+      }, 250);
     }, { passive:true });
   });
 })();

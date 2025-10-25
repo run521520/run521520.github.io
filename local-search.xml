@@ -101,33 +101,6 @@
   
   
   <entry>
-    <title>TEA加密算法</title>
-    <link href="/2025/10/04/04_TEA/"/>
-    <url>/2025/10/04/04_TEA/</url>
-    
-    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
-    
-    
-    <categories>
-      
-      <category>加密算法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>TEA</tag>
-      
-      <tag>加密算法</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>RC4加密算法</title>
     <link href="/2025/10/04/02_RC4/"/>
     <url>/2025/10/04/02_RC4/</url>
@@ -144,9 +117,36 @@
     
     <tags>
       
+      <tag>RC4</tag>
+      
       <tag>加密算法</tag>
       
-      <tag>RC4</tag>
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TEA加密算法</title>
+    <link href="/2025/10/04/04_TEA/"/>
+    <url>/2025/10/04/04_TEA/</url>
+    
+    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
+    
+    
+    <categories>
+      
+      <category>加密算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>加密算法</tag>
+      
+      <tag>TEA</tag>
       
     </tags>
     

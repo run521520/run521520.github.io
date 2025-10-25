@@ -295,14 +295,14 @@
       <h2 class="index-header">
         
         <a href="/2025/10/14/06_GMP/" target="_self">
-          
+          GMP中的一些函数
         </a>
       </h2>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/10/14/06_GMP/" target="_self">
         <div>
-          __gmpz_init_set_str用于初始化大整数并为其设置字符串表示的值。int __gmpz_init_set_str (mpz_t rop, const char *str, int base)  rop: 要初始化的mpz_t类型的大整数变量 str: 包含数字和字符串(可包含可选符号) base: 数值的进制基数(2-62,或0表示自动检测) 成功返回0,失败返回-1  123456
+          讲一下GMP中的函数,和c语言中的函数 GMP__gmpz_init_set_str用于初始化大整数并为其设置字符串表示的值。int __gmpz_init_set_str (mpz_t rop, const char *str, int base)  rop: 要初始化的mpz_t类型的大整数变量 str: 包含数字和字符串(可包含可选符号) base: 数值的进制基数(2-62,或0表示自动检
         </div>
       </a>
 
@@ -369,6 +369,39 @@
       <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/01_ida/" target="_self">
         <div>
           IDA 使用文档一、窗口介绍1. 函数窗口 功能：显示所有函数列表。 快捷键：Ctrl + F 查找函数名（所有表格窗口均支持）。  2. IDA-View 窗口 功能：显示汇编代码。 快捷键：空格键 切换图形模式与文本模式。  3. Pseudocode（伪代码）窗口 功能：显示 C&#x2F;C++ 伪代码。 快捷键：Tab 切换到对应汇编窗口。 重命名：选中关键词后按 N，或右键选择“Ren
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-04 22:12" pubdate>
+              2025-10-04
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/10/04/02_RC4/" target="_self">
+          RC4加密算法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/02_RC4/" target="_self">
+        <div>
+          RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2
         </div>
       </a>
 
@@ -492,48 +525,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/10/04/02_RC4/" target="_self">
-          RC4加密算法
+        <a href="/2025/10/04/SomeNicheOperations/" target="_self">
+          一些偏门的运算
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/02_RC4/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/SomeNicheOperations/" target="_self">
         <div>
-          RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-04 22:12" pubdate>
-              2025-10-04
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/04/dataStorage/" target="_self">
-          数据储存
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/dataStorage/" target="_self">
-        <div>
-          数据在内存中的表示基础：bit 与 bytebit（比特&#x2F;位）是最小的数据单位，只有两种状态：0 或 1。计算机底层的数字电路（由晶体管构成）对应导通&#x2F;截止两个状态，天然适合以二进制表示信息。 byte（字节）通常为 8 个 bit。1 byte &#x3D; 8 bit，因此每字节可以表示 2^8 &#x3D; 256 个不同值（0 到 255）。这足以编码英文字母、数字、标
+          模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模
         </div>
       </a>
 

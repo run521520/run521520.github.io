@@ -76,6 +76,33 @@
   
   
   <entry>
+    <title>RC4加密算法</title>
+    <link href="/2025/10/04/02_RC4/"/>
+    <url>/2025/10/04/02_RC4/</url>
+    
+    <content type="html"><![CDATA[<p><strong>RC4 是典型的对称加密算法</strong></p><p>对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中：</p><p>发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输；</p><p>接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。</p><p><strong>RC4 算法特性与安全性</strong></p><p>RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 256 字节（对应 8 - 2048 比特） 。加密时，会依据密钥及密钥长度生成密钥流，且密钥流长度与明文长度严格匹配，加密和解密流程复用同一算法逻辑，密钥流的生成完全由密钥内容与长度决定。</p><p>在现代技术环境下，当密钥长度达到 128 比特时，暴力枚举密钥的攻击方式已不具备可行性 。由于暴力破解需尝试近乎 “2^128” 数量级的密钥组合，计算量超乎现有算力承载极限，因此可预见在未来较长周期内，RC4 算法凭借其密钥长度设计，能够抵御暴力密钥搜索攻击。截至目前，针对 128 比特密钥长度的 RC4 加密，尚未出现经实践验证的有效攻击手段，一定程度上保障了算法应用的安全性。</p><p><strong>RC4 算法核心组成</strong></p><p>RC4 加密流程主要由两部分构成：</p><p>初始化算法（KSA，Key - Scheduling Algorithm）：负责对初始的密钥状态进行处理，基于输入密钥打乱内部状态数组，为后续生成密钥流做准备；</p><p>加密算法（PRGA，Pseudo - Random Generation Algorithm ，实际常与 KSA 协同表述）：依托 KSA 初始化后的状态，逐字节生成伪随机密钥流，通过密钥流与明文的按位异或（XOR）操作，完成加密（解密为逆过程，复用相同密钥流与异或逻辑 ），最终输出密文（或还原明文 ）。</p><p>#include&lt;stdio.h&gt;</p><p>#include&lt;string.h&gt;</p><p>&#x2F;&#x2F; 初始化RC4的S盒</p><p>void rc4_init(unsigned char *s, unsigned char *key, unsigned long key_len) {</p><p>&nbsp;   int i &#x3D; 0, j &#x3D; 0;</p><p>&nbsp;   unsigned char k[256] &#x3D; {0};</p><p>&nbsp;   unsigned char temp &#x3D; 0;</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 初始化S盒和K盒</p><p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p><p>&nbsp;       s[i] &#x3D; i;</p><p>&nbsp;       k[i] &#x3D; key[i % key_len];  &#x2F;&#x2F; 用密钥循环填充K盒</p><p>&nbsp;   }</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 打乱S盒</p><p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p><p>&nbsp;       j &#x3D; (j + s[i] + k[i]) % 256;</p><p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p><p>&nbsp;       temp &#x3D; s[i];</p><p>&nbsp;       s[i] &#x3D; s[j];</p><p>&nbsp;       s[j] &#x3D; temp;</p><p>&nbsp;   }</p><p>}</p><p>&#x2F;&#x2F; RC4加解密（数据会被直接修改）</p><p>void rc4_crypt(unsigned char *s, unsigned char *data, unsigned long len) {</p><p>&nbsp;   int i &#x3D; 0, j &#x3D; 0, t &#x3D; 0;</p><p>&nbsp;   unsigned long k &#x3D; 0;</p><p>&nbsp;   unsigned char temp;</p><p>&nbsp;   </p><p>&nbsp;   for (k &#x3D; 0; k &lt; len; k++) {</p><p>&nbsp;       i &#x3D; (i + 1) % 256;</p><p>&nbsp;       j &#x3D; (j + s[i]) % 256;</p><p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p><p>&nbsp;       temp &#x3D; s[i];</p><p>&nbsp;       s[i] &#x3D; s[j];</p><p>&nbsp;       s[j] &#x3D; temp;</p><p>&nbsp;       &#x2F;&#x2F; 生成密钥流并异或</p><p>&nbsp;       t &#x3D; (s[i] + s[j]) % 256;</p><p>&nbsp;       data[k] ^&#x3D; s[t];</p><p>&nbsp;   }</p><p>}</p><p>int main() {</p><p>&nbsp;   unsigned char s[256] &#x3D; {0};</p><p>&nbsp;   char key[] &#x3D; “zhaosh”;               &#x2F;&#x2F; 密钥</p><p>&nbsp;   unsigned char data[] &#x3D; {12, 23, 3, 4, 4, 4, 3, 0x7F, 12, 1, 21, 3, 23};  &#x2F;&#x2F; 修正超出char范围的值</p><p>&nbsp;   unsigned long data_len &#x3D; sizeof(data);  &#x2F;&#x2F; 用sizeof计算二进制数据长度</p><p>&nbsp;   unsigned long key_len &#x3D; strlen(key);</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 加密过程</p><p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);</p><p>&nbsp;   rc4_crypt(s, data, data_len);</p><p>&nbsp;   printf(“加密后数据（十六进制）：”);</p><p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p><p>&nbsp;       printf(“%02X “, data[i]);  &#x2F;&#x2F; 用十六进制显示二进制数据</p><p>&nbsp;   }</p><p>&nbsp;   printf(“\n”);</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 解密过程（需要重新初始化S盒）</p><p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);  &#x2F;&#x2F; 重新初始化</p><p>&nbsp;   rc4_crypt(s, data, data_len);</p><p>&nbsp;   printf(“解密后数据（十进制）：”);</p><p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p><p>&nbsp;       printf(“%d “, data[i]);</p><p>&nbsp;   }</p><p>&nbsp;   printf(“\n”);</p><p>&nbsp;   </p><p>&nbsp;   return 0;</p><p>}</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>加密算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RC4</tag>
+      
+      <tag>加密算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Base64加密算法</title>
     <link href="/2025/10/04/03_Base64/"/>
     <url>/2025/10/04/03_Base64/</url>
@@ -92,9 +119,36 @@
     
     <tags>
       
+      <tag>加密算法</tag>
+      
       <tag>Base64</tag>
       
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TEA加密算法</title>
+    <link href="/2025/10/04/04_TEA/"/>
+    <url>/2025/10/04/04_TEA/</url>
+    
+    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
+    
+    
+    <categories>
+      
+      <category>加密算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
       <tag>加密算法</tag>
+      
+      <tag>TEA</tag>
       
     </tags>
     
@@ -145,60 +199,6 @@
     <tags>
       
       <tag>UPX脱壳</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>TEA加密算法</title>
-    <link href="/2025/10/04/04_TEA/"/>
-    <url>/2025/10/04/04_TEA/</url>
-    
-    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
-    
-    
-    <categories>
-      
-      <category>加密算法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>加密算法</tag>
-      
-      <tag>TEA</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>RC4加密算法</title>
-    <link href="/2025/10/04/02_RC4/"/>
-    <url>/2025/10/04/02_RC4/</url>
-    
-    <content type="html"><![CDATA[<p><strong>RC4 是典型的对称加密算法</strong></p><p>对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中：</p><p>发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输；</p><p>接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。</p><p><strong>RC4 算法特性与安全性</strong></p><p>RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 256 字节（对应 8 - 2048 比特） 。加密时，会依据密钥及密钥长度生成密钥流，且密钥流长度与明文长度严格匹配，加密和解密流程复用同一算法逻辑，密钥流的生成完全由密钥内容与长度决定。</p><p>在现代技术环境下，当密钥长度达到 128 比特时，暴力枚举密钥的攻击方式已不具备可行性 。由于暴力破解需尝试近乎 “2^128” 数量级的密钥组合，计算量超乎现有算力承载极限，因此可预见在未来较长周期内，RC4 算法凭借其密钥长度设计，能够抵御暴力密钥搜索攻击。截至目前，针对 128 比特密钥长度的 RC4 加密，尚未出现经实践验证的有效攻击手段，一定程度上保障了算法应用的安全性。</p><p><strong>RC4 算法核心组成</strong></p><p>RC4 加密流程主要由两部分构成：</p><p>初始化算法（KSA，Key - Scheduling Algorithm）：负责对初始的密钥状态进行处理，基于输入密钥打乱内部状态数组，为后续生成密钥流做准备；</p><p>加密算法（PRGA，Pseudo - Random Generation Algorithm ，实际常与 KSA 协同表述）：依托 KSA 初始化后的状态，逐字节生成伪随机密钥流，通过密钥流与明文的按位异或（XOR）操作，完成加密（解密为逆过程，复用相同密钥流与异或逻辑 ），最终输出密文（或还原明文 ）。</p><p>#include&lt;stdio.h&gt;</p><p>#include&lt;string.h&gt;</p><p>&#x2F;&#x2F; 初始化RC4的S盒</p><p>void rc4_init(unsigned char *s, unsigned char *key, unsigned long key_len) {</p><p>&nbsp;   int i &#x3D; 0, j &#x3D; 0;</p><p>&nbsp;   unsigned char k[256] &#x3D; {0};</p><p>&nbsp;   unsigned char temp &#x3D; 0;</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 初始化S盒和K盒</p><p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p><p>&nbsp;       s[i] &#x3D; i;</p><p>&nbsp;       k[i] &#x3D; key[i % key_len];  &#x2F;&#x2F; 用密钥循环填充K盒</p><p>&nbsp;   }</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 打乱S盒</p><p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p><p>&nbsp;       j &#x3D; (j + s[i] + k[i]) % 256;</p><p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p><p>&nbsp;       temp &#x3D; s[i];</p><p>&nbsp;       s[i] &#x3D; s[j];</p><p>&nbsp;       s[j] &#x3D; temp;</p><p>&nbsp;   }</p><p>}</p><p>&#x2F;&#x2F; RC4加解密（数据会被直接修改）</p><p>void rc4_crypt(unsigned char *s, unsigned char *data, unsigned long len) {</p><p>&nbsp;   int i &#x3D; 0, j &#x3D; 0, t &#x3D; 0;</p><p>&nbsp;   unsigned long k &#x3D; 0;</p><p>&nbsp;   unsigned char temp;</p><p>&nbsp;   </p><p>&nbsp;   for (k &#x3D; 0; k &lt; len; k++) {</p><p>&nbsp;       i &#x3D; (i + 1) % 256;</p><p>&nbsp;       j &#x3D; (j + s[i]) % 256;</p><p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p><p>&nbsp;       temp &#x3D; s[i];</p><p>&nbsp;       s[i] &#x3D; s[j];</p><p>&nbsp;       s[j] &#x3D; temp;</p><p>&nbsp;       &#x2F;&#x2F; 生成密钥流并异或</p><p>&nbsp;       t &#x3D; (s[i] + s[j]) % 256;</p><p>&nbsp;       data[k] ^&#x3D; s[t];</p><p>&nbsp;   }</p><p>}</p><p>int main() {</p><p>&nbsp;   unsigned char s[256] &#x3D; {0};</p><p>&nbsp;   char key[] &#x3D; “zhaosh”;               &#x2F;&#x2F; 密钥</p><p>&nbsp;   unsigned char data[] &#x3D; {12, 23, 3, 4, 4, 4, 3, 0x7F, 12, 1, 21, 3, 23};  &#x2F;&#x2F; 修正超出char范围的值</p><p>&nbsp;   unsigned long data_len &#x3D; sizeof(data);  &#x2F;&#x2F; 用sizeof计算二进制数据长度</p><p>&nbsp;   unsigned long key_len &#x3D; strlen(key);</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 加密过程</p><p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);</p><p>&nbsp;   rc4_crypt(s, data, data_len);</p><p>&nbsp;   printf(“加密后数据（十六进制）：”);</p><p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p><p>&nbsp;       printf(“%02X “, data[i]);  &#x2F;&#x2F; 用十六进制显示二进制数据</p><p>&nbsp;   }</p><p>&nbsp;   printf(“\n”);</p><p>&nbsp;   </p><p>&nbsp;   &#x2F;&#x2F; 解密过程（需要重新初始化S盒）</p><p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);  &#x2F;&#x2F; 重新初始化</p><p>&nbsp;   rc4_crypt(s, data, data_len);</p><p>&nbsp;   printf(“解密后数据（十进制）：”);</p><p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p><p>&nbsp;       printf(“%d “, data[i]);</p><p>&nbsp;   }</p><p>&nbsp;   printf(“\n”);</p><p>&nbsp;   </p><p>&nbsp;   return 0;</p><p>}</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>加密算法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>加密算法</tag>
-      
-      <tag>RC4</tag>
       
     </tags>
     

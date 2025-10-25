@@ -19,22 +19,21 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码 首先将文件拖入PE中查看是否加壳和位数在最后一行的info信息中如果出现upx，那就代表经过了upx加壳 有针对脱壳的工具upx-5.0.2-win64  找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中然后会自动脱壳，如果失败">
+    <meta name="description" content="title: Upx脱壳date: 2025-10-04 22:12:41tags: [UPX脱壳]categories: 加密算法 UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Upx脱壳">
-<meta property="og:url" content="http://run521520.github.io/2025/10/04/05_Upx/index.html">
+<meta property="og:title" content="run521">
+<meta property="og:url" content="http://run521520.github.io/2025/10/05/05_Upx/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码 首先将文件拖入PE中查看是否加壳和位数在最后一行的info信息中如果出现upx，那就代表经过了upx加壳 有针对脱壳的工具upx-5.0.2-win64  找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中然后会自动脱壳，如果失败">
+<meta property="og:description" content="title: Upx脱壳date: 2025-10-04 22:12:41tags: [UPX脱壳]categories: 加密算法 UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-25T13:12:31.183Z">
+<meta property="article:published_time" content="2025-10-04T18:14:44.826Z">
+<meta property="article:modified_time" content="2025-10-25T16:53:57.615Z">
 <meta property="article:author" content="youduck7">
-<meta property="article:tag" content="UPX脱壳">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Upx脱壳 - run521</title>
+  <title>run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Upx脱壳"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -211,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-04 22:12" pubdate>
-          2025年10月4日 晚上
+        <time datetime="2025-10-05 02:14" pubdate>
+          2025年10月5日 凌晨
         </time>
       </span>
     
@@ -223,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          820 字
+          767 字
         
       </span>
     
@@ -275,19 +274,40 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Upx脱壳</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <p>upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码</p>
-<p>首先将文件拖入PE中查看是否加壳和位数<br>在最后一行的info信息中如果出现upx，那就代表经过了upx加壳</p>
-<p>有针对脱壳的工具upx-5.0.2-win64 </p>
-<p>找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称<br>这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中<br>然后会自动脱壳，如果失败，根据提示具体解决<br>当然也有反upx脱壳工具的程序，也会导致脱壳失败，这是需要手动脱壳</p>
-<p>OEP(Original Entry Point)是程序的原始入口点的位置，EP(Entry Point)是程序的入口点，加壳之后，程序的入口点会被改动，所以有OEP，<br>需要从OEP开始脱壳，有两个指令，一个是pushad，还有popad，从pushad开始找，一直运行到结束</p>
-<p>OEP：(Original Entry Point)，程序的原始入口点，软件加壳就是隐藏了EP， 只要我们找到程序的OEP，就可以立刻脱壳。<br>PUSHAD （压栈） 代表程序的入口点，POPAD （出栈） 代表程序的出口点，与PUSHAD相对应，一般找到这个OEP就在附近啦。</p>
-<p>进入到程序里面后找到文件的入口<br>pushad意味着upx壳解压缩代码的入口。<br>64位程序中没有pushad，而是用几个push汇编代码替代。32位程序中存在pushad。<br>像这样的：<br>	push rbx;<br>	push rsi;<br>	push rdi;<br>	push rbp;  几个连一起的</p>
-<p>第一就是用x32|64 找到入口：<br>点击断点 -&gt; 查找入口 -&gt; 找到之后点进去将第一行设为原始断点 EIP<br>-&gt; 之后按F8步过直到 ESP(FPU窗口) 发生变化 -&gt; 点击ESP右键找到”在内存窗口中转到” 点击<br>-&gt; 在地址窗口中将该地址右键 -&gt; 找到断点 -&gt;访问 -&gt; 2字节 -&gt; 之后便是运行会出现真正的函数窗口<br>-&gt; 之后便是用 Scylla x86 来将程序修复</p>
+                <p>title: Upx脱壳<br>date: 2025-10-04 22:12:41<br>tags: [UPX脱壳]<br>categories: 加密算法</p>
+<p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p>
+<h2 id="快速检测"><a href="#快速检测" class="headerlink" title="快速检测"></a>快速检测</h2><ol>
+<li>使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。</li>
+<li>查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。</li>
+</ol>
+<h2 id="常用脱壳（自动）"><a href="#常用脱壳（自动）" class="headerlink" title="常用脱壳（自动）"></a>常用脱壳（自动）</h2><p>如果程序确认为 UPX 压缩，可以尝试官方 upx 工具解包：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">upx -d &lt;程序路径&gt;<br></code></pre></td></tr></table></figure>
+
+<p>若成功会在当前目录生成解压后的可执行文件；若失败，说明可能存在保护或混淆，需要使用手动脱壳方法。</p>
+<h2 id="手动脱壳（思路）"><a href="#手动脱壳（思路）" class="headerlink" title="手动脱壳（思路）"></a>手动脱壳（思路）</h2><ol>
+<li>在调试器（x32dbg&#x2F;x64dbg&#x2F;IDA+调试器）中运行程序并设置断点，跟踪程序解压流程。</li>
+<li>找到 OEP（Original Entry Point，原始入口点）。常见的线索有 PUSHAD&#x2F;POPAD（32 位）或多个 push 指令（64 位）作为保存寄存器的序列。</li>
+<li>在 OEP 附近设置断点，继续执行直到出现真实代码，然后转储（dump）进程内存并修复 IAT（可用 Scylla 等工具）。</li>
+</ol>
+<p>简化流程：</p>
+<ul>
+<li>找到入口 -&gt; 跟踪到解压完成点（观察 ESP&#x2F;堆栈&#x2F;字符串变化） -&gt; 在内存中定位真实代码段 -&gt; 导出并修复导入表（IAT）。</li>
+</ul>
+<h2 id="工具建议"><a href="#工具建议" class="headerlink" title="工具建议"></a>工具建议</h2><ul>
+<li>upx（官方工具）</li>
+<li>x32dbg &#x2F; x64dbg（动态调试）</li>
+<li>IDA Pro + 调试插件（定位 OEP）</li>
+<li>Scylla（修复导入表）</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>64 位程序没有 PUSHAD 指令，需通过连续的 push 指令或寄存器保存序列作为线索。</li>
+<li>某些程序使用额外保护（反调试、完整性校验、二次加密等），这时需要针对性分析并绕过防护。</li>
+</ul>
 
                 
               </div>
@@ -296,34 +316,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/UPX%E8%84%B1%E5%A3%B3/" class="print-no-link">#UPX脱壳</a>
-      
-    </div>
   
 </div>
 
@@ -333,8 +325,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Upx脱壳</div>
-      <div>http://run521520.github.io/2025/10/04/05_Upx/</div>
+      <div></div>
+      <div>http://run521520.github.io/2025/10/05/05_Upx/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +338,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年10月4日</div>
+          <div>2025年10月5日</div>
         </div>
       
       
@@ -378,9 +370,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
+                      <a href="/2025/10/10/reverse_books/" title="逆向工程权威指南上">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">TEA加密算法</span>
+                        <span class="hidden-mobile">逆向工程权威指南上</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -388,8 +380,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/03_Base64/" title="Base64加密算法">
-                        <span class="hidden-mobile">Base64加密算法</span>
+                      <a href="/2025/10/04/03_Base64/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

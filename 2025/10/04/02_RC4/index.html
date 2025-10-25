@@ -19,23 +19,21 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2">
+    <meta name="description" content="title: RC4加密算法date: 2025-10-04 22:12:41tags: [RC4,加密算法]categories: 加密算法tags:  RC4 加密算法categories: 加密算法  简介RC4 是一种字节流对称加密算法，加密和解密使用相同的密钥，通过生成与明文等长的伪随机密钥流与明文按字节异或实现。 特性与安全性 实现简单、速度快。 支持 1–256 字节的密钥长度（8–">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RC4加密算法">
+<meta property="og:title" content="run521">
 <meta property="og:url" content="http://run521520.github.io/2025/10/04/02_RC4/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="RC4 是典型的对称加密算法 对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中： 发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输； 接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。 RC4 算法特性与安全性 RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 2">
+<meta property="og:description" content="title: RC4加密算法date: 2025-10-04 22:12:41tags: [RC4,加密算法]categories: 加密算法tags:  RC4 加密算法categories: 加密算法  简介RC4 是一种字节流对称加密算法，加密和解密使用相同的密钥，通过生成与明文等长的伪随机密钥流与明文按字节异或实现。 特性与安全性 实现简单、速度快。 支持 1–256 字节的密钥长度（8–">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-25T13:12:04.508Z">
+<meta property="article:published_time" content="2025-10-04T15:09:41.926Z">
+<meta property="article:modified_time" content="2025-10-25T16:53:00.059Z">
 <meta property="article:author" content="youduck7">
-<meta property="article:tag" content="RC4">
-<meta property="article:tag" content="加密算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>RC4加密算法 - run521</title>
+  <title>run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RC4加密算法"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -212,7 +210,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-04 22:12" pubdate>
+        <time datetime="2025-10-04 23:09" pubdate>
           2025年10月4日 晚上
         </time>
       </span>
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          1.7k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          22 分钟
+          15 分钟
         
       </span>
     
@@ -276,90 +274,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">RC4加密算法</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <p><strong>RC4 是典型的对称加密算法</strong></p>
-<p>对称加密的核心特征是加密与解密过程依托同一密钥完成。在数据传输场景中：</p>
-<p>发送方：利用密钥对明文执行加密变换，通过特殊算法将明文转化为复杂密文后对外传输；</p>
-<p>接收方：需调用加密时的相同密钥，结合算法的逆运算对密文解密，还原出可读明文，以此保障数据传输的保密性。</p>
-<p><strong>RC4 算法特性与安全性</strong></p>
-<p>RC4 算法具备实现简单、运算高效的优势，其密钥长度支持动态调整，范围覆盖 1 - 256 字节（对应 8 - 2048 比特） 。加密时，会依据密钥及密钥长度生成密钥流，且密钥流长度与明文长度严格匹配，加密和解密流程复用同一算法逻辑，密钥流的生成完全由密钥内容与长度决定。</p>
-<p>在现代技术环境下，当密钥长度达到 128 比特时，暴力枚举密钥的攻击方式已不具备可行性 。由于暴力破解需尝试近乎 “2^128” 数量级的密钥组合，计算量超乎现有算力承载极限，因此可预见在未来较长周期内，RC4 算法凭借其密钥长度设计，能够抵御暴力密钥搜索攻击。截至目前，针对 128 比特密钥长度的 RC4 加密，尚未出现经实践验证的有效攻击手段，一定程度上保障了算法应用的安全性。</p>
-<p><strong>RC4 算法核心组成</strong></p>
-<p>RC4 加密流程主要由两部分构成：</p>
-<p>初始化算法（KSA，Key - Scheduling Algorithm）：负责对初始的密钥状态进行处理，基于输入密钥打乱内部状态数组，为后续生成密钥流做准备；</p>
-<p>加密算法（PRGA，Pseudo - Random Generation Algorithm ，实际常与 KSA 协同表述）：依托 KSA 初始化后的状态，逐字节生成伪随机密钥流，通过密钥流与明文的按位异或（XOR）操作，完成加密（解密为逆过程，复用相同密钥流与异或逻辑 ），最终输出密文（或还原明文 ）。</p>
-<p>#include&lt;stdio.h&gt;</p>
-<p>#include&lt;string.h&gt;</p>
-<p>&#x2F;&#x2F; 初始化RC4的S盒</p>
-<p>void rc4_init(unsigned char *s, unsigned char *key, unsigned long key_len) {</p>
-<p>&nbsp;   int i &#x3D; 0, j &#x3D; 0;</p>
-<p>&nbsp;   unsigned char k[256] &#x3D; {0};</p>
-<p>&nbsp;   unsigned char temp &#x3D; 0;</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   &#x2F;&#x2F; 初始化S盒和K盒</p>
-<p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p>
-<p>&nbsp;       s[i] &#x3D; i;</p>
-<p>&nbsp;       k[i] &#x3D; key[i % key_len];  &#x2F;&#x2F; 用密钥循环填充K盒</p>
-<p>&nbsp;   }</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   &#x2F;&#x2F; 打乱S盒</p>
-<p>&nbsp;   for (i &#x3D; 0; i &lt; 256; i++) {</p>
-<p>&nbsp;       j &#x3D; (j + s[i] + k[i]) % 256;</p>
-<p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p>
-<p>&nbsp;       temp &#x3D; s[i];</p>
-<p>&nbsp;       s[i] &#x3D; s[j];</p>
-<p>&nbsp;       s[j] &#x3D; temp;</p>
-<p>&nbsp;   }</p>
-<p>}</p>
-<p>&#x2F;&#x2F; RC4加解密（数据会被直接修改）</p>
-<p>void rc4_crypt(unsigned char *s, unsigned char *data, unsigned long len) {</p>
-<p>&nbsp;   int i &#x3D; 0, j &#x3D; 0, t &#x3D; 0;</p>
-<p>&nbsp;   unsigned long k &#x3D; 0;</p>
-<p>&nbsp;   unsigned char temp;</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   for (k &#x3D; 0; k &lt; len; k++) {</p>
-<p>&nbsp;       i &#x3D; (i + 1) % 256;</p>
-<p>&nbsp;       j &#x3D; (j + s[i]) % 256;</p>
-<p>&nbsp;       &#x2F;&#x2F; 交换s[i]和s[j]</p>
-<p>&nbsp;       temp &#x3D; s[i];</p>
-<p>&nbsp;       s[i] &#x3D; s[j];</p>
-<p>&nbsp;       s[j] &#x3D; temp;</p>
-<p>&nbsp;       &#x2F;&#x2F; 生成密钥流并异或</p>
-<p>&nbsp;       t &#x3D; (s[i] + s[j]) % 256;</p>
-<p>&nbsp;       data[k] ^&#x3D; s[t];</p>
-<p>&nbsp;   }</p>
-<p>}</p>
-<p>int main() {</p>
-<p>&nbsp;   unsigned char s[256] &#x3D; {0};</p>
-<p>&nbsp;   char key[] &#x3D; “zhaosh”;               &#x2F;&#x2F; 密钥</p>
-<p>&nbsp;   unsigned char data[] &#x3D; {12, 23, 3, 4, 4, 4, 3, 0x7F, 12, 1, 21, 3, 23};  &#x2F;&#x2F; 修正超出char范围的值</p>
-<p>&nbsp;   unsigned long data_len &#x3D; sizeof(data);  &#x2F;&#x2F; 用sizeof计算二进制数据长度</p>
-<p>&nbsp;   unsigned long key_len &#x3D; strlen(key);</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   &#x2F;&#x2F; 加密过程</p>
-<p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);</p>
-<p>&nbsp;   rc4_crypt(s, data, data_len);</p>
-<p>&nbsp;   printf(“加密后数据（十六进制）：”);</p>
-<p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p>
-<p>&nbsp;       printf(“%02X “, data[i]);  &#x2F;&#x2F; 用十六进制显示二进制数据</p>
-<p>&nbsp;   }</p>
-<p>&nbsp;   printf(“\n”);</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   &#x2F;&#x2F; 解密过程（需要重新初始化S盒）</p>
-<p>&nbsp;   rc4_init(s, (unsigned char*)key, key_len);  &#x2F;&#x2F; 重新初始化</p>
-<p>&nbsp;   rc4_crypt(s, data, data_len);</p>
-<p>&nbsp;   printf(“解密后数据（十进制）：”);</p>
-<p>&nbsp;   for (int i &#x3D; 0; i &lt; data_len; i++) {</p>
-<p>&nbsp;       printf(“%d “, data[i]);</p>
-<p>&nbsp;   }</p>
-<p>&nbsp;   printf(“\n”);</p>
-<p>&nbsp;   </p>
-<p>&nbsp;   return 0;</p>
-<p>}</p>
+                <p>title: RC4加密算法<br>date: 2025-10-04 22:12:41<br>tags: [RC4,加密算法]<br>categories: 加密算法<br>tags:</p>
+<ul>
+<li>RC4</li>
+<li>加密算法<br>categories: 加密算法</li>
+</ul>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>RC4 是一种字节流对称加密算法，加密和解密使用相同的密钥，通过生成与明文等长的伪随机密钥流与明文按字节异或实现。</p>
+<h2 id="特性与安全性"><a href="#特性与安全性" class="headerlink" title="特性与安全性"></a>特性与安全性</h2><ul>
+<li>实现简单、速度快。</li>
+<li>支持 1–256 字节的密钥长度（8–2048 比特）。</li>
+</ul>
+<p>注意：RC4 在某些协议和实现下存在偏差问题（历史上在 TLS 中发现过弱点）。生产环境应优先使用经过广泛审计的现代算法（如 AES-GCM）。</p>
+<h2 id="算法组成"><a href="#算法组成" class="headerlink" title="算法组成"></a>算法组成</h2><ol>
+<li>初始化算法（KSA）— 根据密钥初始化并打乱 256 字节的 S 盒。</li>
+<li>伪随机生成算法（PRGA）— 基于 S 盒生成密钥流并与数据异或加密&#x2F;解密。</li>
+</ol>
+<h2 id="示例（C-实现）"><a href="#示例（C-实现）" class="headerlink" title="示例（C 实现）"></a>示例（C 实现）</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-comment">/* 初始化 RC4 的 S 盒 */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">rc4_init</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *s, <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *key, <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> key_len)</span> &#123;<br>	<span class="hljs-type">int</span> i, j = <span class="hljs-number">0</span>;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> k[<span class="hljs-number">256</span>];<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> temp;<br><br>	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++) &#123;<br>		s[i] = (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>)i;<br>		k[i] = key[i % key_len];<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++) &#123;<br>		j = (j + s[i] + k[i]) &amp; <span class="hljs-number">0xFF</span>;<br>		temp = s[i];<br>		s[i] = s[j];<br>		s[j] = temp;<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">/* RC4 加解密（就地修改数据） */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">rc4_crypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *s, <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *data, <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> len)</span> &#123;<br>	<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, t;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> idx;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> temp;<br><br>	<span class="hljs-keyword">for</span> (idx = <span class="hljs-number">0</span>; idx &lt; len; idx++) &#123;<br>		i = (i + <span class="hljs-number">1</span>) &amp; <span class="hljs-number">0xFF</span>;<br>		j = (j + s[i]) &amp; <span class="hljs-number">0xFF</span>;<br>		temp = s[i];<br>		s[i] = s[j];<br>		s[j] = temp;<br>		t = (s[i] + s[j]) &amp; <span class="hljs-number">0xFF</span>;<br>		data[idx] ^= s[t];<br>	&#125;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> s[<span class="hljs-number">256</span>];<br>	<span class="hljs-type">char</span> key[] = <span class="hljs-string">&quot;zhaosh&quot;</span>; <span class="hljs-comment">/* 示例密钥 */</span><br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> data[] = &#123;<span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0x7F</span>, <span class="hljs-number">12</span>, <span class="hljs-number">1</span>, <span class="hljs-number">21</span>, <span class="hljs-number">3</span>, <span class="hljs-number">23</span>&#125;;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> data_len = <span class="hljs-keyword">sizeof</span>(data);<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> key_len = <span class="hljs-built_in">strlen</span>(key);<br><br>	<span class="hljs-comment">/* 加密 */</span><br>	rc4_init(s, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)key, key_len);<br>	rc4_crypt(s, data, data_len);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;加密后数据（十六进制）：&quot;</span>);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> i = <span class="hljs-number">0</span>; i &lt; data_len; i++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%02X &quot;</span>, data[i]);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br><br>	<span class="hljs-comment">/* 解密（重新初始化 S 盒） */</span><br>	rc4_init(s, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)key, key_len);<br>	rc4_crypt(s, data, data_len);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;解密后数据（十进制）：&quot;</span>);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> i = <span class="hljs-number">0</span>; i &lt; data_len; i++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, data[i]);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
 
                 
               </div>
@@ -368,36 +306,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/RC4/" class="print-no-link">#RC4</a>
-      
-        <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="print-no-link">#加密算法</a>
-      
-    </div>
   
 </div>
 
@@ -407,7 +315,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RC4加密算法</div>
+      <div></div>
       <div>http://run521520.github.io/2025/10/04/02_RC4/</div>
     </div>
     <div class="license-meta">
@@ -452,9 +360,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
+                      <a href="/2025/10/04/03_Base64/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ida使用文档</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -462,8 +370,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
-                        <span class="hidden-mobile">TEA加密算法</span>
+                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
+                        <span class="hidden-mobile">ida使用文档</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

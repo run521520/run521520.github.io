@@ -104,27 +104,6 @@
   
   
   <entry>
-    <title>TEA加密算法</title>
-    <link href="/2025/10/04/04_TEA/"/>
-    <url>/2025/10/04/04_TEA/</url>
-    
-    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>加密算法</tag>
-      
-      <tag>TEA</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>RC4加密算法</title>
     <link href="/2025/10/04/02_RC4/"/>
     <url>/2025/10/04/02_RC4/</url>
@@ -146,17 +125,19 @@
   
   
   <entry>
-    <title>Upx脱壳</title>
-    <link href="/2025/10/04/05_Upx/"/>
-    <url>/2025/10/04/05_Upx/</url>
+    <title>TEA加密算法</title>
+    <link href="/2025/10/04/04_TEA/"/>
+    <url>/2025/10/04/04_TEA/</url>
     
-    <content type="html"><![CDATA[<p>upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码</p><p>首先将文件拖入PE中查看是否加壳和位数<br>在最后一行的info信息中如果出现upx，那就代表经过了upx加壳</p><p>有针对脱壳的工具upx-5.0.2-win64 </p><p>找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称<br>这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中<br>然后会自动脱壳，如果失败，根据提示具体解决<br>当然也有反upx脱壳工具的程序，也会导致脱壳失败，这是需要手动脱壳</p><p>OEP(Original Entry Point)是程序的原始入口点的位置，EP(Entry Point)是程序的入口点，加壳之后，程序的入口点会被改动，所以有OEP，<br>需要从OEP开始脱壳，有两个指令，一个是pushad，还有popad，从pushad开始找，一直运行到结束</p><p>OEP：(Original Entry Point)，程序的原始入口点，软件加壳就是隐藏了EP， 只要我们找到程序的OEP，就可以立刻脱壳。<br>PUSHAD （压栈） 代表程序的入口点，POPAD （出栈） 代表程序的出口点，与PUSHAD相对应，一般找到这个OEP就在附近啦。</p><p>进入到程序里面后找到文件的入口<br>pushad意味着upx壳解压缩代码的入口。<br>64位程序中没有pushad，而是用几个push汇编代码替代。32位程序中存在pushad。<br>像这样的：<br>push rbx;<br>push rsi;<br>push rdi;<br>push rbp;  几个连一起的</p><p>第一就是用x32|64 找到入口：<br>点击断点 -&gt; 查找入口 -&gt; 找到之后点进去将第一行设为原始断点 EIP<br>-&gt; 之后按F8步过直到 ESP(FPU窗口) 发生变化 -&gt; 点击ESP右键找到”在内存窗口中转到” 点击<br>-&gt; 在地址窗口中将该地址右键 -&gt; 找到断点 -&gt;访问 -&gt; 2字节 -&gt; 之后便是运行会出现真正的函数窗口<br>-&gt; 之后便是用 Scylla x86 来将程序修复</p>]]></content>
+    <content type="html"><![CDATA[<p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p><p> <strong>密钥长度</strong></p><p>TEA：使用128位密钥。</p><p>XTEA：通常使用128位或256位密钥。</p><p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p><p>&nbsp;<strong>加密轮数</strong></p><p>TEA：通常进行32轮加密。</p><p>XTEA：默认进行64轮加密。</p><p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p><p><strong>加密算法</strong></p><p>TEA：加密过程使用简单的加法、异或和移位操作。</p><p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p><p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p><h5 id="TEA加密算法（公式）："><a href="#TEA加密算法（公式）：" class="headerlink" title="TEA加密算法（公式）："></a>TEA加密算法（公式）：</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to 31</p><p>&nbsp;              sum +&#x3D; delta</p><p>&nbsp;X0 +&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;X1 +&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * 32;</p><p>&nbsp;for i&#x3D;0 to 31</p><p>&nbsp;X1 -&#x3D; ((X0 &lt;&lt; 4) + K2) ^ (X0 + sum) ^ ((X0 &gt;&gt; 5) + K3);</p><p>&nbsp;X0 -&#x3D; ((X1 &lt;&lt; 4) + K0) ^ (X1 + sum) ^ ((X1 &gt;&gt; 5) + K1);</p><p>&nbsp;sum -&#x3D; delta;</p><h5 id="XTEA加密算法（公式）"><a href="#XTEA加密算法（公式）" class="headerlink" title="XTEA加密算法（公式）:"></a>XTEA加密算法（公式）:</h5><p>&nbsp;sum &#x3D; 0;</p><p>&nbsp;delta &#x3D; 0x9e3779b9;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;      X0 +&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;sum +&#x3D; delta</p><p>&nbsp;X1 +&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><p>解密：</p><p>&nbsp;sum &#x3D; delta * Round;</p><p>&nbsp;for i &#x3D; 0 to Round</p><p>&nbsp;X1 -&#x3D; (((X0 &lt;&lt; 4) ^ (X0 &gt;&gt; 5)) + X0) ^ (sum + key[(sum  &gt;&gt; 11)^ 3]);</p><p>&nbsp;sum -&#x3D; delta</p><p>&nbsp;      X0 -&#x3D; (((X1 &lt;&lt; 4) ^ (X1 &gt;&gt; 5)) + X1) ^ (sum + key[sum ^ 3]);</p><p>&nbsp;end for</p><p>&nbsp;C0 &#x3D; X0;</p><p>&nbsp;C1 &#x3D; X1;</p><h5 id="XXTEA加密（公式）："><a href="#XXTEA加密（公式）：" class="headerlink" title="XXTEA加密（公式）："></a>XXTEA加密（公式）：</h5>]]></content>
     
     
     
     <tags>
       
-      <tag>UPX脱壳</tag>
+      <tag>加密算法</tag>
+      
+      <tag>TEA</tag>
       
     </tags>
     
@@ -176,6 +157,25 @@
     <tags>
       
       <tag>一些运算技巧</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Upx脱壳</title>
+    <link href="/2025/10/04/05_Upx/"/>
+    <url>/2025/10/04/05_Upx/</url>
+    
+    <content type="html"><![CDATA[<p>upx壳是一种压缩的壳，正常进入ida中会隐藏真正的汇编代码</p><p>首先将文件拖入PE中查看是否加壳和位数<br>在最后一行的info信息中如果出现upx，那就代表经过了upx加壳</p><p>有针对脱壳的工具upx-5.0.2-win64 </p><p>找到upx-5.0.2-win64文件中的upx后打开终端，然后输入 upx -d 程序名称<br>这里程序名称要的是绝对地址或相对地址，当然你也可以将程序拖到终端中<br>然后会自动脱壳，如果失败，根据提示具体解决<br>当然也有反upx脱壳工具的程序，也会导致脱壳失败，这是需要手动脱壳</p><p>OEP(Original Entry Point)是程序的原始入口点的位置，EP(Entry Point)是程序的入口点，加壳之后，程序的入口点会被改动，所以有OEP，<br>需要从OEP开始脱壳，有两个指令，一个是pushad，还有popad，从pushad开始找，一直运行到结束</p><p>OEP：(Original Entry Point)，程序的原始入口点，软件加壳就是隐藏了EP， 只要我们找到程序的OEP，就可以立刻脱壳。<br>PUSHAD （压栈） 代表程序的入口点，POPAD （出栈） 代表程序的出口点，与PUSHAD相对应，一般找到这个OEP就在附近啦。</p><p>进入到程序里面后找到文件的入口<br>pushad意味着upx壳解压缩代码的入口。<br>64位程序中没有pushad，而是用几个push汇编代码替代。32位程序中存在pushad。<br>像这样的：<br>push rbx;<br>push rsi;<br>push rdi;<br>push rbp;  几个连一起的</p><p>第一就是用x32|64 找到入口：<br>点击断点 -&gt; 查找入口 -&gt; 找到之后点进去将第一行设为原始断点 EIP<br>-&gt; 之后按F8步过直到 ESP(FPU窗口) 发生变化 -&gt; 点击ESP右键找到”在内存窗口中转到” 点击<br>-&gt; 在地址窗口中将该地址右键 -&gt; 找到断点 -&gt;访问 -&gt; 2字节 -&gt; 之后便是运行会出现真正的函数窗口<br>-&gt; 之后便是用 Scylla x86 来将程序修复</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>UPX脱壳</tag>
       
     </tags>
     

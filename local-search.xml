@@ -76,6 +76,31 @@
   
   
   <entry>
+    <title>ida使用文档</title>
+    <link href="/2025/10/04/01_ida/"/>
+    <url>/2025/10/04/01_ida/</url>
+    
+    <content type="html"><![CDATA[<h1 id="IDA-使用文档"><a href="#IDA-使用文档" class="headerlink" title="IDA 使用文档"></a>IDA 使用文档</h1><h2 id="一、窗口介绍"><a href="#一、窗口介绍" class="headerlink" title="一、窗口介绍"></a>一、窗口介绍</h2><h3 id="1-函数窗口"><a href="#1-函数窗口" class="headerlink" title="1. 函数窗口"></a>1. 函数窗口</h3><ul><li><strong>功能</strong>：显示所有函数列表。</li><li><strong>快捷键</strong>：<code>Ctrl + F</code> 查找函数名（所有表格窗口均支持）。</li></ul><h3 id="2-IDA-View-窗口"><a href="#2-IDA-View-窗口" class="headerlink" title="2. IDA-View 窗口"></a>2. IDA-View 窗口</h3><ul><li><strong>功能</strong>：显示汇编代码。</li><li><strong>快捷键</strong>：<code>空格键</code> 切换图形模式与文本模式。</li></ul><h3 id="3-Pseudocode（伪代码）窗口"><a href="#3-Pseudocode（伪代码）窗口" class="headerlink" title="3. Pseudocode（伪代码）窗口"></a>3. Pseudocode（伪代码）窗口</h3><ul><li><strong>功能</strong>：显示 C&#x2F;C++ 伪代码。</li><li><strong>快捷键</strong>：<code>Tab</code> 切换到对应汇编窗口。</li><li><strong>重命名</strong>：选中关键词后按 <code>N</code>，或右键选择“Rename global item”。</li></ul><h3 id="4-字符串窗口"><a href="#4-字符串窗口" class="headerlink" title="4. 字符串窗口"></a>4. 字符串窗口</h3><ul><li><strong>功能</strong>：列举程序引用的字符串常量。</li><li><strong>快捷键</strong>：<code>Shift + F12</code> 打开字符串窗口；<code>Ctrl + F</code> 搜索字符串。</li></ul><h3 id="5-其他窗口"><a href="#5-其他窗口" class="headerlink" title="5. 其他窗口"></a>5. 其他窗口</h3><ul><li><strong>HEX View</strong>：内存十六进制视图</li><li><strong>Exports</strong>：导出函数</li><li><strong>Imports</strong>：导入函数</li><li><strong>Structures</strong>：结构体定义</li></ul><blockquote><p><strong>提示</strong>：大部分窗口入口可在菜单栏 <code>View</code> 中找到。</p></blockquote><hr><h2 id="二、常用快捷键"><a href="#二、常用快捷键" class="headerlink" title="二、常用快捷键"></a>二、常用快捷键</h2><table><thead><tr><th>快捷键</th><th>功能说明</th></tr></thead><tbody><tr><td><code>Ctrl + X</code></td><td>查看交叉引用（字符串&#x2F;变量被引用的函数）</td></tr><tr><td><code>Ctrl + Z</code></td><td>撤销操作</td></tr><tr><td><code>Alt + T</code></td><td>查找汇编指令，<code>F3</code> 查找下一个</td></tr><tr><td><code>Alt + M</code></td><td>添加标签描述</td></tr><tr><td><code>Ctrl + M</code></td><td>搜索标签并跳转</td></tr><tr><td><code>\</code></td><td>隐藏&#x2F;显示类型转换（如 <code>*(_DWORD *)</code>）</td></tr><tr><td><code>F5</code>&#x2F;<code>Tab</code></td><td>反编译为 C 伪代码窗口</td></tr><tr><td><code>H</code></td><td>十六进制与十进制切换（Hex-View）</td></tr><tr><td><code>D</code></td><td>转换字节显示方式</td></tr><tr><td><code>U</code></td><td>拆分字节数据</td></tr><tr><td><code>C</code></td><td>重新分析为汇编代码</td></tr><tr><td><code>/</code></td><td>汇编界面显示伪代码（需支持 F5）</td></tr><tr><td><code>R</code></td><td>转换为字符串类型显示</td></tr><tr><td><code>N</code></td><td>修改变量&#x2F;函数名称</td></tr><tr><td><code>Y</code></td><td>修改变量类型</td></tr><tr><td><code>M</code></td><td>查看 API 参数名称</td></tr><tr><td><code>P</code></td><td>重新生成函数</td></tr><tr><td><code>Ctrl +Alt + K</code></td><td>修改汇编指令</td></tr></tbody></table><hr><h2 id="三、IDA-调试器功能"><a href="#三、IDA-调试器功能" class="headerlink" title="三、IDA 调试器功能"></a>三、IDA 调试器功能</h2><ol><li><strong>断点类型</strong>：软件断点、硬件断点、条件断点、脚本断点</li><li><strong>调试控制</strong>：步入、步过、步出、运行到光标</li><li><strong>调试级别</strong>：汇编级、伪代码级、源码级</li><li><strong>寄存器&#x2F;内存</strong>：读写寄存器与内存</li><li><strong>调试方式</strong>：启动进程调试、附加调试</li></ol><h3 id="调试相关菜单功能"><a href="#调试相关菜单功能" class="headerlink" title="调试相关菜单功能"></a>调试相关菜单功能</h3><ul><li><strong>Quick debug view</strong>：快速查看寄存器、内存等关键信息</li><li><strong>Debugger windows</strong>：打开调试辅助窗口（如反汇编、寄存器、内存等）</li><li><strong>Breakpoints</strong>：设置、编辑、删除、管理断点</li><li><strong>Watches</strong>：监视变量或表达式的值</li><li><strong>Tracing</strong>：记录程序执行轨迹，便于分析流程</li><li><strong>Start process</strong>：<code>F9</code> 启动新进程并调试</li><li><strong>Attach to process</strong>：附加到已运行进程或远程进程</li><li><strong>Process options…</strong>：配置调试进程参数（环境变量、工作目录等）</li><li><strong>Pause process</strong>：暂停进程，检查当前状态</li><li><strong>Terminate process</strong>：终止进程</li><li><strong>Detach from process</strong>：分离调试器，进程继续运行</li><li><strong>Refresh memory</strong>：刷新内存视图</li><li><strong>Take memory snapshot</strong>：内存快照，便于对比分析</li><li><strong>Step into</strong>：<code>F7</code> 单步进入函数</li><li><strong>Step over</strong>：<code>F8</code> 单步跳过函数</li><li><strong>Run until return</strong>：<code>Ctrl + F7</code> 运行至当前函数返回</li><li><strong>Run to cursor</strong>：<code>F4</code> 运行到光标处</li><li><strong>Switch to source</strong>：切换到源代码视图</li><li><strong>Use source-level debugging</strong>：启用源码级调试</li><li><strong>Open source file…</strong>：打开源代码文件</li><li><strong>Debugger options…</strong>：调试器全局配置</li><li><strong>Switch debugger…</strong>：切换不同类型调试器</li></ul><hr><h2 id="四、内存修改技巧"><a href="#四、内存修改技巧" class="headerlink" title="四、内存修改技巧"></a>四、内存修改技巧</h2><ul><li>在 <strong>Hex View</strong> 表中可直接修改内存数值。</li><li>找到要修改的位置，按 <code>F2</code> 进行编辑，再按一次 <code>F2</code> 确认修改。</li><li>右键选择 <code>Edit</code> 也可修改。</li><li>推荐插件：<strong>lazyIDA</strong>，可批量粘贴修改内容。</li></ul><hr><h2 id="五、调试技巧：通过修改-EIP-RIP-强制执行函数"><a href="#五、调试技巧：通过修改-EIP-RIP-强制执行函数" class="headerlink" title="五、调试技巧：通过修改 EIP&#x2F;RIP 强制执行函数"></a>五、调试技巧：通过修改 EIP&#x2F;RIP 强制执行函数</h2><ul><li><strong>EIP</strong>（32位）或 <strong>RIP</strong>（64位）寄存器存储 CPU 下一条指令地址。</li><li>修改 EIP&#x2F;RIP 可让 CPU 跳转执行任意函数。</li></ul><p><strong>操作步骤：</strong></p><ol><li>找到目标函数地址（十六进制）。</li><li>在合适位置设置断点，开始调试。</li><li>在寄存器窗口双击 EIP&#x2F;RIP，修改为目标地址（或右键 Edit）。</li><li>取消断点，继续运行即可。</li></ol><hr><h2 id="六、博主见到的一些情况："><a href="#六、博主见到的一些情况：" class="headerlink" title="六、博主见到的一些情况："></a>六、博主见到的一些情况：</h2><ul><li>**堆栈问题：**当你在汇编中看到一大串的数据的时候,可能是堆栈问题,可能会有提示,<br>只需选中数据按c,重新分析为汇编就行了</li></ul><hr><ul><li>**动态调式：**在做题的时候,可能会有静态里找不到需要的信息,或程序运行时发生改变,<br>比如简单的base64,它可能会在程序运行时原来的映射表给换了,所以你怎么也解不出,所以需要你动态<br>的调试一下,还有一些题会靠你远程调试之类的</li></ul><hr><ul><li>**栈帧不平衡：**在使用IDA进行反编译时，可能会遇到栈帧不平衡的问题。这通常会导致反编译结果出错，<br>例如无法正确生成伪代码。<br>在伪代码中可能有:<blockquote><p><code> positive sp value has been detected, the output may be wrong!</code><br>在反编译时会报错:<br><code>positive sp value has been found</code><br>以下是解决栈帧平衡问题的常见方法。</p></blockquote></li></ul><ol><li>打开 <code>Options</code> -&gt; <code>General</code> -&gt; <code>Stack pointer</code>。这样可以看到指针了</li><li>找到红色标记区域(表示栈帧不平衡)</li><li>找到栈指为负的选中按 <code>Alt + K</code> 打开栈帧调整窗口。</li><li>修改栈偏移值(例如:将负值修改为0或更高的值)</li><li>修改后保存重新编译</li></ol><hr><blockquote><p>本文档适用于 IDA Pro 基础及进阶使用，欢迎在博客留言交流更多技巧！</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>逆向软件使用</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>IDA使用</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RC4加密算法</title>
     <link href="/2025/10/04/02_RC4/"/>
     <url>/2025/10/04/02_RC4/</url>
@@ -95,31 +120,6 @@
       <tag>RC4</tag>
       
       <tag>加密算法</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ida使用文档</title>
-    <link href="/2025/10/04/01_ida/"/>
-    <url>/2025/10/04/01_ida/</url>
-    
-    <content type="html"><![CDATA[<h1 id="IDA-使用文档"><a href="#IDA-使用文档" class="headerlink" title="IDA 使用文档"></a>IDA 使用文档</h1><h2 id="一、窗口介绍"><a href="#一、窗口介绍" class="headerlink" title="一、窗口介绍"></a>一、窗口介绍</h2><h3 id="1-函数窗口"><a href="#1-函数窗口" class="headerlink" title="1. 函数窗口"></a>1. 函数窗口</h3><ul><li><strong>功能</strong>：显示所有函数列表。</li><li><strong>快捷键</strong>：<code>Ctrl + F</code> 查找函数名（所有表格窗口均支持）。</li></ul><h3 id="2-IDA-View-窗口"><a href="#2-IDA-View-窗口" class="headerlink" title="2. IDA-View 窗口"></a>2. IDA-View 窗口</h3><ul><li><strong>功能</strong>：显示汇编代码。</li><li><strong>快捷键</strong>：<code>空格键</code> 切换图形模式与文本模式。</li></ul><h3 id="3-Pseudocode（伪代码）窗口"><a href="#3-Pseudocode（伪代码）窗口" class="headerlink" title="3. Pseudocode（伪代码）窗口"></a>3. Pseudocode（伪代码）窗口</h3><ul><li><strong>功能</strong>：显示 C&#x2F;C++ 伪代码。</li><li><strong>快捷键</strong>：<code>Tab</code> 切换到对应汇编窗口。</li><li><strong>重命名</strong>：选中关键词后按 <code>N</code>，或右键选择“Rename global item”。</li></ul><h3 id="4-字符串窗口"><a href="#4-字符串窗口" class="headerlink" title="4. 字符串窗口"></a>4. 字符串窗口</h3><ul><li><strong>功能</strong>：列举程序引用的字符串常量。</li><li><strong>快捷键</strong>：<code>Shift + F12</code> 打开字符串窗口；<code>Ctrl + F</code> 搜索字符串。</li></ul><h3 id="5-其他窗口"><a href="#5-其他窗口" class="headerlink" title="5. 其他窗口"></a>5. 其他窗口</h3><ul><li><strong>HEX View</strong>：内存十六进制视图</li><li><strong>Exports</strong>：导出函数</li><li><strong>Imports</strong>：导入函数</li><li><strong>Structures</strong>：结构体定义</li></ul><blockquote><p><strong>提示</strong>：大部分窗口入口可在菜单栏 <code>View</code> 中找到。</p></blockquote><hr><h2 id="二、常用快捷键"><a href="#二、常用快捷键" class="headerlink" title="二、常用快捷键"></a>二、常用快捷键</h2><table><thead><tr><th>快捷键</th><th>功能说明</th></tr></thead><tbody><tr><td><code>Ctrl + X</code></td><td>查看交叉引用（字符串&#x2F;变量被引用的函数）</td></tr><tr><td><code>Ctrl + Z</code></td><td>撤销操作</td></tr><tr><td><code>Alt + T</code></td><td>查找汇编指令，<code>F3</code> 查找下一个</td></tr><tr><td><code>Alt + M</code></td><td>添加标签描述</td></tr><tr><td><code>Ctrl + M</code></td><td>搜索标签并跳转</td></tr><tr><td><code>\</code></td><td>隐藏&#x2F;显示类型转换（如 <code>*(_DWORD *)</code>）</td></tr><tr><td><code>F5</code>&#x2F;<code>Tab</code></td><td>反编译为 C 伪代码窗口</td></tr><tr><td><code>H</code></td><td>十六进制与十进制切换（Hex-View）</td></tr><tr><td><code>D</code></td><td>转换字节显示方式</td></tr><tr><td><code>U</code></td><td>拆分字节数据</td></tr><tr><td><code>C</code></td><td>重新分析为汇编代码</td></tr><tr><td><code>/</code></td><td>汇编界面显示伪代码（需支持 F5）</td></tr><tr><td><code>R</code></td><td>转换为字符串类型显示</td></tr><tr><td><code>N</code></td><td>修改变量&#x2F;函数名称</td></tr><tr><td><code>Y</code></td><td>修改变量类型</td></tr><tr><td><code>M</code></td><td>查看 API 参数名称</td></tr><tr><td><code>P</code></td><td>重新生成函数</td></tr><tr><td><code>Ctrl +Alt + K</code></td><td>修改汇编指令</td></tr></tbody></table><hr><h2 id="三、IDA-调试器功能"><a href="#三、IDA-调试器功能" class="headerlink" title="三、IDA 调试器功能"></a>三、IDA 调试器功能</h2><ol><li><strong>断点类型</strong>：软件断点、硬件断点、条件断点、脚本断点</li><li><strong>调试控制</strong>：步入、步过、步出、运行到光标</li><li><strong>调试级别</strong>：汇编级、伪代码级、源码级</li><li><strong>寄存器&#x2F;内存</strong>：读写寄存器与内存</li><li><strong>调试方式</strong>：启动进程调试、附加调试</li></ol><h3 id="调试相关菜单功能"><a href="#调试相关菜单功能" class="headerlink" title="调试相关菜单功能"></a>调试相关菜单功能</h3><ul><li><strong>Quick debug view</strong>：快速查看寄存器、内存等关键信息</li><li><strong>Debugger windows</strong>：打开调试辅助窗口（如反汇编、寄存器、内存等）</li><li><strong>Breakpoints</strong>：设置、编辑、删除、管理断点</li><li><strong>Watches</strong>：监视变量或表达式的值</li><li><strong>Tracing</strong>：记录程序执行轨迹，便于分析流程</li><li><strong>Start process</strong>：<code>F9</code> 启动新进程并调试</li><li><strong>Attach to process</strong>：附加到已运行进程或远程进程</li><li><strong>Process options…</strong>：配置调试进程参数（环境变量、工作目录等）</li><li><strong>Pause process</strong>：暂停进程，检查当前状态</li><li><strong>Terminate process</strong>：终止进程</li><li><strong>Detach from process</strong>：分离调试器，进程继续运行</li><li><strong>Refresh memory</strong>：刷新内存视图</li><li><strong>Take memory snapshot</strong>：内存快照，便于对比分析</li><li><strong>Step into</strong>：<code>F7</code> 单步进入函数</li><li><strong>Step over</strong>：<code>F8</code> 单步跳过函数</li><li><strong>Run until return</strong>：<code>Ctrl + F7</code> 运行至当前函数返回</li><li><strong>Run to cursor</strong>：<code>F4</code> 运行到光标处</li><li><strong>Switch to source</strong>：切换到源代码视图</li><li><strong>Use source-level debugging</strong>：启用源码级调试</li><li><strong>Open source file…</strong>：打开源代码文件</li><li><strong>Debugger options…</strong>：调试器全局配置</li><li><strong>Switch debugger…</strong>：切换不同类型调试器</li></ul><hr><h2 id="四、内存修改技巧"><a href="#四、内存修改技巧" class="headerlink" title="四、内存修改技巧"></a>四、内存修改技巧</h2><ul><li>在 <strong>Hex View</strong> 表中可直接修改内存数值。</li><li>找到要修改的位置，按 <code>F2</code> 进行编辑，再按一次 <code>F2</code> 确认修改。</li><li>右键选择 <code>Edit</code> 也可修改。</li><li>推荐插件：<strong>lazyIDA</strong>，可批量粘贴修改内容。</li></ul><hr><h2 id="五、调试技巧：通过修改-EIP-RIP-强制执行函数"><a href="#五、调试技巧：通过修改-EIP-RIP-强制执行函数" class="headerlink" title="五、调试技巧：通过修改 EIP&#x2F;RIP 强制执行函数"></a>五、调试技巧：通过修改 EIP&#x2F;RIP 强制执行函数</h2><ul><li><strong>EIP</strong>（32位）或 <strong>RIP</strong>（64位）寄存器存储 CPU 下一条指令地址。</li><li>修改 EIP&#x2F;RIP 可让 CPU 跳转执行任意函数。</li></ul><p><strong>操作步骤：</strong></p><ol><li>找到目标函数地址（十六进制）。</li><li>在合适位置设置断点，开始调试。</li><li>在寄存器窗口双击 EIP&#x2F;RIP，修改为目标地址（或右键 Edit）。</li><li>取消断点，继续运行即可。</li></ol><hr><h2 id="六、博主见到的一些情况："><a href="#六、博主见到的一些情况：" class="headerlink" title="六、博主见到的一些情况："></a>六、博主见到的一些情况：</h2><ul><li>**堆栈问题：**当你在汇编中看到一大串的数据的时候,可能是堆栈问题,可能会有提示,<br>只需选中数据按c,重新分析为汇编就行了</li></ul><hr><ul><li>**动态调式：**在做题的时候,可能会有静态里找不到需要的信息,或程序运行时发生改变,<br>比如简单的base64,它可能会在程序运行时原来的映射表给换了,所以你怎么也解不出,所以需要你动态<br>的调试一下,还有一些题会靠你远程调试之类的</li></ul><hr><ul><li>**栈帧不平衡：**在使用IDA进行反编译时，可能会遇到栈帧不平衡的问题。这通常会导致反编译结果出错，<br>例如无法正确生成伪代码。<br>在伪代码中可能有:<blockquote><p><code> positive sp value has been detected, the output may be wrong!</code><br>在反编译时会报错:<br><code>positive sp value has been found</code><br>以下是解决栈帧平衡问题的常见方法。</p></blockquote></li></ul><ol><li>打开 <code>Options</code> -&gt; <code>General</code> -&gt; <code>Stack pointer</code>。这样可以看到指针了</li><li>找到红色标记区域(表示栈帧不平衡)</li><li>找到栈指为负的选中按 <code>Alt + K</code> 打开栈帧调整窗口。</li><li>修改栈偏移值(例如:将负值修改为0或更高的值)</li><li>修改后保存重新编译</li></ol><hr><blockquote><p>本文档适用于 IDA Pro 基础及进阶使用，欢迎在博客留言交流更多技巧！</p></blockquote>]]></content>
-    
-    
-    <categories>
-      
-      <category>逆向软件使用</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>IDA使用</tag>
       
     </tags>
     
@@ -155,31 +155,6 @@
   
   
   <entry>
-    <title>Upx脱壳</title>
-    <link href="/2025/10/04/05_Upx/"/>
-    <url>/2025/10/04/05_Upx/</url>
-    
-    <content type="html"><![CDATA[<p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p><h2 id="快速检测"><a href="#快速检测" class="headerlink" title="快速检测"></a>快速检测</h2><ol><li>使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。</li><li>查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。</li></ol><h2 id="常用脱壳（自动）"><a href="#常用脱壳（自动）" class="headerlink" title="常用脱壳（自动）"></a>常用脱壳（自动）</h2><p>如果程序确认为 UPX 压缩，可以尝试官方 upx 工具解包：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">upx -d &lt;程序路径&gt;<br></code></pre></td></tr></table></figure><p>若成功会在当前目录生成解压后的可执行文件；若失败，说明可能存在保护或混淆，需要使用手动脱壳方法。</p><h2 id="手动脱壳（思路）"><a href="#手动脱壳（思路）" class="headerlink" title="手动脱壳（思路）"></a>手动脱壳（思路）</h2><ol><li>在调试器（x32dbg&#x2F;x64dbg&#x2F;IDA+调试器）中运行程序并设置断点，跟踪程序解压流程。</li><li>找到 OEP（Original Entry Point，原始入口点）。常见的线索有 PUSHAD&#x2F;POPAD（32 位）或多个 push 指令（64 位）作为保存寄存器的序列。</li><li>在 OEP 附近设置断点，继续执行直到出现真实代码，然后转储（dump）进程内存并修复 IAT（可用 Scylla 等工具）。</li></ol><p>简化流程：</p><ul><li>找到入口 -&gt; 跟踪到解压完成点（观察 ESP&#x2F;堆栈&#x2F;字符串变化） -&gt; 在内存中定位真实代码段 -&gt; 导出并修复导入表（IAT）。</li></ul><h2 id="工具建议"><a href="#工具建议" class="headerlink" title="工具建议"></a>工具建议</h2><ul><li>upx（官方工具）</li><li>x32dbg &#x2F; x64dbg（动态调试）</li><li>IDA Pro + 调试插件（定位 OEP）</li><li>Scylla（修复导入表）</li></ul><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul><li>64 位程序没有 PUSHAD 指令，需通过连续的 push 指令或寄存器保存序列作为线索。</li><li>某些程序使用额外保护（反调试、完整性校验、二次加密等），这时需要针对性分析并绕过防护。</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>加密算法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>UPX脱壳</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Base64加密算法</title>
     <link href="/2025/10/04/03_Base64/"/>
     <url>/2025/10/04/03_Base64/</url>
@@ -207,23 +182,23 @@
   
   
   <entry>
-    <title>一些偏门的运算</title>
-    <link href="/2025/10/04/SomeNicheOperations/"/>
-    <url>/2025/10/04/SomeNicheOperations/</url>
+    <title>Upx脱壳</title>
+    <link href="/2025/10/04/05_Upx/"/>
+    <url>/2025/10/04/05_Upx/</url>
     
-    <content type="html"><![CDATA[<h5 id="模运算的逆运算："><a href="#模运算的逆运算：" class="headerlink" title="模运算的逆运算："></a><strong>模运算的逆运算：</strong></h5><p><strong>加密后 &#x3D; (原始值 + 偏移) % 模值</strong>     </p><p>**原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数</p><p>这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景；</p><p>当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模值*k) % 模值 ,**你可以自己写一下数字，模拟一下；</p><h5 id="生成随机数："><a href="#生成随机数：" class="headerlink" title="生成随机数："></a><strong>生成随机数：</strong></h5><p><strong>rand(),srand()</strong></p><p>rand_num &#x3D; rand() % num +a  这里的num是生成数的区间，a是区间的左区间</p><p>对于区间[a, b)的随机整数：(rand() % (b-a)) + a</p><p>对于区间[a, b]的随机整数：(rand() % (b-a+1)) + a</p><p>srand()函数用于设置rand()函数生成随机数时所用的种子,</p><p>当用rand而不设种子时，后面的随机数是相同的，可以理解为rand函数是根据时间轴而生成数的，</p><p>rand生成数的时间轴需要srand来更换</p><p><strong>用法：</strong></p><p>用rand 需要引入头文件stdlib</p><p>需要引入<strong>time</strong>头文件，在开头写入<strong>srand((unsigned)time(NULL));</strong> 就行</p><h4 id="使用-Python-的numpy库直接求解线性方程组"><a href="#使用-Python-的numpy库直接求解线性方程组" class="headerlink" title="使用 Python 的numpy库直接求解线性方程组"></a>使用 Python 的numpy库直接求解线性方程组</h4><p>当有解方程组是多元的时候就用</p><h3 id="a-a-4-a"><a href="#a-a-4-a" class="headerlink" title="a &#x3D; (a&gt;&gt;4) | (a&lt;&lt;4) 高位低位互换"></a>a &#x3D; (a&gt;&gt;4) | (a&lt;&lt;4) 高位低位互换</h3><p>这是做题遇到的 <a href="https://www.nssctf.cn/problem/3323">MoeCTF 2022chicken_soup</a><br>是一个花之令题,<br>举个列子：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">1010</span> <span class="hljs-number">1011</span> = <span class="hljs-number">0xAB</span><br>左移<span class="hljs-number">4</span>位  <span class="hljs-number">1011</span> <span class="hljs-number">0000</span> = <span class="hljs-number">0xB0</span><br>右移<span class="hljs-number">4</span>位<span class="hljs-number">0000</span> <span class="hljs-number">1010</span> = <span class="hljs-number">0x0A</span><br><br>OR操作:  <span class="hljs-number">1011</span> <span class="hljs-number">0000</span> | <span class="hljs-number">0000</span> <span class="hljs-number">1010</span> = <span class="hljs-number">1011</span> <span class="hljs-number">1010</span> = <span class="hljs-number">0xBA</span><br><br>结果就是: <span class="hljs-number">0xAB</span> -&gt; <span class="hljs-number">0xBA</span> 高<span class="hljs-number">4</span>位和低<span class="hljs-number">4</span>位交换<br><br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p><h2 id="快速检测"><a href="#快速检测" class="headerlink" title="快速检测"></a>快速检测</h2><ol><li>使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。</li><li>查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。</li></ol><h2 id="常用脱壳（自动）"><a href="#常用脱壳（自动）" class="headerlink" title="常用脱壳（自动）"></a>常用脱壳（自动）</h2><p>如果程序确认为 UPX 压缩，可以尝试官方 upx 工具解包：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">upx -d &lt;程序路径&gt;<br></code></pre></td></tr></table></figure><p>若成功会在当前目录生成解压后的可执行文件；若失败，说明可能存在保护或混淆，需要使用手动脱壳方法。</p><h2 id="手动脱壳（思路）"><a href="#手动脱壳（思路）" class="headerlink" title="手动脱壳（思路）"></a>手动脱壳（思路）</h2><ol><li>在调试器（x32dbg&#x2F;x64dbg&#x2F;IDA+调试器）中运行程序并设置断点，跟踪程序解压流程。</li><li>找到 OEP（Original Entry Point，原始入口点）。常见的线索有 PUSHAD&#x2F;POPAD（32 位）或多个 push 指令（64 位）作为保存寄存器的序列。</li><li>在 OEP 附近设置断点，继续执行直到出现真实代码，然后转储（dump）进程内存并修复 IAT（可用 Scylla 等工具）。</li></ol><p>简化流程：</p><ul><li>找到入口 -&gt; 跟踪到解压完成点（观察 ESP&#x2F;堆栈&#x2F;字符串变化） -&gt; 在内存中定位真实代码段 -&gt; 导出并修复导入表（IAT）。</li></ul><h2 id="工具建议"><a href="#工具建议" class="headerlink" title="工具建议"></a>工具建议</h2><ul><li>upx（官方工具）</li><li>x32dbg &#x2F; x64dbg（动态调试）</li><li>IDA Pro + 调试插件（定位 OEP）</li><li>Scylla（修复导入表）</li></ul><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul><li>64 位程序没有 PUSHAD 指令，需通过连续的 push 指令或寄存器保存序列作为线索。</li><li>某些程序使用额外保护（反调试、完整性校验、二次加密等），这时需要针对性分析并绕过防护。</li></ul>]]></content>
     
     
     <categories>
       
-      <category>其它</category>
+      <category>加密算法</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>一些运算技巧</tag>
+      <tag>UPX脱壳</tag>
       
     </tags>
     
@@ -245,6 +220,31 @@
       
     </categories>
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>一些偏门的运算</title>
+    <link href="/2025/10/04/SomeNicheOperations/"/>
+    <url>/2025/10/04/SomeNicheOperations/</url>
+    
+    <content type="html"><![CDATA[<h5 id="模运算的逆运算："><a href="#模运算的逆运算：" class="headerlink" title="模运算的逆运算："></a><strong>模运算的逆运算：</strong></h5><p><strong>加密后 &#x3D; (原始值 + 偏移) % 模值</strong>     </p><p>**原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数</p><p>这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景；</p><p>当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模值*k) % 模值 ,**你可以自己写一下数字，模拟一下；</p><h5 id="生成随机数："><a href="#生成随机数：" class="headerlink" title="生成随机数："></a><strong>生成随机数：</strong></h5><p><strong>rand(),srand()</strong></p><p>rand_num &#x3D; rand() % num +a  这里的num是生成数的区间，a是区间的左区间</p><p>对于区间[a, b)的随机整数：(rand() % (b-a)) + a</p><p>对于区间[a, b]的随机整数：(rand() % (b-a+1)) + a</p><p>srand()函数用于设置rand()函数生成随机数时所用的种子,</p><p>当用rand而不设种子时，后面的随机数是相同的，可以理解为rand函数是根据时间轴而生成数的，</p><p>rand生成数的时间轴需要srand来更换</p><p><strong>用法：</strong></p><p>用rand 需要引入头文件stdlib</p><p>需要引入<strong>time</strong>头文件，在开头写入<strong>srand((unsigned)time(NULL));</strong> 就行</p><h4 id="使用-Python-的numpy库直接求解线性方程组"><a href="#使用-Python-的numpy库直接求解线性方程组" class="headerlink" title="使用 Python 的numpy库直接求解线性方程组"></a>使用 Python 的numpy库直接求解线性方程组</h4><p>当有解方程组是多元的时候就用</p><h3 id="a-a-4-a"><a href="#a-a-4-a" class="headerlink" title="a &#x3D; (a&gt;&gt;4) | (a&lt;&lt;4) 高位低位互换"></a>a &#x3D; (a&gt;&gt;4) | (a&lt;&lt;4) 高位低位互换</h3><p>这是做题遇到的 <a href="https://www.nssctf.cn/problem/3323">MoeCTF 2022chicken_soup</a><br>是一个花之令题,<br>举个列子：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">1010</span> <span class="hljs-number">1011</span> = <span class="hljs-number">0xAB</span><br>左移<span class="hljs-number">4</span>位  <span class="hljs-number">1011</span> <span class="hljs-number">0000</span> = <span class="hljs-number">0xB0</span><br>右移<span class="hljs-number">4</span>位<span class="hljs-number">0000</span> <span class="hljs-number">1010</span> = <span class="hljs-number">0x0A</span><br><br>OR操作:  <span class="hljs-number">1011</span> <span class="hljs-number">0000</span> | <span class="hljs-number">0000</span> <span class="hljs-number">1010</span> = <span class="hljs-number">1011</span> <span class="hljs-number">1010</span> = <span class="hljs-number">0xBA</span><br><br>结果就是: <span class="hljs-number">0xAB</span> -&gt; <span class="hljs-number">0xBA</span> 高<span class="hljs-number">4</span>位和低<span class="hljs-number">4</span>位交换<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>其它</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>一些运算技巧</tag>
+      
+    </tags>
     
   </entry>
   

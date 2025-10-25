@@ -2159,6 +2159,30 @@ input[type=checkbox] {
 .tagcloud a:hover {
   color: var(--link-hover-color) !important;
 }
+.tag-cloud-container {
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tag-cloud a {
+  display: inline-block;
+  margin: 10px 12px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+/* 强制文字白色，确保在渐变色背景上清晰 */
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.tag-cloud a:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+}
 .links .card {
   box-shadow: none;
   min-width: 33%;

@@ -27,7 +27,7 @@
 <meta property="og:description" content="UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。 查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。  常用脱壳（自动）如果程序确认为 UPX 压缩，可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-25T17:06:15.191Z">
+<meta property="article:modified_time" content="2025-11-04T13:09:20.147Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="UPX脱壳">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          706 字
+          1.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          10 分钟
         
       </span>
     
@@ -308,6 +308,8 @@
 <li>64 位程序没有 PUSHAD 指令，需通过连续的 push 指令或寄存器保存序列作为线索。</li>
 <li>某些程序使用额外保护（反调试、完整性校验、二次加密等），这时需要针对性分析并绕过防护。</li>
 </ul>
+<h2 id="再详细讲一下"><a href="#再详细讲一下" class="headerlink" title="再详细讲一下"></a>再详细讲一下</h2><h3 id="1-寻找入口点"><a href="#1-寻找入口点" class="headerlink" title="1. 寻找入口点"></a>1. 寻找入口点</h3><p>我们要在加壳后的程序中定位到原程序的入口点，这个就是用x64dbg打开程序后运行程序后停在<code>pushad</code><br>这个是将全部的寄存器压入栈中，<code>popad</code>则是将栈中全部的寄存器弹出。在<code>pushad</code>后便是<code>upx</code>解压代码<br>开始解压程序了。<code>upx</code>压缩，但是在程序运行时会自动解开，且是实时的，所以就是看到<code>popad</code>或寄存器被弹出完，<br>就是原程序的入口。<br>看不懂没关系，实操一遍就记住了。</p>
+<p>怎么跟踪这个解压缩的过程呢？先<code>F9</code>运行，<code>pushad</code>执行前(我看有的在执行后，也对把，等我有时间去测一测)<br>对当前栈顶<code>rsi或esi</code>的内存地址下一个硬件断点即可。然后便是一直<code>F9</code>知道遇到<code>popad或连续的pop</code>仔细看一下后面<br>是不是有一个远程跳转，有的话按<code>F4</code>跳到当前的指令并将要执行，<code>F7</code>步进到函数里面，看一下这个函数周围是不是有<br>正常的字符串，就是已经被解压缩的，就是看起来和IDA差不多的形式。其实你也可以<code>F7</code>运行一下汇编指令，<br>看看控制台是否有变化，有变化就代表你找对了，这时就可以dump了。</p>
 
                 
               </div>
@@ -398,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/02_RC4/" title="RC4加密算法">
+                      <a href="/2025/10/04/03_Base64/" title="Base64加密算法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RC4加密算法</span>
+                        <span class="hidden-mobile">Base64加密算法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -408,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/SomeNicheOperations/" title="一些偏门的运算">
-                        <span class="hidden-mobile">一些偏门的运算</span>
+                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
+                        <span class="hidden-mobile">TEA加密算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -19,15 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。 Python 示例下面示例展示如何用 Python 对 Base64 编码&#x2F;解码： 123456789101112import base64# 编码plain &#x3D; &#x27;Hello World&amp;#x27">
+    <meta name="description" content="简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。base64是将数据变得不可读，所以不是加密 Python 示例建议初学者，就是自己动手写脚本，减少对工具的依赖，所以这里讲常用的两种形式，下面再讲工作原理。下面示例展示如何用 Python 对 Base64 编码&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Base64加密算法">
+<meta property="og:title" content="Base64算法">
 <meta property="og:url" content="http://run521520.github.io/2025/10/04/03_Base64/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。 Python 示例下面示例展示如何用 Python 对 Base64 编码&#x2F;解码： 123456789101112import base64# 编码plain &#x3D; &#x27;Hello World&amp;#x27">
+<meta property="og:description" content="简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。base64是将数据变得不可读，所以不是加密 Python 示例建议初学者，就是自己动手写脚本，减少对工具的依赖，所以这里讲常用的两种形式，下面再讲工作原理。下面示例展示如何用 Python 对 Base64 编码&amp;#x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-10-25T17:06:00.717Z">
+<meta property="article:modified_time" content="2025-11-11T12:57:11.098Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="Base64">
 <meta property="article:tag" content="加密算法">
@@ -35,7 +35,7 @@
   
   
   
-  <title>Base64加密算法 - run521</title>
+  <title>Base64算法 - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Base64加密算法"></span>
+            <span id="subtitle" data-typed-text="Base64算法"></span>
           
         </div>
 
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          995 字
+          2.8k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          9 分钟
+          24 分钟
         
       </span>
     
@@ -276,19 +276,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Base64加密算法</h1>
+            <h1 id="seo-header">Base64算法</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。</p>
-<h2 id="Python-示例"><a href="#Python-示例" class="headerlink" title="Python 示例"></a>Python 示例</h2><p>下面示例展示如何用 Python 对 Base64 编码&#x2F;解码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><br><span class="hljs-comment"># 编码</span><br>plain = <span class="hljs-string">&#x27;Hello World&#x27;</span><br>encoded = base64.b64encode(plain.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><span class="hljs-built_in">print</span>(encoded.decode())  <span class="hljs-comment"># 输出: SGVsbG8gV29ybGQ=</span><br><br><span class="hljs-comment"># 解码</span><br>data = <span class="hljs-string">&#x27;SGVsbG8gV29ybGQ=&#x27;</span><br>flag_bytes = base64.b64decode(data)<br>flag = flag_bytes.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><span class="hljs-built_in">print</span>(flag)  <span class="hljs-comment"># 输出: Hello World</span><br></code></pre></td></tr></table></figure>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。<br>base64是将数据变得不可读，所以不是加密</p>
+<h2 id="Python-示例"><a href="#Python-示例" class="headerlink" title="Python 示例"></a>Python 示例</h2><p>建议初学者，就是自己动手写脚本，减少对工具的依赖，所以这里讲常用的两种形式，下面再讲工作原理。<br>下面示例展示如何用 Python 对 Base64 编码&#x2F;解码：</p>
+<h3 id="普通形式"><a href="#普通形式" class="headerlink" title="普通形式"></a>普通形式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><br><span class="hljs-comment"># 编码</span><br>plain = <span class="hljs-string">&#x27;Hello World&#x27;</span><br>encoded = base64.b64encode(plain.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><span class="hljs-built_in">print</span>(encoded.decode())  <span class="hljs-comment"># 输出: SGVsbG8gV29ybGQ=</span><br><br><span class="hljs-comment"># 解码</span><br>data = <span class="hljs-string">&#x27;SGVsbG8gV29ybGQ=&#x27;</span><br>flag_bytes = base64.b64decode(data)<br>flag = flag_bytes.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><span class="hljs-built_in">print</span>(flag)  <span class="hljs-comment"># 输出: Hello World</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="变体：自定义映射表"><a href="#变体：自定义映射表" class="headerlink" title="变体：自定义映射表"></a>变体：自定义映射表</h2><p>有时会改变 Base64 的字符表顺序（例如做混淆），可通过字符映射把变形的编码还原为标准编码再解码：</p>
+<h3 id="变体：自定义映射表"><a href="#变体：自定义映射表" class="headerlink" title="变体：自定义映射表"></a>变体：自定义映射表</h3><p>有时会改变 Base64 的字符表顺序（例如做混淆），可通过字符映射把变形的编码还原为标准编码再解码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">T1 = <span class="hljs-string">&#x27;/T+US9VR8WQ7XP6YO5ZN4aM3bL2cK1dJ0eIzfHygGxhFwiEvjDukCtlBsmArnqop&#x27;</span><br>target = <span class="hljs-string">&#x27;NHPNOt5VdCixcy5JclLJLVHyLyauLMmC3CWeKl4lPRC/&#x27;</span><br>alphabet = <span class="hljs-string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#x27;</span><br><br>translation_table = <span class="hljs-built_in">str</span>.maketrans(T1, alphabet)<br>standard_encoded = target.translate(translation_table)<br>decoded_bytes = base64.b64decode(standard_encoded)<br>flag = decoded_bytes.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><span class="hljs-built_in">print</span>(flag)<br></code></pre></td></tr></table></figure>
 
-<p>说明：使用 <code>str.maketrans(x, y)</code> 创建映射表，<code>str.translate(table)</code> 按映射表替换字符，然后再用标准的 <code>base64.b64decode</code> 解码。</p>
+<h2 id="说明：使用-str-maketrans-x-y-创建映射表，str-translate-table-按映射表替换字符，然后再用标准的-base64-b64decode-解码。"><a href="#说明：使用-str-maketrans-x-y-创建映射表，str-translate-table-按映射表替换字符，然后再用标准的-base64-b64decode-解码。" class="headerlink" title="说明：使用 str.maketrans(x, y) 创建映射表，str.translate(table) 按映射表替换字符，然后再用标准的 base64.b64decode 解码。"></a>说明：使用 <code>str.maketrans(x, y)</code> 创建映射表，<code>str.translate(table)</code> 按映射表替换字符，然后再用标准的 <code>base64.b64decode</code> 解码。</h2><h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><p>我们都知道，数据由内存存储，最小单位是<strong>bit</strong>，常用的<strong>byte</strong>，这里一个<strong>char</strong>在c语言中是1byte，就是一字节8bit<br>那3字节就是24bit，我们把这24bit分为4组，一组就是6bit，那这一组的范围就是<strong>0~64</strong>，正好的就是我们规定的ascii表中<br>&#x2F;26个大写字母、26个小写字母、10个数字以及两个特殊字符（通常是”+”和”&#x2F;“）&#x2F; 就是64个，所以我们可以通过3byte得到4组6bit<br>就是4个来自ascii表’ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;‘字符。</p>
+<p>当明文不是3的倍数的时候就要填充了，这里填充用**&#x3D;**</p>
+<h3 id="加密-C语言"><a href="#加密-C语言" class="headerlink" title="加密 C语言"></a>加密 C语言</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-type">const</span> <span class="hljs-type">char</span> base64 [] =<span class="hljs-string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">base64_encode</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> *data, <span class="hljs-type">size_t</span> len, <span class="hljs-type">char</span> * encode)</span> &#123;<br><br>	<span class="hljs-type">int</span> i = <span class="hljs-number">0</span> , j = <span class="hljs-number">0</span> ;<br>	<span class="hljs-type">uint8_t</span> byte3[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>	<span class="hljs-type">uint8_t</span> byte4[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>	<span class="hljs-keyword">while</span>(len&gt;<span class="hljs-number">0</span>) &#123;<br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">3</span>&amp;&amp;len&gt;<span class="hljs-number">0</span>; i++) &#123;<br>			byte3[i] = *(data++); <span class="hljs-comment">//每三个字节为一组赋给byte3[i]</span><br>			len--;<br>		&#125;<br>		<span class="hljs-comment">//当i==3的时候就是要将byte3的字节转换为ascii表了,默认为3所以就不写if判断了 </span><br>		byte4[<span class="hljs-number">0</span>] = (byte3[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">0xfc</span>) &gt;&gt; <span class="hljs-number">2</span>;<br>		byte4[<span class="hljs-number">1</span>] = ((byte3[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">0x03</span>) &lt;&lt; <span class="hljs-number">4</span>) | ((byte3[<span class="hljs-number">1</span>] &amp; <span class="hljs-number">0xf0</span>) &gt;&gt; <span class="hljs-number">4</span>);<br>		byte4[<span class="hljs-number">2</span>] = ((byte3[<span class="hljs-number">1</span>] &amp; <span class="hljs-number">0x0f</span>) &lt;&lt; <span class="hljs-number">2</span>) | ((byte3[<span class="hljs-number">2</span>] &amp; <span class="hljs-number">0xc0</span>) &gt;&gt; <span class="hljs-number">6</span>);<br>		byte4[<span class="hljs-number">3</span>] = byte3[<span class="hljs-number">2</span>] &amp; <span class="hljs-number">0x3f</span>;<br>		<br>		<span class="hljs-comment">//当 len = 0 ,但是 i!=0 , 就是说len不是3的倍数，要填充啊，填充用&#x27;=&#x27;</span><br>		<span class="hljs-comment">//但是吧，不能直接赋值给byte4 = &#x27;=&#x27; 因为这个byte4代表的是base64下标，</span><br>		<span class="hljs-comment">//所以可以赋一个base64范围之外的数字，下面可以判断要是该数字那 encode = &#x27;=&#x27;</span><br>		<span class="hljs-keyword">if</span>(i == <span class="hljs-number">1</span>)	byte4[<span class="hljs-number">2</span>] = byte4[<span class="hljs-number">3</span>] = <span class="hljs-number">64</span>;<br>		<span class="hljs-keyword">if</span>(i == <span class="hljs-number">2</span>)	byte4[<span class="hljs-number">3</span>] = <span class="hljs-number">64</span>;<br>		<br>		<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>; k&lt;<span class="hljs-number">4</span>; k++) &#123;<br>			encode[j++] = byte4[k]==<span class="hljs-number">64</span> ?<span class="hljs-string">&#x27;=&#x27;</span> : base64[byte4[k]];<br>		&#125;<br>	&#125;<br><br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br><br>	<span class="hljs-type">uint8_t</span> data[] = <span class="hljs-string">&quot;Hello，Base64&quot;</span>;<br>	<span class="hljs-type">char</span> encode[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>	base64_encode(data,<span class="hljs-built_in">strlen</span>((<span class="hljs-type">char</span> *)data),encode);<br>	<span class="hljs-comment">// 因为strlen只能用来计算char，所以用(char *)来强制转换</span><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,encode);<br>	<span class="hljs-comment">//SGVsbG+jrEJhc2U2NG==</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<p>解密的话就用上面用python写的脚本吧，写这个加密就是为了让我们可以分辨这个函数是base64<br>同时要看看还有没有其它的操作，比如再加密前给<strong>base64</strong>表给换了之类的</p>
 
                 
               </div>
@@ -336,7 +340,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Base64加密算法</div>
+      <div>Base64算法</div>
       <div>http://run521520.github.io/2025/10/04/03_Base64/</div>
     </div>
     <div class="license-meta">
@@ -391,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/02_RC4/" title="RC4加密算法">
-                        <span class="hidden-mobile">RC4加密算法</span>
+                      <a href="/2025/10/04/04_TEA/" title="TEA加密算法">
+                        <span class="hidden-mobile">TEA加密算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

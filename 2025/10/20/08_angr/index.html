@@ -19,15 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下starrysky 安装的话就不说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分">
+    <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下 starrysky 安装的话就这几个：pip install angr 安装成功就可以直接使用了，没成功的话就需要问ai了。剩下的看自己吧，不深入的话就不用安装了。pip3 install angr-management 安装angr-management (GUI界面)，安装之后可以通过angr-manag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angr">
 <meta property="og:url" content="http://run521520.github.io/2025/10/20/08_angr/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下starrysky 安装的话就不说了，因为博主也是看着网上的安装的。 什么是符号执行：符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。在达到目标代码时，分">
+<meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下 starrysky 安装的话就这几个：pip install angr 安装成功就可以直接使用了，没成功的话就需要问ai了。剩下的看自己吧，不深入的话就不用安装了。pip3 install angr-management 安装angr-management (GUI界面)，安装之后可以通过angr-manag">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-20T11:37:41.000Z">
-<meta property="article:modified_time" content="2025-10-25T13:14:02.050Z">
+<meta property="article:modified_time" content="2025-11-29T13:02:23.507Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="angr">
 <meta property="article:tag" content="逆向">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k 字
+          16k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          88 分钟
+          131 分钟
         
       </span>
     
@@ -282,8 +282,14 @@
               <div class="markdown-body">
                 
                 <p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a></p>
-<p>这个博主写的也不错,可以看一下<a target="_blank" rel="noopener" href="https://starrysky1004.github.io/2024/12/17/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/#toc-heading-16">starrysky</a></p>
-<p>安装的话就不说了，因为博主也是看着网上的安装的。</p>
+<p>这个博主写的也不错,可以看一下 <a target="_blank" rel="noopener" href="https://starrysky1004.github.io/2024/12/17/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/#toc-heading-16">starrysky</a></p>
+<p>安装的话就这几个：<br><code>pip install angr</code> 安装成功就可以直接使用了，没成功的话就需要问ai了。<br>剩下的看自己吧，不深入的话就不用安装了。<br><code>pip3 install angr-management</code> 安装angr-management (GUI界面)，安装之后可以通过<code>angr-management</code> 或 <code>python -m angrmanagement</code> 打开<br>功能包括：</p>
+<ul>
+<li>二进制文件可视化分析</li>
+<li>CFG（控制流图）查看</li>
+<li>反汇编浏览</li>
+<li>符号执行状态监控<br><code>pip3 install angrop</code>  安装angrop(ROP链自动化生成)</li>
+</ul>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>什么是符号执行：<br>符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。<br>使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。<br>在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到可以触发目标代码的具体值。<br>符号模拟技术（symbolic simulation）则把类似的思想用于硬件分析。<br>符号计算（Symbolic computation）则用于数学表达式分析。我理解为更厉害的爆破。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52369224/article/details/121319151">原文链接</a></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用angr分析的大致流程：</p>
 <ol>
@@ -296,18 +302,73 @@
 <li>求解程序执行行到state时,符号化变量所需的目标状态</li>
 <li>解出约束条件,获取目标状态的数值</li>
 </ol>
-<h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数<br>我没学。<br><code>p = angr.Project(&#39;/text&#39;)</code><br>project只是加载二进制文件，实际是对simstate对象操作<br>simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量。</p>
+<h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数</p>
+<hr>
+<pre><code class="hljs">auto_load_libs                      是否自动加载程序的依赖                  布尔值
+</code></pre>
+<hr>
+<pre><code class="hljs">skip_libs                            希望避免加载的库                       库名  
+</code></pre>
+<hr>
+<pre><code class="hljs">except_missing_libs                  无法解析库时抛出异常                   布尔值
+</code></pre>
+<hr>
+<pre><code class="hljs">force_load_libs                      强制加载的库                           库名
+</code></pre>
+<hr>
+<pre><code class="hljs">ld_path                               共享库的优先搜索路径                  路径名
+</code></pre>
+<hr>
+<p><code>p = angr.Project(&#39;/text&#39;)</code><br>最常用的就是<code>p = angr.Project(&quot;./text&quot;,auto_load_libs=False)</code><br>project只是加载二进制文件，实际是对simstate对象操作<br>simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量。</p>
 <hr>
 <h3 id="2-设置state"><a href="#2-设置state" class="headerlink" title="2. 设置state"></a>2. 设置state</h3><p>创建项目之后,需要一个工厂来解决问题,创建一个状态，默认是程序的入口地址,<br>这个状态保存着程序运行到某一阶段的信息,且可以通过修改这一状态进而修改上下文的信息。</p>
 <p><code>state = p.factory.entry_state()</code><br>也可以指定一个地址作为入口地址<br><code>state = p.factory.entry_state(addr=0x110110)</code><br>比如这里就指定0x110110作为入口地址,一般地址设为加密的函数入口。</p>
 <ul>
 <li><p>entry_state:做一些初始化工作，然后在程序的入口停下。<br>在创建完entry_state，之后就可以通过这个state对象，获取或者修改此时程序的运行状态。</p>
 </li>
-<li><p>state对象一般是符号执行开始前创建,用来初始化一些数据,或者是在路劲探索结束后,返回一个state<br>对象供用户提取需要的值,或进行约束求解.<br>创建完之后便是寻找路劲。程序当前的状态有多种表示。<br>**step()**表示向下执行一个block(42bytes)，**step()**函数产生active状态，<br>表示该分支在执行中。<br>**run()**表示运行到结束，**run()**函数产生deadended状态，表示分支结束。<br>**explore()**可以对地址进行限制以减少符号执行遍历的路径。**explore()**产生found状态<br>表示探索的结果等等。</p>
+<li><p>state对象一般是符号执行开始前创建,用来初始化一些数据,或者是在路劲探索结束后,返回一个state<br>对象供用户提取需要的值,或进行约束求解.<br>创建完之后便是寻找路劲。程序当前的状态有多种表示。<br><code>state.blank_state(addr=)</code> 这个可用于跳过一些极大降低angr效率的指令，初始时rax的数据类型都是bit vector</p>
 </li>
 </ul>
+<p>**step()表示向下执行一个block(42bytes)，step()函数产生active状态，<br>表示该分支在执行中。<br>run()表示运行到结束，run()函数产生deadended状态，表示分支结束。<br>explore()可以对地址进行限制以减少符号执行遍历的路径。explore()产生found状态<br>表示探索的结果等等。</p>
 <hr>
-<h3 id="3-设置Simulation-Managers，进行路径探索的对象"><a href="#3-设置Simulation-Managers，进行路径探索的对象" class="headerlink" title="3. 设置Simulation Managers，进行路径探索的对象"></a>3. 设置Simulation Managers，进行路径探索的对象</h3><p>这个对象用于具体的路径探索<br><code>sm = p.factory.simulation_manager(state)</code><br>指定我们想要走到的位置：（使用explore执行模拟器，find和avoid用来作为约束条件）<br><code>res = sm.explore(find = 0x4005fb, avoid = 0x400607)</code><br>执行len(res.found)输出为1，可以知道found了一个结果,我们把找到的这个结果输出：<br><code>res.found[0].posix.dumps(0).strip(&quot;\x00&quot;)</code></p>
+<h3 id="3-设置Simulation-Managers，进行路径探索的对象"><a href="#3-设置Simulation-Managers，进行路径探索的对象" class="headerlink" title="3. 设置Simulation Managers，进行路径探索的对象"></a>3. 设置Simulation Managers，进行路径探索的对象</h3><p>这个对象用于具体的路径探索<br><code>sm = p.factory.simulation_manager(state)</code><br>指定我们想要走到的位置：（使用explore执行模拟器，find和avoid用来作为约束条件）<br><code>res = sm.explore(find = 0x4005fb, avoid = 0x400607)</code><br>执行if res.found:输出为1，可以知道found了一个结果,我们把找到的这个结果输出：<br><code>res.found[0].posix.dumps(0).strip(&quot;\x00&quot;)</code></p>
+<h4 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h4><ul>
+<li><code>solver.eval(expression)</code> 将会解出一个可行解</li>
+<li><code>solver.eval_one(expression)</code>将会给出一个表达式的可行解，若有多个可行解，则抛出异常。</li>
+<li><code>solver.eval_upto(expression, n)</code>将会给出最多n个可行解，如果不足n个就给出所有的可行解。</li>
+<li><code>solver.eval_exact(expression, n)</code>将会给出n个可行解，如果解的个数不等于n个，将会抛出异常。</li>
+<li><code>solver.min(expression)</code>将会给出最小可行解</li>
+<li><code>solver.max(expression)</code>将会给出最大可行解</li>
+</ul>
+<h4 id="内存符号化"><a href="#内存符号化" class="headerlink" title="内存符号化"></a>内存符号化</h4><p>指定任意一个地址的数据符号化<code>state.memory.store(addr,name)</code><br>以字节类型输出 <code>print(s.solver.eval(name,cast_to=bytes))</code><br>读取内存的值<code>s.memory.load(name,num)</code> name是要读取的变量，num是读取的长度</p>
+<h4 id="动态内存符号化"><a href="#动态内存符号化" class="headerlink" title="动态内存符号化"></a>动态内存符号化</h4><p>由于angr并没有真正 运行 二进制文件而只是在模拟运行状态，因此它实际上不需要将内存分配到堆中，实际上可以伪造任何地址，所以将伪造的地址存放到bss段的地址中模拟题目的情况即可<br><code>state.memory.store(malloc_memory_addr,heap_addr,大小端</code>)</p>
+<h3 id="位向量"><a href="#位向量" class="headerlink" title="位向量"></a>位向量</h3><p>对于内存和寄存器等进行操作时，不仅可以使用python的int，angr还提供了位向量(Bit Vector,BV)，位向量就是一串比特的序列，这于python中的int不同，例如python中的int提供了整数溢出上的包装。而位向量可以理解为CPU中使用的一串比特流，需要注意的是，angr封装的位向量有两个属性：值以及它的长度，使用的时候要引入<code>import claripy</code><br>定义一个变量 <code>name = claripy.BVS(&#39;name&#39;,byte)</code></p>
+<h3 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h3><p>angr在处理的时候，应该是遇到一个分支<code>if</code>就会分一个路劲，这个分支，就像二叉树那样的形式，不是简单的多一个分支那样，所以就是说它是指数的形式增长路劲的 $2^n$  ，所以当分支很多的时候，就会产生路劲爆炸 </p>
+<p>angr常用的缓解路径爆炸的方式有四种：</p>
+<ul>
+<li>重写可能导致路径爆炸的函数或代码片段，可以采用angr提供的hook</li>
+<li>veritesting：结合动态符号执行和静态符号执行</li>
+<li>Lazy Solve：跳过不必要的函数</li>
+<li>Symbion：结合具体执行和符号执行</li>
+</ul>
+<p>但是这里之将第一种，因为我也只学了第一种。</p>
+<h4 id="Veritesting"><a href="#Veritesting" class="headerlink" title="Veritesting"></a>Veritesting</h4><p>veritesting意为路径归并，它在动态符号执行（DSE）和静态符号执行（SSE）之间切换，结合两种方式减少了路径爆炸的影响。</p>
+<ul>
+<li>DSE：为路径生成公式，生成公式时负载很高，但公式易解</li>
+<li>SSE：为语句生成公式，公式生成容易，也能覆盖更多路径，但更难解<br>在angr中启动veritesting</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">p = angr.Project(<span class="hljs-string">&quot;/bin/true&quot;</span>)<br>state = p.factory.entry_state()<br><br><span class="hljs-comment"># 初始化SM时启动</span><br>simgr = p.factory.simgr(state,veritesting=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># 或者在SM初始化后启动</span><br>simgr = p.factory.simgr(state)<br>simgr.use_technique(angr.exploration_techniques.Veritesting())<br><br></code></pre></td></tr></table></figure>
+<p>之前提到的angr的求解器solver，以及操作内存、寄存器、文件系统的方法：memory、regs、fs等，实际上都是state的插件，下面说明两个其他常用的插件。</p>
+<h4 id="全局插件global"><a href="#全局插件global" class="headerlink" title="全局插件global"></a>全局插件global</h4><p><code>state.global</code> 实现了标准python dict接口，使用它你能模拟执行的state中储存任意数据，并且很方便的就能访问到了<br><code>state.globals[&#39;x&#39;] = a_symbol</code><br>全局变量名x不需要提前声明，但当你需要使用这个变量之前需要对它赋值</p>
+<h4 id="history插件"><a href="#history插件" class="headerlink" title="history插件"></a>history插件</h4><p>history记录了一个状态的执行路径，它是一个链表，每个节点代表一次执行的状态。你可以不断使用.parent来回溯这个链表，history的使用方式如下：</p>
+<ul>
+<li>state.history.bbl_addrs：返回当前state执行的基本块的地址列表</li>
+<li>state.history.parent.bbl_addrs：返回上一个state执行的基本块的地址列表</li>
+<li>state.history.descriptions：描述state上每轮执行的状态的字符串列表</li>
+<li>state.histroy.guards：到达当前state所走路径需要满足的条件的列表（也就是每次分支判断时为True还是False）</li>
+<li>state.history.events：执行过程中发生的事件列表，比如符号跳转条件、弹出消息框等</li>
+</ul>
+<p>此外，在每种方法前加上recent_，就可以获取列表中最近的那个地址，例如state.history.recent_bbl_addrs会返回当前state最近执行的基本块的地址。</p>
 <hr>
 <p>所以大致流程代码就是上面的了。</p>
 <h2 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h2><h3 id="简单的一个模板"><a href="#简单的一个模板" class="headerlink" title="简单的一个模板:"></a><strong>简单的一个模板:</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr						<span class="hljs-comment">#导angr包</span><br><br>p = angr.Project(<span class="hljs-string">&#x27;/root&#x27;</span>)   	<span class="hljs-comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span><br>state = p.factory.entry_state() <span class="hljs-comment">#建工厂,就是初始化状态</span><br><br>sm = p.factory.simulation_manager(state)  <span class="hljs-comment">#创建模拟管理器</span><br>sm.explore(find=<span class="hljs-number">0x110110</span>)		<span class="hljs-comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span><br><br>st = sm.found[<span class="hljs-number">0</span>]<br><br><span class="hljs-built_in">print</span>(st.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
@@ -315,7 +376,7 @@
 <p>当程序中出现多个 <code>Try again</code> 和 <code>Good job</code>,就不能再添目标地址了,<br>因为explore发现第一个成功就没了,所以针对这种情况,将这两种情况判断写<br>成函数作为<code>find</code>和<code>avoid</code>的参数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br>project = angr.Project(<span class="hljs-string">&#x27;./text&#x27;</span>)<br>simgr = project.factory.simulation_manager()  <span class="hljs-comment">#这是允许的可以一步到位</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
 
-<h3 id="绕过输入-操控寄存器"><a href="#绕过输入-操控寄存器" class="headerlink" title="绕过输入,操控寄存器"></a>绕过输入,操控寄存器</h3><p>就是angr的输入格式不是很好,所以为了不出现问题,不从输入入手,<br>因为输入的数据是存在寄存器中然后传递给栈,所以找到存储的寄存器就行了<br>从传递寄存器参数给栈的位置开始执行,避开输入。</p>
+<h3 id="绕过输入，操控寄存器"><a href="#绕过输入，操控寄存器" class="headerlink" title="绕过输入，操控寄存器"></a>绕过输入，操控寄存器</h3><p>就是angr的输入格式不是很好,所以为了不出现问题,不从输入入手,<br>因为输入的数据是存在寄存器中然后传递给栈,所以找到存储的寄存器就行了<br>从传递寄存器参数给栈的位置开始执行,避开输入。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//输入数据<br><br>.text:08048937                 mov     ecx, [ebp+var_18]<br>.text:0804893A                 mov     eax, ecx<br>.text:0804893C                 mov     ecx, [ebp+var_14]<br>.text:0804893F                 mov     ebx, ecx<br>.text:08048941                 mov     ecx, [ebp+var_10]<br><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//传递给栈<br><br>.text:0804897B                 call    get_user_input<br>.text:08048980                 mov     [ebp+var_14], eax<br>.text:08048983                 mov     [ebp+var_10], ebx<br>.text:08048986                 mov     [ebp+var_C], edx<br><br></code></pre></td></tr></table></figure>
@@ -359,13 +420,11 @@
 <hr>
 <p>有一个练习题<br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">03_angr_symbolic_registers</a></p>
 <p>脚本是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./03_angr_symbolic_registers&#x27;</span>)<br>initial = project.factory.blank_state(addr=<span class="hljs-number">0x8048980</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">32</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">32</span>)<br>arg3 = claripy.BVS(<span class="hljs-string">&#x27;arg3&#x27;</span>, <span class="hljs-number">32</span>)<br><br>initial.regs.eax = arg1<br>initial.regs.ebx = arg2<br>initial.regs.edx = arg3<br><br>simgr = project.factory.simgr(initial)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg1)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg2)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg3)))<br><span class="hljs-comment">#0xb9ffd04e 0xccf63fe8 0x8fd4d959</span><br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./03_angr_symbolic_registers&#x27;</span>)<br>initial = project.factory.blank_state(addr=<span class="hljs-number">0x8048980</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">32</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">32</span>)<br>arg3 = claripy.BVS(<span class="hljs-string">&#x27;arg3&#x27;</span>, <span class="hljs-number">32</span>)<br><br>initial.regs.eax = arg1<br>initial.regs.ebx = arg2<br>initial.regs.edx = arg3<br><br>simgr = project.factory.simgr(initial)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg1)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg2)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg3)))<br><span class="hljs-comment">#0xb9ffd04e 0xccf63fe8 0x8fd4d959</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="绕过输入，操控栈"><a href="#绕过输入，操控栈" class="headerlink" title="绕过输入，操控栈"></a>绕过输入，操控栈</h3><p>就是我们还是和上面类似的情况，但是不能直接使用<strong>regs</strong>也就是说不能直接创建寄存器来符号化了。但是可以通过计算构造 <strong>esp</strong> 和 <strong>ebp</strong> 在合适的位置<strong>stack_push</strong>来入栈。<br>我们学汇编的时候都知道在进入一个函数的时候应该有以下的操作</p>
+<h3 id="绕过输入，操控栈"><a href="#绕过输入，操控栈" class="headerlink" title="绕过输入，操控栈"></a>绕过输入，操控栈</h3><p>就是还是和上面类似的情况，但是不能直接使用<strong>regs</strong>也就是说不能直接创建寄存器来符号化了。但是可以通过计算构造 <strong>esp</strong> 和 <strong>ebp</strong> 在合适的位置<strong>stack_push</strong>来入栈。<strong>为什么不能用寄存器呢？主要是看输入的值给谁</strong> ，给寄存器就用上面的模板，没给不就不能用了。<br>我们学汇编的时候都知道在进入一个函数的时候应该有以下的操作</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">push    ebp<br>mov     ebp , esp<br>mov     esp , num    <br><br>//先把栈底ebp入栈，因为此时ebp还保存着上个函数的状态，先存着，然后就是创建一个新的&#x27;栈&#x27;，接着在栈顶开辟空间。<br></code></pre></td></tr></table></figure>
-
-
-<p>所以虽然不可以直接创建寄存器和直接操作，但是可以将数据入栈来操作符号化。<br>这里的入栈是<code>state.stack_push()</code></p>
+<p>还有就是mov赋值时的操作比如<code>mov [ebp - 0x20] , eax</code> 则就是入栈吗<br>这里的入栈是<code>state.stack_push()</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./04_angr_symbolic_stack&#x27;</span>)<br>initial_state = project.factory.blank_state(addr=<span class="hljs-number">0x8048697</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">32</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">32</span>)<br><br>initial_state.regs.esp = initial_state.regs.ebp<br>initial_state.regs.esp -= <span class="hljs-number">8</span><br><br>initial_state.stack_push(arg1)<br>initial_state.stack_push(arg2)<br><br>simgr = project.factory.simulation_manager(initial_state)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg1))<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg2))<br>    <br><span class="hljs-comment">#1704280884</span><br><span class="hljs-comment">#2382341151</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="绕过输入，操控全局变量"><a href="#绕过输入，操控全局变量" class="headerlink" title="绕过输入，操控全局变量"></a>绕过输入，操控全局变量</h3><p>这这应该很好判断了，当你看到接收的变量是全局变量的时候就可以用了。<br>用到一个函数 <code>state.memory.store(地址, 变量)</code>,<br><code>cast_to=bytes</code> 意思是按字节类型输出</p>
@@ -398,6 +457,38 @@
 <hr>
 <p>全局变量                               内存                            <code>memory.store(addres,name)</code></p>
 <hr>
+<ol start="5">
+<li>什么时候用<code>stack_push</code> vs <code>memory.store</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>方法</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>函数调用参数</strong></td>
+<td><code>stack_push</code></td>
+<td><code>func(arg1, arg2)</code></td>
+</tr>
+<tr>
+<td><strong>局部变量赋值</strong></td>
+<td><code>memory.store</code></td>
+<td><code>local_var = input</code></td>
+</tr>
+<tr>
+<td><strong>全局变量</strong></td>
+<td><code>memory.store</code></td>
+<td><code>global_var = value</code></td>
+</tr>
+<tr>
+<td><strong>数组操作</strong></td>
+<td><code>memory.store</code></td>
+<td><code>array[i] = data</code></td>
+</tr>
+</tbody></table>
 <h3 id="操控动态内存问题"><a href="#操控动态内存问题" class="headerlink" title="操控动态内存问题"></a>操控动态内存问题</h3><p>大意就是在输入的变量的内存为<code>malloc</code>动态分配的时候，程序静态的时候它是在堆栈中找不到的，只有在动态运行或调试的时候才会分配，其次分配的内存是不固定的，所以我们可以给他一个内存，然后就可以操作了，这里给的内存是用不到的内存</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">内存地址空间：<br>0x00110110: 代码段 (text)<br>0x00220220: 数据段/BSS段 (存储全局变量)<br>0x00330330: 堆空间 (malloc分配在这里)<br></code></pre></td></tr></table></figure>
 <p>其次在写脚本的时候，要在创建好<strong>门口</strong>的时候就创建变量的内存空间<br>就是在<code>malloc</code>之后，<code>scanf</code>之前开始执行<br><code>endness</code>设置端序</p>
@@ -440,6 +531,27 @@
 <td><code>store(指针地址, 堆地址)</code> + <code>store(堆地址, 符号)</code></td>
 </tr>
 </tbody></table>
+<p>寄存器访问：可以通过<code>state.regs.寄存器名</code>来访问和修改寄存器<br>栈访问：涉及到ebp和esp，以及两个指令push和pop，对于寄存器的访问和其它寄存器相同push和pop指令可以通过一下方法调用：<br><code>state.stack_push(value)</code><br><code>state.stack_pop()</code><br>内存访问：<br>	读内存：<code>-state.memory.load(addr,size,endness)</code><br>	写内存：<code>-state.memory.store(addr,size,endness)</code><br><code>endness</code>指的是大端小端，和程序保持相同，同时程序的大小端可以用<code>p.arch.memory_endness</code>查询</p>
+<h3 id="用hook来减少路径"><a href="#用hook来减少路径" class="headerlink" title="用hook来减少路径"></a>用hook来减少路径</h3><p>这个是 <a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">08_angr_constraints</a>的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./08_angr_constraints&quot;</span>,auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state(addr=<span class="hljs-number">0x08048625</span>)<br>p1 = claripy.BVS(<span class="hljs-string">&#x27;p1&#x27;</span>,<span class="hljs-number">128</span>)<br>state.memory.store(<span class="hljs-number">0x804A050</span>,p1)<br>simgr = p.factory.simgr(state)<br>simgr.explore(find=<span class="hljs-number">0x8048673</span>)<br><span class="hljs-keyword">if</span> simgr.found:<br>    s = simgr.found[<span class="hljs-number">0</span>]<br>    s.solver.add( s.memory.load(<span class="hljs-number">0x804A050</span>,<span class="hljs-number">16</span>) == <span class="hljs-string">&quot;AUPDNNPROEZRJWKB&quot;</span>)<br>    <span class="hljs-built_in">print</span>(s.solver.<span class="hljs-built_in">eval</span>(p1,cast_to=<span class="hljs-built_in">bytes</span>))<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;请重新输入&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这个程序用angr正常运行的话有 $2^n$  n &#x3D; 16   肯定是爆炸的，所以用一些条件来减少angr探索的路径，这个<code>simgr.explore(find=0x8048673)</code> 地址是一个函数的地址，进入到这个函数中在判断来减少，那这个<code>simgr.found</code>就是代表进去了，然后因为<code>p1</code>经过运算混淆发生了变化，所以我们直接在地址中取值<code>s.memory.load()</code> 这个函数是跟一串字符串比较的，所以用<code>s.solver.add()</code>来限制条件，最后成功输出</p>
+<h3 id="用hook寻找路径爆炸的位置"><a href="#用hook寻找路径爆炸的位置" class="headerlink" title="用hook寻找路径爆炸的位置"></a>用hook寻找路径爆炸的位置</h3><p><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">09_angr_hooks</a><br>在做题用angr写的时候，最最最重要的就是寻找准确的路径爆炸点比如这个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./09_angr_hooks&quot;</span>, auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state()<br><span class="hljs-meta">@p.hook(<span class="hljs-params"><span class="hljs-number">0x80486B3</span>, length=<span class="hljs-number">5</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">hook_function</span>(<span class="hljs-params">evl</span>):<br>    res = evl.memory.load(<span class="hljs-number">0x804A054</span>, <span class="hljs-number">16</span>)<br>    evl.regs.eax = claripy.If(res == <span class="hljs-string">b&quot;XYMKBKUHNIQYNQXE&quot;</span>, claripy.BVV(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>), claripy.BVV(<span class="hljs-number">0</span>, <span class="hljs-number">32</span>))<br>simgr = p.factory.simulation_manager(state)<br>simgr.explore(find=<span class="hljs-number">0x8048768</span>, avoid=<span class="hljs-number">0x8048756</span>)<br><span class="hljs-keyword">if</span> simgr.found:<br><br>    s = simgr.found[<span class="hljs-number">0</span>]<br><br>    <span class="hljs-built_in">print</span>(s.posix.dumps(<span class="hljs-number">0</span>))<br></code></pre></td></tr></table></figure>
+
+<p>这里用来一个Hook的钩子来模拟一个函数流程，为什么要模拟，因为这个函数是路径爆炸的原因，所以为了绕过这个函数，就模拟一个和这函数流程一样的就行了</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">10_angr_simprocedures</a><br>这个有和上面的不一样，此时输入的字符串被保存在局部变量当中，我们无法提前得知它的地址，因此如果要hook掉check函数，则必须获取check函数的参数。因此需要使用hook_symbol的方式来hook掉check函数</p>
+<p>使用方式之前说明了，只需要注意使用hook_symbol的方法本质上是创建了新的函数取代了原有函数，因此在返回值的时候使用return返回，而不用将值保存在eax当中（事实上重写的run方法中没有当前的state，你也保存不到eax里面）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./10_angr_simprocedures&quot;</span>, auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">fun</span>(angr.SimProcedure):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">self,addr,size</span>):<br>        <span class="hljs-keyword">return</span> claripy.If(<span class="hljs-variable language_">self</span>.state.memory.load(addr, size) == <span class="hljs-string">b&quot;ORSDDWXHZURJRBDH&quot;</span>, claripy.BVV(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>), claripy.BVV(<span class="hljs-number">0</span>, <span class="hljs-number">32</span>))<br>p.hook_symbol(<span class="hljs-string">&#x27;check_equals_ORSDDWXHZURJRBDH&#x27;</span>,fun())<br>simgr = p.factory.simulation_manager(state)<br>simgr.explore(find=<span class="hljs-number">0x804A984</span>, avoid=<span class="hljs-number">0x804A972</span>)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    s = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(s.posix.dumps(<span class="hljs-number">0</span>))<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;No solution found&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 
                 
               </div>

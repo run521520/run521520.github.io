@@ -27,7 +27,7 @@
 <meta property="og:description" content="IDA 使用文档一、窗口介绍1. 函数窗口 功能：显示所有函数列表。 快捷键：Ctrl + F 查找函数名（所有表格窗口均支持）。  2. IDA-View 窗口 功能：显示汇编代码。 快捷键：空格键 切换图形模式与文本模式。  3. Pseudocode（伪代码）窗口 功能：显示 C&#x2F;C++ 伪代码。 快捷键：Tab 切换到对应汇编窗口。 重命名：选中关键词后按 N，或右键选择“Ren">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2025-11-02T06:39:48.704Z">
+<meta property="article:modified_time" content="2025-11-28T08:12:27.571Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="IDA使用">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.2k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          18 分钟
+          19 分钟
         
       </span>
     
@@ -439,7 +439,15 @@
 <li>取消断点，继续运行即可。</li>
 </ol>
 <hr>
-<h2 id="六、博主见到的一些情况："><a href="#六、博主见到的一些情况：" class="headerlink" title="六、博主见到的一些情况："></a>六、博主见到的一些情况：</h2><ul>
+<h2 id="六、IDA常用写脚本函数："><a href="#六、IDA常用写脚本函数：" class="headerlink" title="六、IDA常用写脚本函数："></a>六、IDA常用写脚本函数：</h2><h3 id="c脚本"><a href="#c脚本" class="headerlink" title="c脚本"></a>c脚本</h3><ul>
+<li>头文件引入：<code>idc.idc</code></li>
+<li>main函数：<code>static main(){}</code></li>
+<li>变量类型：<code>auto</code></li>
+<li>得到下一个函数的地址：<code>get_next_func()</code></li>
+<li>改变地址所属字节：<code>PatchByte(addr,byte)</code></li>
+<li>获取地址所属字节：<code>Byte(addr)</code></li>
+</ul>
+<h3 id="python脚本"><a href="#python脚本" class="headerlink" title="python脚本"></a>python脚本</h3><h2 id="七、博主见到的一些情况："><a href="#七、博主见到的一些情况：" class="headerlink" title="七、博主见到的一些情况："></a>七、博主见到的一些情况：</h2><ul>
 <li>**堆栈问题：**当你在汇编中看到一大串的数据的时候,可能是堆栈问题,可能会有提示,<br>只需选中数据按c,重新分析为汇编就行了</li>
 </ul>
 <hr>
@@ -564,8 +572,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/04/03_Base64/" title="Base64算法">
-                        <span class="hidden-mobile">Base64算法</span>
+                      <a href="/2025/10/04/02_RC4/" title="RC4加密算法">
+                        <span class="hidden-mobile">RC4加密算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

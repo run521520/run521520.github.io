@@ -27,7 +27,7 @@
 <meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下 starrysky 安装的话就这几个：pip install angr 安装成功就可以直接使用了，没成功的话就需要问ai了。剩下的看自己吧，不深入的话就不用安装了。pip3 install angr-management 安装angr-management (GUI界面)，安装之后可以通过angr-manag">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-20T11:37:41.000Z">
-<meta property="article:modified_time" content="2025-11-29T13:02:23.507Z">
+<meta property="article:modified_time" content="2025-12-23T11:05:07.420Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="angr">
 <meta property="article:tag" content="逆向">
@@ -67,6 +67,10 @@
     <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
+
+
+  
+<link rel="stylesheet" href="/css/acg.css">
 
 
 
@@ -195,7 +199,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/R_C.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/R1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -235,7 +239,7 @@
         
         
         
-          131 分钟
+          132 分钟
         
       </span>
     
@@ -291,6 +295,7 @@
 <li>符号执行状态监控<br><code>pip3 install angrop</code>  安装angrop(ROP链自动化生成)</li>
 </ul>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>什么是符号执行：<br>符号执行 （Symbolic Execution）是一种程序分析技术。可以通过分析程序来得到让特定代码区域执行的输入。<br>使用符号执行分析一个程序时，该程序会使用符号值作为输入，而非一般执行程序时使用的具体值。<br>在达到目标代码时，分析器可以得到相应的路径约束，然后通过约束求解器来得到可以触发目标代码的具体值。<br>符号模拟技术（symbolic simulation）则把类似的思想用于硬件分析。<br>符号计算（Symbolic computation）则用于数学表达式分析。我理解为更厉害的爆破。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52369224/article/details/121319151">原文链接</a></p>
+<p>就是以我现在来看的话就是不用学的太深了，随便学一两下，会写个最简单的脚本来破解就可以了，<br>因为我自从学了到现在，很少用到，难的用不到，简单的也用不到，所以我感觉学一下简单的就行了</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用angr分析的大致流程：</p>
 <ol>
 <li>导入angr</li>
@@ -303,22 +308,16 @@
 <li>解出约束条件,获取目标状态的数值</li>
 </ol>
 <h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数</p>
-<hr>
-<pre><code class="hljs">auto_load_libs                      是否自动加载程序的依赖                  布尔值
+<pre><code class="hljs">auto_load_libs        是否自动加载程序的依赖        布尔值
+
+skip_libs             希望避免加载的库             库名  
+
+except_missing_libs   无法解析库时抛出异常          布尔值
+
+force_load_libs       强制加载的库                 库名
+
+ld_path               共享库的优先搜索路径          路径名
 </code></pre>
-<hr>
-<pre><code class="hljs">skip_libs                            希望避免加载的库                       库名  
-</code></pre>
-<hr>
-<pre><code class="hljs">except_missing_libs                  无法解析库时抛出异常                   布尔值
-</code></pre>
-<hr>
-<pre><code class="hljs">force_load_libs                      强制加载的库                           库名
-</code></pre>
-<hr>
-<pre><code class="hljs">ld_path                               共享库的优先搜索路径                  路径名
-</code></pre>
-<hr>
 <p><code>p = angr.Project(&#39;/text&#39;)</code><br>最常用的就是<code>p = angr.Project(&quot;./text&quot;,auto_load_libs=False)</code><br>project只是加载二进制文件，实际是对simstate对象操作<br>simstate对象是程序的状态，包含运行时的一切信息，例如寄存器、内存值、文件系统、符号变量。</p>
 <hr>
 <h3 id="2-设置state"><a href="#2-设置state" class="headerlink" title="2. 设置state"></a>2. 设置state</h3><p>创建项目之后,需要一个工厂来解决问题,创建一个状态，默认是程序的入口地址,<br>这个状态保存着程序运行到某一阶段的信息,且可以通过修改这一状态进而修改上下文的信息。</p>
@@ -935,6 +934,10 @@
 
 
 
+  
+<script src="/js/acg.js"></script>
+
+
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
@@ -946,5 +949,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -1,0 +1,184 @@
+/* =========================
+   ACG / Fluid - Clean Final
+   目标：
+   1) 背景轮播由 #acg-bg-rotator 接管
+   2) 消灭归档页“白板重影”：main 透明，只保留 #board 一层磨砂
+   3) 导航栏胶囊磨砂
+   4) 可选隐藏右侧黑猫挂件
+   ========================= */
+
+/* ---- 字体（你用 JS 注入也行，这里只指定 family） ---- */
+body{
+  font-family: "Noto Sans SC","Noto Sans JP",system-ui,-apple-system,"Segoe UI",Arial,sans-serif !important;
+}
+
+/* ---- 背景轮播层 ---- */
+html, body{ background: transparent !important; }
+
+#acg-bg-rotator{
+  position: fixed;
+  inset: 0;
+  z-index: -9999;
+  pointer-events: none;
+  background: center/cover no-repeat;
+  transition: opacity 1.2s ease;
+}
+#acg-bg-rotator::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 700px at 20% 15%, rgba(255,95,162,.18), transparent 60%),
+    radial-gradient(900px 600px at 80% 25%, rgba(124,92,255,.14), transparent 55%),
+    linear-gradient(180deg, rgba(10,12,20,.20), rgba(10,12,20,.10));
+}
+
+/* ---- 导航栏：胶囊磨砂（不刷白整个 navbar） ---- */
+.navbar, #navbar{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.navbar .container, #navbar .container{
+  margin-top: 12px !important;
+  padding: 10px 18px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,0.32) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.22) !important;
+}
+.navbar .navbar-brand, #navbar .navbar-brand{
+  color: #ff5fa2 !important;
+  font-weight: 900 !important;
+}
+.navbar a, #navbar a{
+  color: rgba(30,20,45,0.82) !important;
+  font-weight: 650 !important;
+}
+.navbar a:hover, #navbar a:hover{
+  color: #ff5fa2 !important;
+}
+
+/* =========================================================
+   关键：消灭“白板重影”
+   你实测 main/#board 都有 rgba(...,0.48) 背景
+   => 让 main 完全透明，只保留 #board 一层磨砂
+   ========================================================= */
+
+/* 1) main 强制透明（去掉第一层白板） */
+html body main{
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 2) #board 保留唯一磨砂底（第二层白板，保留但降低） */
+html body #board{
+  background: rgba(255,255,255,0.26) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 26px 85px rgba(0,0,0,0.38) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+/* 3) #board 内部容器全部透明（避免第三、第四层白板叠加） */
+html body #board .container,
+html body #board .container-fluid,
+html body #board .archive-list,
+html body #board .archive-list.container,
+html body #board .card,
+html body #board article,
+html body #board .post,
+html body #board .post-content{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 4) 全站 container 不刷白（避免你之前那种“处处一层白”） */
+.container, .container-fluid{
+  background: transparent !important;
+}
+
+/* ---- 可选：隐藏右侧黑猫挂件容器（你截图右侧灰条+猫） ---- */
+div[style*="position: fixed"][style*="right"]{
+  display: none !important;
+}
+
+/* ---- 深色模式：稍微压暗 #board ---- */
+html[data-user-color-scheme="dark"] body #board{
+  background: rgba(20,20,26,0.40) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ===== 终结重影：强制覆盖 card 的 inline background-color ===== */
+.card[style]{
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== main/#board 不要再刷 0.48（去掉前两层）===== */
+main,
+main > .container,
+main > .container.nopadding-x-md{
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* #board 只保留一层“很轻”的磨砂（你想更透就再调低） */
+#board{
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.35) !important;
+}
+
+/* ===== FIX: remove ghost white panels (final override) ===== */
+
+/* 1) main 彻底透明（去掉第一层 0.48） */
+html body main,
+html body main#content,
+html body main#content-inner,
+html body main > .container,
+html body main > .container.nopadding-x-md{
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 2) #board 只保留一层轻磨砂（你想更透就把 0.18 再调低） */
+html body #board{
+  background: rgba(255,255,255,0.18) !important;
+  background-color: rgba(255,255,255,0.18) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.35) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+/* 3) #board 内的“套娃层”全部透明（避免第二、三、四层叠加） */
+html body #board .container,
+html body #board .archive-list,
+html body #board .archive-list.container,
+html body #board .card,
+html body #board article,
+html body #board .post,
+html body #board .post-content{
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}

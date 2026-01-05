@@ -142,3 +142,60 @@
 
     document.body.appendChild(s);
 })();
+
+(function rotatingBackground() {
+    const enable = true;
+    if (!enable) return;
+
+    const images = ["/img/R1.jpg", "/img/R2.jpg", "/img/R3.jpg", "/img/R4.jpg", "/img/R5.jpeg"];
+    const intervalMs = 15000;
+    const fadeMs = 1200;
+
+    let el = document.getElementById("acg-bg-rotator");
+    if (!el) {
+        el = document.createElement("div");
+        el.id = "acg-bg-rotator";
+        document.body.prepend(el);
+    }
+
+    images.forEach((src) => { const img = new Image(); img.src = src; });
+
+    let idx = 0;
+    let timer = null;
+
+    const apply = (i) => {
+        el.style.opacity = "0";
+        setTimeout(() => {
+            el.style.backgroundImage = `url("${images[i]}")`;
+            el.style.opacity = "1";
+        }, fadeMs);
+    };
+
+    function startRotation() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => {
+            idx = (idx + 1) % images.length;
+            apply(idx);
+        }, intervalMs);
+    }
+
+    function stopRotation() {
+        if (timer) clearInterval(timer);
+        timer = null;
+    }
+
+    // 初始
+    el.style.backgroundImage = `url("${images[idx]}")`;
+    startRotation();
+
+    // 监听 body 是否含有“文件打开”类，比如 .file-open，你要根据实际 HTML 改为你的真实类名！
+    const FILE_OPEN_CLASS = "file-open"; // 或 "modal-open" "article-open" 等
+    const observer = new MutationObserver(() => {
+        const isOpen = document.body.classList.contains(FILE_OPEN_CLASS);
+        if (isOpen) stopRotation();
+        else startRotation();
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // 如果你文章是打开某个元素加 display:block 之类，也可以直接监听那个元素的可见性。
+})();

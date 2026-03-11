@@ -19,15 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="x86&#x2F;x86-64汇编本文档概述 x86 &#x2F; x86-64 常用寄存器、指令及常见用法与注意事项，使用 Intel 语法（gcc&#x2F;masm&#x2F;nasm 常见风格），适用于底层开发、逆向分析与调试场景。 一、寄存器基础寄存器是 CPU 内部的高速存储区域，用于存放临时数据、指令地址和计算结果，其位宽与 CPU 位数&#x2F;处理器模式强相关。 1.1 寄存器">
+    <meta name="description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在Windows运行的 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86&#x2F;x86-64汇编">
 <meta property="og:url" content="http://run521520.github.io/2026/03/08/x86_x86-64%20%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="x86&#x2F;x86-64汇编本文档概述 x86 &#x2F; x86-64 常用寄存器、指令及常见用法与注意事项，使用 Intel 语法（gcc&#x2F;masm&#x2F;nasm 常见风格），适用于底层开发、逆向分析与调试场景。 一、寄存器基础寄存器是 CPU 内部的高速存储区域，用于存放临时数据、指令地址和计算结果，其位宽与 CPU 位数&#x2F;处理器模式强相关。 1.1 寄存器">
+<meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在Windows运行的 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-08T14:12:41.000Z">
-<meta property="article:modified_time" content="2026-03-08T09:05:19.363Z">
+<meta property="article:modified_time" content="2026-03-11T10:29:25.982Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k 字
+          7.9k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          47 分钟
+          67 分钟
         
       </span>
     
@@ -283,7 +283,27 @@
             
               <div class="markdown-body">
                 
-                <h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>本文档概述 x86 &#x2F; x86-64 常用寄存器、指令及常见用法与注意事项，使用 Intel 语法（gcc&#x2F;masm&#x2F;nasm 常见风格），适用于底层开发、逆向分析与调试场景。</p>
+                <h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>使用 <code>masm</code> 语法，适用于在Windows运行的</p>
+<p>首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如将寄存器BX的内容送到AX中<br>; 机器指令<br>1000100111011000 ;随便输的，但就是这样子<br>; 汇编指令<br>mov ax,bx<br></code></pre></td></tr></table></figure>
+
+<p>我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要面向机器的，所以这时候就需要一个中间件来将这些汇编指令转换为机器指令，这个中间件就是<strong>编译器</strong></p>
+<p><strong><code>程序员 ---&gt; 汇编指令 ---&gt; 编译器 ---&gt; 机器码 ---&gt; 计算机</code></strong></p>
+<p>有了编译器就有一些其它的东西了：</p>
+<ol>
+<li>汇编指令：机器码的助记符，有对应的机器码</li>
+<li>伪指令：没有对应的机器码，由编译器执行，计算机并不执行</li>
+<li>其他符号：如+，-，*，&#x2F;等，由编译器识别，没有对应的机器码</li>
+</ol>
+<p>CPU 是计算机的核心部件，它控制整个计算机的运作并进行运算。要想让一个 CPU 工作，就必须向它提供<strong>指令和数据</strong>。指令和数据在存储器中存放，也就是我们平时所说的<strong>内存</strong>。在一台 PC 机中内存的作用仅次于 CPU。离开了内存，性能再好的 CPU 也无法工作。这就像再聪明的大脑，没有了记忆也无法进行思考。磁盘不同于内存，磁盘上的数据或程序如果不读到内存中，就无法被 CPU 使用。要灵活地利用汇编语言编程，我们首先要了解 CPU 是如何从内存中读取信息，以及向内存中写入信息的。</p>
+<p>要明白存储器就是存储信息的，以字节为基础单位，且存储器被划分为多个存储单元，存储单元从零开始顺序编号，每一个存储单元由信息存储，CPU要从内存中读取数据，首先要指定存储单元的地址，下面的什么线之类的就不写了，没搞太懂</p>
+<p>CPU由运算器，控制器，寄存器等器件构成，这些器件由总线连接，进行数据的传送：</p>
+<ol>
+<li>运算器进行信息处理</li>
+<li>寄存器进行信息存储</li>
+<li>控制器控制各种器件进行工作</li>
+</ol>
+<p>对于汇编程序员来说，CPU的主要部件是寄存器，寄存器是CPU中程序员可以用指令读写部件，通过各种寄存器中的内容来实现对CPU的控制</p>
 <h2 id="一、寄存器基础"><a href="#一、寄存器基础" class="headerlink" title="一、寄存器基础"></a>一、寄存器基础</h2><p>寄存器是 CPU 内部的高速存储区域，用于存放临时数据、指令地址和计算结果，其位宽与 CPU 位数&#x2F;处理器模式强相关。</p>
 <h3 id="1-1-寄存器位宽与架构对应关系"><a href="#1-1-寄存器位宽与架构对应关系" class="headerlink" title="1.1 寄存器位宽与架构对应关系"></a>1.1 寄存器位宽与架构对应关系</h3><ul>
 <li><p>32位 x86 架构：寄存器位宽 32 位（内存地址亦为 32 位），常用 EAX&#x2F;EBX 等寄存器；</p>
@@ -333,7 +353,7 @@
 <tr>
 <td>EBP</td>
 <td>RBP</td>
-<td>基指针寄存器，指向当前栈帧基址（调试友好），现代优化编译器可省略帧指针</td>
+<td>基指针寄存器，指向当前栈帧基址（调试友好），现代优化编译器可省略帧指针，栈底</td>
 </tr>
 <tr>
 <td>ESP</td>
@@ -353,13 +373,15 @@
 </li>
 </ul>
 <h3 id="1-4-段寄存器"><a href="#1-4-段寄存器" class="headerlink" title="1.4 段寄存器"></a>1.4 段寄存器</h3><p>我们可以将一段内存定义为一个段，用一个段地址指示段，用偏移地址访问段内的单元，可以用分段的方式来管理内存。</p>
-<p>用一个段存放数据，就是<strong>数据段</strong><code>.data</code>，其次就是有<code>.data?</code>这个意思就是数据为定义</p>
-<p>用一个段存放代码，就是<strong>代码段</strong><code>.code</code></p>
-<p>用一个段当作栈，就是<strong>栈段</strong><code>.stack</code></p>
-<p><code>.const</code>用于存储常量</p>
+<p>用一个段存放数据，就是<strong>数据段</strong></p>
+<p>用一个段存放代码，就是<strong>代码段</strong></p>
+<p>用一个段当作栈，就是<strong>栈段</strong></p>
+<p>8086CPU有四个段寄存器：<strong><code>CS , DS , SS , ES</code></strong></p>
 <p>一个段的起始地址一定是16的倍数，这个是由于自身的性质(由CS，IP两个寄存器来表示，其中执行地址为CS*16+IP &#x3D; M*16+N)</p>
 <p>偏移地址为16位，变化范围为0-FFFFH，所以一个段的长度最大为64KB</p>
-<p>CPU可以用不同的段地址和偏移地址形成同一个物理地址</p>
+<p><strong>CPU可以用不同的段地址和偏移地址形成同一个物理地址，其中CPU也是通过相关的部件提供的内存单元的段地址和偏移量经过地址加法合成器合成物理地址来访问</strong></p>
+<p>CPU当前要读取指令的地址为<strong>CS为代码段寄存器和IP为指令指针寄存器</strong></p>
+<p>所以可以通过修改CS，IP来修改CPU的执行，下面就是一些指令集了</p>
 <h2 id="二、汇编程序结构与语法"><a href="#二、汇编程序结构与语法" class="headerlink" title="二、汇编程序结构与语法"></a>二、汇编程序结构与语法</h2><h3 id="2-1-程序段-节划分"><a href="#2-1-程序段-节划分" class="headerlink" title="2.1 程序段&#x2F;节划分"></a>2.1 程序段&#x2F;节划分</h3><table>
 <thead>
 <tr>
@@ -380,7 +402,7 @@
 <td>未初始化数据段，存放未初始化或置零的静态数据</td>
 </tr>
 <tr>
-<td>注释规则：Intel 语法中，注释以 <code>;</code> 开头。</td>
+<td>注释规则：语法中，注释以 <code>;</code> 开头。</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -403,7 +425,30 @@
 <td>目标在后，源在前；寄存器前加 %，立即数前加 $</td>
 <td><code>movl %ebx, %eax</code></td>
 </tr>
+<tr>
+<td>汇编语言程序由三种类型的语句组成</td>
+<td></td>
+<td></td>
+</tr>
 </tbody></table>
+<ul>
+<li>可执行指令或说明</li>
+</ul>
+<blockquote>
+<p><strong>可执行指令</strong>或简单的<strong>指令</strong>告诉处理器要做什么。 每条指令由一个<strong>操作码</strong>（opcode）组成。 每条可执行指令生成一条机器语言指令。</p>
+</blockquote>
+<ul>
+<li>汇编器指令或伪操作</li>
+</ul>
+<blockquote>
+<p><strong>汇编程序指令</strong>或<strong>伪操作</strong>告诉汇编程序有关汇编过程的各个方面。 它们是不可执行的，并且不会生成机器语言指令。</p>
+</blockquote>
+<ul>
+<li>宏</li>
+</ul>
+<blockquote>
+<p><strong>宏</strong>基本上是一种文本替换机制。</p>
+</blockquote>
 <h2 id="三、常用汇编指令摘要"><a href="#三、常用汇编指令摘要" class="headerlink" title="三、常用汇编指令摘要"></a>三、常用汇编指令摘要</h2><p>以下指令均为 Intel 语法，按功能分类整理，含核心用法示例：</p>
 <h3 id="3-1-数据传送指令"><a href="#3-1-数据传送指令" class="headerlink" title="3.1 数据传送指令"></a>3.1 数据传送指令</h3><ul>
 <li><p><strong>MOV</strong>：数据传送（最常用）</p>
@@ -527,7 +572,7 @@
 </ul>
 </li>
 <li><p><strong>idiv（有符号除法）</strong></p>
-<ul>
+</li>
 <li><p>格式：<code>idiv r/m32</code>（32位模式）</p>
 </li>
 <li><p>约定：与 div 一致，但按有符号数处理</p>
@@ -537,8 +582,6 @@
 <li><p>32位：<code>cdq</code>（将 EAX 符号扩展到 EDX）</p>
 </li>
 <li><p>64位：<code>cqo</code>（将 RAX 符号扩展到 RDX）</p>
-</li>
-</ul>
 </li>
 </ul>
 </li>
@@ -591,8 +634,26 @@
 </ul>
 <h3 id="5-3-示例：实现-memcpy（32位）"><a href="#5-3-示例：实现-memcpy（32位）" class="headerlink" title="5.3 示例：实现 memcpy（32位）"></a>5.3 示例：实现 memcpy（32位）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>; 功能：将 source 地址的 length 个字节复制到 dest 地址<br>; 前提：方向标志 DF 已清零（cld 指令）<br>cld                 ; 清方向标志（EDI/ESI 自动递增）<br>mov esi, source     ; ESI = 源地址<br>mov edi, dest       ; EDI = 目的地址<br>mov ecx, length     ; ECX = 复制字节数<br>rep movsb           ; 重复复制，直到 ECX=0<br></code></pre></td></tr></table></figure>
 
-<h2 id="六、栈与调用约定（概要）"><a href="#六、栈与调用约定（概要）" class="headerlink" title="六、栈与调用约定（概要）"></a>六、栈与调用约定（概要）</h2><h3 id="6-1-栈的基本特性"><a href="#6-1-栈的基本特性" class="headerlink" title="6.1 栈的基本特性"></a>6.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP，pop 操作增大 ESP&#x2F;RSP。</p>
+
+
+<h3 id="dup-数组"><a href="#dup-数组" class="headerlink" title="dup 数组"></a>dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实列，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="六、栈与调用约定（概要）"><a href="#六、栈与调用约定（概要）" class="headerlink" title="六、栈与调用约定（概要）"></a>六、栈与调用约定（概要）</h2><h3 id="6-1-栈的基本特性"><a href="#6-1-栈的基本特性" class="headerlink" title="6.1 栈的基本特性"></a>6.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
 <h3 id="6-2-经典栈帧布局（带-EBP-的函数）"><a href="#6-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="6.2 经典栈帧布局（带 EBP 的函数）"></a>6.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push ebp        ; 保存上一级栈帧基址<br>mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）<br>sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）<br>...             ; 函数体执行<br>mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）<br>pop ebp         ; 恢复上一级栈帧基址<br>ret             ; 函数返回<br></code></pre></td></tr></table></figure>
+
+<p>这里说一下就是为什么栈的操作可以准确到确定的地址？</p>
+<p>这里又有两个寄存器来工作：<strong>段寄存器SS 和 寄存器 SP</strong></p>
+<p><strong>栈顶的段地址存放在SS中，偏移地址放在SP中，任意时刻，SS：SP指向栈顶元素，push和pop指令执行时CPU从SS和SP获取地址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 看一下下面的代码<br>mov ax,0H<br>mov ax,1000H	<br>mov ss,ax		;这里就是ax将获取的1000H给到段寄存器ss<br>mov sp,0010H	;这里是寄存器sp获取偏移地址<br>				;所以当前的栈顶地址为 ss:sp = 1010H<br>mov ax,001AH<br>mov bx,001BH	;给ax，bx赋值<br><br>push ax<br>push bx			;入栈，高地址先入栈<br>				;1010H	100FH	100EH	100DH	100CH<br>				;		00		1A		00		1B<br><br>sub ax,ax<br>sub bx,bx<br><br>pop bx<br>pop ax			;将值又返还给ax，bx<br></code></pre></td></tr></table></figure>
+
+
 
 <h3 id="6-3-x86-64-常见调用约定"><a href="#6-3-x86-64-常见调用约定" class="headerlink" title="6.3 x86-64 常见调用约定"></a>6.3 x86-64 常见调用约定</h3><p>调用约定规定参数传递方式、返回值存储位置及寄存器保存规则，不同系统约定不同：</p>
 <table>
@@ -631,33 +692,64 @@
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="七、常见错误与纠正"><a href="#七、常见错误与纠正" class="headerlink" title="七、常见错误与纠正"></a>七、常见错误与纠正</h2><p>修正原笔记中的错误点，避免认知偏差：</p>
-<ul>
-<li><p>错误1：将 EDX 误作“目的索引寄存器”；纠正：源索引为 ESI，目的索引为 EDI，EDX 是数据寄存器。</p>
+<h3 id="BX-和loop指令"><a href="#BX-和loop指令" class="headerlink" title="[BX]和loop指令"></a>[BX]和loop指令</h3><h4 id="BX"><a href="#BX" class="headerlink" title="[BX]"></a>[BX]</h4><p>[BX]和[0]有些类似(一个是动态偏移量，一个是静态偏移量，其实一样)，[0]表示内存单元，它的偏移量为0.比如<code>mov ax,[0]</code>表示将一个内存单元的内容送到ax里，这个内存单元的长度为2字节，存放一个字节，偏移量为0，段地址在ds中(默认为ds寄存器)</p>
+<p>用[0]表示一个内存单元的时候，0表示偏移地址，段地址默认为ds，单元的长度由寄存器大小决定</p>
+<p>默认的是ds寄存器，但是你可以指定你想要的寄存器 <code>mov ax,ds:[bx] mov ax,cs:[bx]</code>这种写法叫做<strong>段前缀</strong></p>
+<h4 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h4><p>这个指令英文有循环的含义</p>
+<p>CPU执行到loop的时候进行两部操作：</p>
+<blockquote>
+<ol>
+<li><p>(cx) &#x3D; (cx)-1</p>
 </li>
-<li><p>错误2：POP 指令示例误写为 <code>push eax</code>；纠正：正确示例为 <code>pop eax</code>。</p>
+<li><p>判断cx中的值，不为零则转至标号处执行程序，为零则向下执行</p>
 </li>
-<li><p>错误3：MOV 指令访问内存示例缺失；补充：<code>mov eax, [0x40100000]</code> 是从内存读取，<code>mov eax, 0x40100000</code> 是写入立即数。</p>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个列子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="and和or指令"><a href="#and和or指令" class="headerlink" title="and和or指令"></a>and和or指令</h3><p>就是和Python语言中的and和or一样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,01100011B<br>and al,00000001B<br>;这个时候al的值为00000001B,常用的就是指定对象的位设为0<br><br>;这样or就是指定对象的位设为1<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="转移指令"><a href="#转移指令" class="headerlink" title="转移指令"></a>转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如在汇编中获取该段或函数等的地址<br>main proc<br>	mov eax,offset main<br>	; 这个执行后eax的值为main函数的地址<br>main ENDP<br></code></pre></td></tr></table></figure>
+
+<p>**<code>jmp</code>**无条件转移指令，可以修改<code>ip</code>，也可以同时修改<code>cs和ip</code></p>
+<blockquote>
+<p><code>jmp</code>指令要给出两种信息</p>
+<ol>
+<li>转移的目的地址</li>
+<li>转移的距离(段间转移，段内短转移，段内近转移)</li>
+</ol>
+</blockquote>
+<ol>
+<li><p><code>jmp short 标号(转到标号处执行指令)</code></p>
+<p>这种是<strong>段内短转移</strong>，这个是修改<code>IP</code>所以只能修改到-128~127，标号是转移的目的地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	mov eax,0<br>	jmp short s	;执行该语句会越过add eax,1，所以eax的值为0<br>	add eax,1<br>s:	mov ecx,10 <br></code></pre></td></tr></table></figure>
 </li>
-<li><p>错误4：乘除法符号扩展指令说明不全；补充：32位用 <code>cdq</code>（EAX→EDX），64位用 <code>cqo</code>（RAX→RDX）。</p>
+<li><p><code>jmp near ptr 标号</code>这个是<strong>段内近转移</strong>和上面的功能类似实际是<code>修改IP：IP=ip+16位位移</code></p>
 </li>
-</ul>
-<h2 id="八、调试与逆向分析补充"><a href="#八、调试与逆向分析补充" class="headerlink" title="八、调试与逆向分析补充"></a>八、调试与逆向分析补充</h2><h3 id="8-1-关键调试关注点"><a href="#8-1-关键调试关注点" class="headerlink" title="8.1 关键调试关注点"></a>8.1 关键调试关注点</h3><ul>
-<li><p>除法异常：除零、未初始化 EDX（无符号除法）、未符号扩展（有符号除法）会触发异常，可设置断点观察寄存器状态。</p>
+<li><p><code>jmp far ptr 标号</code>实现的是段间转移，又称为远转移</p>
 </li>
-<li><p>字符串操作：<code>rep</code> 前缀+字符串指令常被用于内存拷贝&#x2F;比较，逆向时跟踪 ESI&#x2F;EDI&#x2F;ECX 变化可快速定位核心逻辑。</p>
-</li>
-<li><p>栈帧分析：通过 EBP&#x2F;RBP 追溯栈帧结构，可还原函数参数、局部变量布局（调试时非常有效）。</p>
-</li>
-</ul>
-<h3 id="8-2-字符串相关逆向技巧"><a href="#8-2-字符串相关逆向技巧" class="headerlink" title="8.2 字符串相关逆向技巧"></a>8.2 字符串相关逆向技巧</h3><ul>
-<li><p>搜索静态字符串：在 x32dbg 字符串窗口中搜索程序引用的字符串，快速定位相关函数。</p>
-</li>
-<li><p>监视动态操作：设置内存断点，监视字符串缓冲区（如 WriteProcessMemory、recv 函数操作的内存地址）。</p>
-</li>
-<li><p>分析字符串比较：程序验证密码&#x2F;关键字时，常调用 strcmp 类函数，跟踪 RDI&#x2F;RSI 寄存器（传递字符串地址）可还原比较逻辑。</p>
-</li>
-</ul>
+</ol>
+<p>上面的这些是根据位移来转移</p>
+<h2 id="写一个程序"><a href="#写一个程序" class="headerlink" title="写一个程序"></a>写一个程序</h2><p>从汇编到一个完整的程序步骤：</p>
+<ol>
+<li>编写汇编源程序，后缀文件为<code>asm</code></li>
+<li>对源程序进行编译连接，这一步就是使用汇编语言编译程序对该文件中的程序进行编译，产生目标文件，再用连接程序对目标文件进行连接，生辰可执行文件，这个可执行文件里面就是源程序的汇编指令翻译过来的机器码和数据，以及相关描述信息</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:codesg<br>codesg segment<br>		mov ax,0123H<br>		mov bx,0456H<br>		add ax,bx<br>		add ax,ax<br>		<br>		mov ax,4c00H ;这两句是程序返回，由CPU执行<br>		int 21H<br>		<br>codesg ends<br>end<br></code></pre></td></tr></table></figure>
+
+<p>一段简单的程序，观察一下便会发现，从上面的讲述中源程序包括<strong>汇编代码和伪指令</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs assembly">XXX segment<br>	;<br>	;<br>	;<br>XXX ends<br>	<br>; 第一种伪指令 segment和ends，这是在写可被编译器编译的汇编代码时用到的，用于定义一个段，segment用于说明一个段的开始 ends用于说明一个段的结束，前面的XXX是段名<br><br>end<br>;是一个汇编程序结束标记，编译器在编译的时候碰到end就停止编译，上面ends是混写的end segment<br><br>assume<br><br>;这条伪指令代表‘假设’，它假设某一段寄存器和程序中的某一个具体的段相联系<br></code></pre></td></tr></table></figure>
+
+
+
+
+
 
                 
               </div>

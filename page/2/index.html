@@ -232,6 +232,69 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/10/04/04_TEA/" target="_self">
+          TEA加密算法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/04_TEA/" target="_self">
+        <div>
+          TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-04 22:12" pubdate>
+              2025-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
+            
+              <a href="/tags/TEA/">#TEA</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/10/04/05_Upx/" target="_self">
           Upx脱壳
         </a>
@@ -293,15 +356,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/10/04/03_Base64/" target="_self">
-          Base64算法
+        <a href="/2025/10/04/SomeNicheOperations/" target="_self">
+          一些偏门的运算
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/03_Base64/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/SomeNicheOperations/" target="_self">
         <div>
-          简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。base64是将数据变得不可读，所以不是加密 Python 示例建议初学者，就是自己动手写脚本，减少对工具的依赖，所以这里讲常用的两种形式，下面再讲工作原理。下面示例展示如何用 Python 对 Base64 编码&#x
+          模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模
         </div>
       </a>
 
@@ -325,7 +388,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
+  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
   
   
 
@@ -340,9 +403,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
-            
-              <a href="/tags/Base64/">#Base64</a>
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/">#一些运算技巧</a>
             
           </div>
         
@@ -399,67 +460,6 @@
 
           </div>
         
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/04/SomeNicheOperations/" target="_self">
-          一些偏门的运算
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/SomeNicheOperations/" target="_self">
-        <div>
-          模运算的逆运算：加密后 &#x3D; (原始值 + 偏移) % 模值      **原始值 &#x3D; (加密后 - 偏移 + 模值) % 模值    &#x2F;&#x2F;**这里加上模值是因为取模可能是负数 这个式子成立的关键是     0&lt;&#x3D; 原始值 &lt;&#x3D; 模值，这是字符加密的常见场景； 当不成立时就是 **原始值 &#x3D; (加密后 - 偏移 + 模
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-04 22:12" pubdate>
-              2025-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E4%B8%80%E4%BA%9B%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/">#一些运算技巧</a>
-            
-          </div>
         
       </div>
     </article>

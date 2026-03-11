@@ -240,7 +240,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/08/x86_x86-64%20%E6%B1%87%E7%BC%96/" target="_self">
         <div>
-          x86&#x2F;x86-64汇编本文档概述 x86 &#x2F; x86-64 常用寄存器、指令及常见用法与注意事项，使用 Intel 语法（gcc&#x2F;masm&#x2F;nasm 常见风格），适用于底层开发、逆向分析与调试场景。 一、寄存器基础寄存器是 CPU 内部的高速存储区域，用于存放临时数据、指令地址和计算结果，其位宽与 CPU 位数&#x2F;处理器模式强相关。 1.1 寄存器
+          x86&#x2F;x86-64汇编使用 masm 语法，适用于在Windows运行的 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要
         </div>
       </a>
 
@@ -575,6 +575,69 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/10/04/03_Base64/" target="_self">
+          Base64算法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/03_Base64/" target="_self">
+        <div>
+          简介MD5 &#x2F; SHA256 属于不可逆的哈希算法，而 Base64 是一种可逆的编码方案（严格来说不是“加密”）。Base64 常用于在文本协议中安全地传输二进制数据。base64是将数据变得不可读，所以不是加密 Python 示例建议初学者，就是自己动手写脚本，减少对工具的依赖，所以这里讲常用的两种形式，下面再讲工作原理。下面示例展示如何用 Python 对 Base64 编码&#x
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-04 22:12" pubdate>
+              2025-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Base64/">#Base64</a>
+            
+              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/10/04/02_RC4/" target="_self">
           RC4加密算法
         </a>
@@ -622,72 +685,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
+            
               <a href="/tags/RC4/">#RC4</a>
-            
-              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/04/04_TEA/" target="_self">
-          TEA加密算法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/04_TEA/" target="_self">
-        <div>
-          TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-04 22:12" pubdate>
-              2025-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
-            
-              <a href="/tags/TEA/">#TEA</a>
             
           </div>
         

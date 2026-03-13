@@ -19,15 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在Windows运行的 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要">
+    <meta name="description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86&#x2F;x86-64汇编">
 <meta property="og:url" content="http://run521520.github.io/2026/03/08/x86_x86-64%20%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在Windows运行的 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要">
+<meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-08T14:12:41.000Z">
-<meta property="article:modified_time" content="2026-03-11T10:29:25.982Z">
+<meta property="article:modified_time" content="2026-03-12T13:39:04.996Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.9k 字
+          7.8k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          67 分钟
+          66 分钟
         
       </span>
     
@@ -283,7 +283,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>使用 <code>masm</code> 语法，适用于在Windows运行的</p>
+                <h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>使用 <code>masm</code> 语法，适用于在 Windows 上运行的程序</p>
 <p>首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如将寄存器BX的内容送到AX中<br>; 机器指令<br>1000100111011000 ;随便输的，但就是这样子<br>; 汇编指令<br>mov ax,bx<br></code></pre></td></tr></table></figure>
 
@@ -333,12 +333,12 @@
 <tr>
 <td>ECX</td>
 <td>RCX</td>
-<td>计数寄存器，常用于循环&#x2F;移位操作；Windows x64 调用约定中传递第 4 个参数</td>
+<td>计数寄存器，常用于循环&#x2F;移位操作；Windows x64 调用约定中传递第 1 个参数</td>
 </tr>
 <tr>
 <td>EDX</td>
 <td>RDX</td>
-<td>数据寄存器，乘除法、I&#x2F;O 操作常用；Windows x64 调用约定中传递第 3 个参数</td>
+<td>数据寄存器，乘除法、I&#x2F;O 操作常用；Windows x64 调用约定中传递第 2 个参数</td>
 </tr>
 <tr>
 <td>ESI</td>
@@ -353,7 +353,7 @@
 <tr>
 <td>EBP</td>
 <td>RBP</td>
-<td>基指针寄存器，指向当前栈帧基址（调试友好），现代优化编译器可省略帧指针，栈底</td>
+<td>基指针寄存器，指向当前栈帧基址（调试友好），现代优化编译器可省略帧指针</td>
 </tr>
 <tr>
 <td>ESP</td>
@@ -492,11 +492,6 @@
 
 
 
-<ul>
-<li>[bx]：表示一个内存单元，他的偏移地址在bx中，段地址默认在ds中</li>
-<li>loop：cpu执行loop指令的时候，要进行两步，(cx) &#x3D; (cx) -1; 判断cx中的值，不为零则转至标号处执行程序，为0就向下执行</li>
-</ul>
-<p>，</p>
 <h3 id="3-3-调用与返回指令"><a href="#3-3-调用与返回指令" class="headerlink" title="3.3 调用与返回指令"></a>3.3 调用与返回指令</h3><ul>
 <li><p><strong>CALL addr</strong>：函数调用</p>
 <ul>
@@ -637,7 +632,7 @@
 
 
 <h3 id="dup-数组"><a href="#dup-数组" class="headerlink" title="dup 数组"></a>dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实列，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实例，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
 
 
 
@@ -681,7 +676,7 @@
 <td>前6个参数：RDI、RSI、RDX、RCX、R8、R9；其余通过栈传递</td>
 <td>RAX</td>
 <td>被调用者</td>
-<td>RBX、RBP、RDI、RSI、R12-R15</td>
+<td>RBX、RBP、R12-R15</td>
 </tr>
 <tr>
 <td>注：32位架构（x86）的 stdcall、cdecl 等约定差异较大，本文不作详尽列举。</td>
@@ -696,7 +691,7 @@
 <p>用[0]表示一个内存单元的时候，0表示偏移地址，段地址默认为ds，单元的长度由寄存器大小决定</p>
 <p>默认的是ds寄存器，但是你可以指定你想要的寄存器 <code>mov ax,ds:[bx] mov ax,cs:[bx]</code>这种写法叫做<strong>段前缀</strong></p>
 <h4 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h4><p>这个指令英文有循环的含义</p>
-<p>CPU执行到loop的时候进行两部操作：</p>
+<p>CPU执行到loop的时候进行两步操作：</p>
 <blockquote>
 <ol>
 <li><p>(cx) &#x3D; (cx)-1</p>
@@ -705,7 +700,7 @@
 </li>
 </ol>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个列子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个例子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
 
 
 
@@ -739,7 +734,7 @@
 <h2 id="写一个程序"><a href="#写一个程序" class="headerlink" title="写一个程序"></a>写一个程序</h2><p>从汇编到一个完整的程序步骤：</p>
 <ol>
 <li>编写汇编源程序，后缀文件为<code>asm</code></li>
-<li>对源程序进行编译连接，这一步就是使用汇编语言编译程序对该文件中的程序进行编译，产生目标文件，再用连接程序对目标文件进行连接，生辰可执行文件，这个可执行文件里面就是源程序的汇编指令翻译过来的机器码和数据，以及相关描述信息</li>
+<li>对源程序进行编译连接，这一步就是使用汇编语言编译程序对该文件中的程序进行编译，产生目标文件，再用连接程序对目标文件进行连接，生成可执行文件，这个可执行文件里面就是源程序的汇编指令翻译过来的机器码和数据，以及相关描述信息</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:codesg<br>codesg segment<br>		mov ax,0123H<br>		mov bx,0456H<br>		add ax,bx<br>		add ax,ax<br>		<br>		mov ax,4c00H ;这两句是程序返回，由CPU执行<br>		int 21H<br>		<br>codesg ends<br>end<br></code></pre></td></tr></table></figure>
 

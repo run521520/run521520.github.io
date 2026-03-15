@@ -27,7 +27,7 @@
 <meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-08T14:12:41.000Z">
-<meta property="article:modified_time" content="2026-03-12T13:39:04.996Z">
+<meta property="article:modified_time" content="2026-03-15T11:54:37.654Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.8k 字
+          12k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          66 分钟
+          101 分钟
         
       </span>
     
@@ -398,7 +398,7 @@
 <td>数据段，存放已初始化的全局&#x2F;静态数据</td>
 </tr>
 <tr>
-<td>.bss</td>
+<td><code>.bss</code></td>
 <td>未初始化数据段，存放未初始化或置零的静态数据</td>
 </tr>
 <tr>
@@ -449,7 +449,7 @@
 <blockquote>
 <p><strong>宏</strong>基本上是一种文本替换机制。</p>
 </blockquote>
-<h2 id="三、常用汇编指令摘要"><a href="#三、常用汇编指令摘要" class="headerlink" title="三、常用汇编指令摘要"></a>三、常用汇编指令摘要</h2><p>以下指令均为 Intel 语法，按功能分类整理，含核心用法示例：</p>
+<h2 id="三、常用汇编指令摘要"><a href="#三、常用汇编指令摘要" class="headerlink" title="三、常用汇编指令摘要"></a>三、常用汇编指令摘要</h2><p>以下指令均为 Intel 语法，<code>masm</code>语法和这个差不多，按功能分类整理，含核心用法示例：</p>
 <h3 id="3-1-数据传送指令"><a href="#3-1-数据传送指令" class="headerlink" title="3.1 数据传送指令"></a>3.1 数据传送指令</h3><ul>
 <li><p><strong>MOV</strong>：数据传送（最常用）</p>
 <ul>
@@ -488,12 +488,8 @@
 </ul>
 </li>
 </ul>
-<h4 id="写一个HelloWorld"><a href="#写一个HelloWorld" class="headerlink" title="写一个HelloWorld"></a>写一个HelloWorld</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs nasm">_text<br><br>main	proc near<br>		push rbp<br>		mov  rbp,rsp<br>		sub  rsp,20h<br>		lea  rcx,msg<br>		call puts<br>		mov  eax,0<br>		add  rsp,20h<br>		pop  rbp<br>		retn<br>main    endp<br><br><br>_text ends<br><br>_data<br>	msg db &#x27;HelloWorld&#x27;,0<br>_data ends<br></code></pre></td></tr></table></figure>
-
-
-
 <h3 id="3-3-调用与返回指令"><a href="#3-3-调用与返回指令" class="headerlink" title="3.3 调用与返回指令"></a>3.3 调用与返回指令</h3><ul>
-<li><p><strong>CALL addr</strong>：函数调用</p>
+<li><p><strong><code>CALL  addr</code></strong>：函数调用</p>
 <ul>
 <li><p>功能：将返回地址压栈，跳转到目标地址（addr）执行函数</p>
 </li>
@@ -528,64 +524,33 @@
 <h3 id="3-5-控制转移指令（常用）"><a href="#3-5-控制转移指令（常用）" class="headerlink" title="3.5 控制转移指令（常用）"></a>3.5 控制转移指令（常用）</h3><p>用于改变程序执行流程，常配合 CMP&#x2F;TEST 指令的标志位结果：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Plain"><br>jmp（无条件跳转）、je（相等跳转，ZF=1）、jne（不相等跳转，ZF=0）、jg（大于跳转）、jl（小于跳转）、jge（大于等于跳转）、jle（小于等于跳转）、loop（循环跳转）、int（中断调用）、iret（中断返回）<br></code></pre></td></tr></table></figure>
 
-<h2 id="四、乘除法指令细节（mul-imul-div-idiv）"><a href="#四、乘除法指令细节（mul-imul-div-idiv）" class="headerlink" title="四、乘除法指令细节（mul&#x2F;imul&#x2F;div&#x2F;idiv）"></a>四、乘除法指令细节（mul&#x2F;imul&#x2F;div&#x2F;idiv）</h2><p>乘除法指令存在隐含寄存器约定，需注意无符号&#x2F;有符号区别及符号扩展操作：</p>
-<h3 id="4-1-乘法指令"><a href="#4-1-乘法指令" class="headerlink" title="4.1 乘法指令"></a>4.1 乘法指令</h3><ul>
-<li><p><strong>mul（无符号乘法）</strong></p>
+<h3 id="3-6-算数指令"><a href="#3-6-算数指令" class="headerlink" title="3.6 算数指令"></a>3.6 算数指令</h3><p>乘除法指令存在隐含寄存器约定，需注意无符号&#x2F;有符号区别及符号扩展操作：</p>
+<h4 id="乘法指令"><a href="#乘法指令" class="headerlink" title="乘法指令"></a>乘法指令</h4><ul>
+<li><p><strong><code>mul</code>（无符号乘法）</strong></p>
 <ul>
 <li><p>格式：<code>mul r/m32</code>（32位模式）</p>
 </li>
 <li><p>约定：隐含被乘数为 EAX，64位结果存于 EDX:EAX（EDX 高32位，EAX 低32位）</p>
 </li>
-</ul>
+<li><p>默认寄存器<code>eax</code>为被乘数，操作数为乘数</p>
 </li>
-<li><p><strong>imul（有符号乘法）</strong></p>
-<ul>
-<li><p>三种格式：</p>
-<ul>
-<li><p>单操作：<code>imul r/m32</code>（隐含被乘数 EAX，结果 EDX:EAX）</p>
-</li>
-<li><p>双操作：<code>imul r32, r/m32</code>（r32 &#x3D; r32 * r&#x2F;m32）</p>
-</li>
-<li><p>三操作：<code>imul r32, r/m32, imm</code>（r32 &#x3D; r&#x2F;m32 * 立即数 imm）</p>
-</li>
-</ul>
-</li>
-<li><p>注意：结果会进行有符号扩展，存于对应寄存器组合。</p>
+<li><pre><code class="language-assembly">  mov eax,5
+  mov ecx,3
+  mov ecx
+  ; 这时 eax为15
+  <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><br>    - <br><br>- **<span class="hljs-string">`imul`</span>（有符号乘法）**<br><br>    - 三种格式：<br>                <br><br>        - 单操作：<span class="hljs-string">`imul r/m32`</span>（隐含被乘数 <span class="hljs-built_in">EAX</span>，结果 <span class="hljs-built_in">EDX</span>:<span class="hljs-built_in">EAX</span>）<br><br>        - 双操作：<span class="hljs-string">`imul r32, r/m32`</span>（r32 = r32 * r/m32）<br><br>        - 三操作：<span class="hljs-string">`imul r32, r/m32, imm`</span>（r32 = r/m32 * 立即数 <span class="hljs-string">`imm`</span>）<br><br>    - 注意：结果会进行有符号扩展，存于对应寄存器组合。<br><br>#### 除法指令<br><br>- **<span class="hljs-string">`div`</span>（无符号除法）**<br>    - 格式：<span class="hljs-string">`div r/m32`</span>（<span class="hljs-number">32</span>位模式）<br>    <br>    - 约定：被除数为 <span class="hljs-built_in">EDX</span>:<span class="hljs-built_in">EAX</span>（<span class="hljs-number">64</span>位组合），除数为 r/m32；商存于 <span class="hljs-built_in">EAX</span>，余数存于 <span class="hljs-built_in">EDX</span><br>    <br>    - 注意：使用前需将 <span class="hljs-built_in">EDX</span> 清零（常用 <span class="hljs-string">`xor edx, edx`</span>），避免高位干扰。<br>    <br>- **<span class="hljs-string">`idiv`</span> （有符号除法）**<br>- 格式：<span class="hljs-string">`idiv r/m32`</span>（<span class="hljs-number">32</span>位模式）<br>  <br>- 约定：与 <span class="hljs-keyword">div</span> 一致，但按有符号数处理<br>  <br>- 注意：使用前需进行符号扩展：<br>                <br>  <br>    - <span class="hljs-number">32</span>位：<span class="hljs-string">`cdq`</span>（将 <span class="hljs-built_in">EAX</span> 符号扩展到 <span class="hljs-built_in">EDX</span>）<br>    <br>    - <span class="hljs-number">64</span>位：<span class="hljs-string">`cqo`</span>（将 <span class="hljs-built_in">RAX</span> 符号扩展到 <span class="hljs-built_in">RDX</span>）<br><br>#### 示例（<span class="hljs-number">32</span>位 Intel 语法）<br><br><span class="hljs-string">```</span>asm<br><br><span class="hljs-comment">; 无符号乘法：5 * 2 = 10</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">5</span>    <span class="hljs-comment">; EAX = 5（被乘数）</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ecx</span>, <span class="hljs-number">2</span>    <span class="hljs-comment">; ECX = 2（乘数）</span><br><span class="hljs-keyword">mul</span> <span class="hljs-built_in">ecx</span>       <span class="hljs-comment">; EDX:EAX = 5*2 = 10 → EAX=10, EDX=0</span><br><br><span class="hljs-comment">; 有符号除法：-15 / 3 = -5</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, -<span class="hljs-number">15</span>  <span class="hljs-comment">; EAX = -15（被除数）</span><br><span class="hljs-keyword">cdq</span>           <span class="hljs-comment">; 将 EAX 符号扩展到 EDX → EDX=0xFFFFFFFF</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ecx</span>, <span class="hljs-number">3</span>    <span class="hljs-comment">; ECX = 3（除数）</span><br><span class="hljs-keyword">idiv</span> <span class="hljs-built_in">ecx</span>      <span class="hljs-comment">; EAX = -5（商）, EDX=0（余数）</span><br></code></pre></td></tr></table></figure>
+</code></pre>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="4-2-除法指令"><a href="#4-2-除法指令" class="headerlink" title="4.2 除法指令"></a>4.2 除法指令</h3><ul>
-<li><p><strong>div（无符号除法）</strong></p>
-<ul>
-<li><p>格式：<code>div r/m32</code>（32位模式）</p>
-</li>
-<li><p>约定：被除数为 EDX:EAX（64位组合），除数为 r&#x2F;m32；商存于 EAX，余数存于 EDX</p>
-</li>
-<li><p>注意：使用前需将 EDX 清零（常用 <code>xor edx, edx</code>），避免高位干扰。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>idiv（有符号除法）</strong></p>
-</li>
-<li><p>格式：<code>idiv r/m32</code>（32位模式）</p>
-</li>
-<li><p>约定：与 div 一致，但按有符号数处理</p>
-</li>
-<li><p>注意：使用前需进行符号扩展：</p>
-<ul>
-<li><p>32位：<code>cdq</code>（将 EAX 符号扩展到 EDX）</p>
-</li>
-<li><p>64位：<code>cqo</code>（将 RAX 符号扩展到 RDX）</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-3-示例（32位-Intel-语法）"><a href="#4-3-示例（32位-Intel-语法）" class="headerlink" title="4.3 示例（32位 Intel 语法）"></a>4.3 示例（32位 Intel 语法）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>; 无符号乘法：5 * 2 = 10<br>mov eax, 5    ; EAX = 5（被乘数）<br>mov ecx, 2    ; ECX = 2（乘数）<br>mul ecx       ; EDX:EAX = 5*2 = 10 → EAX=10, EDX=0<br><br>; 有符号除法：-15 / 3 = -5<br>mov eax, -15  ; EAX = -15（被除数）<br>cdq           ; 将 EAX 符号扩展到 EDX → EDX=0xFFFFFFFF<br>mov ecx, 3    ; ECX = 3（除数）<br>idiv ecx      ; EAX = -5（商）, EDX=0（余数）<br></code></pre></td></tr></table></figure>
-
 <p>注意：除法溢出（商超出寄存器范围）或除以零会触发异常（#DE 或 #DB），安全&#x2F;逆向分析需重点关注边界条件。</p>
-<h2 id="五、字符串与块内存指令"><a href="#五、字符串与块内存指令" class="headerlink" title="五、字符串与块内存指令"></a>五、字符串与块内存指令</h2><p>该组指令专为内存块&#x2F;字符串操作设计，常与 <code>rep</code> 系列前缀配合，实现批量操作：</p>
-<h3 id="5-1-核心字符串指令"><a href="#5-1-核心字符串指令" class="headerlink" title="5.1 核心字符串指令"></a>5.1 核心字符串指令</h3><table>
+<h4 id="add加法指令"><a href="#add加法指令" class="headerlink" title="add加法指令"></a>add加法指令</h4><p><code>add eax,ebx</code> ：<code>eax = eax+ebx</code></p>
+<h4 id="sub减法指令"><a href="#sub减法指令" class="headerlink" title="sub减法指令"></a>sub减法指令</h4><p><code>sub eax,ebx</code> ：<code>eax = eax-ebx</code></p>
+<h4 id="自增、自减运算符"><a href="#自增、自减运算符" class="headerlink" title="自增、自减运算符"></a>自增、自减运算符</h4><p><strong><code>inc</code></strong> 自增运算符：<code>inc eax</code> 代表的效果是<code>eax</code>寄存器加1</p>
+<p><strong><code>dec</code></strong> 自减运算符：<code>dec eax</code> 代表的效果是<code>eax</code>寄存器减1</p>
+<h3 id="3-7-字符串与块内存指令"><a href="#3-7-字符串与块内存指令" class="headerlink" title="3.7 字符串与块内存指令"></a>3.7 字符串与块内存指令</h3><p>该组指令专为内存块&#x2F;字符串操作设计，常与 <code>rep</code> 系列前缀配合，实现批量操作：</p>
+<h4 id="核心字符串指令"><a href="#核心字符串指令" class="headerlink" title="核心字符串指令"></a>核心字符串指令</h4><table>
 <thead>
 <tr>
 <th>指令</th>
@@ -594,32 +559,32 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>movsb&#x2F;movsw&#x2F;movsd&#x2F;movsq</td>
+<td><code>movsb/movsw/movsd/movsq</code></td>
 <td>按字节&#x2F;字&#x2F;双字&#x2F;四字复制内存</td>
 <td>ESI（源）、EDI（目的）、ECX（计数）</td>
 </tr>
 <tr>
-<td>stosb&#x2F;stosw&#x2F;stosd</td>
+<td><code>stosb/stosw/stosd</code></td>
 <td>将 AL&#x2F;AX&#x2F;EAX 的值存入 [EDI]</td>
 <td>EDI（目的）、ECX（计数）</td>
 </tr>
 <tr>
-<td>lodsb&#x2F;lodsw&#x2F;lodsd</td>
+<td><code>lodsb/lodsw/lodsd</code></td>
 <td>从 [ESI] 加载数据到 AL&#x2F;AX&#x2F;EAX</td>
 <td>ESI（源）、ECX（计数）</td>
 </tr>
 <tr>
-<td>cmpsb&#x2F;cmpsw&#x2F;cmpsd</td>
+<td><code>cmpsb/cmpsw/cmpsd</code></td>
 <td>比较 [ESI] 与 [EDI] 的值</td>
 <td>ESI（源）、EDI（目的）、ECX（计数）</td>
 </tr>
 <tr>
-<td>scasb&#x2F;scasw&#x2F;scasd</td>
+<td><code>scasb/scasw/scasd</code></td>
 <td>在 [EDI] 中扫描 AL&#x2F;AX&#x2F;EAX 的值</td>
 <td>EDI（目的）、ECX（计数）</td>
 </tr>
 </tbody></table>
-<h3 id="5-2-rep-系列前缀（重复控制）"><a href="#5-2-rep-系列前缀（重复控制）" class="headerlink" title="5.2 rep 系列前缀（重复控制）"></a>5.2 rep 系列前缀（重复控制）</h3><ul>
+<h4 id="rep-系列前缀（重复控制）"><a href="#rep-系列前缀（重复控制）" class="headerlink" title="rep 系列前缀（重复控制）"></a>rep 系列前缀（重复控制）</h4><ul>
 <li><p><code>rep</code>：重复执行后续指令，直到 ECX &#x3D;&#x3D; 0（适用于批量复制）</p>
 </li>
 <li><p><code>repe / repz</code>：当 ZF &#x3D;&#x3D; 1 且 ECX !&#x3D; 0 时重复（适用于相等比较）</p>
@@ -627,10 +592,66 @@
 <li><p><code>repne / repnz</code>：当 ZF &#x3D;&#x3D; 0 且 ECX !&#x3D; 0 时重复（适用于搜索）</p>
 </li>
 </ul>
-<h3 id="5-3-示例：实现-memcpy（32位）"><a href="#5-3-示例：实现-memcpy（32位）" class="headerlink" title="5.3 示例：实现 memcpy（32位）"></a>5.3 示例：实现 memcpy（32位）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>; 功能：将 source 地址的 length 个字节复制到 dest 地址<br>; 前提：方向标志 DF 已清零（cld 指令）<br>cld                 ; 清方向标志（EDI/ESI 自动递增）<br>mov esi, source     ; ESI = 源地址<br>mov edi, dest       ; EDI = 目的地址<br>mov ecx, length     ; ECX = 复制字节数<br>rep movsb           ; 重复复制，直到 ECX=0<br></code></pre></td></tr></table></figure>
+<h4 id="示例：实现-memcpy（32位）"><a href="#示例：实现-memcpy（32位）" class="headerlink" title="示例：实现 memcpy（32位）"></a>示例：实现 <code>memcpy</code>（32位）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>; 功能：将 source 地址的 length 个字节复制到 dest 地址<br>; 前提：方向标志 DF 已清零（cld 指令）<br>cld                 ; 清方向标志（EDI/ESI 自动递增）<br>mov esi, source     ; ESI = 源地址<br>mov edi, dest       ; EDI = 目的地址<br>mov ecx, length     ; ECX = 复制字节数<br>rep movsb           ; 重复复制，直到 ECX=0<br></code></pre></td></tr></table></figure>
 
 
 
+<h3 id="BX-和loop指令"><a href="#BX-和loop指令" class="headerlink" title="[BX]和loop指令"></a>[BX]和loop指令</h3><h4 id="BX"><a href="#BX" class="headerlink" title="[BX]"></a>[BX]</h4><p>[BX]和[0]有些类似(一个是动态偏移量，一个是静态偏移量，其实一样)，[0]表示内存单元，它的偏移量为0.比如<code>mov ax,[0]</code>表示将一个内存单元的内容送到ax里，这个内存单元的长度为2字节，存放一个字节，偏移量为0，段地址在ds中(默认为ds寄存器)</p>
+<p>用[0]表示一个内存单元的时候，0表示偏移地址，段地址默认为ds，单元的长度由寄存器大小决定</p>
+<p>默认的是ds寄存器，但是你可以指定你想要的寄存器 <code>mov ax,ds:[bx] mov ax,cs:[bx]</code>这种写法叫做<strong>段前缀</strong></p>
+<h4 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h4><p>这个指令英文有循环的含义</p>
+<p>CPU执行到loop的时候进行两步操作：</p>
+<blockquote>
+<ol>
+<li><p>(cx) &#x3D; (cx)-1</p>
+</li>
+<li><p>判断cx中的值，不为零则转至标号处执行程序，为零则向下执行</p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个例子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="位操作指令"><a href="#位操作指令" class="headerlink" title="位操作指令"></a>位操作指令</h3><h4 id="and和or-按位与和按位或"><a href="#and和or-按位与和按位或" class="headerlink" title="and和or 按位与和按位或"></a><strong><code>and和or</code> 按位与和按位或</strong></h4><p>就是和Python语言中的and和or一样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,01100011B<br>and al,00000001B<br>;每一位相应的位都执行“与”操作：两个对应的位都为1时结果为1，否则为0。<br>;这个时候al的值为00000001B,常用的就是指定对象的位设为0<br><br>mov al,01100011B<br>or 	al,00000000B<br><br>;每一位相应的位都执行“或”操作：两个对应的位中，只要有一个为1，结果为1。<br>;这样or就是指定对象的位设为1,al = 01100011B<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="xor-按位异或"><a href="#xor-按位异或" class="headerlink" title="xor 按位异或"></a><strong><code>xor </code>按位异或</strong></h4><p>每一位相应的位都执行“异或”操作：两个对应的位不相同，结果为1，否则为0。</p>
+<p><code>xor al,ah</code></p>
+<h4 id="not-按位取反"><a href="#not-按位取反" class="headerlink" title="not 按位取反"></a><code>not</code> 按位取反</h4><p>每一位都执行取反操作：1变成0，0变成1。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">al</span> , <span class="hljs-number">11110000B</span><br><span class="hljs-keyword">not</span> <span class="hljs-built_in">al</span><br><span class="hljs-comment">; 则al的值为 00001111B</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="shl无符号左移"><a href="#shl无符号左移" class="headerlink" title="shl无符号左移"></a><code>shl</code>无符号左移</h4><p><code>shl al,1</code> 所有位向左移动1位，左移后空出的位置填充0，最左边的位丢弃。</p>
+<p>当然你也可以控制移动的位数</p>
+<h4 id="shr无符号右移"><a href="#shr无符号右移" class="headerlink" title="shr无符号右移"></a><code>shr</code>无符号右移</h4><p><code>shr al,1</code>所有位向右移动1位，右移后空出的位置填充0，最右边的位丢弃。</p>
+<h4 id="sal有符号左移"><a href="#sal有符号左移" class="headerlink" title="sal有符号左移"></a><code>sal</code>有符号左移</h4><p><code>sal al,1</code> 和 <code>shl</code> 相同，所有位向左移动1位，空出的位置填充0，最左边的位丢弃。</p>
+<h4 id="rol-有符号右移"><a href="#rol-有符号右移" class="headerlink" title="rol 有符号右移"></a><code>rol</code> 有符号右移</h4><p>所有位向右移动1位，右移后空出的位置填充符号位（即最左边的位），保持符号位不变。</p>
+<h4 id="rol-循环左移"><a href="#rol-循环左移" class="headerlink" title="rol 循环左移"></a><code>rol</code> 循环左移</h4><p><code>rol al,1</code>所有位向左循环移动1位，最左边的位移到最右边。</p>
+<h4 id="ror循环右移"><a href="#ror循环右移" class="headerlink" title="ror循环右移"></a><code>ror</code>循环右移</h4><p><code>rol al,1</code>所有位向右循环移动1位，最右边的位移到最左边。</p>
+<p>在<code>c</code>或<code>ida</code>中：</p>
+<p>通常，<code>not</code> 的优先级较高，其次是位移操作符 <code>shl</code>、<code>shr</code>、<code>sal</code> 和 <code>sar</code>，最后是按位逻辑操作符 <code>and</code>、<code>or</code>、<code>xor</code>。</p>
+<h3 id="转移指令"><a href="#转移指令" class="headerlink" title="转移指令"></a>转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如在汇编中获取该段或函数等的地址<br>main proc<br>	mov eax,offset main<br>	; 这个执行后eax的值为main函数的地址<br>main ENDP<br></code></pre></td></tr></table></figure>
+
+<p>**<code>jmp</code>**无条件转移指令，可以修改<code>ip</code>，也可以同时修改<code>cs和ip</code></p>
+<blockquote>
+<p><code>jmp</code>指令要给出两种信息</p>
+<ol>
+<li>转移的目的地址</li>
+<li>转移的距离(段间转移，段内短转移，段内近转移)</li>
+</ol>
+</blockquote>
+<ol>
+<li><p><code>jmp short 标号(转到标号处执行指令)</code></p>
+<p>这种是<strong>段内短转移</strong>，这个是修改<code>IP</code>所以只能修改到-128~127，标号是转移的目的地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	mov eax,0<br>	jmp short s	;执行该语句会越过add eax,1，所以eax的值为0<br>	add eax,1<br>s:	mov ecx,10 <br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>jmp near ptr 标号</code>这个是<strong>段内近转移</strong>和上面的功能类似实际是<code>修改IP：IP=ip+16位位移</code></p>
+</li>
+<li><p><code>jmp far ptr 标号</code>实现的是段间转移，又称为远转移</p>
+</li>
+</ol>
+<p>上面的这些是根据位移来转移</p>
 <h3 id="dup-数组"><a href="#dup-数组" class="headerlink" title="dup 数组"></a>dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实例，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
 
@@ -640,8 +661,8 @@
 
 
 
-<h2 id="六、栈与调用约定（概要）"><a href="#六、栈与调用约定（概要）" class="headerlink" title="六、栈与调用约定（概要）"></a>六、栈与调用约定（概要）</h2><h3 id="6-1-栈的基本特性"><a href="#6-1-栈的基本特性" class="headerlink" title="6.1 栈的基本特性"></a>6.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
-<h3 id="6-2-经典栈帧布局（带-EBP-的函数）"><a href="#6-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="6.2 经典栈帧布局（带 EBP 的函数）"></a>6.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push ebp        ; 保存上一级栈帧基址<br>mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）<br>sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）<br>...             ; 函数体执行<br>mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）<br>pop ebp         ; 恢复上一级栈帧基址<br>ret             ; 函数返回<br></code></pre></td></tr></table></figure>
+<h2 id="四、栈与调用约定（概要）"><a href="#四、栈与调用约定（概要）" class="headerlink" title="四、栈与调用约定（概要）"></a>四、栈与调用约定（概要）</h2><h3 id="4-1-栈的基本特性"><a href="#4-1-栈的基本特性" class="headerlink" title="4.1 栈的基本特性"></a>4.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
+<h3 id="4-2-经典栈帧布局（带-EBP-的函数）"><a href="#4-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="4.2 经典栈帧布局（带 EBP 的函数）"></a>4.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push ebp        ; 保存上一级栈帧基址<br>mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）<br>sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）<br>...             ; 函数体执行<br>mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）<br>pop ebp         ; 恢复上一级栈帧基址<br>ret             ; 函数返回<br></code></pre></td></tr></table></figure>
 
 <p>这里说一下就是为什么栈的操作可以准确到确定的地址？</p>
 <p>这里又有两个寄存器来工作：<strong>段寄存器SS 和 寄存器 SP</strong></p>
@@ -650,7 +671,7 @@
 
 
 
-<h3 id="6-3-x86-64-常见调用约定"><a href="#6-3-x86-64-常见调用约定" class="headerlink" title="6.3 x86-64 常见调用约定"></a>6.3 x86-64 常见调用约定</h3><p>调用约定规定参数传递方式、返回值存储位置及寄存器保存规则，不同系统约定不同：</p>
+<h3 id="4-3-x86-64-常见调用约定"><a href="#4-3-x86-64-常见调用约定" class="headerlink" title="4.3 x86-64 常见调用约定"></a>4.3 x86-64 常见调用约定</h3><p>调用约定规定参数传递方式、返回值存储位置及寄存器保存规则，不同系统约定不同：</p>
 <table>
 <thead>
 <tr>
@@ -679,7 +700,7 @@
 <td>RBX、RBP、R12-R15</td>
 </tr>
 <tr>
-<td>注：32位架构（x86）的 stdcall、cdecl 等约定差异较大，本文不作详尽列举。</td>
+<td>注：32位架构（x86）的 <code>stdcall、cdecl</code> 等约定差异较大，本文不作详尽列举。</td>
 <td></td>
 <td></td>
 <td></td>
@@ -687,50 +708,19 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="BX-和loop指令"><a href="#BX-和loop指令" class="headerlink" title="[BX]和loop指令"></a>[BX]和loop指令</h3><h4 id="BX"><a href="#BX" class="headerlink" title="[BX]"></a>[BX]</h4><p>[BX]和[0]有些类似(一个是动态偏移量，一个是静态偏移量，其实一样)，[0]表示内存单元，它的偏移量为0.比如<code>mov ax,[0]</code>表示将一个内存单元的内容送到ax里，这个内存单元的长度为2字节，存放一个字节，偏移量为0，段地址在ds中(默认为ds寄存器)</p>
-<p>用[0]表示一个内存单元的时候，0表示偏移地址，段地址默认为ds，单元的长度由寄存器大小决定</p>
-<p>默认的是ds寄存器，但是你可以指定你想要的寄存器 <code>mov ax,ds:[bx] mov ax,cs:[bx]</code>这种写法叫做<strong>段前缀</strong></p>
-<h4 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h4><p>这个指令英文有循环的含义</p>
-<p>CPU执行到loop的时候进行两步操作：</p>
-<blockquote>
-<ol>
-<li><p>(cx) &#x3D; (cx)-1</p>
-</li>
-<li><p>判断cx中的值，不为零则转至标号处执行程序，为零则向下执行</p>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个例子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
+<hr>
+<h2 id="五、TEB、PEB和反调试"><a href="#五、TEB、PEB和反调试" class="headerlink" title="五、TEB、PEB和反调试"></a>五、TEB、PEB和反调试</h2><h3 id="5-2-TEB"><a href="#5-2-TEB" class="headerlink" title="5.2 TEB"></a>5.2 TEB</h3><p><code>TEB</code>（Thread Environment Block）是为每个线程分配的一个数据结构，用来存储线程的相关信息。每个线程都有一个独立的 TEB，它被用来存储多种信息，包括线程的本地存储、异常处理、TLS（线程局部存储）、栈指针等。每个线程都会通过 <code>fs:[0]</code> 获取指向其 TEB 的指针。</p>
+<p>在 Windows 操作系统中，<code>fs</code> 是一个<strong>段寄存器</strong>（Segment Register），它用于指向线程的<strong>线程环境块</strong>（TEB，Thread Environment Block）。<code>fs</code> 寄存器主要用于访问当前线程的局部存储区域，而不是全局数据。这使得线程能够高效地存储和访问其专有的信息，而不需要锁定整个进程的数据。</p>
+<p>在 32 位 Windows 操作系统中，<code>fs</code> 寄存器的默认值是指向当前线程的 TEB 的地址</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef struct _TEB &#123;<br>    <span class="hljs-type">NT_TIB</span> <span class="hljs-type">NtTib</span>;                          // +0x0000  <span class="hljs-type">TIB</span> (<span class="hljs-type">Thread</span> <span class="hljs-type">Information</span> <span class="hljs-type">Block</span>) 用于存储堆栈信息<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">EnvironmentPointer</span>;              // +0x001C  指向线程的环境块（通常为空）<br>    <span class="hljs-type">CLIENT_ID</span> <span class="hljs-type">ClientId</span>;                    // +0x0020  线程的 <span class="hljs-type">ClientId</span>（由线程 <span class="hljs-type">ID</span> 和进程 <span class="hljs-type">ID</span> 组成）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ActiveRpcHandle</span>;                 // +0x0028  当前线程的 <span class="hljs-type">RPC</span> 句柄<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ThreadLocalStoragePointer</span>;       // +0x002C  指向线程局部存储的指针<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ProcessEnvironmentBlock</span>;         // +0x0030  指向进程环境块（<span class="hljs-type">PEB</span>）的指针<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">LastErrorValue</span>;                  // +0x0034  最后错误值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">CountOfOwnedCriticalSections</span>;    // +0x0038  当前线程拥有的临界区数量<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CsrClientThread</span>;                 // +0x003C  相关的 <span class="hljs-type">CsrClient</span> 线程<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">Win32ThreadInfo</span>;                 // +0x0040  线程信息<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">User32Reserved</span>[26];              // +0x0044  保留字段（26个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">UserReserved</span>[5];                 // +0x00AC  保留字段（5个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">WOW32Reserved</span>;                   // +0x00C0  32 位 <span class="hljs-type">Windows</span> 下的保留区域<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CurrentTransactionHandle</span>;        // +0x00C4  当前事务的句柄<br>    // 其他字段...<br>&#125; <span class="hljs-type">TEB</span>;<br><br>typedef struct _CLIENT_ID &#123;<br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueProcess</span>;  // 进程<span class="hljs-type">ID</span><br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueThread</span>;   // 线程<span class="hljs-type">ID</span><br>&#125; <span class="hljs-type">CLIENT_ID</span>;<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="and和or指令"><a href="#and和or指令" class="headerlink" title="and和or指令"></a>and和or指令</h3><p>就是和Python语言中的and和or一样的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,01100011B<br>and al,00000001B<br>;这个时候al的值为00000001B,常用的就是指定对象的位设为0<br><br>;这样or就是指定对象的位设为1<br></code></pre></td></tr></table></figure>
+<h3 id="5-2-PEB"><a href="#5-2-PEB" class="headerlink" title="5.2 PEB"></a>5.2 PEB</h3><p><code>PEB</code>（Process Environment Block）是每个进程在 Windows 系统中都有的一个数据结构，包含了与进程有关的重要信息。Windows 内核将其保存在进程的虚拟地址空间中，通常位于进程的基址附近。<code>PEB</code> 结构在进程的生命周期中是唯一的。</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef struct _PEB &#123;<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">InheritedAddressSpace</span>;             // +0x000  是否继承地址空间<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">ReadImageFileExecOptions</span>;          // +0x001  读取映像文件执行选项<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">BeingDebugged</span>;                     // +0x002  是否正在调试<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">Spare</span>;                             // +0x003  保留字段<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Mutant</span>;                            // +0x004  进程的 <span class="hljs-type">Mutant</span><br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageBaseAddress</span>;                  // +0x008  映像基地址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Ldr</span>;                               // +0x00C  加载器的地址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessParameters</span>;                 // +0x010  进程参数（指向 `<span class="hljs-type">RTL_USER_PROCESS_PARAMETERS</span>`）<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SubSystemData</span>;                     // +0x014  子系统数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessHeap</span>;                       // +0x018  进程堆<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebLock</span>;                       // +0x01C  快速 <span class="hljs-type">PEB</span> 锁<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebLockRoutine</span>;                // +0x020  快速 <span class="hljs-type">PEB</span> 锁例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebUnlockRoutine</span>;              // +0x024  快速 <span class="hljs-type">PEB</span> 解锁例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">EnvironmentUpdateCount</span>;            // +0x028  环境更新计数<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">KernelCallbackTable</span>;               // +0x02C  内核回调表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SystemReserved</span>;                    // +0x030  系统保留区域<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Spare2</span>;                            // +0x034  保留字段<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FreeList</span>;                          // +0x038  空闲列表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionCounter</span>;               // +0x03C  <span class="hljs-type">TLS</span> 扩展计数器<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsBitmap</span>;                         // +0x040  <span class="hljs-type">TLS</span> 位图<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsBitmapBits</span>[2];                  // +0x044  <span class="hljs-type">TLS</span> 位图位<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ReadOnlySharedMemoryBase</span>;          // +0x04C  只读共享内存基址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HotpatchInformation</span>;               // +0x050  热补丁信息<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ReadOnlyStaticServerData</span>;          // +0x054  只读静态服务器数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">AnsiCodePageData</span>;                  // +0x058  <span class="hljs-type">ANSI</span> 代码页数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OemCodePageData</span>;                   // +0x05C  <span class="hljs-type">OEM</span> 代码页数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">UnicodeCaseTableData</span>;              // +0x060  <span class="hljs-type">Unicode</span> 大小写转换表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NumberOfProcessors</span>;                // +0x064  处理器数量<br>    <br>    // 以下字段通常位于更高的内存偏移<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NtGlobalFlag</span>;                      // +0x068  <span class="hljs-type">NtGlobalFlag</span><br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">CriticalSectionTimeout</span>;            // +0x06C  临界区超时<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapSegmentReserve</span>;                // +0x070  堆段保留空间<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapSegmentCommit</span>;                 // +0x074  堆段提交空间<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapDeCommitTotalFreeThreshold</span>;    // +0x078  堆释放阈值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapDeCommitFreeBlockThreshold</span>;    // +0x07C  堆释放块阈值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NumberOfHeaps</span>;                     // +0x080  堆的数量<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">MaximumNumberOfHeaps</span>;              // +0x084  最大堆数量<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessHeaps</span>;                      // +0x088  进程堆数组<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiSharedHandleTable</span>;              // +0x08C  <span class="hljs-type">GDI</span> 共享句柄表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessStarterHelper</span>;              // +0x090  进程启动助手<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiDCAttributeList</span>;                // +0x094  <span class="hljs-type">GDI</span> <span class="hljs-type">DC</span> 属性列表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">LoaderLock</span>;                        // +0x098  加载器锁<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSMajorVersion</span>;                    // +0x09C  操作系统主版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSMinorVersion</span>;                    // +0x0A0  操作系统次版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSBuildNumber</span>;                     // +0x0A4  操作系统构建号<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSPlatformId</span>;                      // +0x0A8  操作系统平台标识<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystem</span>;                    // +0x0AC  映像子系统标识<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystemMajorVersion</span>;        // +0x0B0  映像子系统主版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystemMinorVersion</span>;        // +0x0B4  映像子系统次版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageProcessAffinityMask</span>;          // +0x0B8  映像进程亲和性掩码<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiHandleBuffer</span>[34];               // +0x0BC  <span class="hljs-type">GDI</span> 句柄缓冲区<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">PostProcessInitRoutine</span>;            // +0x100  后处理初始化例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionBitmap</span>;                // +0x104  <span class="hljs-type">TLS</span> 扩展位图<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionBitmapBits</span>[32];        // +0x108  <span class="hljs-type">TLS</span> 扩展位图的实际位<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SessionId</span>;                         // +0x148  会话 <span class="hljs-type">ID</span><br>&#125; <span class="hljs-type">PEB</span>;<br></code></pre></td></tr></table></figure>
 
-
-
-<h3 id="转移指令"><a href="#转移指令" class="headerlink" title="转移指令"></a>转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如在汇编中获取该段或函数等的地址<br>main proc<br>	mov eax,offset main<br>	; 这个执行后eax的值为main函数的地址<br>main ENDP<br></code></pre></td></tr></table></figure>
-
-<p>**<code>jmp</code>**无条件转移指令，可以修改<code>ip</code>，也可以同时修改<code>cs和ip</code></p>
-<blockquote>
-<p><code>jmp</code>指令要给出两种信息</p>
-<ol>
-<li>转移的目的地址</li>
-<li>转移的距离(段间转移，段内短转移，段内近转移)</li>
-</ol>
-</blockquote>
-<ol>
-<li><p><code>jmp short 标号(转到标号处执行指令)</code></p>
-<p>这种是<strong>段内短转移</strong>，这个是修改<code>IP</code>所以只能修改到-128~127，标号是转移的目的地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	mov eax,0<br>	jmp short s	;执行该语句会越过add eax,1，所以eax的值为0<br>	add eax,1<br>s:	mov ecx,10 <br></code></pre></td></tr></table></figure>
-</li>
-<li><p><code>jmp near ptr 标号</code>这个是<strong>段内近转移</strong>和上面的功能类似实际是<code>修改IP：IP=ip+16位位移</code></p>
-</li>
-<li><p><code>jmp far ptr 标号</code>实现的是段间转移，又称为远转移</p>
-</li>
-</ol>
-<p>上面的这些是根据位移来转移</p>
+<p>这些是<code>PEB</code>的封装，你可以在<code>ob或xdbg</code>查看它，或有关进程的软件等来查看</p>
+<p>常用的就是<code>0x2,0x68</code>是关于是否调试，值为零显示没有调试，否则为调试</p>
 <h2 id="写一个程序"><a href="#写一个程序" class="headerlink" title="写一个程序"></a>写一个程序</h2><p>从汇编到一个完整的程序步骤：</p>
 <ol>
 <li>编写汇编源程序，后缀文件为<code>asm</code></li>
@@ -806,6 +796,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/03/15/%E6%B7%B7%E6%B7%86/" title="混淆">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">混淆</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

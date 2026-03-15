@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/baimao.jpg">
+  <link rel="icon" href="/img/baimao.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="youduck7">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="VMVM &#x3D; Virtual Machine(虚拟机）在ctf中又叫**[自定义指令集虚拟机]**，也常被叫[字节码虚拟机&#x2F;沙箱虚拟机VMProtect]  白话：程序作者没有让 CPU 直接执行 x86&#x2F;x64 汇编指令，而是自己「发明」了一套全新的、只有这个程序认识的「伪汇编指令（字节码）」，然后写了一个「解释器 (VM)」，让这个解释器去逐条解析、执行这套自定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VM">
+<meta property="og:url" content="http://run521520.github.io/2026/03/15/VM/index.html">
+<meta property="og:site_name" content="run521">
+<meta property="og:description" content="VMVM &#x3D; Virtual Machine(虚拟机）在ctf中又叫**[自定义指令集虚拟机]**，也常被叫[字节码虚拟机&#x2F;沙箱虚拟机VMProtect]  白话：程序作者没有让 CPU 直接执行 x86&#x2F;x64 汇编指令，而是自己「发明」了一套全新的、只有这个程序认识的「伪汇编指令（字节码）」，然后写了一个「解释器 (VM)」，让这个解释器去逐条解析、执行这套自定义">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-15T09:20:26.000Z">
+<meta property="article:modified_time" content="2026-03-15T09:49:18.037Z">
+<meta property="article:author" content="youduck7">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>VM - run521</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/acg.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"run521520.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"python"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":3},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>youduck7</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/R1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-15 17:20" pubdate>
+          2026年3月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          102 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">VM</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h1><p>VM &#x3D; Virtual Machine(虚拟机）在<code>ctf</code>中又叫**[自定义指令集虚拟机]**，也常被叫[字节码虚拟机&#x2F;沙箱虚拟机<code>VMProtect] </code></p>
+<p>白话：<strong>程序作者没有让 CPU 直接执行 x86&#x2F;x64 汇编指令，而是自己「发明」了一套全新的、只有这个程序认识的「伪汇编指令（字节码）」，然后写了一个「解释器 (VM)」，让这个解释器去逐条解析、执行这套自定义指令</strong></p>
+<blockquote>
+<p>  <strong>正常的逆向题</strong>：程序编译后，直接是 <strong>CPU 能识别的 x86&#x2F;x64 原生汇编指令</strong>（比如<code>mov/ push/ pop/ add/ call</code>），你用 IDA&#x2F;GDB 打开，直接能看到熟悉的汇编代码，能直接看懂逻辑、找 flag。</p>
+</blockquote>
+<blockquote>
+<p>  <strong>VM 保护的逆向题</strong>：</p>
+<p>  程序编译后，<strong>核心逻辑不再是原生汇编</strong>，而是：</p>
+<ol>
+<li>作者写了一堆 <strong>自定义的字节码指令</strong>（比如<code>0x01=赋值、0x02=加法、0x03=比较、0x04=循环</code>，指令值 &#x2F; 含义都是作者自己定的）；</li>
+<li>这些字节码指令，被<strong>打包成一段指令流</strong>，藏在程序的某个地方（内存 &#x2F; 数据段）；</li>
+<li>程序的主逻辑，就是一个 <strong>VM 解释器</strong>（随便一个函数可能就是这个解释器的核心！）；</li>
+<li>程序运行时：CPU 只执行「VM 解释器」的原生汇编，<strong>解释器再逐条解析、执行自定义的字节码指令</strong>，最终完成核心功能（比如校验 flag）。</li>
+</ol>
+<p>  核心一句话：<strong>VM 是「套娃」，CPU 执行解释器，解释器执行自定义指令，你要逆向的是「自定义指令的含义」+「指令流的逻辑」</strong>。</p>
+</blockquote>
+<p>程序运行时通过解释操作码(opcode)选择对应的函数(handle)执行。</p>
+<hr>
+<h2 id="一套-VM-虚拟机-5-个固定组成部分"><a href="#一套-VM-虚拟机-5-个固定组成部分" class="headerlink" title="一套 VM 虚拟机 &#x3D; 5 个固定组成部分"></a>一套 VM 虚拟机 &#x3D; 5 个固定组成部分</h2><p>常见的是**<code>vm_init</code>**代表的是对虚拟机的环境进行初始化的部分</p>
+<p>其次就是**<code>dispatcher</code><strong>部分，用于解释</strong><code>opcode</code><strong>取指并分发，就是通过</strong><code>opcode</code>**来进行自定义操作的指令</p>
+<p>最正常的方法就是分析成汇编-&gt;逆向回去</p>
+<p>还有就是用<code>Z3</code>来爆破</p>
+<p>或者用<code>Hook</code>来修改内存，进程等操作来获取</p>
+<p>但是这里我用的是最正规的操作</p>
+<h2 id="列题"><a href="#列题" class="headerlink" title="列题"></a>列题</h2><h3 id="isctf2022EasyyyyyyVM"><a href="#isctf2022EasyyyyyyVM" class="headerlink" title="isctf2022EasyyyyyyVM"></a>isctf2022EasyyyyyyVM</h3><p>这个题是我开始VM入门的题，做完之后就知道的VM题的大致流程了</p>
+<p>这里又重新做了一遍</p>
+<p>用<code>ida</code>打开之后找到<code>main</code>函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> __cdecl <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **argv, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **envp)</span></span><br><span class="hljs-function"></span>&#123;<br>  _OWORD *v3; <span class="hljs-comment">// esi</span><br>  <span class="hljs-type">char</span> *i; <span class="hljs-comment">// eax</span><br>  <span class="hljs-type">int</span> v5; <span class="hljs-comment">// ecx</span><br>  <span class="hljs-type">int</span> v6; <span class="hljs-comment">// esi</span><br>  __int128 v8[<span class="hljs-number">24</span>]; <span class="hljs-comment">// [esp+4h] [ebp-188h] BYREF</span><br>  <span class="hljs-type">char</span> v9; <span class="hljs-comment">// [esp+184h] [ebp-8h]</span><br><br>  v3 = <span class="hljs-built_in">malloc</span>(<span class="hljs-number">0x20u</span>);<br>  v8[<span class="hljs-number">0</span>] = xmmword_4031D0;<br>  v8[<span class="hljs-number">1</span>] = xmmword_403270;<br>  v9 = <span class="hljs-number">118</span>;<br>  v8[<span class="hljs-number">2</span>] = xmmword_403220;<br>  v8[<span class="hljs-number">3</span>] = xmmword_403230;<br>  v8[<span class="hljs-number">4</span>] = xmmword_403200;<br>  v8[<span class="hljs-number">5</span>] = xmmword_403300;<br>  v8[<span class="hljs-number">6</span>] = xmmword_403250;<br>  v8[<span class="hljs-number">7</span>] = xmmword_4032B0;<br>  v8[<span class="hljs-number">8</span>] = xmmword_403330;<br>  v8[<span class="hljs-number">9</span>] = xmmword_4031F0;<br>  v8[<span class="hljs-number">10</span>] = xmmword_4032C0;<br>  v8[<span class="hljs-number">11</span>] = xmmword_403310;<br>  v8[<span class="hljs-number">12</span>] = xmmword_403240;<br>  v8[<span class="hljs-number">13</span>] = xmmword_4032F0;<br>  v8[<span class="hljs-number">14</span>] = xmmword_403340;<br>  v8[<span class="hljs-number">15</span>] = xmmword_403260;<br>  v8[<span class="hljs-number">16</span>] = xmmword_<span class="hljs-number">4032E0</span>;<br>  v8[<span class="hljs-number">17</span>] = xmmword_4032D0;<br>  v8[<span class="hljs-number">18</span>] = xmmword_<span class="hljs-number">4031E0</span>;<br>  v8[<span class="hljs-number">19</span>] = xmmword_403290;<br>  v8[<span class="hljs-number">20</span>] = xmmword_4032A0;<br>  v8[<span class="hljs-number">21</span>] = xmmword_403210;<br>  v8[<span class="hljs-number">22</span>] = xmmword_403280;<br>  v8[<span class="hljs-number">23</span>] = xmmword_403320;<br>  <span class="hljs-built_in">sub_401010</span>(std::cout, <span class="hljs-string">&quot;please in put your flag\n&quot;</span>);<br>  *v3 = <span class="hljs-number">0</span>i64;<br>  v3[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>i64;<br>  *((_BYTE *)v3 + <span class="hljs-number">32</span>) = <span class="hljs-number">0</span>;<br>  <span class="hljs-built_in">sub_401200</span>(std::cin, <span class="hljs-number">-1</span>, v3);<br>  <span class="hljs-keyword">for</span> ( i = (<span class="hljs-type">char</span> *)v8 + <span class="hljs-number">1</span>; ; i += <span class="hljs-number">3</span> )<br>  &#123;<br>    <span class="hljs-keyword">while</span> ( <span class="hljs-number">1</span> )<br>    &#123;<br>      <span class="hljs-keyword">while</span> ( *(i - <span class="hljs-number">1</span>) == <span class="hljs-number">1</span> )<br>      &#123;<br>        *((_BYTE *)v3 + *i) += i[<span class="hljs-number">1</span>];<br>        i += <span class="hljs-number">3</span>;<br>      &#125;<br>      <span class="hljs-keyword">if</span> ( *(i - <span class="hljs-number">1</span>) != <span class="hljs-number">4</span> )<br>        <span class="hljs-keyword">break</span>;<br>      *((_BYTE *)v3 + *i) -= i[<span class="hljs-number">1</span>];<br>      i += <span class="hljs-number">3</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> ( *(i - <span class="hljs-number">1</span>) != <span class="hljs-number">5</span> )<br>      <span class="hljs-keyword">break</span>;<br>    *((_BYTE *)v3 + *i) ^= i[<span class="hljs-number">1</span>];<br>  &#125;<br>  v5 = <span class="hljs-number">0</span>;<br>  v6 = (<span class="hljs-type">char</span> *)v3 - byte_405000;<br>  <span class="hljs-keyword">while</span> ( byte_405000[v5 + v6] == byte_405000[v5] )<br>  &#123;<br>    <span class="hljs-keyword">if</span> ( ++v5 &gt;= <span class="hljs-number">32</span> )<br>    &#123;<br>      <span class="hljs-built_in">sub_401010</span>(std::cout, <span class="hljs-string">&quot;you are right!\n&quot;</span>);<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">sub_401010</span>(std::cout, <span class="hljs-string">&quot;no!\n&quot;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>看到这个程序的时候，一开始我也不会，因为常见的<code>VM</code>题用<code>switch-case 或 if</code>但是这个题用的是<code>while 加 if</code>看别的师傅的WP说这个题是比较裸漏的，就是逻辑比较明确，没有别的影响</p>
+<p>先找<code>opcode</code>解释操作码，这里是<code>v8</code>，然后看一下<code>flag</code>是<code>v3</code>，最后<code>flag 和 byte_405000</code>比较，一样的话打印成功，所以操作后的<code>flag</code>就是<code>byte_405000</code>了</p>
+<p>接着就是循环里面的操作了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> ( i = (<span class="hljs-type">char</span> *)v8 + <span class="hljs-number">1</span>; ; i += <span class="hljs-number">3</span> )<br>&#123;<br>  <span class="hljs-keyword">while</span> ( <span class="hljs-number">1</span> )<br>  &#123;<br>    <span class="hljs-keyword">while</span> ( *(i - <span class="hljs-number">1</span>) == <span class="hljs-number">1</span> )<br>    &#123;<br>      *((_BYTE *)v3 + *i) += i[<span class="hljs-number">1</span>];<br>      i += <span class="hljs-number">3</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> ( *(i - <span class="hljs-number">1</span>) != <span class="hljs-number">4</span> )<br>      <span class="hljs-keyword">break</span>;<br>    *((_BYTE *)v3 + *i) -= i[<span class="hljs-number">1</span>];<br>    i += <span class="hljs-number">3</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> ( *(i - <span class="hljs-number">1</span>) != <span class="hljs-number">5</span> )<br>    <span class="hljs-keyword">break</span>;<br>  *((_BYTE *)v3 + *i) ^= i[<span class="hljs-number">1</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在循环中，一次循环是3个字节，然后可以看到是通过<code>*(i-1)</code>来执行操作的，可以把<code>*(i-1) 看作op</code>在操作中<code>*i可以看作指针</code>，<code>i[1] 可以看作操作数</code></p>
+<p>所以可以把上面的变为:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> op , idx , imm;<br><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = v8 + <span class="hljs-number">1</span>; ; i += <span class="hljs-number">3</span>)&#123;<br>    op = *(i<span class="hljs-number">-1</span>);<br>    idx= *i;<br>    imm= i[<span class="hljs-number">1</span>];<br>    <br>    <span class="hljs-keyword">switch</span>(op)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>            flag[idx] += imm;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>            flag[idx] -= imm;<br>           	<span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>            flag[idx] ^= imm;<br>            <span class="hljs-keyword">break</span>;<br>    &#125;  <br>&#125;<br><br><span class="hljs-keyword">if</span> (!<span class="hljs-built_in">strcmp</span>(flag,byte_405000))&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;right!&quot;</span>);<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Wrong!!!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>所以 <code>op == 1</code> 是 <code>add</code> </p>
+<pre><code class="hljs">`op == 4`是 `sub`
+
+`op == 5`是 `xor`
+</code></pre>
+<p>所以正向的流程就是：</p>
+<p>这个<code>opcode</code>是从网上拿的，一个一个的区分太麻烦了</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">unsigned char opcode[<span class="hljs-number">384</span>] = &#123;<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x31</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x03</span>, <span class="hljs-number">0x95</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0x59</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x16</span>, <span class="hljs-number">0xf5</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x15</span>, <span class="hljs-number">0x22</span>, <span class="hljs-number">0x01</span>,<br>	<span class="hljs-number">0x00</span>, <span class="hljs-number">0x8b</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x14</span>, <span class="hljs-number">0x40</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0xf7</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x92</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0e</span>, <span class="hljs-number">0x7c</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x08</span>,<br>	<span class="hljs-number">0x21</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0xd2</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x3d</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1b</span>, <span class="hljs-number">0xeb</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-number">0x27</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x14</span>, <span class="hljs-number">0x04</span>,<br>	<span class="hljs-number">0x01</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0x92</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x14</span>, <span class="hljs-number">0x59</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0xec</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x16</span>, <span class="hljs-number">0x50</span>, <span class="hljs-number">0x04</span>,<br>	<span class="hljs-number">0x15</span>, <span class="hljs-number">0xc3</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0xe4</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x03</span>, <span class="hljs-number">0xc6</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x03</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x04</span>,<br>	<span class="hljs-number">0xa9</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0xe6</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0xad</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x12</span>, <span class="hljs-number">0xe4</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x15</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-number">0x33</span>,<br>	<span class="hljs-number">0x01</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1b</span>, <span class="hljs-number">0x22</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0xf0</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0xe7</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1d</span>, <span class="hljs-number">0xba</span>, <span class="hljs-number">0x05</span>,<br>	<span class="hljs-number">0x0d</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0b</span>, <span class="hljs-number">0x20</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0b</span>, <span class="hljs-number">0x84</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0xd9</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0xe5</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>,<br>	<span class="hljs-number">0xbe</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x0d</span>, <span class="hljs-number">0x72</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x32</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x21</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0xb6</span>,<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x0c</span>, <span class="hljs-number">0x0c</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0x65</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0xd9</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x2d</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-number">0xe4</span>, <span class="hljs-number">0x01</span>,<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x73</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x09</span>, <span class="hljs-number">0xfe</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0d</span>, <span class="hljs-number">0x0a</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1f</span>, <span class="hljs-number">0x5f</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x11</span>, <span class="hljs-number">0x61</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x18</span>,<br>	<span class="hljs-number">0xbb</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x0e</span>, <span class="hljs-number">0xd4</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1f</span>, <span class="hljs-number">0xb2</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0x24</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x0c</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x15</span>, <span class="hljs-number">0x84</span>,<br>	<span class="hljs-number">0x05</span>, <span class="hljs-number">0x15</span>, <span class="hljs-number">0xce</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1a</span>, <span class="hljs-number">0xbb</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0x45</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1b</span>, <span class="hljs-number">0x91</span>, <span class="hljs-number">0x04</span>,<br>	<span class="hljs-number">0x14</span>, <span class="hljs-number">0x89</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0xca</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x09</span>, <span class="hljs-number">0x6e</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1c</span>, <span class="hljs-number">0x2b</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0xf7</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1d</span>,<br>	<span class="hljs-number">0x39</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1a</span>, <span class="hljs-number">0xbc</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0e</span>, <span class="hljs-number">0xcd</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1a</span>, <span class="hljs-number">0x4a</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0xdc</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0xd3</span>,<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x0b</span>, <span class="hljs-number">0x98</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0xc1</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0xce</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0xf7</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0xc4</span>, <span class="hljs-number">0x05</span>,<br>	<span class="hljs-number">0x19</span>, <span class="hljs-number">0xf2</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x07</span>, <span class="hljs-number">0x65</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1d</span>,<br>	<span class="hljs-number">0x16</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0xb9</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0x68</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0x71</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x96</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x1b</span>,<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x1d</span>, <span class="hljs-number">0xdc</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0x57</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x17</span>, <span class="hljs-number">0x8f</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x09</span>, <span class="hljs-number">0x49</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0xc0</span>, <span class="hljs-number">0x01</span>,<br>	<span class="hljs-number">0x0d</span>, <span class="hljs-number">0x9c</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x97</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x6b</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x1f</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0xab</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x10</span>,<br>	<span class="hljs-number">0x6a</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0xf1</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x1b</span>, <span class="hljs-number">0x65</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x09</span>, <span class="hljs-number">0xaa</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1b</span>, <span class="hljs-number">0xb0</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x12</span>,<br>	<span class="hljs-number">0x04</span>, <span class="hljs-number">0x1c</span>, <span class="hljs-number">0x4c</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x02</span>, <span class="hljs-number">0x9b</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x0e</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0x82</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x07</span>, <span class="hljs-number">0x04</span>,<br>	<span class="hljs-number">0x0c</span>, <span class="hljs-number">0xb7</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x10</span>, <span class="hljs-number">0x6f</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x72</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1f</span>, <span class="hljs-number">0xad</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x1e</span>, <span class="hljs-number">0x07</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x0d</span>,<br>	<span class="hljs-number">0x92</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0xcd</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x18</span>, <span class="hljs-number">0xe8</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x0b</span>, <span class="hljs-number">0x43</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0xd7</span>, <span class="hljs-number">0x04</span>, <span class="hljs-number">0x1c</span>, <span class="hljs-number">0xb0</span>,<br>&#125;<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdint.h&gt;</span></span><br><br><span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> opcode[<span class="hljs-number">384</span>] = &#123;...&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>     <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> off = <span class="hljs-number">0</span>; off<span class="hljs-number">+2</span>&lt;<span class="hljs-number">384</span>; off+=<span class="hljs-number">3</span>)&#123;<br>        <span class="hljs-type">uint8_t</span> op  = opcode[off<span class="hljs-number">+0</span>];<br>        <span class="hljs-type">uint8_t</span> idx = opcode[off<span class="hljs-number">+1</span>];<br>        <span class="hljs-type">uint8_t</span> imm = opcode[off<span class="hljs-number">+2</span>];<br>        <span class="hljs-type">const</span> <span class="hljs-type">char</span>* s = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">switch</span>(op)&#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>                s = <span class="hljs-string">&quot;add&quot;</span>;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>                s = <span class="hljs-string">&quot;sub&quot;</span>;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>                s = <span class="hljs-string">&quot;xor&quot;</span>;<br>            <span class="hljs-keyword">default</span>:<br>                <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%03zu %s flag[%02u] , 0x%02X\n&quot;</span>,off,s,idx,imm);<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">000 </span>sub flag[<span class="hljs-number">15</span>] , <span class="hljs-number">0</span>x31<br><span class="hljs-symbol">003 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">03</span>] , <span class="hljs-number">0</span>x95<br><span class="hljs-symbol">006 </span>sub flag[<span class="hljs-number">02</span>] , <span class="hljs-number">0</span>x59<br><span class="hljs-symbol">009 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">22</span>] , <span class="hljs-number">0</span>xF5<br><span class="hljs-symbol">012 </span>add flag[<span class="hljs-number">21</span>] , <span class="hljs-number">0</span>x22<br><span class="hljs-symbol">015 </span>add flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>x8B<br><span class="hljs-symbol">018 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">20</span>] , <span class="hljs-number">0</span>x40<br><span class="hljs-symbol">021 </span>add flag[<span class="hljs-number">15</span>] , <span class="hljs-number">0</span>xF7<br><span class="hljs-symbol">024 </span>sub flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>x92<br><span class="hljs-symbol">027 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">14</span>] , <span class="hljs-number">0</span>x7C<br><span class="hljs-symbol">030 </span>sub flag[<span class="hljs-number">08</span>] , <span class="hljs-number">0</span>x21<br><span class="hljs-symbol">033 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">02</span>] , <span class="hljs-number">0</span>xD2<br><span class="hljs-symbol">036 </span>add flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>x3D<br><span class="hljs-symbol">039 </span>add flag[<span class="hljs-number">27</span>] , <span class="hljs-number">0</span>xEB<br><span class="hljs-symbol">042 </span>sub flag[<span class="hljs-number">10</span>] , <span class="hljs-number">0</span>x27<br><span class="hljs-symbol">045 </span>add flag[<span class="hljs-number">20</span>] , <span class="hljs-number">0</span>x04<br><span class="hljs-symbol">048 </span>add flag[<span class="hljs-number">08</span>] , <span class="hljs-number">0</span>x10<br><span class="hljs-symbol">051 </span>sub flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>x92<br><span class="hljs-symbol">054 </span>sub flag[<span class="hljs-number">20</span>] , <span class="hljs-number">0</span>x59<br><span class="hljs-symbol">057 </span>sub flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>xEC<br><span class="hljs-symbol">060 </span>add flag[<span class="hljs-number">22</span>] , <span class="hljs-number">0</span>x50<br><span class="hljs-symbol">063 </span>sub flag[<span class="hljs-number">21</span>] , <span class="hljs-number">0</span>xC3<br><span class="hljs-symbol">066 </span>sub flag[<span class="hljs-number">06</span>] , <span class="hljs-number">0</span>xE4<br><span class="hljs-symbol">069 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">03</span>] , <span class="hljs-number">0</span>xC6<br><span class="hljs-symbol">072 </span>add flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>x05<br><span class="hljs-symbol">075 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>x03<br><span class="hljs-symbol">078 </span>sub flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>xA9<br><span class="hljs-symbol">081 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">05</span>] , <span class="hljs-number">0</span>xE6<br><span class="hljs-symbol">084 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>xAD<br><span class="hljs-symbol">087 </span>sub flag[<span class="hljs-number">18</span>] , <span class="hljs-number">0</span>xE4<br><span class="hljs-symbol">090 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">21</span>] , <span class="hljs-number">0</span>x0A<br><span class="hljs-symbol">093 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">10</span>] , <span class="hljs-number">0</span>x33<br><span class="hljs-symbol">096 </span>add flag[<span class="hljs-number">02</span>] , <span class="hljs-number">0</span>x1E<br><span class="hljs-symbol">099 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">27</span>] , <span class="hljs-number">0</span>x22<br><span class="hljs-symbol">102 </span>add flag[<span class="hljs-number">25</span>] , <span class="hljs-number">0</span>xF0<br><span class="hljs-symbol">105 </span>add flag[<span class="hljs-number">25</span>] , <span class="hljs-number">0</span>xE7<br><span class="hljs-symbol">108 </span>sub flag[<span class="hljs-number">29</span>] , <span class="hljs-number">0</span>xBA<br><span class="hljs-symbol">111 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">13</span>] , <span class="hljs-number">0</span>x01<br><span class="hljs-symbol">114 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">11</span>] , <span class="hljs-number">0</span>x20<br><span class="hljs-symbol">117 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">11</span>] , <span class="hljs-number">0</span>x84<br><span class="hljs-symbol">120 </span>add flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>xD9<br><span class="hljs-symbol">123 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>xE5<br><span class="hljs-symbol">126 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>xBE<br><span class="hljs-symbol">129 </span>sub flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>x19<br><span class="hljs-symbol">132 </span>sub flag[<span class="hljs-number">13</span>] , <span class="hljs-number">0</span>x72<br><span class="hljs-symbol">135 </span>sub flag[<span class="hljs-number">19</span>] , <span class="hljs-number">0</span>x32<br><span class="hljs-symbol">138 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>x21<br><span class="hljs-symbol">141 </span>sub flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>xB6<br><span class="hljs-symbol">144 </span>sub flag[<span class="hljs-number">12</span>] , <span class="hljs-number">0</span>x0C<br><span class="hljs-symbol">147 </span>add flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>x65<br><span class="hljs-symbol">150 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">08</span>] , <span class="hljs-number">0</span>xD9<br><span class="hljs-symbol">153 </span>sub flag[<span class="hljs-number">19</span>] , <span class="hljs-number">0</span>x2D<br><span class="hljs-symbol">156 </span>add flag[<span class="hljs-number">10</span>] , <span class="hljs-number">0</span>xE4<br><span class="hljs-symbol">159 </span>add flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>x73<br><span class="hljs-symbol">162 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">09</span>] , <span class="hljs-number">0</span>xFE<br><span class="hljs-symbol">165 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">13</span>] , <span class="hljs-number">0</span>x0A<br><span class="hljs-symbol">168 </span>sub flag[<span class="hljs-number">31</span>] , <span class="hljs-number">0</span>x5F<br><span class="hljs-symbol">171 </span>add flag[<span class="hljs-number">17</span>] , <span class="hljs-number">0</span>x61<br><span class="hljs-symbol">174 </span>add flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>xBB<br><span class="hljs-symbol">177 </span>sub flag[<span class="hljs-number">14</span>] , <span class="hljs-number">0</span>xD4<br><span class="hljs-symbol">180 </span>sub flag[<span class="hljs-number">31</span>] , <span class="hljs-number">0</span>xB2<br><span class="hljs-symbol">183 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>x24<br><span class="hljs-symbol">186 </span>add flag[<span class="hljs-number">12</span>] , <span class="hljs-number">0</span>x19<br><span class="hljs-symbol">189 </span>sub flag[<span class="hljs-number">21</span>] , <span class="hljs-number">0</span>x84<br><span class="hljs-symbol">192 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">21</span>] , <span class="hljs-number">0</span>xCE<br><span class="hljs-symbol">195 </span>add flag[<span class="hljs-number">26</span>] , <span class="hljs-number">0</span>xBB<br><span class="hljs-symbol">198 </span>sub flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>x0F<br><span class="hljs-symbol">201 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">02</span>] , <span class="hljs-number">0</span>x45<br><span class="hljs-symbol">204 </span>sub flag[<span class="hljs-number">27</span>] , <span class="hljs-number">0</span>x91<br><span class="hljs-symbol">207 </span>sub flag[<span class="hljs-number">20</span>] , <span class="hljs-number">0</span>x89<br><span class="hljs-symbol">210 </span>add flag[<span class="hljs-number">08</span>] , <span class="hljs-number">0</span>xCA<br><span class="hljs-symbol">213 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">09</span>] , <span class="hljs-number">0</span>x6E<br><span class="hljs-symbol">216 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">28</span>] , <span class="hljs-number">0</span>x2B<br><span class="hljs-symbol">219 </span>add flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>xF7<br><span class="hljs-symbol">222 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">29</span>] , <span class="hljs-number">0</span>x39<br><span class="hljs-symbol">225 </span>add flag[<span class="hljs-number">26</span>] , <span class="hljs-number">0</span>xBC<br><span class="hljs-symbol">228 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">14</span>] , <span class="hljs-number">0</span>xCD<br><span class="hljs-symbol">231 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">26</span>] , <span class="hljs-number">0</span>x4A<br><span class="hljs-symbol">234 </span>sub flag[<span class="hljs-number">06</span>] , <span class="hljs-number">0</span>xDC<br><span class="hljs-symbol">237 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>xD3<br><span class="hljs-symbol">240 </span>sub flag[<span class="hljs-number">11</span>] , <span class="hljs-number">0</span>x98<br><span class="hljs-symbol">243 </span>add flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>xC1<br><span class="hljs-symbol">246 </span>add flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>xCE<br><span class="hljs-symbol">249 </span>add flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>xF7<br><span class="hljs-symbol">252 </span>sub flag[<span class="hljs-number">15</span>] , <span class="hljs-number">0</span>xC4<br><span class="hljs-symbol">255 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">25</span>] , <span class="hljs-number">0</span>xF2<br><span class="hljs-symbol">258 </span>sub flag[<span class="hljs-number">15</span>] , <span class="hljs-number">0</span>x0F<br><span class="hljs-symbol">261 </span>add flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>x06<br><span class="hljs-symbol">264 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>x0F<br><span class="hljs-symbol">267 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">07</span>] , <span class="hljs-number">0</span>x65<br><span class="hljs-symbol">270 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">29</span>] , <span class="hljs-number">0</span>x16<br><span class="hljs-symbol">273 </span>sub flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>xB9<br><span class="hljs-symbol">276 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>x68<br><span class="hljs-symbol">279 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>x71<br><span class="hljs-symbol">282 </span>add flag[<span class="hljs-number">19</span>] , <span class="hljs-number">0</span>x96<br><span class="hljs-symbol">285 </span>add flag[<span class="hljs-number">19</span>] , <span class="hljs-number">0</span>x1B<br><span class="hljs-symbol">288 </span>sub flag[<span class="hljs-number">29</span>] , <span class="hljs-number">0</span>xDC<br><span class="hljs-symbol">291 </span>sub flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>x57<br><span class="hljs-symbol">294 </span>add flag[<span class="hljs-number">23</span>] , <span class="hljs-number">0</span>x8F<br><span class="hljs-symbol">297 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">09</span>] , <span class="hljs-number">0</span>x49<br><span class="hljs-symbol">300 </span>sub flag[<span class="hljs-number">06</span>] , <span class="hljs-number">0</span>xC0<br><span class="hljs-symbol">303 </span>add flag[<span class="hljs-number">13</span>] , <span class="hljs-number">0</span>x9C<br><span class="hljs-symbol">306 </span>add flag[<span class="hljs-number">05</span>] , <span class="hljs-number">0</span>x97<br><span class="hljs-symbol">309 </span>sub flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>x6B<br><span class="hljs-symbol">312 </span>add flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>x1F<br><span class="hljs-symbol">315 </span>sub flag[<span class="hljs-number">25</span>] , <span class="hljs-number">0</span>xAB<br><span class="hljs-symbol">318 </span>sub flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>x6A<br><span class="hljs-symbol">321 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">01</span>] , <span class="hljs-number">0</span>xF1<br><span class="hljs-symbol">324 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">27</span>] , <span class="hljs-number">0</span>x65<br><span class="hljs-symbol">327 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">09</span>] , <span class="hljs-number">0</span>xAA<br><span class="hljs-symbol">330 </span>add flag[<span class="hljs-number">27</span>] , <span class="hljs-number">0</span>xB0<br><span class="hljs-symbol">333 </span>sub flag[<span class="hljs-number">01</span>] , <span class="hljs-number">0</span>x12<br><span class="hljs-symbol">336 </span>sub flag[<span class="hljs-number">28</span>] , <span class="hljs-number">0</span>x4C<br><span class="hljs-symbol">339 </span>add flag[<span class="hljs-number">02</span>] , <span class="hljs-number">0</span>x9B<br><span class="hljs-symbol">342 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">19</span>] , <span class="hljs-number">0</span>x0E<br><span class="hljs-symbol">345 </span>add flag[<span class="hljs-number">08</span>] , <span class="hljs-number">0</span>x82<br><span class="hljs-symbol">348 </span>add flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>x07<br><span class="hljs-symbol">351 </span>sub flag[<span class="hljs-number">12</span>] , <span class="hljs-number">0</span>xB7<br><span class="hljs-symbol">354 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">16</span>] , <span class="hljs-number">0</span>x6F<br><span class="hljs-symbol">357 </span>sub flag[<span class="hljs-number">00</span>] , <span class="hljs-number">0</span>x72<br><span class="hljs-symbol">360 </span>add flag[<span class="hljs-number">31</span>] , <span class="hljs-number">0</span>xAD<br><span class="hljs-symbol">363 </span>add flag[<span class="hljs-number">30</span>] , <span class="hljs-number">0</span>x07<br><span class="hljs-symbol">366 </span><span class="hljs-keyword">xor</span> flag[<span class="hljs-number">13</span>] , <span class="hljs-number">0</span>x92<br><span class="hljs-symbol">369 </span>sub flag[<span class="hljs-number">01</span>] , <span class="hljs-number">0</span>xCD<br><span class="hljs-symbol">372 </span>sub flag[<span class="hljs-number">24</span>] , <span class="hljs-number">0</span>xE8<br><span class="hljs-symbol">375 </span>add flag[<span class="hljs-number">11</span>] , <span class="hljs-number">0</span>x43<br><span class="hljs-symbol">378 </span>add flag[<span class="hljs-number">04</span>] , <span class="hljs-number">0</span>xD7<br><span class="hljs-symbol">381 </span>sub flag[<span class="hljs-number">28</span>] , <span class="hljs-number">0</span>xB0<br></code></pre></td></tr></table></figure>
+
+<p>上面的就是正向流程了，反过来就是逆向流程了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdint.h&gt;</span></span><br><br>unsingned <span class="hljs-type">char</span> opcode[] = &#123;...&#125;;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> flag[] =&#123;<br>    <span class="hljs-number">0x65</span>, <span class="hljs-number">0xE2</span>, <span class="hljs-number">0x57</span>, <span class="hljs-number">0x60</span>, <span class="hljs-number">0xCE</span>, <span class="hljs-number">0x1E</span>, <span class="hljs-number">0xE1</span>, <span class="hljs-number">0x5C</span>, <span class="hljs-number">0x4B</span>, <span class="hljs-number">0x4B</span>, <span class="hljs-number">0x23</span>, <span class="hljs-number">0x6D</span>, <span class="hljs-number">0x8C</span>, <span class="hljs-number">0xC2</span>, <span class="hljs-number">0xBC</span>, <span class="hljs-number">0x58</span>, <br>    <span class="hljs-number">0x84</span>, <span class="hljs-number">0x92</span>, <span class="hljs-number">0x7E</span>, <span class="hljs-number">0x8C</span>, <span class="hljs-number">0x43</span>, <span class="hljs-number">0xDB</span>, <span class="hljs-number">0x15</span>, <span class="hljs-number">0x71</span>, <span class="hljs-number">0x97</span>, <span class="hljs-number">0x4A</span>, <span class="hljs-number">0xE3</span>, <span class="hljs-number">0xC4</span>, <span class="hljs-number">0x1F</span>, <span class="hljs-number">0x7C</span>, <span class="hljs-number">0xC2</span>, <span class="hljs-number">0xFD</span><br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> len = <span class="hljs-number">0</span>; <span class="hljs-comment">// 这里加一个计数器，因为我现在还没搞懂不加这个计数器idx会泄露</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> off = <span class="hljs-number">381</span>; off&gt;=<span class="hljs-number">0</span>; off-=<span class="hljs-number">3</span>)&#123;<br>        <span class="hljs-keyword">if</span>(len == <span class="hljs-number">384</span>) <span class="hljs-keyword">break</span>;<br>        <span class="hljs-type">uint8_t</span> op  = opcode[off<span class="hljs-number">+0</span>];<br>        <span class="hljs-type">uint8_t</span> idx = opcode[off<span class="hljs-number">+1</span>];<br>        <span class="hljs-type">uint8_t</span> imm = opcode[off<span class="hljs-number">+2</span>];<br>        <span class="hljs-type">const</span> <span class="hljs-type">char</span>* s = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">switch</span>(op)&#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>                s = <span class="hljs-string">&quot;add&quot;</span>;<br>                flag[idx] -= imm;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>                s = <span class="hljs-string">&quot;sub&quot;</span>;<br>                flag[idx] += imm;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>                s = <span class="hljs-string">&quot;xor&quot;</span>;<br>                flag[idx] ^= imm;<br>            <span class="hljs-keyword">default</span>:<br>                <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%03zu %s flag[%02u] , 0x%02X\n&quot;</span>,off,s,idx,imm);<br>        len+=<span class="hljs-number">3</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,flag);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">0381</span> sub flag[<span class="hljs-number">28</span>], <span class="hljs-number">0</span>xB0<br><span class="hljs-attribute">0378</span> add flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>xD7<br><span class="hljs-attribute">0375</span> add flag[<span class="hljs-number">11</span>], <span class="hljs-number">0</span>x43<br><span class="hljs-attribute">0372</span> sub flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>xE8<br><span class="hljs-attribute">0369</span> sub flag[<span class="hljs-number">01</span>], <span class="hljs-number">0</span>xCD<br><span class="hljs-attribute">0366</span> xor flag[<span class="hljs-number">13</span>], <span class="hljs-number">0</span>x92<br><span class="hljs-attribute">0363</span> add flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>x07<br><span class="hljs-attribute">0360</span> add flag[<span class="hljs-number">31</span>], <span class="hljs-number">0</span>xAD<br><span class="hljs-attribute">0357</span> sub flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>x72<br><span class="hljs-attribute">0354</span> xor flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>x6F<br><span class="hljs-attribute">0351</span> sub flag[<span class="hljs-number">12</span>], <span class="hljs-number">0</span>xB7<br><span class="hljs-attribute">0348</span> add flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>x07<br><span class="hljs-attribute">0345</span> add flag[<span class="hljs-number">08</span>], <span class="hljs-number">0</span>x82<br><span class="hljs-attribute">0342</span> xor flag[<span class="hljs-number">19</span>], <span class="hljs-number">0</span>x0E<br><span class="hljs-attribute">0339</span> add flag[<span class="hljs-number">02</span>], <span class="hljs-number">0</span>x9B<br><span class="hljs-attribute">0336</span> sub flag[<span class="hljs-number">28</span>], <span class="hljs-number">0</span>x4C<br><span class="hljs-attribute">0333</span> sub flag[<span class="hljs-number">01</span>], <span class="hljs-number">0</span>x12<br><span class="hljs-attribute">0330</span> add flag[<span class="hljs-number">27</span>], <span class="hljs-number">0</span>xB0<br><span class="hljs-attribute">0327</span> xor flag[<span class="hljs-number">09</span>], <span class="hljs-number">0</span>xAA<br><span class="hljs-attribute">0324</span> xor flag[<span class="hljs-number">27</span>], <span class="hljs-number">0</span>x65<br><span class="hljs-attribute">0321</span> xor flag[<span class="hljs-number">01</span>], <span class="hljs-number">0</span>xF1<br><span class="hljs-attribute">0318</span> sub flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>x6A<br><span class="hljs-attribute">0315</span> sub flag[<span class="hljs-number">25</span>], <span class="hljs-number">0</span>xAB<br><span class="hljs-attribute">0312</span> add flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>x1F<br><span class="hljs-attribute">0309</span> sub flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>x6B<br><span class="hljs-attribute">0306</span> add flag[<span class="hljs-number">05</span>], <span class="hljs-number">0</span>x97<br><span class="hljs-attribute">0303</span> add flag[<span class="hljs-number">13</span>], <span class="hljs-number">0</span>x9C<br><span class="hljs-attribute">0300</span> sub flag[<span class="hljs-number">06</span>], <span class="hljs-number">0</span>xC0<br><span class="hljs-attribute">0297</span> xor flag[<span class="hljs-number">09</span>], <span class="hljs-number">0</span>x49<br><span class="hljs-attribute">0294</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>x8F<br><span class="hljs-attribute">0291</span> sub flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>x57<br><span class="hljs-attribute">0288</span> sub flag[<span class="hljs-number">29</span>], <span class="hljs-number">0</span>xDC<br><span class="hljs-attribute">0285</span> add flag[<span class="hljs-number">19</span>], <span class="hljs-number">0</span>x1B<br><span class="hljs-attribute">0282</span> add flag[<span class="hljs-number">19</span>], <span class="hljs-number">0</span>x96<br><span class="hljs-attribute">0279</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>x71<br><span class="hljs-attribute">0276</span> xor flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>x68<br><span class="hljs-attribute">0273</span> sub flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>xB9<br><span class="hljs-attribute">0270</span> xor flag[<span class="hljs-number">29</span>], <span class="hljs-number">0</span>x16<br><span class="hljs-attribute">0267</span> xor flag[<span class="hljs-number">07</span>], <span class="hljs-number">0</span>x65<br><span class="hljs-attribute">0264</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>x0F<br><span class="hljs-attribute">0261</span> add flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>x06<br><span class="hljs-attribute">0258</span> sub flag[<span class="hljs-number">15</span>], <span class="hljs-number">0</span>x0F<br><span class="hljs-attribute">0255</span> xor flag[<span class="hljs-number">25</span>], <span class="hljs-number">0</span>xF2<br><span class="hljs-attribute">0252</span> sub flag[<span class="hljs-number">15</span>], <span class="hljs-number">0</span>xC4<br><span class="hljs-attribute">0249</span> add flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>xF7<br><span class="hljs-attribute">0246</span> add flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>xCE<br><span class="hljs-attribute">0243</span> add flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>xC1<br><span class="hljs-attribute">0240</span> sub flag[<span class="hljs-number">11</span>], <span class="hljs-number">0</span>x98<br><span class="hljs-attribute">0237</span> xor flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>xD3<br><span class="hljs-attribute">0234</span> sub flag[<span class="hljs-number">06</span>], <span class="hljs-number">0</span>xDC<br><span class="hljs-attribute">0231</span> xor flag[<span class="hljs-number">26</span>], <span class="hljs-number">0</span>x4A<br><span class="hljs-attribute">0228</span> xor flag[<span class="hljs-number">14</span>], <span class="hljs-number">0</span>xCD<br><span class="hljs-attribute">0225</span> add flag[<span class="hljs-number">26</span>], <span class="hljs-number">0</span>xBC<br><span class="hljs-attribute">0222</span> xor flag[<span class="hljs-number">29</span>], <span class="hljs-number">0</span>x39<br><span class="hljs-attribute">0219</span> add flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>xF7<br><span class="hljs-attribute">0216</span> xor flag[<span class="hljs-number">28</span>], <span class="hljs-number">0</span>x2B<br><span class="hljs-attribute">0213</span> xor flag[<span class="hljs-number">09</span>], <span class="hljs-number">0</span>x6E<br><span class="hljs-attribute">0210</span> add flag[<span class="hljs-number">08</span>], <span class="hljs-number">0</span>xCA<br><span class="hljs-attribute">0207</span> sub flag[<span class="hljs-number">20</span>], <span class="hljs-number">0</span>x89<br><span class="hljs-attribute">0204</span> sub flag[<span class="hljs-number">27</span>], <span class="hljs-number">0</span>x91<br><span class="hljs-attribute">0201</span> xor flag[<span class="hljs-number">02</span>], <span class="hljs-number">0</span>x45<br><span class="hljs-attribute">0198</span> sub flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>x0F<br><span class="hljs-attribute">0195</span> add flag[<span class="hljs-number">26</span>], <span class="hljs-number">0</span>xBB<br><span class="hljs-attribute">0192</span> xor flag[<span class="hljs-number">21</span>], <span class="hljs-number">0</span>xCE<br><span class="hljs-attribute">0189</span> sub flag[<span class="hljs-number">21</span>], <span class="hljs-number">0</span>x84<br><span class="hljs-attribute">0186</span> add flag[<span class="hljs-number">12</span>], <span class="hljs-number">0</span>x19<br><span class="hljs-attribute">0183</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>x24<br><span class="hljs-attribute">0180</span> sub flag[<span class="hljs-number">31</span>], <span class="hljs-number">0</span>xB2<br><span class="hljs-attribute">0177</span> sub flag[<span class="hljs-number">14</span>], <span class="hljs-number">0</span>xD4<br><span class="hljs-attribute">0174</span> add flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>xBB<br><span class="hljs-attribute">0171</span> add flag[<span class="hljs-number">17</span>], <span class="hljs-number">0</span>x61<br><span class="hljs-attribute">0168</span> sub flag[<span class="hljs-number">31</span>], <span class="hljs-number">0</span>x5F<br><span class="hljs-attribute">0165</span> xor flag[<span class="hljs-number">13</span>], <span class="hljs-number">0</span>x0A<br><span class="hljs-attribute">0162</span> xor flag[<span class="hljs-number">09</span>], <span class="hljs-number">0</span>xFE<br><span class="hljs-attribute">0159</span> add flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>x73<br><span class="hljs-attribute">0156</span> add flag[<span class="hljs-number">10</span>], <span class="hljs-number">0</span>xE4<br><span class="hljs-attribute">0153</span> sub flag[<span class="hljs-number">19</span>], <span class="hljs-number">0</span>x2D<br><span class="hljs-attribute">0150</span> xor flag[<span class="hljs-number">08</span>], <span class="hljs-number">0</span>xD9<br><span class="hljs-attribute">0147</span> add flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>x65<br><span class="hljs-attribute">0144</span> sub flag[<span class="hljs-number">12</span>], <span class="hljs-number">0</span>x0C<br><span class="hljs-attribute">0141</span> sub flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>xB6<br><span class="hljs-attribute">0138</span> xor flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>x21<br><span class="hljs-attribute">0135</span> sub flag[<span class="hljs-number">19</span>], <span class="hljs-number">0</span>x32<br><span class="hljs-attribute">0132</span> sub flag[<span class="hljs-number">13</span>], <span class="hljs-number">0</span>x72<br><span class="hljs-attribute">0129</span> sub flag[<span class="hljs-number">24</span>], <span class="hljs-number">0</span>x19<br><span class="hljs-attribute">0126</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>xBE<br><span class="hljs-attribute">0123</span> add flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>xE5<br><span class="hljs-attribute">0120</span> add flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>xD9<br><span class="hljs-attribute">0117</span> xor flag[<span class="hljs-number">11</span>], <span class="hljs-number">0</span>x84<br><span class="hljs-attribute">0114</span> xor flag[<span class="hljs-number">11</span>], <span class="hljs-number">0</span>x20<br><span class="hljs-attribute">0111</span> xor flag[<span class="hljs-number">13</span>], <span class="hljs-number">0</span>x01<br><span class="hljs-attribute">0108</span> sub flag[<span class="hljs-number">29</span>], <span class="hljs-number">0</span>xBA<br><span class="hljs-attribute">0105</span> add flag[<span class="hljs-number">25</span>], <span class="hljs-number">0</span>xE7<br><span class="hljs-attribute">0102</span> add flag[<span class="hljs-number">25</span>], <span class="hljs-number">0</span>xF0<br><span class="hljs-attribute">0099</span> xor flag[<span class="hljs-number">27</span>], <span class="hljs-number">0</span>x22<br><span class="hljs-attribute">0096</span> add flag[<span class="hljs-number">02</span>], <span class="hljs-number">0</span>x1E<br><span class="hljs-attribute">0093</span> xor flag[<span class="hljs-number">10</span>], <span class="hljs-number">0</span>x33<br><span class="hljs-attribute">0090</span> xor flag[<span class="hljs-number">21</span>], <span class="hljs-number">0</span>x0A<br><span class="hljs-attribute">0087</span> sub flag[<span class="hljs-number">18</span>], <span class="hljs-number">0</span>xE4<br><span class="hljs-attribute">0084</span> xor flag[<span class="hljs-number">23</span>], <span class="hljs-number">0</span>xAD<br><span class="hljs-attribute">0081</span> xor flag[<span class="hljs-number">05</span>], <span class="hljs-number">0</span>xE6<br><span class="hljs-attribute">0078</span> sub flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>xA9<br><span class="hljs-attribute">0075</span> xor flag[<span class="hljs-number">04</span>], <span class="hljs-number">0</span>x03<br><span class="hljs-attribute">0072</span> add flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>x05<br><span class="hljs-attribute">0069</span> xor flag[<span class="hljs-number">03</span>], <span class="hljs-number">0</span>xC6<br><span class="hljs-attribute">0066</span> sub flag[<span class="hljs-number">06</span>], <span class="hljs-number">0</span>xE4<br><span class="hljs-attribute">0063</span> sub flag[<span class="hljs-number">21</span>], <span class="hljs-number">0</span>xC3<br><span class="hljs-attribute">0060</span> add flag[<span class="hljs-number">22</span>], <span class="hljs-number">0</span>x50<br><span class="hljs-attribute">0057</span> sub flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>xEC<br><span class="hljs-attribute">0054</span> sub flag[<span class="hljs-number">20</span>], <span class="hljs-number">0</span>x59<br><span class="hljs-attribute">0051</span> sub flag[<span class="hljs-number">16</span>], <span class="hljs-number">0</span>x92<br><span class="hljs-attribute">0048</span> add flag[<span class="hljs-number">08</span>], <span class="hljs-number">0</span>x10<br><span class="hljs-attribute">0045</span> add flag[<span class="hljs-number">20</span>], <span class="hljs-number">0</span>x04<br><span class="hljs-attribute">0042</span> sub flag[<span class="hljs-number">10</span>], <span class="hljs-number">0</span>x27<br><span class="hljs-attribute">0039</span> add flag[<span class="hljs-number">27</span>], <span class="hljs-number">0</span>xEB<br><span class="hljs-attribute">0036</span> add flag[<span class="hljs-number">30</span>], <span class="hljs-number">0</span>x3D<br><span class="hljs-attribute">0033</span> xor flag[<span class="hljs-number">02</span>], <span class="hljs-number">0</span>xD2<br><span class="hljs-attribute">0030</span> sub flag[<span class="hljs-number">08</span>], <span class="hljs-number">0</span>x21<br><span class="hljs-attribute">0027</span> xor flag[<span class="hljs-number">14</span>], <span class="hljs-number">0</span>x7C<br><span class="hljs-attribute">0024</span> sub flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>x92<br><span class="hljs-attribute">0021</span> add flag[<span class="hljs-number">15</span>], <span class="hljs-number">0</span>xF7<br><span class="hljs-attribute">0018</span> xor flag[<span class="hljs-number">20</span>], <span class="hljs-number">0</span>x40<br><span class="hljs-attribute">0015</span> add flag[<span class="hljs-number">00</span>], <span class="hljs-number">0</span>x8B<br><span class="hljs-attribute">0012</span> add flag[<span class="hljs-number">21</span>], <span class="hljs-number">0</span>x22<br><span class="hljs-attribute">0009</span> xor flag[<span class="hljs-number">22</span>], <span class="hljs-number">0</span>xF5<br><span class="hljs-attribute">0006</span> sub flag[<span class="hljs-number">02</span>], <span class="hljs-number">0</span>x59<br><span class="hljs-attribute">0003</span> xor flag[<span class="hljs-number">03</span>], <span class="hljs-number">0</span>x95<br><span class="hljs-attribute">0000</span> sub flag[<span class="hljs-number">15</span>], <span class="hljs-number">0</span>x31<br><span class="hljs-attribute">b0b3eaa9783f619e11b0a4064025018a</span><br></code></pre></td></tr></table></figure>
+
+<p><strong><code>flag{b0b3eaa9783f619e11b0a4064025018a}</code></strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VM</div>
+      <div>http://run521520.github.io/2026/03/15/VM/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>youduck7</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/15/ida%E8%84%9A%E6%9C%AC/" title="ida脚本">
+                        <span class="hidden-mobile">ida脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"WCiAJOcmEvtC8mCKY347mmNi-MdYXbMMI","appKey":"Ds56gTbsyMSf1AJROtxNZAai","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://wciajocm.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/acg.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

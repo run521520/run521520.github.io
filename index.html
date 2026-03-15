@@ -232,6 +232,105 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/03/15/VM/" target="_self">
+          VM
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/03/15/VM/" target="_self">
+        <div>
+          VMVM &#x3D; Virtual Machine(虚拟机）在ctf中又叫**[自定义指令集虚拟机]**，也常被叫[字节码虚拟机&#x2F;沙箱虚拟机VMProtect]  白话：程序作者没有让 CPU 直接执行 x86&#x2F;x64 汇编指令，而是自己「发明」了一套全新的、只有这个程序认识的「伪汇编指令（字节码）」，然后写了一个「解释器 (VM)」，让这个解释器去逐条解析、执行这套自定义
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-03-15 17:20" pubdate>
+              2026-03-15
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/03/15/ida%E8%84%9A%E6%9C%AC/" target="_self">
+          ida脚本
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/03/15/ida%E8%84%9A%E6%9C%AC/" target="_self">
+        <div>
+          PYTHON可以通过Shift + F2来调用这个脚本编译器 导入函数库idc 常见的就是SMC混淆，简单的解密：12345import idcaddr = 0x12345678for i in range(200):	b = get_bytes(addr+i,1);    idc.patch_byte(addr+i,ord(b)^0xF)   get_bytes(addr,len) 这里的意思就
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-03-15 14:58" pubdate>
+              2026-03-15
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/03/15/%E6%B7%B7%E6%B7%86/" target="_self">
+          混淆
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/03/15/%E6%B7%B7%E6%B7%86/" target="_self">
+        <div>
+          花指令概念：花之令是为了干扰反汇编器（IDA、objdump 等）而在代码段插入的垃圾代码或不完整指令，能导致反汇编报错或生成错误的控制流。对于只会按 F5（IDA 全量反汇编）的人来说，花之令可能是致命的分析障碍。 分类 可执行花之令：插入看似合法的指令或数据（不破坏执行），但干扰线性或递归分析。 不可执行花之令：插入不完整或非法的指令序列，使反汇编器在解析时出错。  反汇编算法（简述） 线性扫
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-03-15 14:47" pubdate>
+              2026-03-15
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2026/03/08/x86_x86-64%20%E6%B1%87%E7%BC%96/" target="_self">
           x86/x86-64汇编
         </a>
@@ -383,72 +482,6 @@
               <a href="/tags/%E9%80%86%E5%90%91/">#逆向</a>
             
           </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/17/07_mybook/" target="_self">
-          一些做题的经验或心得
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/17/07_mybook/" target="_self">
-        <div>
-          打印输出方式在最后一步输出flag,可能会遇到的问题,博主之前在做buuctf平台上的**[GWCTF 2019]xxor**的时候就被坑了,它那个tea解密后只有三个字节,大端,博主是用c一个一个读取的,然后直接打印字符串的,所以它是空的,以至于我花了一个小时找wp,找我的问题但是没找到,在随便查看的时候就把解密的数组打印了,然后我才知道它是三个字节,不是四个,所以把它一个一个打印就行了,但是我
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-17 18:36" pubdate>
-              2025-10-17
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/14/06_GMP/" target="_self">
-          GMP中的一些函数
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/14/06_GMP/" target="_self">
-        <div>
-          讲一下GMP中的函数,和c语言中的函数 GMP__gmpz_init_set_str用于初始化大整数并为其设置字符串表示的值。int __gmpz_init_set_str (mpz_t rop, const char *str, int base)  rop: 要初始化的mpz_t类型的大整数变量 str: 包含数字和字符串(可包含可选符号) base: 数值的进制基数(2-62,或0表示自动检
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-14 20:38" pubdate>
-              2025-10-14
-            </time>
-          </div>
-        
-        
         
       </div>
     </article>
@@ -625,69 +658,6 @@
               <a href="/tags/Base64/">#Base64</a>
             
               <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/10/04/02_RC4/" target="_self">
-          RC4加密算法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/10/04/02_RC4/" target="_self">
-        <div>
-          简介RC4 是一种字节流对称加密算法，加密和解密使用相同的密钥，通过生成与明文等长的伪随机密钥流与明文按字节异或实现。 特性与安全性 实现简单、速度快。 支持 1–256 字节的密钥长度（8–2048 比特）。  注意：RC4 在某些协议和实现下存在偏差问题（历史上在 TLS 中发现过弱点）。生产环境应优先使用经过广泛审计的现代算法（如 AES-GCM）。 算法组成 初始化算法（KSA）— 根据密
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-10-04 22:12" pubdate>
-              2025-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">#加密算法</a>
-            
-              <a href="/tags/RC4/">#RC4</a>
             
           </div>
         

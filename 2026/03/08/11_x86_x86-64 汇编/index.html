@@ -27,7 +27,7 @@
 <meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-08T14:12:41.000Z">
-<meta property="article:modified_time" content="2026-03-16T05:01:20.708Z">
+<meta property="article:modified_time" content="2026-03-19T12:46:15.213Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k 字
+          17k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          101 分钟
+          140 分钟
         
       </span>
     
@@ -383,6 +383,400 @@
 <p><strong>CPU可以用不同的段地址和偏移地址形成同一个物理地址，其中CPU也是通过相关的部件提供的内存单元的段地址和偏移量经过地址加法合成器合成物理地址来访问</strong></p>
 <p>CPU当前要读取指令的地址为<strong>CS为代码段寄存器和IP为指令指针寄存器</strong></p>
 <p>所以可以通过修改CS，IP来修改CPU的执行，下面就是一些指令集了</p>
+<p>一些二字节的寄存器在这里就不写了，但是后面会在列子中用到</p>
+<h3 id="1-5-标志寄存器"><a href="#1-5-标志寄存器" class="headerlink" title="1.5 标志寄存器"></a>1.5 标志寄存器</h3><ol>
+<li><p><strong>ZF (Zero flag，零标志)</strong></p>
+<ol>
+<li>运算结果为0时，值为1</li>
+<li>触发指令：<code>cmp,test,sub,add,dec</code></li>
+</ol>
+</li>
+<li><p><strong>CF（Carry Flag，进位标志）</strong></p>
+<ol>
+<li><p>无符号数运算产生进位（加法）或借位（减法）时置1</p>
+</li>
+<li><p><strong>触发指令</strong>：<code>ADD</code>, <code>SUB</code>, <code>CMP</code>, <code>SHR</code>等</p>
+</li>
+<li><pre><code class="language-ass">MOV  EAX, 0xFFFFFFFF
+ADD  EAX, 1       ; EAX=0 → CF=1（溢出）
+JC   overflow     ; 处理进位
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-bullet">3.</span>   <span class="hljs-strong">**SF（Sign Flag，符号标志）**</span><br><br><span class="hljs-bullet">     1.</span>   运算结果的最高位为1时置1（表示负数）。<br><br><span class="hljs-bullet">     2.</span>   <span class="hljs-strong">**触发指令**</span>：<span class="hljs-code">`CMP`</span>, <span class="hljs-code">`SUB`</span>, <span class="hljs-code">`ADD`</span>等。<br><br><span class="hljs-bullet">     3.</span>   <span class="hljs-code">```ass</span><br><span class="hljs-code">          CMP  EAX, 0</span><br><span class="hljs-code">          JS   negative     ; EAX为负数时跳转</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p><strong>OF（Overflow Flag，溢出标志）</strong></p>
+<ol>
+<li><p><strong>含义</strong>：有符号数运算结果超出范围时置1。</p>
+</li>
+<li><p><strong>触发指令</strong>：<code>ADD</code>, <code>SUB</code>, <code>IMUL</code>等。</p>
+</li>
+<li><pre><code class="language-ass">MOV  AL, 0x7F     ; 127（有符号正数）
+ADD  AL, 1        ; AL=0x80（-128）→ OF=1
+JO   handle_overflow
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-bullet">5.</span>   #### <span class="hljs-strong">**PF（Parity Flag，奇偶标志）**</span><br><br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**含义**</span>：结果低8位中1的个数为<span class="hljs-strong">**偶数**</span>时置1。<br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**触发指令**</span>：<span class="hljs-code">`TEST`</span>, <span class="hljs-code">`AND`</span>, <span class="hljs-code">`XOR`</span>等。<br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**逆向应用**</span>：<br><br><span class="hljs-code">     ```z80</span><br><span class="hljs-code">     MOV  AL, 0x0F     ; 二进制00001111（4个1 → 偶数）</span><br><span class="hljs-code">     TEST AL, AL       ; PF=1</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<ul>
+<li>数据校验（如串口通信、旧式加密算法）。</li>
+<li>反调试技巧（故意设置PF陷阱）。</li>
+</ul>
+<p><strong>6. AF（Adjust Flag，调整标志）</strong></p>
+<ul>
+<li><strong>含义</strong>：BCD码运算时低4位向高4位进位&#x2F;借位时置1。</li>
+<li><strong>触发指令</strong>：<code>ADD</code>, <code>SUB</code>（仅低4位运算时有效）。</li>
+<li><strong>逆向应用</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs z80">MOV  AL, 0x09     ; BCD码9<br>ADD  AL, 0x01     ; AL=0x0A → AF=1（需要调整）<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>处理BCD码（如财务软件、旧系统逆向）。</li>
+<li>极少在现代程序中出现。</li>
+</ul>
+<h4 id="7-IF（Interrupt-Flag，中断标志）"><a href="#7-IF（Interrupt-Flag，中断标志）" class="headerlink" title="7. IF（Interrupt Flag，中断标志）"></a><strong>7. IF（Interrupt Flag，中断标志）</strong></h4><ul>
+<li><strong>含义</strong>：置1时允许CPU响应可屏蔽中断（如<code>INT</code>指令）。</li>
+<li><strong>控制指令</strong>：<code>STI</code>（置1）、<code>CLI</code>（清0）。</li>
+<li><strong>逆向应用</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs z80">CLI               ; 禁用中断<br>; 关键代码（防调试）<br>STI               ; 恢复中断<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>分析反调试代码（<code>CLI</code>禁用中断防止调试器接管）。</li>
+<li>内核模式驱动逆向。</li>
+</ul>
+<h4 id="8-TF（Trap-Flag，陷阱标志）"><a href="#8-TF（Trap-Flag，陷阱标志）" class="headerlink" title="8. TF（Trap Flag，陷阱标志）"></a><strong>8. TF（Trap Flag，陷阱标志）</strong></h4><ul>
+<li><strong>含义</strong>：置1时CPU进入单步调试模式（触发<code>INT 1</code>异常）。</li>
+<li><strong>控制指令</strong>：通过<code>POPF</code>或调试寄存器间接设置。</li>
+<li><strong>逆向应用</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs z80">PUSHFD            ; 获取当前EFLAGS<br>OR   DWORD [ESP], 0x100 ; 设置TF=1<br>POPFD             ; 激活单步模式<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>实现单步执行（调试器核心功能）。</li>
+<li>反调试技术（检测<code>TF</code>状态）。</li>
+</ul>
+<h4 id="9-DF（Direction-Flag，方向标志）"><a href="#9-DF（Direction-Flag，方向标志）" class="headerlink" title="9. DF（Direction Flag，方向标志）"></a><strong>9. DF（Direction Flag，方向标志）</strong></h4><ul>
+<li><strong>含义</strong>：控制字符串操作方向（<code>STD</code>置1时从高到低，<code>CLD</code>清0时从低到高）。</li>
+<li><strong>触发指令</strong>：<code>STD</code>, <code>CLD</code>, <code>REP MOVSB</code>等。</li>
+<li><strong>逆向应用</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs z80">CLD               ; 清0 DF<br>MOV  ESI, src     ; 源地址<br>MOV  EDI, dest    ; 目标地址<br>REP  MOVSB        ; 复制字符串（ESI→EDI递增）<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>分析字符串处理代码（如加密、解密循环）。</li>
+</ul>
+<p>以下是关于 <strong>x86标志寄存器（EFLAGS）</strong> 及其在条件跳转中的应用的详细技术解析，结合逆向工程的实际场景说明：</p>
+<p><strong>关键标志位及其含义</strong></p>
+<p>以下是逆向分析中最重要的标志位（按优先级排序）：</p>
+<table>
+<thead>
+<tr>
+<th><strong>标志位</strong></th>
+<th><strong>名称</strong></th>
+<th><strong>触发条件</strong></th>
+<th><strong>常见指令</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ZF</strong></td>
+<td>零标志（Zero）</td>
+<td>运算结果为0时置1</td>
+<td><code>CMP</code>, <code>TEST</code>, <code>SUB</code></td>
+</tr>
+<tr>
+<td><strong>SF</strong></td>
+<td>符号标志（Sign）</td>
+<td>结果为负数时置1（最高位为1）</td>
+<td><code>CMP</code>, <code>SUB</code></td>
+</tr>
+<tr>
+<td><strong>CF</strong></td>
+<td>进位标志（Carry）</td>
+<td>无符号数运算溢出（借位或进位）时置1</td>
+<td><code>ADD</code>, <code>SUB</code>, <code>CMP</code></td>
+</tr>
+<tr>
+<td><strong>OF</strong></td>
+<td>溢出标志（Overflow）</td>
+<td>有符号数运算溢出时置1</td>
+<td><code>ADD</code>, <code>SUB</code>, <code>IMUL</code></td>
+</tr>
+<tr>
+<td><strong>PF</strong></td>
+<td>奇偶标志（Parity）</td>
+<td>结果低8位中1的个数为偶数时置1（极少使用）</td>
+<td><code>TEST</code>, <code>AND</code></td>
+</tr>
+</tbody></table>
+<p>条件跳转指令根据标志位组合判断是否跳转。以下是逆向工程中常见的跳转指令：</p>
+<p><strong>JCC指令</strong></p>
+<p>(1) 基于ZF的跳转</p>
+<ul>
+<li><code>JZ</code> <strong>&#x2F;</strong> <code>JE</code>：结果为零（ZF&#x3D;1）时跳转（如相等比较）。</li>
+<li><code>JNZ</code> <strong>&#x2F;</strong> <code>JNE</code>：结果非零（ZF&#x3D;0）时跳转（如不等比较）。</li>
+</ul>
+<p>(2) 基于SF、OF、ZF的组合（有符号数比较）</p>
+<ul>
+<li><code>JG</code> <strong>&#x2F;</strong> <code>JNLE</code>：大于时跳转（SF&#x3D;OF且ZF&#x3D;0）。</li>
+<li><code>JL</code> <strong>&#x2F;</strong> <code>JNGE</code>：小于时跳转（SF≠OF且ZF&#x3D;0）。</li>
+<li><code>JGE</code> <strong>&#x2F;</strong> <code>JNL</code>：大于等于时跳转（SF&#x3D;OF或ZF&#x3D;1）。</li>
+<li><code>JLE</code> <strong>&#x2F;</strong> <code>JNG</code>：小于等于时跳转（SF≠OF或ZF&#x3D;1）。</li>
+</ul>
+<p>(3) 基于CF的无符号数比较</p>
+<ul>
+<li><code>JA</code> <strong>&#x2F;</strong> <code>JNBE</code>：高于时跳转（CF&#x3D;0且ZF&#x3D;0）。</li>
+<li><code>JB</code> <strong>&#x2F;</strong> <code>JNAE</code>：低于时跳转（CF&#x3D;1且ZF&#x3D;0）。</li>
+<li><code>JAE</code> <strong>&#x2F;</strong> <code>JNB</code>：高于等于时跳转（CF&#x3D;0或ZF&#x3D;1）。</li>
+<li><code>JBE</code> <strong>&#x2F;</strong> <code>JNA</code>：低于等于时跳转（CF&#x3D;1或ZF&#x3D;1）。</li>
+</ul>
+<p><strong>速查表：条件跳转与标志位</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>指令</strong></th>
+<th><strong>条件</strong></th>
+<th><strong>标志位组合</strong></th>
+<th><strong>典型用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>JE</code></td>
+<td>相等</td>
+<td>ZF&#x3D;1</td>
+<td>字符串比较、循环结束</td>
+</tr>
+<tr>
+<td><code>JNE</code></td>
+<td>不等</td>
+<td>ZF&#x3D;0</td>
+<td>循环继续、条件分支</td>
+</tr>
+<tr>
+<td><code>JG</code></td>
+<td>有符号大于</td>
+<td>SF&#x3D;OF且ZF&#x3D;0</td>
+<td>数值范围判断</td>
+</tr>
+<tr>
+<td><code>JA</code></td>
+<td>无符号高于</td>
+<td>CF&#x3D;0且ZF&#x3D;0</td>
+<td>地址或长度比较</td>
+</tr>
+<tr>
+<td><code>JS</code></td>
+<td>结果为负</td>
+<td>SF&#x3D;1</td>
+<td>负数处理</td>
+</tr>
+<tr>
+<td><code>JO</code></td>
+<td>溢出</td>
+<td>OF&#x3D;1</td>
+<td>溢出异常检测</td>
+</tr>
+</tbody></table>
+<p><strong>EFLAGS寄存器位定义表（32位）</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>位位置</strong></th>
+<th><strong>标志名称</strong></th>
+<th><strong>缩写</strong></th>
+<th><strong>触发条件&#x2F;用途</strong></th>
+<th><strong>逆向工程中的意义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0</strong></td>
+<td>进位标志</td>
+<td>CF</td>
+<td>无符号运算进位&#x2F;借位时置1</td>
+<td>无符号数比较（JB&#x2F;JA）、位操作检测</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>保留</td>
+<td>-</td>
+<td>未使用</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>奇偶标志</td>
+<td>PF</td>
+<td>结果低8位中1的个数为偶数时置1</td>
+<td>数据校验（旧算法、反调试技巧）</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>保留</td>
+<td>-</td>
+<td>未使用</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>调整标志</td>
+<td>AF</td>
+<td>BCD码运算低4位进位&#x2F;借位时置1</td>
+<td>BCD码处理（旧财务软件逆向）</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>保留</td>
+<td>-</td>
+<td>未使用</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>零标志</td>
+<td>ZF</td>
+<td>运算结果为0时置1</td>
+<td>条件跳转（JZ&#x2F;JNZ）、循环终止判断</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td>符号标志</td>
+<td>SF</td>
+<td>结果为负数（最高位为1）时置1</td>
+<td>有符号数判断（JS&#x2F;JNS）</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td>陷阱标志</td>
+<td>TF</td>
+<td>置1时触发单步调试（INT 1）</td>
+<td>调试器实现、反调试检测</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td>中断允许标志</td>
+<td>IF</td>
+<td>置1时允许响应可屏蔽中断</td>
+<td>内核逆向、反调试（CLI禁用中断）</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td>方向标志</td>
+<td>DF</td>
+<td>置1时字符串操作从高到低（STD指令）</td>
+<td>字符串处理逻辑分析（REP MOVSB等）</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td>溢出标志</td>
+<td>OF</td>
+<td>有符号数运算溢出时置1</td>
+<td>有符号数比较（JG&#x2F;JL）、溢出检测</td>
+</tr>
+<tr>
+<td><strong>12</strong></td>
+<td>I&#x2F;O特权级（位0）</td>
+<td>IOPL[0]</td>
+<td>控制I&#x2F;O指令执行权限（0环&#x3D;内核，3环&#x3D;用户）</td>
+<td>内核驱动逆向、权限漏洞分析</td>
+</tr>
+<tr>
+<td><strong>13</strong></td>
+<td>I&#x2F;O特权级（位1）</td>
+<td>IOPL[1]</td>
+<td>同上</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><strong>14</strong></td>
+<td>嵌套任务标志</td>
+<td>NT</td>
+<td>任务切换链控制（用于多任务系统）</td>
+<td>操作系统内核逆向（任务调度）</td>
+</tr>
+<tr>
+<td><strong>15</strong></td>
+<td>保留</td>
+<td>-</td>
+<td>未使用</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>16</strong></td>
+<td>恢复标志</td>
+<td>RF</td>
+<td>控制调试异常后的恢复行为</td>
+<td>高级反调试、异常处理分析</td>
+</tr>
+<tr>
+<td><strong>17</strong></td>
+<td>虚拟8086模式标志</td>
+<td>VM</td>
+<td>置1时进入虚拟8086模式</td>
+<td>旧代码兼容性分析</td>
+</tr>
+<tr>
+<td><strong>18</strong></td>
+<td>对齐检查标志</td>
+<td>AC</td>
+<td>置1时启用内存对齐检查（需CR0.AM&#x3D;1）</td>
+<td>SIMD指令优化、内存访问漏洞检测</td>
+</tr>
+<tr>
+<td><strong>19</strong></td>
+<td>虚拟中断标志</td>
+<td>VIF</td>
+<td>虚拟化环境下的中断标志（需CR4.VME&#x3D;1）</td>
+<td>虚拟机检测与逆向</td>
+</tr>
+<tr>
+<td><strong>20</strong></td>
+<td>虚拟中断挂起</td>
+<td>VIP</td>
+<td>虚拟化环境下中断挂起状态</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><strong>21</strong></td>
+<td>ID标志</td>
+<td>ID</td>
+<td>置1表示支持CPUID指令（只读）</td>
+<td>CPU特性检测（如虚拟机指纹）</td>
+</tr>
+<tr>
+<td><strong>22-31</strong></td>
+<td>保留</td>
+<td>-</td>
+<td>未使用</td>
+<td>-</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="关键说明"><a href="#关键说明" class="headerlink" title="关键说明"></a><strong>关键说明</strong></h3><ol>
+<li><strong>逆向工程常用标志</strong>：</li>
+</ol>
+<ul>
+<li><strong>CF&#x2F;ZF&#x2F;SF&#x2F;OF</strong>（位0&#x2F;6&#x2F;7&#x2F;11）是分析条件跳转的核心。  </li>
+<li><strong>TF&#x2F;IF</strong>（位8&#x2F;9）常见于反调试和内核逆向。</li>
+</ul>
+<ol>
+<li><strong>保留位</strong>：</li>
+</ol>
+<ul>
+<li>位1&#x2F;3&#x2F;5&#x2F;15&#x2F;22-31未定义，通常为0，写入值可能被忽略。</li>
+</ul>
+<ol>
+<li><strong>系统级标志</strong>：</li>
+</ol>
+<ul>
+<li><strong>IOPL&#x2F;NT&#x2F;AC&#x2F;VM</strong>（位12-14&#x2F;18）需在<strong>内核模式</strong>或驱动逆向中关注。</li>
+</ul>
+<ol>
+<li><strong>调试器中的显示</strong>：</li>
+</ol>
+<ul>
+<li>在x32dbg等工具中，EFLAGS以缩写显示（如<code>PF,ZF,IF</code>），需结合位位置手动计算。</li>
+</ul>
 <h2 id="二、汇编程序结构与语法"><a href="#二、汇编程序结构与语法" class="headerlink" title="二、汇编程序结构与语法"></a>二、汇编程序结构与语法</h2><h3 id="2-1-程序段-节划分"><a href="#2-1-程序段-节划分" class="headerlink" title="2.1 程序段&#x2F;节划分"></a>2.1 程序段&#x2F;节划分</h3><table>
 <thead>
 <tr>
@@ -597,7 +991,7 @@
 
 
 
-<h3 id="BX-和loop指令"><a href="#BX-和loop指令" class="headerlink" title="[BX]和loop指令"></a>[BX]和loop指令</h3><h4 id="BX"><a href="#BX" class="headerlink" title="[BX]"></a>[BX]</h4><p>[BX]和[0]有些类似(一个是动态偏移量，一个是静态偏移量，其实一样)，[0]表示内存单元，它的偏移量为0.比如<code>mov ax,[0]</code>表示将一个内存单元的内容送到ax里，这个内存单元的长度为2字节，存放一个字节，偏移量为0，段地址在ds中(默认为ds寄存器)</p>
+<h3 id="3-8-BX-和loop指令"><a href="#3-8-BX-和loop指令" class="headerlink" title="3.8 [BX]和loop指令"></a>3.8 [BX]和loop指令</h3><h4 id="BX"><a href="#BX" class="headerlink" title="[BX]"></a>[BX]</h4><p>[BX]和[0]有些类似(一个是动态偏移量，一个是静态偏移量，其实一样)，[0]表示内存单元，它的偏移量为0.比如<code>mov ax,[0]</code>表示将一个内存单元的内容送到ax里，这个内存单元的长度为2字节，存放一个字节，偏移量为0，段地址在ds中(默认为ds寄存器)</p>
 <p>用[0]表示一个内存单元的时候，0表示偏移地址，段地址默认为ds，单元的长度由寄存器大小决定</p>
 <p>默认的是ds寄存器，但是你可以指定你想要的寄存器 <code>mov ax,ds:[bx] mov ax,cs:[bx]</code>这种写法叫做<strong>段前缀</strong></p>
 <h4 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h4><p>这个指令英文有循环的含义</p>
@@ -612,9 +1006,8 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个例子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
 
-
-
-<h3 id="位操作指令"><a href="#位操作指令" class="headerlink" title="位操作指令"></a>位操作指令</h3><h4 id="and和or-按位与和按位或"><a href="#and和or-按位与和按位或" class="headerlink" title="and和or 按位与和按位或"></a><strong><code>and和or</code> 按位与和按位或</strong></h4><p>就是和Python语言中的and和or一样的</p>
+<p>这个loop再<code>intel</code>中用不到</p>
+<h3 id="3-9-位操作指令"><a href="#3-9-位操作指令" class="headerlink" title="3.9 位操作指令"></a>3.9 位操作指令</h3><h4 id="and和or-按位与和按位或"><a href="#and和or-按位与和按位或" class="headerlink" title="and和or 按位与和按位或"></a><strong><code>and和or</code> 按位与和按位或</strong></h4><p>就是和Python语言中的and和or一样的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,01100011B<br>and al,00000001B<br>;每一位相应的位都执行“与”操作：两个对应的位都为1时结果为1，否则为0。<br>;这个时候al的值为00000001B,常用的就是指定对象的位设为0<br><br>mov al,01100011B<br>or 	al,00000000B<br><br>;每一位相应的位都执行“或”操作：两个对应的位中，只要有一个为1，结果为1。<br>;这样or就是指定对象的位设为1,al = 01100011B<br><br></code></pre></td></tr></table></figure>
 
 <h4 id="xor-按位异或"><a href="#xor-按位异或" class="headerlink" title="xor 按位异或"></a><strong><code>xor </code>按位异或</strong></h4><p>每一位相应的位都执行“异或”操作：两个对应的位不相同，结果为1，否则为0。</p>
@@ -631,7 +1024,7 @@
 <h4 id="ror循环右移"><a href="#ror循环右移" class="headerlink" title="ror循环右移"></a><code>ror</code>循环右移</h4><p><code>rol al,1</code>所有位向右循环移动1位，最右边的位移到最左边。</p>
 <p>在<code>c</code>或<code>ida</code>中：</p>
 <p>通常，<code>not</code> 的优先级较高，其次是位移操作符 <code>shl</code>、<code>shr</code>、<code>sal</code> 和 <code>sar</code>，最后是按位逻辑操作符 <code>and</code>、<code>or</code>、<code>xor</code>。</p>
-<h3 id="转移指令"><a href="#转移指令" class="headerlink" title="转移指令"></a>转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
+<h3 id="3-10-转移指令"><a href="#3-10-转移指令" class="headerlink" title="3.10 转移指令"></a>3.10 转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如在汇编中获取该段或函数等的地址<br>main proc<br>	mov eax,offset main<br>	; 这个执行后eax的值为main函数的地址<br>main ENDP<br></code></pre></td></tr></table></figure>
 
 <p>**<code>jmp</code>**无条件转移指令，可以修改<code>ip</code>，也可以同时修改<code>cs和ip</code></p>
@@ -653,16 +1046,42 @@
 </li>
 </ol>
 <p>上面的这些是根据位移来转移</p>
-<h3 id="dup-数组"><a href="#dup-数组" class="headerlink" title="dup 数组"></a>dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
+<h3 id="3-11dup-数组"><a href="#3-11dup-数组" class="headerlink" title="3. 11dup 数组"></a>3. 11dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实例，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
 
+<h3 id="3-12-FPU"><a href="#3-12-FPU" class="headerlink" title="3.12 FPU"></a>3.12 FPU</h3><h2 id="四、函数"><a href="#四、函数" class="headerlink" title="四、函数"></a>四、函数</h2><p>程序的基本单位是函数，函数的基本结构是栈，esp是顶，ebp是低</p>
+<p>一般用<code>call</code>指令来进入函数，在x32&#x2F;64dbg上的基本函数名字都是标明的</p>
+<p>在<code>dbg</code>中或其他的跳转指令中，鼠标点击那一行指令按<strong>回车</strong>即可进入到目标地址，按<strong>减号</strong>即可退回跳转</p>
+<p>返回值在<code>eax</code>里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 函数的入口<br>push ebp<br>mov  ebp, esp<br>sub	 esp, 0x10	; 为栈存储数据分配空间<br><br>; 函数退出<br>mov esp, ebp<br>pop ebp<br>ret<br><br>; 这个退出还可以用<br>leave<br>ret	; 函数退出<br></code></pre></td></tr></table></figure>
 
+<p>一般的在内存函数看到 <code>ebp + xxx</code> 代表的是函数参数</p>
+<p><code>ebp - xxx</code> 这个一般的局部变量</p>
+<p>在不同的架构中<code>call</code>一般的是不同的：</p>
+<ol>
+<li><p><code>cdecl</code></p>
+<p>参数从右到左一次压栈<code>push</code>，由调用者清理栈，且返回值在<code>eax</code>寄存器上，比如<code>printf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 调用代码<br>push 3<br>push 2<br>push 1<br>call my_func ; 调用这个函数<br>; 参数是这样子的 my_func(1,2,3)<br>add esp,0xc	; 	调用者清理栈(3*4=12)<br><br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,8<br>	; ...<br>	mov esp,ebp<br>	pop ebp<br>	ret<br></code></pre></td></tr></table></figure>
 
+<p>注意这里的 <code>my_func</code>在执行完后栈中的数据，就是传入的参数是没有处理的，所以要在调用执行完函数后，手动来平衡一下栈，因为是在外面平衡栈的所以这种方式叫做<strong>外平栈</strong>(Windows)</p>
+</li>
+<li><p><code>stdcall</code></p>
+<p>参数从右到左一次压栈<code>push</code>，由被调用者清理(<code>retn X</code>)，返回值在<code>eax</code>，常见的函数是Windows下的**<code>API</code>**，<strong>内平栈</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 调用代码<br>push 3<br>push 2<br>push 1<br>call my_func ; 调用这个函数<br>; 参数是这样子的 my_func(1,2,3)<br>;.....<br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,8<br>	; ...<br>	mov esp,ebp<br>	pop ebp<br>	retn 0xc  ; 在函数内处理<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>fastcall</code></p>
+</li>
+</ol>
+<pre><code class="hljs"> 前两个参数通过寄存器**`ecx,edx`**，其余的参数从右向左压栈，栈清理和`stdcall`一样返回值在`eax`里面在`Windows`下都是**内平栈**
 
-
-
-
-<h2 id="四、栈与调用约定（概要）"><a href="#四、栈与调用约定（概要）" class="headerlink" title="四、栈与调用约定（概要）"></a>四、栈与调用约定（概要）</h2><h3 id="4-1-栈的基本特性"><a href="#4-1-栈的基本特性" class="headerlink" title="4.1 栈的基本特性"></a>4.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ecx,1	; 第一个参数<br>mov edx,2	; 第二个参数<br>push 3		; 第三个参数，最右边的参数<br>call my_func<br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,0x10<br>	; 分配局部空间<br>	mov eax,ecx	; 第一个参数<br>	mov ebx,edx	; 第二个参数<br>	mov ecx,[ebp+8] ; 获取第三个参数<br>				   ; ebp		-&gt; ebp 的地址<br>				   ; ebp+4		-&gt; 调用函数的下一条指令的地址<br>				   ; ebp+8		-&gt; 第三个参数<br>	mov esp,ebp<br>	pop ebp<br>	retn 4			; 进栈的就一个参数，ecx,edx不算<br></code></pre></td></tr></table></figure>
+</code></pre>
+<ol start="4">
+<li><p><code>thiscall</code> (C++成员函数调用)，可内可外，一般的是内</p>
+<p>参数传递是：<code>this</code>指针通过<code>ecx</code>传递，其余的参数从右向左压栈，栈清理类似<code>stdcall或cdecl</code>，返回值在<code>eax</code>寄存器上</p>
+</li>
+</ol>
+<h2 id="五、栈与调用约定（概要）"><a href="#五、栈与调用约定（概要）" class="headerlink" title="五、栈与调用约定（概要）"></a>五、栈与调用约定（概要）</h2><h3 id="4-1-栈的基本特性"><a href="#4-1-栈的基本特性" class="headerlink" title="4.1 栈的基本特性"></a>4.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
 <h3 id="4-2-经典栈帧布局（带-EBP-的函数）"><a href="#4-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="4.2 经典栈帧布局（带 EBP 的函数）"></a>4.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push ebp        ; 保存上一级栈帧基址<br>mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）<br>sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）<br>...             ; 函数体执行<br>mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）<br>pop ebp         ; 恢复上一级栈帧基址<br>ret             ; 函数返回<br></code></pre></td></tr></table></figure>
 
 <p>这里说一下就是为什么栈的操作可以准确到确定的地址？</p>
@@ -710,7 +1129,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="五、TEB、PEB和反调试"><a href="#五、TEB、PEB和反调试" class="headerlink" title="五、TEB、PEB和反调试"></a>五、TEB、PEB和反调试</h2><h3 id="5-2-TEB"><a href="#5-2-TEB" class="headerlink" title="5.2 TEB"></a>5.2 TEB</h3><p><code>TEB</code>（Thread Environment Block）是为每个线程分配的一个数据结构，用来存储线程的相关信息。每个线程都有一个独立的 TEB，它被用来存储多种信息，包括线程的本地存储、异常处理、TLS（线程局部存储）、栈指针等。每个线程都会通过 <code>fs:[0]</code> 获取指向其 TEB 的指针。</p>
+<h2 id="六、TEB、PEB和反调试"><a href="#六、TEB、PEB和反调试" class="headerlink" title="六、TEB、PEB和反调试"></a>六、TEB、PEB和反调试</h2><h3 id="5-2-TEB"><a href="#5-2-TEB" class="headerlink" title="5.2 TEB"></a>5.2 TEB</h3><p><code>TEB</code>（Thread Environment Block）是为每个线程分配的一个数据结构，用来存储线程的相关信息。每个线程都有一个独立的 TEB，它被用来存储多种信息，包括线程的本地存储、异常处理、TLS（线程局部存储）、栈指针等。每个线程都会通过 <code>fs:[0]</code> 获取指向其 TEB 的指针。</p>
 <p>在 Windows 操作系统中，<code>fs</code> 是一个<strong>段寄存器</strong>（Segment Register），它用于指向线程的<strong>线程环境块</strong>（TEB，Thread Environment Block）。<code>fs</code> 寄存器主要用于访问当前线程的局部存储区域，而不是全局数据。这使得线程能够高效地存储和访问其专有的信息，而不需要锁定整个进程的数据。</p>
 <p>在 32 位 Windows 操作系统中，<code>fs</code> 寄存器的默认值是指向当前线程的 TEB 的地址</p>
 <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef struct _TEB &#123;<br>    <span class="hljs-type">NT_TIB</span> <span class="hljs-type">NtTib</span>;                          // +0x0000  <span class="hljs-type">TIB</span> (<span class="hljs-type">Thread</span> <span class="hljs-type">Information</span> <span class="hljs-type">Block</span>) 用于存储堆栈信息<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">EnvironmentPointer</span>;              // +0x001C  指向线程的环境块（通常为空）<br>    <span class="hljs-type">CLIENT_ID</span> <span class="hljs-type">ClientId</span>;                    // +0x0020  线程的 <span class="hljs-type">ClientId</span>（由线程 <span class="hljs-type">ID</span> 和进程 <span class="hljs-type">ID</span> 组成）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ActiveRpcHandle</span>;                 // +0x0028  当前线程的 <span class="hljs-type">RPC</span> 句柄<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ThreadLocalStoragePointer</span>;       // +0x002C  指向线程局部存储的指针<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ProcessEnvironmentBlock</span>;         // +0x0030  指向进程环境块（<span class="hljs-type">PEB</span>）的指针<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">LastErrorValue</span>;                  // +0x0034  最后错误值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">CountOfOwnedCriticalSections</span>;    // +0x0038  当前线程拥有的临界区数量<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CsrClientThread</span>;                 // +0x003C  相关的 <span class="hljs-type">CsrClient</span> 线程<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">Win32ThreadInfo</span>;                 // +0x0040  线程信息<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">User32Reserved</span>[26];              // +0x0044  保留字段（26个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">UserReserved</span>[5];                 // +0x00AC  保留字段（5个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">WOW32Reserved</span>;                   // +0x00C0  32 位 <span class="hljs-type">Windows</span> 下的保留区域<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CurrentTransactionHandle</span>;        // +0x00C4  当前事务的句柄<br>    // 其他字段...<br>&#125; <span class="hljs-type">TEB</span>;<br><br>typedef struct _CLIENT_ID &#123;<br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueProcess</span>;  // 进程<span class="hljs-type">ID</span><br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueThread</span>;   // 线程<span class="hljs-type">ID</span><br>&#125; <span class="hljs-type">CLIENT_ID</span>;<br></code></pre></td></tr></table></figure>
@@ -727,6 +1146,9 @@
 <li>编写汇编源程序，后缀文件为<code>asm</code></li>
 <li>对源程序进行编译连接，这一步就是使用汇编语言编译程序对该文件中的程序进行编译，产生目标文件，再用连接程序对目标文件进行连接，生成可执行文件，这个可执行文件里面就是源程序的汇编指令翻译过来的机器码和数据，以及相关描述信息</li>
 </ol>
+<p>由<code>asm</code> -&gt; <code>exe</code> 就是进行程序的生成</p>
+<p>比如一个C文件  —-&gt; 编译  —–&gt; obj   —–&gt; 链接器   ——&gt; 可执行文件exe</p>
+<p>在Linux中编译器产生的文件时 o</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:codesg<br>codesg segment<br>		mov ax,0123H<br>		mov bx,0456H<br>		add ax,bx<br>		add ax,ax<br>		<br>		mov ax,4c00H ;这两句是程序返回，由CPU执行<br>		int 21H<br>		<br>codesg ends<br>end<br></code></pre></td></tr></table></figure>
 
 <p>一段简单的程序，观察一下便会发现，从上面的讲述中源程序包括<strong>汇编代码和伪指令</strong></p>

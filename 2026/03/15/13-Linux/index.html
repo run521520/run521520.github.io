@@ -19,13 +19,15 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="LinuxLD_PRELOAD在Linux中，Linux的动态加载器ld-linux会先寻找程序要运行的文件，并装载，在LD_PRELOAD可选的环境变量，包含多个指向文件的路径，加载器会先加载LD_PRELOAD然后是C语言库，就是所谓的预加载preload 预装载意味着会它的函数会比其他库文件中的同名函数先于调用, 也就使得库函数可以被阻截或替换掉. 多个共享链接库文件的路径可以用冒号或空格进">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Linux">
 <meta property="og:url" content="http://run521520.github.io/2026/03/15/13-Linux/index.html">
 <meta property="og:site_name" content="run521">
+<meta property="og:description" content="LinuxLD_PRELOAD在Linux中，Linux的动态加载器ld-linux会先寻找程序要运行的文件，并装载，在LD_PRELOAD可选的环境变量，包含多个指向文件的路径，加载器会先加载LD_PRELOAD然后是C语言库，就是所谓的预加载preload 预装载意味着会它的函数会比其他库文件中的同名函数先于调用, 也就使得库函数可以被阻截或替换掉. 多个共享链接库文件的路径可以用冒号或空格进">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-15T12:09:11.000Z">
-<meta property="article:modified_time" content="2026-03-16T04:57:56.835Z">
+<meta property="article:modified_time" content="2026-03-16T13:01:19.131Z">
 <meta property="article:author" content="youduck7">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2.5k 字
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          1 分钟
+          22 分钟
         
       </span>
     
@@ -281,7 +283,43 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h2><p>在Linux中，Linux的动态加载器<code>ld-linux</code>会先寻找程序要运行的文件，并装载，在<code>LD_PRELOAD</code>可选的环境变量，包含多个指向文件的路径，加载器会先加载<code>LD_PRELOAD</code>然后是<code>C</code>语言库，就是所谓的<strong>预加载<code>preload</code></strong></p>
+<p>预装载意味着会它的函数会比其他库文件中的同名函数先于调用, 也就使得库函数可以被阻截或替换掉. 多个共享链接库文件的路径可以用<code>冒号</code>或<code>空格</code>进行区分. 显然不会受到<code>LD_PRELOAD</code>影响的也就只有那些静态链接的程序了.</p>
+<p>当然为避免用于恶意攻击, 在<code>ruid != euid</code>的情况下加载器是不会使用<code>LD_PRELOAD</code>进行预装载的.</p>
+<p>[<code>hitb_bin100.elf</code>](<a target="_blank" rel="noopener" href="https://github.com/ctfs/write-ups-2014/blob/master/hack-in-the-box-amsterdam-2014/bin-100/hitb-bin100.elf">write-ups-2014&#x2F;hack-in-the-box-amsterdam-2014&#x2F;bin-100&#x2F;hitb-bin100.elf at master · ctfs&#x2F;write-ups-2014</a>)</p>
+<p>这个题目是从<code>ctf-wiki</code>上看到的，比较基础但是更好的理解</p>
+<p>大致意思就是这个程序需要在一个很长的时间中找到特定的<code>key</code>并对其操作，最后打印<code>flag</code>主要问题就是<code>key</code>是通过一个漫长的过程组成的，正常情况下，就是等，但是这里就是通过<code>LD_PRELOAD</code>来修改里面的<code>time和sleep</code>函数，缩短里面的时间来达到获取<code>flag</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> __fastcall <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **argv, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **envp)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">char</span> *v3; <span class="hljs-comment">// rdi</span><br>  __int64 i; <span class="hljs-comment">// rcx</span><br>  <span class="hljs-type">unsigned</span> __int64 v5; <span class="hljs-comment">// r12</span><br>  <span class="hljs-type">int</span> v6; <span class="hljs-comment">// eax</span><br>  <span class="hljs-type">char</span> v7; <span class="hljs-comment">// r13</span><br>  <span class="hljs-type">const</span> <span class="hljs-type">char</span> *v8; <span class="hljs-comment">// r13</span><br>  __int64 v9; <span class="hljs-comment">// r14</span><br>  <span class="hljs-type">const</span> <span class="hljs-type">__int32_t</span> **v10; <span class="hljs-comment">// rax</span><br>  __int64 j; <span class="hljs-comment">// rbx</span><br>  <span class="hljs-type">char</span> *v12; <span class="hljs-comment">// rbx</span><br>  __int64 v13; <span class="hljs-comment">// rdx</span><br>  __int64 v14; <span class="hljs-comment">// rbx</span><br>  <span class="hljs-type">unsigned</span> __int8 v15; <span class="hljs-comment">// di</span><br>  <span class="hljs-type">int</span> v17; <span class="hljs-comment">// [rsp+8h] [rbp-190h]</span><br>  <span class="hljs-type">int</span> v18; <span class="hljs-comment">// [rsp+Ch] [rbp-18Ch]</span><br>  <span class="hljs-type">char</span> v19[<span class="hljs-number">36</span>]; <span class="hljs-comment">// [rsp+10h] [rbp-188h] BYREF</span><br>  <span class="hljs-type">char</span> v20[<span class="hljs-number">292</span>]; <span class="hljs-comment">// [rsp+34h] [rbp-164h] BYREF</span><br>  <span class="hljs-type">unsigned</span> __int64 v21; <span class="hljs-comment">// [rsp+158h] [rbp-40h]</span><br><br>  <span class="hljs-built_in">qmemcpy</span>(v20, &amp;unk_400A7E, <span class="hljs-number">0x25uLL</span>);<br>  v21 = __readfsqword(<span class="hljs-number">0x28u</span>);<br>  v3 = v19;<br>  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">9LL</span>; i; --i )<br>  &#123;<br>    *(_DWORD *)v3 = <span class="hljs-number">0</span>;<br>    v3 += <span class="hljs-number">4</span>;<br>  &#125;<br>  v17 = <span class="hljs-number">201527</span>;<br>  v18 = <span class="hljs-built_in">time</span>(<span class="hljs-number">0LL</span>);<br>  <span class="hljs-keyword">do</span><br>  &#123;<br>    <span class="hljs-keyword">for</span> ( j = <span class="hljs-number">0LL</span>; j != <span class="hljs-number">36</span>; ++j )<br>    &#123;<br>      v5 = <span class="hljs-number">0LL</span>;<br>      v6 = <span class="hljs-built_in">time</span>(<span class="hljs-number">0LL</span>);<br>      <span class="hljs-built_in">srand</span>(<span class="hljs-number">233811181</span> - v18 + v6);<br>      v7 = v19[j];<br>      v19[j] = <span class="hljs-built_in">rand</span>() ^ v7;<br>      v8 = (&amp;funny)[j];<br>      <span class="hljs-keyword">while</span> ( v5 &lt; <span class="hljs-built_in">strlen</span>(v8) )<br>      &#123;<br>        v9 = v8[v5];<br>        <span class="hljs-keyword">if</span> ( (_BYTE)v9 == <span class="hljs-number">105</span> )<br>        &#123;<br>          v20[(<span class="hljs-type">int</span>)v5 + <span class="hljs-number">37</span>] = <span class="hljs-number">105</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>          <span class="hljs-keyword">if</span> ( (_DWORD)v5 &amp;&amp; v8[v5 - <span class="hljs-number">1</span>] != <span class="hljs-number">32</span> )<br>            v10 = __ctype_toupper_loc();<br>          <span class="hljs-keyword">else</span><br>            v10 = __ctype_tolower_loc();<br>          v20[(<span class="hljs-type">int</span>)v5 + <span class="hljs-number">37</span>] = (*v10)[v9];<br>        &#125;<br>        ++v5;<br>      &#125;<br>      v20[(<span class="hljs-type">int</span>)v5 + <span class="hljs-number">37</span>] = <span class="hljs-number">0</span>;<br>      <span class="hljs-built_in">sleep</span>(<span class="hljs-number">1u</span>);<br>    &#125;<br>    --v17;<br>  &#125;<br>  <span class="hljs-keyword">while</span> ( v17 );<br>  v12 = v19;<br>  __printf_chk(<span class="hljs-number">1LL</span>, <span class="hljs-string">&quot;KEY: &quot;</span>);<br>  <span class="hljs-keyword">do</span><br>  &#123;<br>    v13 = (<span class="hljs-type">unsigned</span> __int8)*v12++;<br>    __printf_chk(<span class="hljs-number">1LL</span>, <span class="hljs-string">&quot;%02x &quot;</span>, v13);<br>  &#125;<br>  <span class="hljs-keyword">while</span> ( v12 != v20 );<br>  v14 = <span class="hljs-number">0LL</span>;<br>  <span class="hljs-built_in">putchar</span>(<span class="hljs-number">10</span>);<br>  __printf_chk(<span class="hljs-number">1LL</span>, <span class="hljs-string">&quot;OK YOU WIN. HERE&#x27;S YOUR FLAG: &quot;</span>);<br>  <span class="hljs-keyword">do</span><br>  &#123;<br>    v15 = v20[v14] ^ v19[v14];<br>    ++v14;<br>    <span class="hljs-built_in">putchar</span>(v15);<br>  &#125;<br>  <span class="hljs-keyword">while</span> ( v14 != <span class="hljs-number">36</span> );<br>  <span class="hljs-built_in">putchar</span>(<span class="hljs-number">10</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>写个库，通过<code>gcc</code>生成动态链接文件，最后通过<code>LD_PRELOAD</code>来连接这个文件就ok了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// time.c</span><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> t = <span class="hljs-number">0x31337</span>;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">(<span class="hljs-type">int</span> sec)</span> &#123;<br>    t += sec;<br>&#125;<br><span class="hljs-comment">// 这个函数满足了每次循环种子加1，其次就是节省时间</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">time</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> t;<br>&#125;<br><span class="hljs-comment">//这个是</span><br></code></pre></td></tr></table></figure>
+
+<p>通过<code>gcc --shared time.c -o time.so</code>来生成动态文件</p>
+<p>然后通过<code>LD_PRELOAD=./time.so ./hite_bin.elf</code></p>
+<p>便可以将这个文件给到<code>hite_bin.elf</code>并运行</p>
+<p>一会便打印出了flag了</p>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">原程序的本意</th>
+<th align="center">我们修改后的 “作弊行为”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>sleep(1)</code></td>
+<td align="center">让程序真的等 1 秒，模拟时间流逝</td>
+<td align="center">模拟时间流逝：假时间 <code>t</code> 每次 + 1，刚好匹配原程序 “每循环一次时间过 1 秒” 的预期</td>
+</tr>
+<tr>
+<td align="center"><code>time(0)</code></td>
+<td align="center">获取真实的当前时间戳</td>
+<td align="center">改成 “固定返回一个值，且每次调用就返回当前的t，实际是模拟0x31337+ i,i++”—— 程序以为时间在走，实际是假的</td>
+</tr>
+</tbody></table>
+<h2 id="Detecting-debugging"><a href="#Detecting-debugging" class="headerlink" title="Detecting debugging"></a>Detecting debugging</h2><p>这个学一下</p>
+
                 
               </div>
             
@@ -342,6 +380,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/03/23/14-MYSQL/" title="14.MYSQL">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">14.MYSQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

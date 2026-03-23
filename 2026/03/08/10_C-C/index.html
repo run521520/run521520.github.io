@@ -27,7 +27,7 @@
 <meta property="og:description" content="进制二进制：	0	1 八进制：	0	1	2	3	4	5	6	7 十进制：	0	1	2	3	4	5	6	7	8	9      10       11     12	13      14      15 十六进制：    0	1	2	3	4	5	6	7	8	9	A	B	C	D	E	F    十进制 二进制 十六进制    0 0000 0   1 0001 1   2 0010 2   3 0011">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-08T09:12:09.000Z">
-<meta property="article:modified_time" content="2026-03-16T05:02:27.309Z">
+<meta property="article:modified_time" content="2026-03-16T10:58:22.873Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="语法">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.9k 字
+          5.6k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          41 分钟
+          47 分钟
         
       </span>
     
@@ -452,12 +452,21 @@
 
 
 
-<h4 id="limits库"><a href="#limits库" class="headerlink" title="limits库"></a><code>limits库</code></h4><h4 id="stdlib库"><a href="#stdlib库" class="headerlink" title="stdlib库"></a><code>stdlib库</code></h4><p>在这里面有一个函数是 <code>rand()</code> 随机数函数</p>
+<h4 id="limits库"><a href="#limits库" class="headerlink" title="limits库"></a><code>limits库</code></h4><h4 id="stdlib库"><a href="#stdlib库" class="headerlink" title="stdlib库"></a><code>stdlib库</code></h4><h5 id="rand"><a href="#rand" class="headerlink" title="rand()"></a>rand()</h5><p><code>rand()这个函数实际上也不算是真正的随机数，它是根据里面的机制来刷选出来，就是第二次还是这几个，所以需要一个种子来变换这个刷选数组</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 生成随机数</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>   <span class="hljs-comment">// 设置随机数种子，使用当前时间确保每次运行结果不同</span><br>   srand((<span class="hljs-type">unsigned</span>)time(<span class="hljs-literal">NULL</span>));<br>   <span class="hljs-comment">// 生成一个0到RAND_MAX之间的随机整数</span><br>   <span class="hljs-type">int</span> random_number = rand();<br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;随机数: %d\n&quot;</span>, random_number);<br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 在指定的范围内生成随机数</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>   srand((<span class="hljs-type">unsigned</span>)time(<span class="hljs-literal">NULL</span>));<br>   <span class="hljs-comment">// 生成13到63之间的随机整数</span><br>   <span class="hljs-type">int</span> lower = <span class="hljs-number">13</span>, upper = <span class="hljs-number">63</span>;<br>   <span class="hljs-type">int</span> random_number = rand() % (upper - lower + <span class="hljs-number">1</span>) + lower;<br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;范围内随机数: %d\n&quot;</span>, random_number);<br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// rand()函数的随即范围是[lower,upper)</span><br><span class="hljs-comment">// 这里如果要获取[0,num)的随机数，就这样子写 rand()%num</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 <h4 id="string"><a href="#string" class="headerlink" title="string"></a><code>string</code></h4><h5 id="strtok"><a href="#strtok" class="headerlink" title="strtok"></a><code>strtok</code></h5><p><code>char *strtok(char *str, const char *delim);</code>：用于分割字符串，将字符串根据指定的分隔符分割成多个子字符串</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>   <span class="hljs-type">char</span> str[<span class="hljs-number">80</span>] = <span class="hljs-string">&quot;This is - www.runoob.com - website&quot;</span>;<br>   <span class="hljs-type">const</span> <span class="hljs-type">char</span> s[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;-&quot;</span>;<br>   <span class="hljs-type">char</span> *token;<br>   <span class="hljs-comment">// 获取第一个子字符串</span><br>   token = <span class="hljs-built_in">strtok</span>(str, s);<br>   <span class="hljs-comment">// 继续获取其他的子字符串</span><br>   <span class="hljs-keyword">while</span>(token != <span class="hljs-literal">NULL</span>) &#123;<br>       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, token);<br>       token = <span class="hljs-built_in">strtok</span>(<span class="hljs-literal">NULL</span>, s); <span class="hljs-comment">// 用循环来获取剩下的字符串，第一个参数必须是NUll，表示接着上一次的分割</span><br>   &#125;<br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><code>strtok</code> 会修改被操作的字符</p>
-<h2 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h2>
+<h2 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h2><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>当程序运行完后便会退出，比如一闪而过的程序，如果按<code>Ctrl + F5</code>便不会退出</p>
+
                 
               </div>
             

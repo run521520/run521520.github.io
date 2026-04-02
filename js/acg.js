@@ -37,7 +37,7 @@
     if (!enable) return;
 
     const images = ["/img/R1.jpg", "/img/R2.jpg", "/img/R3.jpg", "/img/R4.jpg", "/img/R5.jpeg"];
-    const intervalMs = 150000;
+    const intervalMs = 6000000;
     const fadeMs = 1000;
 
     let el = document.getElementById("acg-bg-rotator");

@@ -19,22 +19,22 @@
   <meta name="author" content="youduck7">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活">
+    <meta name="description" content="UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。 查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。  常用脱壳（自动）如果程序确认为 UPX 压缩，可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TEA加密算法">
-<meta property="og:url" content="http://run521520.github.io/2025/10/04/04_TEA/index.html">
+<meta property="og:title" content="Upx脱壳">
+<meta property="og:url" content="http://run521520.github.io/2025/10/04/02_Upx/index.html">
 <meta property="og:site_name" content="run521">
-<meta property="og:description" content="TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。  密钥长度 TEA：使用128位密钥。 XTEA：通常使用128位或256位密钥。 XXTEA：密钥长度更灵活">
+<meta property="og:description" content="UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。 快速检测 使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。 查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。  常用脱壳（自动）如果程序确认为 UPX 压缩，可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-04T14:12:41.000Z">
-<meta property="article:modified_time" content="2026-03-16T05:12:38.977Z">
+<meta property="article:modified_time" content="2026-03-16T05:00:02.228Z">
 <meta property="article:author" content="youduck7">
-<meta property="article:tag" content="加密算法">
+<meta property="article:tag" content="UPX脱壳">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>TEA加密算法 - run521</title>
+  <title>Upx脱壳 - run521</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="TEA加密算法"></span>
+            <span id="subtitle" data-typed-text="Upx脱壳"></span>
           
         </div>
 
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          1.1k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          22 分钟
+          10 分钟
         
       </span>
     
@@ -279,48 +279,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">TEA加密算法</h1>
+            <h1 id="seo-header">Upx脱壳</h1>
             
             
               <div class="markdown-body">
                 
-                <p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p>
-<p> <strong>密钥长度</strong></p>
-<p>TEA：使用128位密钥。</p>
-<p>XTEA：通常使用128位或256位密钥。</p>
-<p>XXTEA：密钥长度更灵活，可以使用任意长度的密钥。</p>
-<p>&nbsp;<strong>加密轮数</strong></p>
-<p>TEA：通常进行32轮加密。</p>
-<p>XTEA：默认进行64轮加密。</p>
-<p>XXTEA：加密轮数更多，具体轮数取决于数据块和密钥的长度。</p>
-<p><strong>加密算法</strong></p>
-<p>XTEA：在TEA的基础上增加了更多的变量和操作，例如密钥的不规则混合。</p>
-<p>XXTEA：进一步改进了轮加密过程，使用了更多的变量和操作，并且利用相邻字进行加密。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>TEA（Tiny Encryption Algorithm）及其变体 XTEA、XXTEA 是一类轻量级分组&#x2F;块加密算法，通常以 64 位明文分组、128 位密钥为基础。算法使用常数 delta（δ &#x3D; 0x9E3779B9，来自黄金比相关表达）作为轮常数。</p>
-<h2 id="主要差异"><a href="#主要差异" class="headerlink" title="主要差异"></a>主要差异</h2><ul>
-<li>TEA：经典实现，通常 32 轮。</li>
-<li>XTEA：对 TEA 的改进，轮数与细节不同，常见实现轮数更多。</li>
-<li>XXTEA：适用于任意长度数据块的改进版本，结构更复杂。</li>
-</ul>
-<h2 id="常量与符号"><a href="#常量与符号" class="headerlink" title="常量与符号"></a>常量与符号</h2><ul>
-<li>delta（δ）: 0x9E3779B9</li>
-</ul>
-<h2 id="TEA（伪代码）"><a href="#TEA（伪代码）" class="headerlink" title="TEA（伪代码）"></a>TEA（伪代码）</h2><p>下面以伪代码展示 TEA 的加密与解密流程：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">/* 加密 */<br><span class="hljs-built_in">sum</span> = <span class="hljs-number">0</span><br>delta = <span class="hljs-number">0x9E3779B9</span><br><span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span> to <span class="hljs-number">31</span>:<br>	<span class="hljs-built_in">sum</span> += delta<br>	X0 += ((X1 &lt;&lt; <span class="hljs-number">4</span>) + K0) ^ (X1 + <span class="hljs-built_in">sum</span>) ^ ((X1 &gt;&gt; <span class="hljs-number">5</span>) + K1)<br>	X1 += ((X0 &lt;&lt; <span class="hljs-number">4</span>) + K2) ^ (X0 + <span class="hljs-built_in">sum</span>) ^ ((X0 &gt;&gt; <span class="hljs-number">5</span>) + K3)<br><br>/* 解密 */<br><span class="hljs-built_in">sum</span> = delta * <span class="hljs-number">32</span><br><span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span> to <span class="hljs-number">31</span>:<br>	X1 -= ((X0 &lt;&lt; <span class="hljs-number">4</span>) + K2) ^ (X0 + <span class="hljs-built_in">sum</span>) ^ ((X0 &gt;&gt; <span class="hljs-number">5</span>) + K3)<br>	X0 -= ((X1 &lt;&lt; <span class="hljs-number">4</span>) + K0) ^ (X1 + <span class="hljs-built_in">sum</span>) ^ ((X1 &gt;&gt; <span class="hljs-number">5</span>) + K1)<br>	<span class="hljs-built_in">sum</span> -= delta<br></code></pre></td></tr></table></figure>
+                <p>UPX 是常见的可执行文件压缩壳，壳会在运行时解压真实代码，因此在 IDA 等静态分析工具中通常看不到原始代码。下面给出常用的检测与脱壳思路。</p>
+<h2 id="快速检测"><a href="#快速检测" class="headerlink" title="快速检测"></a>快速检测</h2><ol>
+<li>使用 PE 工具（如 PEiD、Detect it easy）或在 IDA 的文件信息栏查看是否带有 UPX 标识。</li>
+<li>查看入口点（Entry Point）附近是否有解压逻辑或简单跳转到解压例程。</li>
+</ol>
+<h2 id="常用脱壳（自动）"><a href="#常用脱壳（自动）" class="headerlink" title="常用脱壳（自动）"></a>常用脱壳（自动）</h2><p>如果程序确认为 UPX 压缩，可以尝试官方 upx 工具解包：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">upx -d &lt;程序路径&gt;<br></code></pre></td></tr></table></figure>
 
-<h2 id="XTEA（伪代码）"><a href="#XTEA（伪代码）" class="headerlink" title="XTEA（伪代码）"></a>XTEA（伪代码）</h2><p>XTEA 使用不同的索引与轮次处理，常见形式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">sum</span> = <span class="hljs-number">0</span><br>delta = <span class="hljs-number">0x9E3779B9</span><br><span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span> to (Round-<span class="hljs-number">1</span>):<br>	X0 += (((X1 &lt;&lt; <span class="hljs-number">4</span>) ^ (X1 &gt;&gt; <span class="hljs-number">5</span>)) + X1) ^ (<span class="hljs-built_in">sum</span> + key[<span class="hljs-built_in">sum</span> &amp; <span class="hljs-number">3</span>])<br>	<span class="hljs-built_in">sum</span> += delta<br>	X1 += (((X0 &lt;&lt; <span class="hljs-number">4</span>) ^ (X0 &gt;&gt; <span class="hljs-number">5</span>)) + X0) ^ (<span class="hljs-built_in">sum</span> + key[(<span class="hljs-built_in">sum</span> &gt;&gt; <span class="hljs-number">11</span>) &amp; <span class="hljs-number">3</span>])<br></code></pre></td></tr></table></figure>
-
-<p>解密为上述过程的逆序实现。</p>
-<h2 id="XXTEA"><a href="#XXTEA" class="headerlink" title="XXTEA"></a>XXTEA</h2><p>XXTEA（又名 Corrected Block TEA）用于任意长度的数据块，具体实现与轮函数更复杂，建议查看参考实现以获得准确代码。</p>
-<p>这里重点记住一个点就是**<code>0x61C88647 = -0x9E3779B9</code>**<br>为什么呢，因为我在做题的时候因为这个被坑过；</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DELTA 0x9e3779b9</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MX (((z&gt;&gt;5^y<span class="hljs-string">&lt;&lt;2) + (y&gt;</span>&gt;3^z&lt;&lt;4)) ^ ((sum^y) + (key[(p&amp;3)^e] ^ z)))</span><br> <br><span class="hljs-type">void</span> <span class="hljs-title function_">btea</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> *v, <span class="hljs-type">int</span> n, <span class="hljs-type">uint32_t</span> <span class="hljs-type">const</span> key[<span class="hljs-number">4</span>])</span><br>&#123;<br>    <span class="hljs-type">uint32_t</span> y, z, sum;<br>    <span class="hljs-type">unsigned</span> p, rounds, e;<br>    <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">1</span>)            <span class="hljs-comment">/* Coding Part */</span><br>    &#123;<br>        rounds = <span class="hljs-number">6</span> + <span class="hljs-number">52</span>/n;<br>        sum = <span class="hljs-number">0</span>;<br>        z = v[n<span class="hljs-number">-1</span>];<br>        <span class="hljs-keyword">do</span><br>        &#123;<br>            sum += DELTA;<br>            e = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;<br>            <span class="hljs-keyword">for</span> (p=<span class="hljs-number">0</span>; p&lt;n<span class="hljs-number">-1</span>; p++)<br>            &#123;<br>                y = v[p+<span class="hljs-number">1</span>];<br>                z = v[p] += MX;<br>            &#125;<br>            y = v[<span class="hljs-number">0</span>];<br>            z = v[n<span class="hljs-number">-1</span>] += MX;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (--rounds);<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">-1</span>)      <span class="hljs-comment">/* Decoding Part */</span><br>    &#123;<br>        n = -n;<br>        rounds = <span class="hljs-number">6</span> + <span class="hljs-number">52</span>/n;<br>        sum = rounds*DELTA;<br>        y = v[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">do</span><br>        &#123;<br>            e = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;<br>            <span class="hljs-keyword">for</span> (p=n<span class="hljs-number">-1</span>; p&gt;<span class="hljs-number">0</span>; p--)<br>            &#123;<br>                z = v[p<span class="hljs-number">-1</span>];<br>                y = v[p] -= MX;<br>            &#125;<br>            z = v[n<span class="hljs-number">-1</span>];<br>            y = v[<span class="hljs-number">0</span>] -= MX;<br>            sum -= DELTA;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (--rounds);<br>    &#125;<br>&#125;<br> <br> <br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">uint32_t</span> v[<span class="hljs-number">2</span>]= &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;;<br>    <span class="hljs-type">uint32_t</span> <span class="hljs-type">const</span> k[<span class="hljs-number">4</span>]= &#123;<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;<br>    <span class="hljs-type">int</span> n= <span class="hljs-number">2</span>; <span class="hljs-comment">//n的绝对值表示v的长度，取正表示加密，取负表示解密</span><br>    <span class="hljs-comment">// v为要加密的数据是两个32位无符号整数</span><br>    <span class="hljs-comment">// k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;加密前原始数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);<br>    btea(v, n, k);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;加密后的数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);<br>    btea(v, -n, k);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;解密后的数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
-
-<p>这个是网上找的脚本,这个是最基本的类型，在做题的时候可能会碰到，轮次变换，MA变换等，但是问题不大<br>解密的模式不变</p>
-<h2 id="说明与注意事项"><a href="#说明与注意事项" class="headerlink" title="说明与注意事项"></a>说明与注意事项</h2><ul>
-<li>这些算法在 CTF&#x2F;练习中常见；实现时需注意整数位宽、溢出行为与字节序（endianness）。</li>
-<li>若用于实际生产环境，建议使用现代经过审计的加密库（如 AES 系列）。</li>
+<p>若成功会在当前目录生成解压后的可执行文件；若失败，说明可能存在保护或混淆，需要使用手动脱壳方法。</p>
+<h2 id="手动脱壳（思路）"><a href="#手动脱壳（思路）" class="headerlink" title="手动脱壳（思路）"></a>手动脱壳（思路）</h2><ol>
+<li>在调试器（x32dbg&#x2F;x64dbg&#x2F;IDA+调试器）中运行程序并设置断点，跟踪程序解压流程。</li>
+<li>找到 OEP（Original Entry Point，原始入口点）。常见的线索有 PUSHAD&#x2F;POPAD（32 位）或多个 push 指令（64 位）作为保存寄存器的序列。</li>
+<li>在 OEP 附近设置断点，继续执行直到出现真实代码，然后转储（dump）进程内存并修复 IAT（可用 Scylla 等工具）。</li>
+</ol>
+<p>简化流程：</p>
+<ul>
+<li>找到入口 -&gt; 跟踪到解压完成点（观察 ESP&#x2F;堆栈&#x2F;字符串变化） -&gt; 在内存中定位真实代码段 -&gt; 导出并修复导入表（IAT）。</li>
 </ul>
+<h2 id="工具建议"><a href="#工具建议" class="headerlink" title="工具建议"></a>工具建议</h2><ul>
+<li>upx（官方工具）</li>
+<li>x32dbg &#x2F; x64dbg（动态调试）</li>
+<li>IDA Pro + 调试插件（定位 OEP）</li>
+<li>Scylla（修复导入表）</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>64 位程序没有 PUSHAD 指令，需通过连续的 push 指令或寄存器保存序列作为线索。</li>
+<li>某些程序使用额外保护（反调试、完整性校验、二次加密等），这时需要针对性分析并绕过防护。</li>
+</ul>
+<h2 id="再详细讲一下"><a href="#再详细讲一下" class="headerlink" title="再详细讲一下"></a>再详细讲一下</h2><p>我们要在加壳后的程序中定位到原程序的入口点，这个就是用x64dbg打开程序后运行程序后停在<code>pushad</code><br>这个是将全部的寄存器压入栈中，<code>popad</code>则是将栈中全部的寄存器弹出。在<code>pushad</code>后便是<code>upx</code>解压代码<br>开始解压程序了。<code>upx</code>压缩，但是在程序运行时会自动解开，且是实时的，所以就是看到<code>popad</code>或寄存器被弹出完，<br>就是原程序的入口。<br>看不懂没关系，实操一遍就记住了。</p>
+<p>怎么跟踪这个解压缩的过程呢？先<code>F9</code>运行，<code>pushad</code>执行前(我看有的在执行后，也对把，等我有时间去测一测)<br>对当前栈顶<code>rsi或esi</code>的内存地址下一个硬件断点即可。然后便是一直<code>F9</code>知道遇到<code>popad或连续的pop</code>仔细看一下后面<br>是不是有一个远程跳转，有的话按<code>F4</code>跳到当前的指令并将要执行，<code>F7</code>步进到函数里面，看一下这个函数周围是不是有<br>正常的字符串，就是已经被解压缩的，就是看起来和IDA差不多的形式。其实你也可以<code>F7</code>运行一下汇编指令，<br>看看控制台是否有变化，有变化就代表你找对了，这时就可以dump了。</p>
 
                 
               </div>
@@ -339,7 +332,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="category-chain-item">加密算法</a>
+  <a href="/categories/%E8%84%B1%E5%A3%B3/" class="category-chain-item">脱壳</a>
   
   
 
@@ -354,7 +347,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="print-no-link">#加密算法</a>
+        <a href="/tags/UPX%E8%84%B1%E5%A3%B3/" class="print-no-link">#UPX脱壳</a>
       
     </div>
   
@@ -366,8 +359,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>TEA加密算法</div>
-      <div>http://run521520.github.io/2025/10/04/04_TEA/</div>
+      <div>Upx脱壳</div>
+      <div>http://run521520.github.io/2025/10/04/02_Upx/</div>
     </div>
     <div class="license-meta">
       
@@ -411,21 +404,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/04/03_Base64/" title="Base64算法">
+                      <a href="/2025/10/04/otherAlgorithms/" title="另外一些加密算法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Base64算法</span>
+                        <span class="hidden-mobile">另外一些加密算法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2025/10/04/05_Upx/" title="Upx脱壳">
-                        <span class="hidden-mobile">Upx脱壳</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>

@@ -27,7 +27,7 @@
 <meta property="og:description" content="RC4算法简介RC4 是一种字节流对称加密算法，加密和解密使用相同的密钥，通过生成与明文等长的伪随机密钥流与明文按字节异或实现。 特性与安全性 实现简单、速度快。 支持 1–256 字节的密钥长度（8–2048 比特）。  注意：RC4 在某些协议和实现下存在偏差问题（历史上在 TLS 中发现过弱点）。生产环境应优先使用经过广泛审计的现代算法（如 AES-GCM）。 算法组成 初始化算法（KSA）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-02T07:01:34.000Z">
-<meta property="article:modified_time" content="2026-04-02T07:10:44.790Z">
+<meta property="article:modified_time" content="2026-04-02T08:12:49.378Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="常见加密方式">
 <meta name="twitter:card" content="summary_large_image">
@@ -302,10 +302,7 @@
 
 
 
-
-
-
-
+<hr>
 <h1 id="TEA算法"><a href="#TEA算法" class="headerlink" title="TEA算法"></a>TEA算法</h1><p>TEA、XTEA、XXTEA算法采用64位的明文分组和128位的密钥。算法中使用了一个神秘常数δ（delta），它来源于黄金比率，用于保证每一轮加密都不相同。δ的精确值并不关键，通常定义为δ&#x3D;「(√5 - 1)2^31」（即0x9E3779B9），在做题中可能会变，但没有影响。</p>
 <p> <strong>密钥长度</strong></p>
 <p>TEA：使用128位密钥。</p>

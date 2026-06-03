@@ -1,28 +1,29 @@
 
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
-
-
+<!DOCTYPE html><html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/baimao.jpg">
-  <link rel="icon" href="/img/baimao.jpg">
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="youduck7">
-  <meta name="keywords" content="">
+  <meta name="generator" content="Hexo 8.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>angr - run521</title>
+
   
     <meta name="description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下 starrysky 安装的话就这几个：pip install angr 安装成功就可以直接使用了，没成功的话就需要问ai了。剩下的看自己吧，不深入的话就不用安装了。pip3 install angr-management 安装angr-management (GUI界面)，安装之后可以通过angr-manag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angr">
-<meta property="og:url" content="http://run521520.github.io/2025/10/20/05_angr/index.html">
+<meta property="og:url" content="http://run521520.github.io/2025/10/20/05_angr/">
 <meta property="og:site_name" content="run521">
 <meta property="og:description" content="学习视频是B站的作者是:mr_m0nst3r链接学习资源 这个博主写的也不错,可以看一下 starrysky 安装的话就这几个：pip install angr 安装成功就可以直接使用了，没成功的话就需要问ai了。剩下的看自己吧，不深入的话就不用安装了。pip3 install angr-management 安装angr-management (GUI界面)，安装之后可以通过angr-manag">
 <meta property="og:locale" content="zh_CN">
@@ -31,261 +32,64 @@
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="angr">
 <meta property="article:tag" content="逆向">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
   
   
   
-  <title>angr - run521</title>
+  <meta name="keywords" content="angr,逆向">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  <!-- feed -->
   
 
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
 
 
   
-<link rel="stylesheet" href="/css/acg.css">
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"run521520.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"python"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":3},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 8.0.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 80vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>youduck7</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/R1.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="angr"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-20 19:37" pubdate>
-          2025年10月20日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          16k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          132 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"youduck7","sameAs":[]},"dateCreated":"2025-10-20T19:37:41+08:00","dateModified":"2025-12-23T19:05:07+08:00","datePublished":"2025-10-20T19:37:41+08:00","description":"","headline":"angr","mainEntityOfPage":{"@type":"WebPage","@id":"http://run521520.github.io/2025/10/20/05_angr/"},"publisher":{"@type":"Organization","name":"youduck7","sameAs":[]},"url":"http://run521520.github.io/2025/10/20/05_angr/","keywords":"angr, 逆向","image":[]}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
 
 
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">run521</div><div class="sub normal cap">CTF玩家</div><div class="sub hover cap" style="opacity:0"> 逆向工程 | 安全研究</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/04/02/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86/"><span class="title">常见加密方式</span></a><a class="item title" href="/2026/03/08/07_C-C/"><span class="title">C/C++</span></a><a class="item title" href="/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/"><span class="title">x86/x86-64汇编</span></a><a class="item title" href="/2026/03/15/03_VM/"><span class="title">VM</span></a><a class="item title" href="/2026/03/15/04_ida%E8%84%9A%E6%9C%AC/"><span class="title">ida脚本</span></a><a class="item title" href="/2026/03/25/2024%E5%BE%A1%E7%BD%91%E6%9D%AF/"><span class="title">2024御网杯</span></a><a class="item title" href="/2026/03/23/11-MYSQL/"><span class="title">MYSQL</span></a><a class="item title" href="/2025/10/04/01_ida/"><span class="title">ida使用文档</span></a><a class="item title" href="/2026/03/15/10-Linux/"><span class="title">Linux</span></a><a class="item title" href="/2025/10/04/dataStorage/"><span class="title">数据储存</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Angr/">Angr</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-10-20T11:37:41.000Z">2025-10-20</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-12-23T11:05:07.420Z">2025-12-23</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>angr</span></h1>
         
       </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
     </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">angr</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a></p>
+  </div>
+  </div><article class="md-text content"><p>学习视频是B站的<br>作者是:mr_m0nst3r<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV167411o7WK/?vd_source=fd5cdb6d7f1c081069afc1d62787fbf8">链接</a><br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">学习资源</a></p>
 <p>这个博主写的也不错,可以看一下 <a target="_blank" rel="noopener" href="https://starrysky1004.github.io/2024/12/17/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/angr-xue-xi-yu-angr-ctf-ti-jie-chi-xu-geng-xin/#toc-heading-16">starrysky</a></p>
 <p>安装的话就这几个：<br><code>pip install angr</code> 安装成功就可以直接使用了，没成功的话就需要问ai了。<br>剩下的看自己吧，不深入的话就不用安装了。<br><code>pip3 install angr-management</code> 安装angr-management (GUI界面)，安装之后可以通过<code>angr-management</code> 或 <code>python -m angrmanagement</code> 打开<br>功能包括：</p>
 <ul>
@@ -308,7 +112,7 @@
 <li>解出约束条件,获取目标状态的数值</li>
 </ol>
 <h3 id="1-创建project对象"><a href="#1-创建project对象" class="headerlink" title="1. 创建project对象"></a>1. 创建project对象</h3><p>因为angr是一个基于符号执行和模拟执行的二进制框架,所以运行文件的二进制,你必须要有。<br>载入二进制文件使用<code>angr.Project函数</code>,它的第一个参数是载入文件的路径,后面还有其它参数</p>
-<pre><code class="hljs">auto_load_libs        是否自动加载程序的依赖        布尔值
+<pre><code>auto_load_libs        是否自动加载程序的依赖        布尔值
 
 skip_libs             希望避免加载的库             库名  
 
@@ -356,7 +160,7 @@ ld_path               共享库的优先搜索路径          路径名
 <li>DSE：为路径生成公式，生成公式时负载很高，但公式易解</li>
 <li>SSE：为语句生成公式，公式生成容易，也能覆盖更多路径，但更难解<br>在angr中启动veritesting</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">p = angr.Project(<span class="hljs-string">&quot;/bin/true&quot;</span>)<br>state = p.factory.entry_state()<br><br><span class="hljs-comment"># 初始化SM时启动</span><br>simgr = p.factory.simgr(state,veritesting=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># 或者在SM初始化后启动</span><br>simgr = p.factory.simgr(state)<br>simgr.use_technique(angr.exploration_techniques.Veritesting())<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">p = angr.Project(<span class="string">&quot;/bin/true&quot;</span>)</span><br><span class="line">state = p.factory.entry_state()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化SM时启动</span></span><br><span class="line">simgr = p.factory.simgr(state,veritesting=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 或者在SM初始化后启动</span></span><br><span class="line">simgr = p.factory.simgr(state)</span><br><span class="line">simgr.use_technique(angr.exploration_techniques.Veritesting())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>之前提到的angr的求解器solver，以及操作内存、寄存器、文件系统的方法：memory、regs、fs等，实际上都是state的插件，下面说明两个其他常用的插件。</p>
 <h4 id="全局插件global"><a href="#全局插件global" class="headerlink" title="全局插件global"></a>全局插件global</h4><p><code>state.global</code> 实现了标准python dict接口，使用它你能模拟执行的state中储存任意数据，并且很方便的就能访问到了<br><code>state.globals[&#39;x&#39;] = a_symbol</code><br>全局变量名x不需要提前声明，但当你需要使用这个变量之前需要对它赋值</p>
 <h4 id="history插件"><a href="#history插件" class="headerlink" title="history插件"></a>history插件</h4><p>history记录了一个状态的执行路径，它是一个链表，每个节点代表一次执行的状态。你可以不断使用.parent来回溯这个链表，history的使用方式如下：</p>
@@ -370,15 +174,15 @@ ld_path               共享库的优先搜索路径          路径名
 <p>此外，在每种方法前加上recent_，就可以获取列表中最近的那个地址，例如state.history.recent_bbl_addrs会返回当前state最近执行的基本块的地址。</p>
 <hr>
 <p>所以大致流程代码就是上面的了。</p>
-<h2 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h2><h3 id="简单的一个模板"><a href="#简单的一个模板" class="headerlink" title="简单的一个模板:"></a><strong>简单的一个模板:</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr						<span class="hljs-comment">#导angr包</span><br><br>p = angr.Project(<span class="hljs-string">&#x27;/root&#x27;</span>)   	<span class="hljs-comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span><br>state = p.factory.entry_state() <span class="hljs-comment">#建工厂,就是初始化状态</span><br><br>sm = p.factory.simulation_manager(state)  <span class="hljs-comment">#创建模拟管理器</span><br>sm.explore(find=<span class="hljs-number">0x110110</span>)		<span class="hljs-comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span><br><br>st = sm.found[<span class="hljs-number">0</span>]<br><br><span class="hljs-built_in">print</span>(st.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
+<h2 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h2><h3 id="简单的一个模板"><a href="#简单的一个模板" class="headerlink" title="简单的一个模板:"></a><strong>简单的一个模板:</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr						<span class="comment">#导angr包</span></span><br><span class="line"></span><br><span class="line">p = angr.Project(<span class="string">&#x27;/root&#x27;</span>)   	<span class="comment"># 创建项目,引入路劲,可以在路劲后面加上 auto_load_libs=False 关闭自动加载库提高性能</span></span><br><span class="line">state = p.factory.entry_state() <span class="comment">#建工厂,就是初始化状态</span></span><br><span class="line"></span><br><span class="line">sm = p.factory.simulation_manager(state)  <span class="comment">#创建模拟管理器</span></span><br><span class="line">sm.explore(find=<span class="number">0x110110</span>)		<span class="comment">#探索路劲,find是成功分支地址,avoid是失败的地址</span></span><br><span class="line"></span><br><span class="line">st = sm.found[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(st.posix.dumps(<span class="number">0</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>当程序中出现多个 <code>Try again</code> 和 <code>Good job</code>,就不能再添目标地址了,<br>因为explore发现第一个成功就没了,所以针对这种情况,将这两种情况判断写<br>成函数作为<code>find</code>和<code>avoid</code>的参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br>project = angr.Project(<span class="hljs-string">&#x27;./text&#x27;</span>)<br>simgr = project.factory.simulation_manager()  <span class="hljs-comment">#这是允许的可以一步到位</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.posix.dumps(<span class="hljs-number">0</span>))<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">project = angr.Project(<span class="string">&#x27;./text&#x27;</span>)</span><br><span class="line">simgr = project.factory.simulation_manager()  <span class="comment">#这是允许的可以一步到位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Good&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Try&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">simgr.explore(find=right, avoid=wrong)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    solution_state = simgr.found[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(solution_state.posix.dumps(<span class="number">0</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="绕过输入，操控寄存器"><a href="#绕过输入，操控寄存器" class="headerlink" title="绕过输入，操控寄存器"></a>绕过输入，操控寄存器</h3><p>就是angr的输入格式不是很好,所以为了不出现问题,不从输入入手,<br>因为输入的数据是存在寄存器中然后传递给栈,所以找到存储的寄存器就行了<br>从传递寄存器参数给栈的位置开始执行,避开输入。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//输入数据<br><br>.text:08048937                 mov     ecx, [ebp+var_18]<br>.text:0804893A                 mov     eax, ecx<br>.text:0804893C                 mov     ecx, [ebp+var_14]<br>.text:0804893F                 mov     ebx, ecx<br>.text:08048941                 mov     ecx, [ebp+var_10]<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//输入数据</span><br><span class="line"></span><br><span class="line">.text:08048937                 mov     ecx, [ebp+var_18]</span><br><span class="line">.text:0804893A                 mov     eax, ecx</span><br><span class="line">.text:0804893C                 mov     ecx, [ebp+var_14]</span><br><span class="line">.text:0804893F                 mov     ebx, ecx</span><br><span class="line">.text:08048941                 mov     ecx, [ebp+var_10]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>//传递给栈<br><br>.text:0804897B                 call    get_user_input<br>.text:08048980                 mov     [ebp+var_14], eax<br>.text:08048983                 mov     [ebp+var_10], ebx<br>.text:08048986                 mov     [ebp+var_C], edx<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//传递给栈</span><br><span class="line"></span><br><span class="line">.text:0804897B                 call    get_user_input</span><br><span class="line">.text:08048980                 mov     [ebp+var_14], eax</span><br><span class="line">.text:08048983                 mov     [ebp+var_10], ebx</span><br><span class="line">.text:08048986                 mov     [ebp+var_C], edx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这里讲一下,一些相关的函数(这里是按照顺序写的):</p>
 <ul>
@@ -398,7 +202,7 @@ ld_path               共享库的优先搜索路径          路径名
 <li>simgr.explore(find,avoid) 自动探索执行路线，寻找目标状态<br>find和avoid的参数可以是目标地址,同时也可以是函数,当程序中成功后的提示<br>只调用一次时便可使用<code>目标地址</code>反而就用函数,为什么呢?我们的<code>目标地址</code>其实就是<br>成功的提示,当提示被调用多次时,那怎么办,所以用函数自定义来区分到底哪一个是正确的。</li>
 </ul>
 <p><code>目标地址</code>很好写,找到函数地址填上去就行了。<br><code>函数定义</code>下面就是一个例子:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment">#假设成功的提示有 Good 失败的有 Try</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#假设成功的提示有 Good 失败的有 Try</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Good&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Try&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ol>
 <li><code>state.posix</code> 	访问POSIX相关的抽象</li>
 <li><code>dumps(num)</code> <ul>
@@ -419,20 +223,20 @@ ld_path               共享库的优先搜索路径          路径名
 <hr>
 <p>有一个练习题<br><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">03_angr_symbolic_registers</a></p>
 <p>脚本是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./03_angr_symbolic_registers&#x27;</span>)<br>initial = project.factory.blank_state(addr=<span class="hljs-number">0x8048980</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">32</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">32</span>)<br>arg3 = claripy.BVS(<span class="hljs-string">&#x27;arg3&#x27;</span>, <span class="hljs-number">32</span>)<br><br>initial.regs.eax = arg1<br>initial.regs.ebx = arg2<br>initial.regs.edx = arg3<br><br>simgr = project.factory.simgr(initial)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg1)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg2)))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(solution.solver.<span class="hljs-built_in">eval</span>(arg3)))<br><span class="hljs-comment">#0xb9ffd04e 0xccf63fe8 0x8fd4d959</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">project = angr.Project(<span class="string">&#x27;./03_angr_symbolic_registers&#x27;</span>)</span><br><span class="line">initial = project.factory.blank_state(addr=<span class="number">0x8048980</span>)</span><br><span class="line"></span><br><span class="line">arg1 = claripy.BVS(<span class="string">&#x27;arg1&#x27;</span>, <span class="number">32</span>)</span><br><span class="line">arg2 = claripy.BVS(<span class="string">&#x27;arg2&#x27;</span>, <span class="number">32</span>)</span><br><span class="line">arg3 = claripy.BVS(<span class="string">&#x27;arg3&#x27;</span>, <span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">initial.regs.eax = arg1</span><br><span class="line">initial.regs.ebx = arg2</span><br><span class="line">initial.regs.edx = arg3</span><br><span class="line"></span><br><span class="line">simgr = project.factory.simgr(initial)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Good&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Try&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">simgr.explore(find=right, avoid=wrong)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    solution = simgr.found[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(solution.solver.<span class="built_in">eval</span>(arg1)))</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(solution.solver.<span class="built_in">eval</span>(arg2)))</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(solution.solver.<span class="built_in">eval</span>(arg3)))</span><br><span class="line"><span class="comment">#0xb9ffd04e 0xccf63fe8 0x8fd4d959</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="绕过输入，操控栈"><a href="#绕过输入，操控栈" class="headerlink" title="绕过输入，操控栈"></a>绕过输入，操控栈</h3><p>就是还是和上面类似的情况，但是不能直接使用<strong>regs</strong>也就是说不能直接创建寄存器来符号化了。但是可以通过计算构造 <strong>esp</strong> 和 <strong>ebp</strong> 在合适的位置<strong>stack_push</strong>来入栈。<strong>为什么不能用寄存器呢？主要是看输入的值给谁</strong> ，给寄存器就用上面的模板，没给不就不能用了。<br>我们学汇编的时候都知道在进入一个函数的时候应该有以下的操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">push    ebp<br>mov     ebp , esp<br>mov     esp , num    <br><br>//先把栈底ebp入栈，因为此时ebp还保存着上个函数的状态，先存着，然后就是创建一个新的&#x27;栈&#x27;，接着在栈顶开辟空间。<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">push    ebp</span><br><span class="line">mov     ebp , esp</span><br><span class="line">mov     esp , num    </span><br><span class="line"></span><br><span class="line">//先把栈底ebp入栈，因为此时ebp还保存着上个函数的状态，先存着，然后就是创建一个新的&#x27;栈&#x27;，接着在栈顶开辟空间。</span><br></pre></td></tr></table></figure>
 <p>还有就是mov赋值时的操作比如<code>mov [ebp - 0x20] , eax</code> 则就是入栈吗<br>这里的入栈是<code>state.stack_push()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./04_angr_symbolic_stack&#x27;</span>)<br>initial_state = project.factory.blank_state(addr=<span class="hljs-number">0x8048697</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">32</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">32</span>)<br><br>initial_state.regs.esp = initial_state.regs.ebp<br>initial_state.regs.esp -= <span class="hljs-number">8</span><br><br>initial_state.stack_push(arg1)<br>initial_state.stack_push(arg2)<br><br>simgr = project.factory.simulation_manager(initial_state)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg1))<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg2))<br>    <br><span class="hljs-comment">#1704280884</span><br><span class="hljs-comment">#2382341151</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">project = angr.Project(<span class="string">&#x27;./04_angr_symbolic_stack&#x27;</span>)</span><br><span class="line">initial_state = project.factory.blank_state(addr=<span class="number">0x8048697</span>)</span><br><span class="line"></span><br><span class="line">arg1 = claripy.BVS(<span class="string">&#x27;arg1&#x27;</span>, <span class="number">32</span>)</span><br><span class="line">arg2 = claripy.BVS(<span class="string">&#x27;arg2&#x27;</span>, <span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">initial_state.regs.esp = initial_state.regs.ebp</span><br><span class="line">initial_state.regs.esp -= <span class="number">8</span></span><br><span class="line"></span><br><span class="line">initial_state.stack_push(arg1)</span><br><span class="line">initial_state.stack_push(arg2)</span><br><span class="line"></span><br><span class="line">simgr = project.factory.simulation_manager(initial_state)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Good&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Try&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">simgr.explore(find=right, avoid=wrong)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    solution_state = simgr.found[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg1))</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg2))</span><br><span class="line">    </span><br><span class="line"><span class="comment">#1704280884</span></span><br><span class="line"><span class="comment">#2382341151</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="绕过输入，操控全局变量"><a href="#绕过输入，操控全局变量" class="headerlink" title="绕过输入，操控全局变量"></a>绕过输入，操控全局变量</h3><p>这这应该很好判断了，当你看到接收的变量是全局变量的时候就可以用了。<br>用到一个函数 <code>state.memory.store(地址, 变量)</code>,<br><code>cast_to=bytes</code> 意思是按字节类型输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>project = angr.Project(<span class="hljs-string">&#x27;./05_angr_symbolic_memory&#x27;</span>)<br>initial_state = project.factory.blank_state(addr=<span class="hljs-number">0x8048601</span>)<br><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-number">64</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>, <span class="hljs-number">64</span>)<br>arg3 = claripy.BVS(<span class="hljs-string">&#x27;arg3&#x27;</span>, <span class="hljs-number">64</span>)<br>arg4 = claripy.BVS(<span class="hljs-string">&#x27;arg4&#x27;</span>, <span class="hljs-number">64</span>)<br>addr = <span class="hljs-number">0xA1BA1C0</span> <br><br>initial_state.memory.store(addr, arg1)<br>initial_state.memory.store(addr + <span class="hljs-number">0x8</span>, arg2)<br>initial_state.memory.store(addr + <span class="hljs-number">0x10</span>, arg3)<br>initial_state.memory.store(addr + <span class="hljs-number">0x18</span>, arg4)<br><br>simgr = project.factory.simulation_manager(initial_state)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Good&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>(<span class="hljs-params">state</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">b&#x27;Try&#x27;</span> <span class="hljs-keyword">in</span> state.posix.dumps(<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>simgr.explore(find=right, avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    solution_state = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg1, cast_to=<span class="hljs-built_in">bytes</span>))<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg2, cast_to=<span class="hljs-built_in">bytes</span>))<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg3, cast_to=<span class="hljs-built_in">bytes</span>))<br>    <span class="hljs-built_in">print</span>(solution_state.solver.<span class="hljs-built_in">eval</span>(arg4, cast_to=<span class="hljs-built_in">bytes</span>))<br><span class="hljs-comment">#b&#x27;NAXTHGNR&#x27;</span><br><span class="hljs-comment">#b&#x27;JVSFTPWE&#x27;</span><br><span class="hljs-comment">#b&#x27;LMGAUHWC&#x27;</span><br><span class="hljs-comment">#b&#x27;XMDCPALU&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">project = angr.Project(<span class="string">&#x27;./05_angr_symbolic_memory&#x27;</span>)</span><br><span class="line">initial_state = project.factory.blank_state(addr=<span class="number">0x8048601</span>)</span><br><span class="line"></span><br><span class="line">arg1 = claripy.BVS(<span class="string">&#x27;arg1&#x27;</span>, <span class="number">64</span>)</span><br><span class="line">arg2 = claripy.BVS(<span class="string">&#x27;arg2&#x27;</span>, <span class="number">64</span>)</span><br><span class="line">arg3 = claripy.BVS(<span class="string">&#x27;arg3&#x27;</span>, <span class="number">64</span>)</span><br><span class="line">arg4 = claripy.BVS(<span class="string">&#x27;arg4&#x27;</span>, <span class="number">64</span>)</span><br><span class="line">addr = <span class="number">0xA1BA1C0</span> </span><br><span class="line"></span><br><span class="line">initial_state.memory.store(addr, arg1)</span><br><span class="line">initial_state.memory.store(addr + <span class="number">0x8</span>, arg2)</span><br><span class="line">initial_state.memory.store(addr + <span class="number">0x10</span>, arg3)</span><br><span class="line">initial_state.memory.store(addr + <span class="number">0x18</span>, arg4)</span><br><span class="line"></span><br><span class="line">simgr = project.factory.simulation_manager(initial_state)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Good&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;Try&#x27;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">simgr.explore(find=right, avoid=wrong)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    solution_state = simgr.found[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg1, cast_to=<span class="built_in">bytes</span>))</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg2, cast_to=<span class="built_in">bytes</span>))</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg3, cast_to=<span class="built_in">bytes</span>))</span><br><span class="line">    <span class="built_in">print</span>(solution_state.solver.<span class="built_in">eval</span>(arg4, cast_to=<span class="built_in">bytes</span>))</span><br><span class="line"><span class="comment">#b&#x27;NAXTHGNR&#x27;</span></span><br><span class="line"><span class="comment">#b&#x27;JVSFTPWE&#x27;</span></span><br><span class="line"><span class="comment">#b&#x27;LMGAUHWC&#x27;</span></span><br><span class="line"><span class="comment">#b&#x27;XMDCPALU&#x27;</span></span><br></pre></td></tr></table></figure>
 <h3 id="怎么判断是：寄存器、栈、全局变量"><a href="#怎么判断是：寄存器、栈、全局变量" class="headerlink" title="怎么判断是：寄存器、栈、全局变量"></a>怎么判断是：寄存器、栈、全局变量</h3><p>开始的时候我也是感觉不太好分辨，查了些资料有点头绪了。</p>
 <ol>
 <li>当输入的值直接给寄存器并用寄存器操作的时候就是用<strong>寄存器模板</strong>，比如：</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs asm">.text:0804891E                 lea     ecx, [ebp+var_10]<br>.text:08048921                 push    ecx<br>.text:08048922                 lea     ecx, [ebp+var_14]<br>.text:08048925                 push    ecx<br>.text:08048926                 lea     ecx, [ebp+var_18]<br>.text:08048929                 push    ecx<br>.text:0804892A                 push    offset aXXX     ; &quot;%x %x %x&quot;<br>.text:0804892F                 call    ___isoc99_scanf<br>.text:08048934                 add     esp, 10h<br>.text:08048937                 mov     ecx, [ebp+var_18]<br>.text:0804893A                 mov     eax, ecx<br>.text:0804893C                 mov     ecx, [ebp+var_14]<br>.text:0804893F                 mov     ebx, ecx<br>.text:08048941                 mov     ecx, [ebp+var_10]<br>.text:08048944                 mov     edx, ecx<br>.text:08048946                 nop	<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.text:0804891E                 lea     ecx, [ebp+var_10]</span><br><span class="line">.text:08048921                 push    ecx</span><br><span class="line">.text:08048922                 lea     ecx, [ebp+var_14]</span><br><span class="line">.text:08048925                 push    ecx</span><br><span class="line">.text:08048926                 lea     ecx, [ebp+var_18]</span><br><span class="line">.text:08048929                 push    ecx</span><br><span class="line">.text:0804892A                 push    offset aXXX     ; &quot;%x %x %x&quot;</span><br><span class="line">.text:0804892F                 call    ___isoc99_scanf</span><br><span class="line">.text:08048934                 add     esp, 10h</span><br><span class="line">.text:08048937                 mov     ecx, [ebp+var_18]</span><br><span class="line">.text:0804893A                 mov     eax, ecx</span><br><span class="line">.text:0804893C                 mov     ecx, [ebp+var_14]</span><br><span class="line">.text:0804893F                 mov     ebx, ecx</span><br><span class="line">.text:08048941                 mov     ecx, [ebp+var_10]</span><br><span class="line">.text:08048944                 mov     edx, ecx</span><br><span class="line">.text:08048946                 nop	</span><br></pre></td></tr></table></figure>
 <p>可以好好看看先压入三个寄存器用来储存输入的值，在输入后又把值赋值给寄存器，看一下这里并没有把寄存器压入到栈中，这就是直接存储给寄存器。</p>
 <ol start="2">
 <li><p>讲一下<code>scanf</code>函数的储存，<code>scanf</code>输入的值刚开始是在栈上的，但是看上面，虽然开始是在栈上的，但是立即储存到寄存器中了，并且后续都是用寄存器计算。</p>
@@ -440,13 +244,13 @@ ld_path               共享库的优先搜索路径          路径名
 <li><p>当输入的值不是直接给寄存器，而是一直存储在栈中的就用<strong>栈模板</strong>，比如：</p>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs asm">.text:0804867F                 sub     esp, 4<br>.text:08048682                 lea     eax, [ebp+var_10]<br>.text:08048685                 push    eax<br>.text:08048686                 lea     eax, [ebp+var_C]<br>.text:08048689                 push    eax<br>.text:0804868A                 push    offset aUU      ; &quot;%u %u&quot;<br>.text:0804868F                 call    ___isoc99_scanf<br>.text:08048694                 add     esp, 10h<br>.text:08048697                 mov     eax, [ebp+var_C]<br>.text:0804869A                 sub     esp, 0Ch<br>.text:0804869D                 push    eax<br>.text:0804869E                 call    complex_function0<br>.text:080486A3                 add     esp, 10h<br>.text:080486A6                 mov     [ebp+var_C], eax<br>.text:080486A9                 mov     eax, [ebp+var_10]<br>.text:080486AC                 sub     esp, 0Ch<br>.text:080486AF                 push    eax<br>.text:080486B0                 call    complex_function1<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.text:0804867F                 sub     esp, 4</span><br><span class="line">.text:08048682                 lea     eax, [ebp+var_10]</span><br><span class="line">.text:08048685                 push    eax</span><br><span class="line">.text:08048686                 lea     eax, [ebp+var_C]</span><br><span class="line">.text:08048689                 push    eax</span><br><span class="line">.text:0804868A                 push    offset aUU      ; &quot;%u %u&quot;</span><br><span class="line">.text:0804868F                 call    ___isoc99_scanf</span><br><span class="line">.text:08048694                 add     esp, 10h</span><br><span class="line">.text:08048697                 mov     eax, [ebp+var_C]</span><br><span class="line">.text:0804869A                 sub     esp, 0Ch</span><br><span class="line">.text:0804869D                 push    eax</span><br><span class="line">.text:0804869E                 call    complex_function0</span><br><span class="line">.text:080486A3                 add     esp, 10h</span><br><span class="line">.text:080486A6                 mov     [ebp+var_C], eax</span><br><span class="line">.text:080486A9                 mov     eax, [ebp+var_10]</span><br><span class="line">.text:080486AC                 sub     esp, 0Ch</span><br><span class="line">.text:080486AF                 push    eax</span><br><span class="line">.text:080486B0                 call    complex_function1</span><br></pre></td></tr></table></figure>
 <p>明显可以看到虽然在输入后把<code>[ebp+var_C]</code>的值给了<code>eax</code>并把寄存器押入到栈中了，这是因为其他函数在调用时，方便可以从栈中取出来使用，其次在后续中并没有用<code>eax</code>来取代<code>[ebp+var_C]</code>，也就是说值一直都在栈中，思想不就是用栈来操作吗。</p>
 <ol start="4">
 <li><strong>全局变量</strong>这个比较好判断，就是看接收的值是不是<strong>全局变量</strong>就行了。</li>
 </ol>
 <hr>
-<pre><code class="hljs">情况                     方法                            要点
+<pre><code>情况                     方法                            要点
       
 </code></pre>
 <hr>
@@ -489,17 +293,17 @@ ld_path               共享库的优先搜索路径          路径名
 </tr>
 </tbody></table>
 <h3 id="操控动态内存问题"><a href="#操控动态内存问题" class="headerlink" title="操控动态内存问题"></a>操控动态内存问题</h3><p>大意就是在输入的变量的内存为<code>malloc</code>动态分配的时候，程序静态的时候它是在堆栈中找不到的，只有在动态运行或调试的时候才会分配，其次分配的内存是不固定的，所以我们可以给他一个内存，然后就可以操作了，这里给的内存是用不到的内存</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">内存地址空间：<br>0x00110110: 代码段 (text)<br>0x00220220: 数据段/BSS段 (存储全局变量)<br>0x00330330: 堆空间 (malloc分配在这里)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">内存地址空间：</span><br><span class="line">0x00110110: 代码段 (text)</span><br><span class="line">0x00220220: 数据段/BSS段 (存储全局变量)</span><br><span class="line">0x00330330: 堆空间 (malloc分配在这里)</span><br></pre></td></tr></table></figure>
 <p>其次在写脚本的时候，要在创建好<strong>门口</strong>的时候就创建变量的内存空间<br>就是在<code>malloc</code>之后，<code>scanf</code>之前开始执行<br><code>endness</code>设置端序</p>
 <ul>
 <li><code>endness = LE</code>小端序</li>
 <li><code>endness = BE</code>大端序</li>
 <li><code>endness = ME</code>中间序</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&#x27;./06_angr_symbolic_dynamic_memory&#x27;</span>)<br>init = p.factory.blank_state(addr=<span class="hljs-number">0x8048699</span>)<br><span class="hljs-comment"># 创建符号变量</span><br>arg1 = claripy.BVS(<span class="hljs-string">&#x27;arg1&#x27;</span>,<span class="hljs-number">64</span>)<br>arg2 = claripy.BVS(<span class="hljs-string">&#x27;arg2&#x27;</span>,<span class="hljs-number">64</span>)<br><span class="hljs-comment"># 设置BSS段地址：储存堆指针的全局变量位置</span><br>add1 = <span class="hljs-number">0xABCC8A4</span>   <span class="hljs-comment"># buffer1指针本身的地址</span><br>add2 = <span class="hljs-number">0xABCC8AC</span>   <span class="hljs-comment"># buffer2指针本身的地址</span><br><span class="hljs-comment"># 自定义堆地址 不和程序原本的地址冲突就行</span><br>heap_ptr1 = <span class="hljs-number">0x12340</span>   <span class="hljs-comment"># 创建 buffer1指向这里的内存</span><br>heap_ptr2 = <span class="hljs-number">0x12350</span>   <span class="hljs-comment"># 创建 buffer2指向这里的内存</span><br><span class="hljs-comment"># 定义完后便是设置BSS段的指针值</span><br><span class="hljs-comment"># 表示 buffer1 指向 0x12340 ， 其次这里的 endness=&quot;LE&quot;告诉python这是以什么方式储存的,然后便是将符号变量的值存到内存中</span><br>init.memory.store(add1,heap_ptr1,endness=<span class="hljs-string">&quot;LE&quot;</span>)<br>init.memory.store(add2,heap_ptr2,endness=<span class="hljs-string">&quot;LE&quot;</span>)<br>init.memory.store(heap_ptr1,add1)<br>init.memory.store(heap_ptr2,add2)<br><span class="hljs-comment"># 然后便是创建符号管理器</span><br>simgr = p.factory.simgr(init)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">right</span>():<br>	...<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">wrong</span>():<br>	...<br>simgr.explore(find=right,avoid=wrong)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>	s = simgr.found[<span class="hljs-number">0</span>]<br>	<span class="hljs-built_in">print</span>(s.solver.<span class="hljs-built_in">eval</span>(arg1,cast_to=<span class="hljs-built_in">bytes</span>))<br>	<span class="hljs-built_in">print</span>(s.solver.<span class="hljs-built_in">eval</span>(arg2,cast_to=<span class="hljs-built_in">bytes</span>))<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">p = angr.Project(<span class="string">&#x27;./06_angr_symbolic_dynamic_memory&#x27;</span>)</span><br><span class="line">init = p.factory.blank_state(addr=<span class="number">0x8048699</span>)</span><br><span class="line"><span class="comment"># 创建符号变量</span></span><br><span class="line">arg1 = claripy.BVS(<span class="string">&#x27;arg1&#x27;</span>,<span class="number">64</span>)</span><br><span class="line">arg2 = claripy.BVS(<span class="string">&#x27;arg2&#x27;</span>,<span class="number">64</span>)</span><br><span class="line"><span class="comment"># 设置BSS段地址：储存堆指针的全局变量位置</span></span><br><span class="line">add1 = <span class="number">0xABCC8A4</span>   <span class="comment"># buffer1指针本身的地址</span></span><br><span class="line">add2 = <span class="number">0xABCC8AC</span>   <span class="comment"># buffer2指针本身的地址</span></span><br><span class="line"><span class="comment"># 自定义堆地址 不和程序原本的地址冲突就行</span></span><br><span class="line">heap_ptr1 = <span class="number">0x12340</span>   <span class="comment"># 创建 buffer1指向这里的内存</span></span><br><span class="line">heap_ptr2 = <span class="number">0x12350</span>   <span class="comment"># 创建 buffer2指向这里的内存</span></span><br><span class="line"><span class="comment"># 定义完后便是设置BSS段的指针值</span></span><br><span class="line"><span class="comment"># 表示 buffer1 指向 0x12340 ， 其次这里的 endness=&quot;LE&quot;告诉python这是以什么方式储存的,然后便是将符号变量的值存到内存中</span></span><br><span class="line">init.memory.store(add1,heap_ptr1,endness=<span class="string">&quot;LE&quot;</span>)</span><br><span class="line">init.memory.store(add2,heap_ptr2,endness=<span class="string">&quot;LE&quot;</span>)</span><br><span class="line">init.memory.store(heap_ptr1,add1)</span><br><span class="line">init.memory.store(heap_ptr2,add2)</span><br><span class="line"><span class="comment"># 然后便是创建符号管理器</span></span><br><span class="line">simgr = p.factory.simgr(init)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">right</span>():</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrong</span>():</span><br><span class="line">	...</span><br><span class="line">simgr.explore(find=right,avoid=wrong)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">	s = simgr.found[<span class="number">0</span>]</span><br><span class="line">	<span class="built_in">print</span>(s.solver.<span class="built_in">eval</span>(arg1,cast_to=<span class="built_in">bytes</span>))</span><br><span class="line">	<span class="built_in">print</span>(s.solver.<span class="built_in">eval</span>(arg2,cast_to=<span class="built_in">bytes</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>执行后的内存大概是这样子的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs asm">BSS段 (全局变量区):<br>地址 0xABCC8A4: 0x00012340  ← 我们说buffer1指向0x12340<br>地址 0xABCC8AC: 0x00012350  ← 我们说buffer2指向0x12350<br><br>&quot;堆&quot;区域 (我们伪造的):<br>地址 0x12340: 符号数据arg1  ← 实际存储第一个输入的地方<br>地址 0x12350: 符号数据arg2  ← 实际存储第二个输入的地方<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BSS段 (全局变量区):</span><br><span class="line">地址 0xABCC8A4: 0x00012340  ← 我们说buffer1指向0x12340</span><br><span class="line">地址 0xABCC8AC: 0x00012350  ← 我们说buffer2指向0x12350</span><br><span class="line"></span><br><span class="line">&quot;堆&quot;区域 (我们伪造的):</span><br><span class="line">地址 0x12340: 符号数据arg1  ← 实际存储第一个输入的地方</span><br><span class="line">地址 0x12350: 符号数据arg2  ← 实际存储第二个输入的地方</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
@@ -532,16 +336,16 @@ ld_path               共享库的优先搜索路径          路径名
 </tbody></table>
 <p>寄存器访问：可以通过<code>state.regs.寄存器名</code>来访问和修改寄存器<br>栈访问：涉及到ebp和esp，以及两个指令push和pop，对于寄存器的访问和其它寄存器相同push和pop指令可以通过一下方法调用：<br><code>state.stack_push(value)</code><br><code>state.stack_pop()</code><br>内存访问：<br>	读内存：<code>-state.memory.load(addr,size,endness)</code><br>	写内存：<code>-state.memory.store(addr,size,endness)</code><br><code>endness</code>指的是大端小端，和程序保持相同，同时程序的大小端可以用<code>p.arch.memory_endness</code>查询</p>
 <h3 id="用hook来减少路径"><a href="#用hook来减少路径" class="headerlink" title="用hook来减少路径"></a>用hook来减少路径</h3><p>这个是 <a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">08_angr_constraints</a>的脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./08_angr_constraints&quot;</span>,auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state(addr=<span class="hljs-number">0x08048625</span>)<br>p1 = claripy.BVS(<span class="hljs-string">&#x27;p1&#x27;</span>,<span class="hljs-number">128</span>)<br>state.memory.store(<span class="hljs-number">0x804A050</span>,p1)<br>simgr = p.factory.simgr(state)<br>simgr.explore(find=<span class="hljs-number">0x8048673</span>)<br><span class="hljs-keyword">if</span> simgr.found:<br>    s = simgr.found[<span class="hljs-number">0</span>]<br>    s.solver.add( s.memory.load(<span class="hljs-number">0x804A050</span>,<span class="hljs-number">16</span>) == <span class="hljs-string">&quot;AUPDNNPROEZRJWKB&quot;</span>)<br>    <span class="hljs-built_in">print</span>(s.solver.<span class="hljs-built_in">eval</span>(p1,cast_to=<span class="hljs-built_in">bytes</span>))<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;请重新输入&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">p = angr.Project(<span class="string">&quot;./08_angr_constraints&quot;</span>,auto_load_libs=<span class="literal">False</span>)</span><br><span class="line">state = p.factory.entry_state(addr=<span class="number">0x08048625</span>)</span><br><span class="line">p1 = claripy.BVS(<span class="string">&#x27;p1&#x27;</span>,<span class="number">128</span>)</span><br><span class="line">state.memory.store(<span class="number">0x804A050</span>,p1)</span><br><span class="line">simgr = p.factory.simgr(state)</span><br><span class="line">simgr.explore(find=<span class="number">0x8048673</span>)</span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    s = simgr.found[<span class="number">0</span>]</span><br><span class="line">    s.solver.add( s.memory.load(<span class="number">0x804A050</span>,<span class="number">16</span>) == <span class="string">&quot;AUPDNNPROEZRJWKB&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(s.solver.<span class="built_in">eval</span>(p1,cast_to=<span class="built_in">bytes</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请重新输入&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>这个程序用angr正常运行的话有 $2^n$  n &#x3D; 16   肯定是爆炸的，所以用一些条件来减少angr探索的路径，这个<code>simgr.explore(find=0x8048673)</code> 地址是一个函数的地址，进入到这个函数中在判断来减少，那这个<code>simgr.found</code>就是代表进去了，然后因为<code>p1</code>经过运算混淆发生了变化，所以我们直接在地址中取值<code>s.memory.load()</code> 这个函数是跟一串字符串比较的，所以用<code>s.solver.add()</code>来限制条件，最后成功输出</p>
 <h3 id="用hook寻找路径爆炸的位置"><a href="#用hook寻找路径爆炸的位置" class="headerlink" title="用hook寻找路径爆炸的位置"></a>用hook寻找路径爆炸的位置</h3><p><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">09_angr_hooks</a><br>在做题用angr写的时候，最最最重要的就是寻找准确的路径爆炸点比如这个</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./09_angr_hooks&quot;</span>, auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state()<br><span class="hljs-meta">@p.hook(<span class="hljs-params"><span class="hljs-number">0x80486B3</span>, length=<span class="hljs-number">5</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">hook_function</span>(<span class="hljs-params">evl</span>):<br>    res = evl.memory.load(<span class="hljs-number">0x804A054</span>, <span class="hljs-number">16</span>)<br>    evl.regs.eax = claripy.If(res == <span class="hljs-string">b&quot;XYMKBKUHNIQYNQXE&quot;</span>, claripy.BVV(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>), claripy.BVV(<span class="hljs-number">0</span>, <span class="hljs-number">32</span>))<br>simgr = p.factory.simulation_manager(state)<br>simgr.explore(find=<span class="hljs-number">0x8048768</span>, avoid=<span class="hljs-number">0x8048756</span>)<br><span class="hljs-keyword">if</span> simgr.found:<br><br>    s = simgr.found[<span class="hljs-number">0</span>]<br><br>    <span class="hljs-built_in">print</span>(s.posix.dumps(<span class="hljs-number">0</span>))<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">p = angr.Project(<span class="string">&quot;./09_angr_hooks&quot;</span>, auto_load_libs=<span class="literal">False</span>)</span><br><span class="line">state = p.factory.entry_state()</span><br><span class="line"><span class="meta">@p.hook(<span class="params"><span class="number">0x80486B3</span>, length=<span class="number">5</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hook_function</span>(<span class="params">evl</span>):</span><br><span class="line">    res = evl.memory.load(<span class="number">0x804A054</span>, <span class="number">16</span>)</span><br><span class="line">    evl.regs.eax = claripy.If(res == <span class="string">b&quot;XYMKBKUHNIQYNQXE&quot;</span>, claripy.BVV(<span class="number">1</span>, <span class="number">32</span>), claripy.BVV(<span class="number">0</span>, <span class="number">32</span>))</span><br><span class="line">simgr = p.factory.simulation_manager(state)</span><br><span class="line">simgr.explore(find=<span class="number">0x8048768</span>, avoid=<span class="number">0x8048756</span>)</span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line"></span><br><span class="line">    s = simgr.found[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(s.posix.dumps(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
 
 <p>这里用来一个Hook的钩子来模拟一个函数流程，为什么要模拟，因为这个函数是路径爆炸的原因，所以为了绕过这个函数，就模拟一个和这函数流程一样的就行了</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf/blob/master/dist/">10_angr_simprocedures</a><br>这个有和上面的不一样，此时输入的字符串被保存在局部变量当中，我们无法提前得知它的地址，因此如果要hook掉check函数，则必须获取check函数的参数。因此需要使用hook_symbol的方式来hook掉check函数</p>
 <p>使用方式之前说明了，只需要注意使用hook_symbol的方法本质上是创建了新的函数取代了原有函数，因此在返回值的时候使用return返回，而不用将值保存在eax当中（事实上重写的run方法中没有当前的state，你也保存不到eax里面）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> angr<br><span class="hljs-keyword">import</span> claripy<br><br>p = angr.Project(<span class="hljs-string">&quot;./10_angr_simprocedures&quot;</span>, auto_load_libs=<span class="hljs-literal">False</span>)<br>state = p.factory.entry_state()<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">fun</span>(angr.SimProcedure):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">self,addr,size</span>):<br>        <span class="hljs-keyword">return</span> claripy.If(<span class="hljs-variable language_">self</span>.state.memory.load(addr, size) == <span class="hljs-string">b&quot;ORSDDWXHZURJRBDH&quot;</span>, claripy.BVV(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>), claripy.BVV(<span class="hljs-number">0</span>, <span class="hljs-number">32</span>))<br>p.hook_symbol(<span class="hljs-string">&#x27;check_equals_ORSDDWXHZURJRBDH&#x27;</span>,fun())<br>simgr = p.factory.simulation_manager(state)<br>simgr.explore(find=<span class="hljs-number">0x804A984</span>, avoid=<span class="hljs-number">0x804A972</span>)<br><br><span class="hljs-keyword">if</span> simgr.found:<br>    s = simgr.found[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(s.posix.dumps(<span class="hljs-number">0</span>))<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;No solution found&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line"></span><br><span class="line">p = angr.Project(<span class="string">&quot;./10_angr_simprocedures&quot;</span>, auto_load_libs=<span class="literal">False</span>)</span><br><span class="line">state = p.factory.entry_state()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">fun</span>(angr.SimProcedure):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self,addr,size</span>):</span><br><span class="line">        <span class="keyword">return</span> claripy.If(<span class="variable language_">self</span>.state.memory.load(addr, size) == <span class="string">b&quot;ORSDDWXHZURJRBDH&quot;</span>, claripy.BVV(<span class="number">1</span>, <span class="number">32</span>), claripy.BVV(<span class="number">0</span>, <span class="number">32</span>))</span><br><span class="line">p.hook_symbol(<span class="string">&#x27;check_equals_ORSDDWXHZURJRBDH&#x27;</span>,fun())</span><br><span class="line">simgr = p.factory.simulation_manager(state)</span><br><span class="line">simgr.explore(find=<span class="number">0x804A984</span>, avoid=<span class="number">0x804A972</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> simgr.found:</span><br><span class="line">    s = simgr.found[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(s.posix.dumps(<span class="number">0</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No solution found&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -551,409 +355,1016 @@ ld_path               共享库的优先搜索路径          路径名
 
 
 
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
+</article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
-      <span class="category-chain">
-        
-  <a href="/categories/Angr/" class="category-chain-item">Angr</a>
-  
-  
 
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/angr/" class="print-no-link">#angr</a>
-      
-        <a href="/tags/%E9%80%86%E5%90%91/" class="print-no-link">#逆向</a>
-      
-    </div>
-  
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/03/08/07_C-C/">C/C++</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/10/10/reverse_books/">逆向工程权威指南上</a></div></section></div>
 
-              
-  
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>angr</div>
-      <div>http://run521520.github.io/2025/10/20/05_angr/</div>
-    </div>
-    <div class="license-meta">
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body utterances'>
       
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>youduck7</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2025年10月20日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-cc-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="utterances" repo="run521520/run521520.github.io" issue-term="pathname" theme="preferred-color-scheme"></div>
+
+    </section>
   </div>
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2026/03/08/07_C-C/" title="C/C++">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C/C++</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2025/10/10/reverse_books/" title="逆向工程权威指南上">
-                        <span class="hidden-mobile">逆向工程权威指南上</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">youduck7</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<div style="margin-top:10px;text-align:center;"><span id="busuanzi_container_site_pv" style="display:inline-block;margin:0 10px;">本站总访问量 <span id="busuanzi_value_site_pv" style="color:#00d2ff;font-weight:bold;">-</span> 次</span><span id="busuanzi_container_site_uv" style="display:inline-block;margin:0 10px;">本站访客数 <span id="busuanzi_value_site_uv" style="color:#00d2ff;font-weight:bold;">-</span> 人</span></div></div></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
 
-            
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAproject%E5%AF%B9%E8%B1%A1"><span class="toc-text">1. 创建project对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AEstate"><span class="toc-text">2. 设置state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AE%BE%E7%BD%AESimulation-Managers%EF%BC%8C%E8%BF%9B%E8%A1%8C%E8%B7%AF%E5%BE%84%E6%8E%A2%E7%B4%A2%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">3. 设置Simulation Managers，进行路径探索的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#eval"><span class="toc-text">eval</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AC%A6%E5%8F%B7%E5%8C%96"><span class="toc-text">内存符号化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AC%A6%E5%8F%B7%E5%8C%96"><span class="toc-text">动态内存符号化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E5%90%91%E9%87%8F"><span class="toc-text">位向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hook"><span class="toc-text">hook</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Veritesting"><span class="toc-text">Veritesting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%8F%92%E4%BB%B6global"><span class="toc-text">全局插件global</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#history%E6%8F%92%E4%BB%B6"><span class="toc-text">history插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF"><span class="toc-text">使用模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%80%E4%B8%AA%E6%A8%A1%E6%9D%BF"><span class="toc-text">简单的一个模板:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E8%BE%93%E5%85%A5%EF%BC%8C%E6%93%8D%E6%8E%A7%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">绕过输入，操控寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E8%BE%93%E5%85%A5%EF%BC%8C%E6%93%8D%E6%8E%A7%E6%A0%88"><span class="toc-text">绕过输入，操控栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E8%BE%93%E5%85%A5%EF%BC%8C%E6%93%8D%E6%8E%A7%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-text">绕过输入，操控全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E6%98%AF%EF%BC%9A%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%A0%88%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-text">怎么判断是：寄存器、栈、全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E6%8E%A7%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98"><span class="toc-text">操控动态内存问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8hook%E6%9D%A5%E5%87%8F%E5%B0%91%E8%B7%AF%E5%BE%84"><span class="toc-text">用hook来减少路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8hook%E5%AF%BB%E6%89%BE%E8%B7%AF%E5%BE%84%E7%88%86%E7%82%B8%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">用hook寻找路径爆炸的位置</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"http://run521520.github.io/2025/10/20/05_angr/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
   
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"WCiAJOcmEvtC8mCKY347mmNi-MdYXbMMI","appKey":"Ds56gTbsyMSf1AJROtxNZAai","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://wciajocm.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
           }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
 
-    </article>
-  
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
 
-
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
         return;
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
         }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
         }
       }
-    });
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
   });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<!-- optional -->
 
-  <script>Fluid.plugins.codeWidget();</script>
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initUtterances() {
+      const el = document.querySelector("#comments #utterances");
+      if (!el) return;
+      
+      function load_utterances() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_utterances, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.utterances = initUtterances;
+    
+    // Initialize on page load
+    initUtterances();
+  })();
+</script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
     };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  };
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
+  utils.initPlugin(initServices, 'services');
 </script>
 
-
-  
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
   });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
 </script>
 
 
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-  
-<script src="/js/acg.js"></script>
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+<!-- inject -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

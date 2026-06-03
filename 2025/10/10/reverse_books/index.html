@@ -1,289 +1,93 @@
 
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
-
-
+<!DOCTYPE html><html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/baimao.jpg">
-  <link rel="icon" href="/img/baimao.jpg">
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="youduck7">
-  <meta name="keywords" content="">
+  <meta name="generator" content="Hexo 8.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>逆向工程权威指南上 - run521</title>
+
   
     <meta name="description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逆向工程权威指南上">
-<meta property="og:url" content="http://run521520.github.io/2025/10/10/reverse_books/index.html">
+<meta property="og:url" content="http://run521520.github.io/2025/10/10/reverse_books/">
 <meta property="og:site_name" content="run521">
 <meta property="og:description" content="1. CPU简介CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。CPU最基本工作方式：  取指令：从内存中读取下一条要执行的指令。 解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。 执行指令：实际完成指令所要求的操作，比如让加法器开始计算。  机器码就是由01这两种组成的，形成各种信息。cpu是怎么识别机器码的呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-10T06:46:41.000Z">
 <meta property="article:modified_time" content="2025-10-25T13:14:47.830Z">
 <meta property="article:author" content="youduck7">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
   
   
   
-  <title>逆向工程权威指南上 - run521</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
 
 
   
-<link rel="stylesheet" href="/css/acg.css">
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"run521520.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"python"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":3},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 8.0.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 80vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>youduck7</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/R1.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="逆向工程权威指南上"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-10 14:46" pubdate>
-          2025年10月10日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          9.2k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          77 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"youduck7","sameAs":[]},"dateCreated":"2025-10-10T14:46:41+08:00","dateModified":"2025-10-25T21:14:47+08:00","datePublished":"2025-10-10T14:46:41+08:00","description":"","headline":"逆向工程权威指南上","mainEntityOfPage":{"@type":"WebPage","@id":"http://run521520.github.io/2025/10/10/reverse_books/"},"publisher":{"@type":"Organization","name":"youduck7","sameAs":[]},"url":"http://run521520.github.io/2025/10/10/reverse_books/","image":[]}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
 
 
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">run521</div><div class="sub normal cap">CTF玩家</div><div class="sub hover cap" style="opacity:0"> 逆向工程 | 安全研究</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/04/02/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86/"><span class="title">常见加密方式</span></a><a class="item title" href="/2026/03/08/07_C-C/"><span class="title">C/C++</span></a><a class="item title" href="/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/"><span class="title">x86/x86-64汇编</span></a><a class="item title" href="/2026/03/15/03_VM/"><span class="title">VM</span></a><a class="item title" href="/2026/03/15/04_ida%E8%84%9A%E6%9C%AC/"><span class="title">ida脚本</span></a><a class="item title" href="/2026/03/25/2024%E5%BE%A1%E7%BD%91%E6%9D%AF/"><span class="title">2024御网杯</span></a><a class="item title" href="/2026/03/23/11-MYSQL/"><span class="title">MYSQL</span></a><a class="item title" href="/2025/10/04/01_ida/"><span class="title">ida使用文档</span></a><a class="item title" href="/2026/03/15/10-Linux/"><span class="title">Linux</span></a><a class="item title" href="/2025/10/04/dataStorage/"><span class="title">数据储存</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-10-10T06:46:41.000Z">2025-10-10</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-10-25T13:14:47.830Z">2025-10-25</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>逆向工程权威指南上</span></h1>
         
       </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
     </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">逆向工程权威指南上</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h2 id="1-CPU简介"><a href="#1-CPU简介" class="headerlink" title="1. CPU简介"></a>1. CPU简介</h2><p>CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。<br><strong>CPU最基本工作方式</strong>：</p>
+  </div>
+  </div><article class="md-text content"><h2 id="1-CPU简介"><a href="#1-CPU简介" class="headerlink" title="1. CPU简介"></a>1. CPU简介</h2><p>CPU是执行机器码的硬件单元，可以叫它中央处理器，相当于人的大脑，处理各种信息，机器码就是信息而这些信息储存在内存中。<br><strong>CPU最基本工作方式</strong>：</p>
 <ol>
 <li>取指令：从内存中读取下一条要执行的指令。</li>
 <li>解码指令：搞清楚这条指令是什么意思，是运算？还是内存加载数据。</li>
@@ -297,18 +101,18 @@
 </blockquote>
 <h3 id="指令集架构"><a href="#指令集架构" class="headerlink" title="指令集架构"></a>指令集架构</h3><p>你可以吧<strong>指令集架构</strong>想象成CPU的<strong>母语</strong>或<strong>方言</strong><br><strong>CPU</strong>是一个只会说方言的工人<br>指令集就是这种方言的语法规范，它规定了CPU能听懂哪些命令，<br>我们写的所有程序(c++,py,java等)，最终都必须被翻译为CPU能听懂的<strong>方言</strong></p>
 <p>就像中文，英文，日文一样，指令架构也有不同如x86,x64,ARM,MIPS等<br>这里就不细讲，因为我也不知道，还待学~。</p>
-<h2 id="2-最简函数"><a href="#2-最简函数" class="headerlink" title="2. 最简函数"></a>2. 最简函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">fun</span><span class="hljs-params">()</span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;&#125;<br><span class="hljs-comment">//非常简单的自定义函数</span><br></code></pre></td></tr></table></figure>
+<h2 id="2-最简函数"><a href="#2-最简函数" class="headerlink" title="2. 最简函数"></a>2. 最简函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fun</span><span class="params">()</span>&#123;<span class="keyword">return</span> <span class="number">123</span>;&#125;</span><br><span class="line"><span class="comment">//非常简单的自定义函数</span></span><br></pre></td></tr></table></figure>
 <h3 id="用x86表现"><a href="#用x86表现" class="headerlink" title="用x86表现"></a>用x86表现</h3><p>GCC是用于反编译x86汇编指令的编译器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">f:<br>	mov		eax,  123<br>	ret<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f:</span><br><span class="line">	mov		eax,  123</span><br><span class="line">	ret</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>MSVC编译器的和上面一样。<br>分析一下：这个函数仅由两条指令构成：第一条将<strong>123</strong>存放到EAX寄存器里；根据函数调用约定<br>后面一条指令会把EAX的值当作返回值传递给调用者函数，而调用者函数(caller)会从EAX寄存器<br>里取值，把它当作返回结果。</p>
 <h3 id="用ARM表现"><a href="#用ARM表现" class="headerlink" title="用ARM表现"></a>用ARM表现</h3><p>Keil编译器</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm">f <span class="hljs-meta">PROC</span><br>		<span class="hljs-keyword">MOV</span>		<span class="hljs-built_in">r0</span>,<span class="hljs-number">#0x7b</span> <span class="hljs-comment">; 123</span><br>		<span class="hljs-keyword">BX</span>      <span class="hljs-built_in">lr</span><br>		<span class="hljs-meta">ENDP</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f <span class="meta">PROC</span></span><br><span class="line">		<span class="keyword">MOV</span>		<span class="built_in">r0</span>,<span class="number">#0x7b</span> <span class="comment">; 123</span></span><br><span class="line">		<span class="keyword">BX</span>      <span class="built_in">lr</span></span><br><span class="line">		<span class="meta">ENDP</span></span><br></pre></td></tr></table></figure>
 
 <p>ARM程序使用R0寄存器传递函数返回值，所以指令把数值123赋值给R0<br>ARM程序使用LR寄存器储存函数结束之后的返回地址。x86程序使用<strong>栈</strong><br>结构储存上述返回地址。 BX LR 指令的作用是跳转到返回地址，即返回到调用<br>者函数，然后继续执行后续命令</p>
 <h3 id="用MIPS表现"><a href="#用MIPS表现" class="headerlink" title="用MIPS表现"></a>用MIPS表现</h3><p>博主等以后在学，现在用不到，用到什么学什么</p>
-<h2 id="3-Hello-world"><a href="#3-Hello-world" class="headerlink" title="3. Hello,world!"></a>3. Hello,world!</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello,world!\n&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//非常著名的程序</span><br></code></pre></td></tr></table></figure>
+<h2 id="3-Hello-world"><a href="#3-Hello-world" class="headerlink" title="3. Hello,world!"></a>3. Hello,world!</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello,world!\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非常著名的程序</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="X86"><a href="#X86" class="headerlink" title="X86"></a>X86</h3><h4 id="用MSVC生成汇编"><a href="#用MSVC生成汇编" class="headerlink" title="- 用MSVC生成汇编"></a>- 用MSVC生成汇编</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>CONST	SEGMENT<br>$SG3830 DB 		&#x27;Hello,world!&#x27;, OAH, ООH<br>CONST 	ENDS<br><br>PUBLIC 	_main<br>EXTRN 	_printf: PROC<br>; Function compile flags: /0dtp<br><br>_TEXT 	SEGMENT<br>_main 	PROC<br>		push ebp<br>		mov  ebp, esp<br>		push OFFSET $SG3830<br>		call _printf<br>		add  esp, 4<br>		xor  eax, eax<br>		pop  ebp<br>		ret  0<br>_main 	ENDP<br>_TEXT 	ENDS<br><br></code></pre></td></tr></table></figure>
+<h3 id="X86"><a href="#X86" class="headerlink" title="X86"></a>X86</h3><h4 id="用MSVC生成汇编"><a href="#用MSVC生成汇编" class="headerlink" title="- 用MSVC生成汇编"></a>- 用MSVC生成汇编</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CONST	SEGMENT</span><br><span class="line">$SG3830 DB 		&#x27;Hello,world!&#x27;, OAH, ООH</span><br><span class="line">CONST 	ENDS</span><br><span class="line"></span><br><span class="line">PUBLIC 	_main</span><br><span class="line">EXTRN 	_printf: PROC</span><br><span class="line">; Function compile flags: /0dtp</span><br><span class="line"></span><br><span class="line">_TEXT 	SEGMENT</span><br><span class="line">_main 	PROC</span><br><span class="line">		push ebp</span><br><span class="line">		mov  ebp, esp</span><br><span class="line">		push OFFSET $SG3830</span><br><span class="line">		call _printf</span><br><span class="line">		add  esp, 4</span><br><span class="line">		xor  eax, eax</span><br><span class="line">		pop  ebp</span><br><span class="line">		ret  0</span><br><span class="line">_main 	ENDP</span><br><span class="line">_TEXT 	ENDS</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>这段代码主要分为两个代码段，即CONST和_TEXT段，它们分别代表数据段和代码段</p>
 <ul>
 <li><p>在CONST段：<br>将字符串 Hello,world! 赋值给  $SG3830</p>
@@ -316,26 +120,26 @@
 <li><p>在_TEXT段：<br>只有一个函数 即主函数main()。在汇编中，主函数的函数体有标志性的<strong>函数序言</strong>和<strong>函数尾声</strong><br>通过push指令将变量$SG3830压入栈。这样_printf就可以调用栈中的指针即’Hello,world!’<br>的地址，调用完成后，$SG3830仍然在栈中，这时候就需要调整栈指针(ESP里的值)，来释放<br>这个指针，所以下一条语句 add esp,4 就是栈指针里的值加4(因为x86是32位4字节)，<br>相当于POP出栈，但是不同是本例是舍弃栈里的数据而POP还要把寄存器里的值存储到既定寄存器<br>然后便是 xor 异或 xor eax , eax 值为0</p>
 </li>
 </ul>
-<h4 id="用GCC编译"><a href="#用GCC编译" class="headerlink" title="- 用GCC编译"></a>- 用GCC编译</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs asm">Main    proc near<br>var 10  =  dword ptr-10h<br>		push ebp<br>		mov  ebp, esp<br>		and  esp, OFFFFFFF0h<br>		sub  esp, 10h<br>		mov  eax, offset aHelloWorld; &quot;Hello,world!\n&quot;<br>		mov  [esp+10h+var_10], eax<br>		call  printf<br>		mov  eax, 0<br>		leave<br>		retn<br>main    endp<br><br></code></pre></td></tr></table></figure>
+<h4 id="用GCC编译"><a href="#用GCC编译" class="headerlink" title="- 用GCC编译"></a>- 用GCC编译</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Main    proc near</span><br><span class="line">var 10  =  dword ptr-10h</span><br><span class="line">		push ebp</span><br><span class="line">		mov  ebp, esp</span><br><span class="line">		and  esp, OFFFFFFF0h</span><br><span class="line">		sub  esp, 10h</span><br><span class="line">		mov  eax, offset aHelloWorld; &quot;Hello,world!\n&quot;</span><br><span class="line">		mov  [esp+10h+var_10], eax</span><br><span class="line">		call  printf</span><br><span class="line">		mov  eax, 0</span><br><span class="line">		leave</span><br><span class="line">		retn</span><br><span class="line">main    endp</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>GCC生成的汇编指令，与MSVC生成的基本相同,开头 AND ESP, OFFFFFFF0h 指令。它令栈地址(ESP的值) 向16字节边界对齐，属于初始话的指令。如果地址没对齐，CPU可能需要访问两次内存<br>才能获取栈内数据。虽然在8字节边界处对齐就可以满足32位x86 CPU 和 64位 x64 CPU的要求,但是<br>主流编译器的编译规则规定“程序访问的地址必须向16字节对齐(被16整除)”。人们还是为了提高指令<br>的执行效率而特意拟定了这条编译规范。</p>
 <p>SUB ESP,10h 在栈中分配16个字节(这里10h &#x3D; hex(10))，而后便是将字符串地址(指针的值)<br>写入到栈中，此处 GCC用的是 MOV 而MSVC用的是 PUSH 指令。</p>
 <p>mov  [esp+10h+var_10], eax 中的var_10是局部变量，用来向后面printf()函数传递参数<br>mov eax, 0 将eax归零，这里和MSVC又不同， mov指令的opcode是4，而xor的opcode是2</p>
-<h3 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h3><h4 id="64位下的MSVC编译器"><a href="#64位下的MSVC编译器" class="headerlink" title="- 64位下的MSVC编译器"></a>- 64位下的MSVC编译器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>$SG2989 	DB   &#x27;hello, world&#x27;, ООH<br>main 		PROC<br>			sub rsp, 40<br>			lea rcx, OFFSET FLAT:$SG2989<br>			call printf<br>			xor eax, eax<br>			add rsp, 40<br>			ret 0<br>main 		ENDP<br><br></code></pre></td></tr></table></figure>
+<h3 id="x86-64"><a href="#x86-64" class="headerlink" title="- x86-64"></a>- x86-64</h3><h4 id="64位下的MSVC编译器"><a href="#64位下的MSVC编译器" class="headerlink" title="- 64位下的MSVC编译器"></a>- 64位下的MSVC编译器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$SG2989 	DB   &#x27;hello, world&#x27;, ООH</span><br><span class="line">main 		PROC</span><br><span class="line">			sub rsp, 40</span><br><span class="line">			lea rcx, OFFSET FLAT:$SG2989</span><br><span class="line">			call printf</span><br><span class="line">			xor eax, eax</span><br><span class="line">			add rsp, 40</span><br><span class="line">			ret 0</span><br><span class="line">main 		ENDP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>x86-64 框架的CPU 里,所有的物理寄存器都被扩展为64位寄存器。程序可通过R-字头的名称直接调用整<br>个64位寄存器。为了尽可能充分地利用寄存器、减少访问内存数据的次数,编译器会充分利用寄存器传递函数参<br>数。。也就是说,编译器会优先使用寄存器传递部分参数,再利用内存(数据线)传递其余的参数。<br>Win64的程序还会使用 RCX、RDX、R8、R9这4个寄存器来存放函数参数<br>如： printf()使用 RCX 寄存器传递参数,而没有像32位程序那样使用栈传递数据。</p>
 <p>main()函数的返回值是整数类型的零,但是出于兼容性和可移植性的考虑,C语言的编译器仍将使用 32<br>位的零。换而言之,即使是64位的应用程序,在程序结束时 EAX 的值是零,而RAX 的值不一定会是零。<br>此时,数据栈的对应空间里仍留有40字节的数据。这部分数据空间有个专用的名词,即阴影空间</p>
-<h4 id="GCC"><a href="#GCC" class="headerlink" title="- GCC"></a>- GCC</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>.string &quot;hello, world\n&quot;<br>main:<br>		sub 	rsp, 8<br>		mov 	edi, OFFSET FLAT:.LCO; &quot;hello, world&quot;<br>		xor 	eax, eax ; number of vector registers passed<br>		call 	printf<br>		xor 	eax, eax<br>		add 	rsp, 8<br>		ret<br><br></code></pre></td></tr></table></figure>
+<h4 id="GCC"><a href="#GCC" class="headerlink" title="- GCC"></a>- GCC</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">.string &quot;hello, world\n&quot;</span><br><span class="line">main:</span><br><span class="line">		sub 	rsp, 8</span><br><span class="line">		mov 	edi, OFFSET FLAT:.LCO; &quot;hello, world&quot;</span><br><span class="line">		xor 	eax, eax ; number of vector registers passed</span><br><span class="line">		call 	printf</span><br><span class="line">		xor 	eax, eax</span><br><span class="line">		add 	rsp, 8</span><br><span class="line">		ret</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>Linux、BSD 和 Mac OS X 系统中的应用程序,会优先使用RDI、RSI、RDX、RCX、R8、R9这6个<br>寄存器传递函数所需的头6个参数,然后使用数据栈传递其余的参数。<br>因此,64位的GCC 编译器使用 EDI 寄存器(寄存器的32位)存储字符串指针。EDI不过是RDI 寄<br>存器中地址位较低的32位地址部分。为何GCC 不直接使用整个RDI 寄存器?<br>需要注意的是,64位汇编指令 MOV 在写入R-寄存器的低32位地址位的时候,即对E-寄存器进行写<br>操作的时候,会同时清除R寄存器中的高32位地址位。所以,“MOV EAX, 011223344h”能够对 RAX<br>寄存器进行正确的赋值操作,因为该指令会清除(置零)高地址位的内容。</p>
 <h3 id="GCC的其他特性"><a href="#GCC的其他特性" class="headerlink" title="GCC的其他特性"></a>GCC的其他特性</h3><p>只要c语言代码里使用了字符串常量，编译器就会把这个字符串常量置于常量字段，<br>以保证其内容不会发生变化。不过GCC可能会把字符串拆出来单独使用，当还有其他<br>字符串，且里面内容部分相同时</p>
 <h3 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h3><p>等以后再学，目前主要是学习x86,x64</p>
 <h2 id="4-函数序言和函数尾声"><a href="#4-函数序言和函数尾声" class="headerlink" title="4. 函数序言和函数尾声"></a>4. 函数序言和函数尾声</h2><p>函数序言是函数在启动的时候运行的一系列指令。其汇编指令大致如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push  ebp<br>mov   ebp, esp<br>sub   esp, X<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">push  ebp</span><br><span class="line">mov   ebp, esp</span><br><span class="line">sub   esp, X</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这些指令的功能是：在栈里保存EBP寄存器的内容,将ESP的值复制到EBP寄存器,然后修改栈的高度<br>以便为本函数的局部变量申请空间</p>
 <p>想象一下，函数开始执行时，它需要一张干净的桌子（栈空间）来摆放自己的东西（局部变量）。<br>但问题是，这张桌子是共用的，上一个函数刚用完，上面可能很乱。<br>函数序言就是为当前函数布置一个稳定、独立工作区的过程。</p>
 <p>在函数执行期间,EBP寄存器不受函数运行的影响，它是函数访问局部变量和函数参数的基准值。<br>虽然我们也可便中 ESP 寄存器存储局部变量和运行参数,但是ESP 寄存器的值总是会发生变化,使用起来并不方便。</p>
 <p>函数在退出时,要做启动过程的反操作,释放栈中申请的内存,还原EBP 寄存器的值,将代码控制权<br>还原给调用者函数(callee)。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>mov   esp, ebp<br>pop   ebp<br>ret   0<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mov   esp, ebp</span><br><span class="line">pop   ebp</span><br><span class="line">ret   0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><code>mov   esp, ebp</code>相当于我们一下子，将桌子高变为0，ebp是桌底，赋值给esp是桌高<br>这时栈里的就是进函数时存的ebp，将这弹出赋值给ebp<br>借助函数序言和函数尾声的有关特征,我们可以在汇编语言里识别各个函数。</p>
 <h2 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="- 简单介绍"></a>- 简单介绍</h3><p>从技术上说,栈就是CPU 寄存器里的某个指针所指向的一片内存区域。这里所说的“某个指针”通常<br>位于x86&#x2F;x64平台的ESP 寄存器&#x2F;RSP寄存器,以及ARM 平台的SP寄存器。</p>
@@ -357,18 +161,18 @@
 </ul>
 <h2 id="说一下"><a href="#说一下" class="headerlink" title="说一下"></a>说一下</h2><p><strong>这本书,有些东西是错的,我也不知道到是翻译的错,还是作者的错；其次有些东西我已经学过几遍了</strong><br><strong>所以就没记录笔记,所以有时候会感觉不全，东一块西一块</strong></p>
 <h2 id="6-条件转移指令"><a href="#6-条件转移指令" class="headerlink" title="6. 条件转移指令"></a>6. 条件转移指令</h2><p>这里会围绕这个c语言来理解</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">f_signed</span> <span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>&#123;<br>	<span class="hljs-keyword">if</span> (a&gt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&gt;b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a==b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a==b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a&lt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&lt;b\n&quot;</span>);<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">f_unsigned</span> <span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> a, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> b)</span>&#123;<br>	<span class="hljs-keyword">if</span> (a&gt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&gt;b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a==b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a==b\n&quot;</span>);<br>	<span class="hljs-keyword">if</span> (a&lt;b)<br>		<span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;a&lt;b\n&quot;</span>);<br>&#125;<br><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span>&#123;<br><br>	f_signed(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>	f_unsigned(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<h3 id="用MSVC来编译f-signed"><a href="#用MSVC来编译f-signed" class="headerlink" title="用MSVC来编译f_signed"></a>用MSVC来编译f_signed</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs asm">a$ = 8<br>b$= 12<br>_f_signed PROC<br>		push ebp<br>		mov ebp, esp<br>		mov eax, DWORD PTR _a$[ebp]<br>		cmp eax, DWORD PTR _b$ [ebp]<br>		jle SHORT $LN3@f_signed<br>		push OFFSET $SG737			;&#x27;a&gt;b&#x27;<br>		call printf<br>		add esp, 4<br>		<br>$LN3@f_signed:<br>		mov ecx, DWORD PTR _a$ [ebp]<br>		cmp ecx, DWORD PTR _b$ [ebp]<br>		jne SHORT $LN2@f_signed<br>		push OFFSET $SG739          ;&#x27;a==b&#x27;<br>		call printf<br>		add esp, 4<br><br>$LN2@f_signed:<br>		mov edx, DWORD PTR _a$ [ebp]<br>		cmp edx, DWORD PTR _b$ [ebp]<br>		jge SHORT $LN4@f_signed<br>		push OFFSET $SG741 			;&#x27;a&lt;b&#x27;<br>		call _printf<br>		add esp, 4<br><br>$LN4@f_signed:<br>		pop ebp<br>		ret<br>_f_signed ENDP<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">f_signed</span> <span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a&gt;b\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (a==b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a==b\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (a&lt;b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a&lt;b\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">f_unsigned</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span> a, <span class="type">unsigned</span> <span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a&gt;b\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (a==b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a==b\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (a&lt;b)</span><br><span class="line">		<span class="built_in">printf</span> (<span class="string">&quot;a&lt;b\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">	f_signed(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">	f_unsigned(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="用MSVC来编译f-signed"><a href="#用MSVC来编译f-signed" class="headerlink" title="用MSVC来编译f_signed"></a>用MSVC来编译f_signed</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">a$ = 8</span><br><span class="line">b$= 12</span><br><span class="line">_f_signed PROC</span><br><span class="line">		push ebp</span><br><span class="line">		mov ebp, esp</span><br><span class="line">		mov eax, DWORD PTR _a$[ebp]</span><br><span class="line">		cmp eax, DWORD PTR _b$ [ebp]</span><br><span class="line">		jle SHORT $LN3@f_signed</span><br><span class="line">		push OFFSET $SG737			;&#x27;a&gt;b&#x27;</span><br><span class="line">		call printf</span><br><span class="line">		add esp, 4</span><br><span class="line">		</span><br><span class="line">$LN3@f_signed:</span><br><span class="line">		mov ecx, DWORD PTR _a$ [ebp]</span><br><span class="line">		cmp ecx, DWORD PTR _b$ [ebp]</span><br><span class="line">		jne SHORT $LN2@f_signed</span><br><span class="line">		push OFFSET $SG739          ;&#x27;a==b&#x27;</span><br><span class="line">		call printf</span><br><span class="line">		add esp, 4</span><br><span class="line"></span><br><span class="line">$LN2@f_signed:</span><br><span class="line">		mov edx, DWORD PTR _a$ [ebp]</span><br><span class="line">		cmp edx, DWORD PTR _b$ [ebp]</span><br><span class="line">		jge SHORT $LN4@f_signed</span><br><span class="line">		push OFFSET $SG741 			;&#x27;a&lt;b&#x27;</span><br><span class="line">		call _printf</span><br><span class="line">		add esp, 4</span><br><span class="line"></span><br><span class="line">$LN4@f_signed:</span><br><span class="line">		pop ebp</span><br><span class="line">		ret</span><br><span class="line">_f_signed ENDP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>第一个条件转移指令是JLE,即“Jump if Less or Equal”。如果上一条 CMP 指令的第一个操作表达式<br>小于或等于(不大于)第二个表达式,JLE 将跳转到指令所标明的地址;如果不满足上述条件,则运行下一条指令。</p>
 <p>本列 <strong>1&lt;2</strong> 会执行JLE跳转到 $LN3@f_signed , JNE “ump if Not Equa”,如果<br>上一条CMP的两个操作符不相等则跳转,<strong>1&lt;2</strong>继续跳 $LN2@f_signed ,这次JGE意思是<br>“Jump if Greater or Equa”。如果CMP 的第一个表达式大于或等于第二个表达式,则进行跳转</p>
 <p><strong>f_unsigned</strong> 函数的汇编和 <strong>f_signed</strong> 差不多,f_nsinged()函数的使用的条件转移指令<br>是JBE 和JAE,而f_signed()函数使用的条件转移指令则是JLE 和JGE</p>
-<h3 id="GCC编译f-unsigned"><a href="#GCC编译f-unsigned" class="headerlink" title="GCC编译f_unsigned"></a>GCC编译f_unsigned</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>_a$ = 8 ; size = 4<br>b$ = 12 ; size = 4<br><br>_f_unsigned PROC<br>push ebp<br>		push ebp<br>		mov ebp, esp<br>		mov eax, DWORD PTR _a$[ebp]<br>		cmp eax, DWORD PTR _b$[ebp]<br>		jbe SHORT $LN3@f_unsigned<br>		push OFFSET $SG2761 ; &#x27;a&gt;b&#x27;<br>		call printf<br>		add esp, 4<br>		<br>$LN3@f_unsigned:<br>		mov ecx, DWORD PTR _a$[ebp]<br>		cmp ecx, DWORD PTR _b$ [ebp]<br>		jne SHORT $LN2@f_unsigned<br>		push OFFSET $SG2763 ; &#x27;a==b&#x27;<br>		call _printf<br>		add esp, 4<br>		<br>$LN2@f_unsigned:<br>		mov edx, DWORD PTR _a$ [ebp]<br>		cmp edx, DWORD PTR _b$ [ebp]<br>		jae SHORT $LN4@f_unsigned<br>		push OFFSET $SG2765 ;&#x27;a&lt;b<br>		call _printf<br>		add esp, 4<br>		<br>LN4@f_unsigned:<br>		Pop ebp<br>		Ret 0<br>_f_unsigned ENDP<br><br><br></code></pre></td></tr></table></figure>
+<h3 id="GCC编译f-unsigned"><a href="#GCC编译f-unsigned" class="headerlink" title="GCC编译f_unsigned"></a>GCC编译f_unsigned</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">_a$ = 8 ; size = 4</span><br><span class="line">b$ = 12 ; size = 4</span><br><span class="line"></span><br><span class="line">_f_unsigned PROC</span><br><span class="line">push ebp</span><br><span class="line">		push ebp</span><br><span class="line">		mov ebp, esp</span><br><span class="line">		mov eax, DWORD PTR _a$[ebp]</span><br><span class="line">		cmp eax, DWORD PTR _b$[ebp]</span><br><span class="line">		jbe SHORT $LN3@f_unsigned</span><br><span class="line">		push OFFSET $SG2761 ; &#x27;a&gt;b&#x27;</span><br><span class="line">		call printf</span><br><span class="line">		add esp, 4</span><br><span class="line">		</span><br><span class="line">$LN3@f_unsigned:</span><br><span class="line">		mov ecx, DWORD PTR _a$[ebp]</span><br><span class="line">		cmp ecx, DWORD PTR _b$ [ebp]</span><br><span class="line">		jne SHORT $LN2@f_unsigned</span><br><span class="line">		push OFFSET $SG2763 ; &#x27;a==b&#x27;</span><br><span class="line">		call _printf</span><br><span class="line">		add esp, 4</span><br><span class="line">		</span><br><span class="line">$LN2@f_unsigned:</span><br><span class="line">		mov edx, DWORD PTR _a$ [ebp]</span><br><span class="line">		cmp edx, DWORD PTR _b$ [ebp]</span><br><span class="line">		jae SHORT $LN4@f_unsigned</span><br><span class="line">		push OFFSET $SG2765 ;&#x27;a&lt;b</span><br><span class="line">		call _printf</span><br><span class="line">		add esp, 4</span><br><span class="line">		</span><br><span class="line">LN4@f_unsigned:</span><br><span class="line">		Pop ebp</span><br><span class="line">		Ret 0</span><br><span class="line">_f_unsigned ENDP</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>GCC 编译的结果与MSVC 编译的结果基本相同。</p>
 <p>经 GCC 编译后,f_unsigned函数使用的条件转移指令是JBE (Jump if Below or Equal,相当于JLE)<br>和JAE(Jump if Above or Equal,相当于JGE)。JA&#x2F;JAE&#x2F;JB&#x2F;JBE 与 JG&#x2F;JGE&#x2F;JL&#x2F;JLE 的区别,在于它们检查的<br>标志位不同:前者检查借&#x2F;进位标志位CF(1意味着小于)和零标志位 ZF(1意味着相等),后者检查“SF<br>XOR OF” (1意味着异号)和ZF。从指令参数的角度看,前者适用于 unsigned (无符号)类型数据的(CMP)<br>运算,而后者的适用于signed (有符号)类型数据的运算。</p>
 <p>main函数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>_main PROC<br>		push 	ebp<br>		mov 	ebp, esp<br>		push 	2<br>		push 	1<br>		call 	_f_signed<br>		add 	esp, 8<br>		push 	2<br>		push 	1<br>		call 	_f_unsigned<br>		add 	esp, 8<br>		xor 	eax, eax<br>		pop 	ebp<br>		ret 	0<br>_main ENDP<br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">_main PROC</span><br><span class="line">		push 	ebp</span><br><span class="line">		mov 	ebp, esp</span><br><span class="line">		push 	2</span><br><span class="line">		push 	1</span><br><span class="line">		call 	_f_signed</span><br><span class="line">		add 	esp, 8</span><br><span class="line">		push 	2</span><br><span class="line">		push 	1</span><br><span class="line">		call 	_f_unsigned</span><br><span class="line">		add 	esp, 8</span><br><span class="line">		xor 	eax, eax</span><br><span class="line">		pop 	ebp</span><br><span class="line">		ret 	0</span><br><span class="line">_main ENDP</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <h3 id="无符号和有符号的不同"><a href="#无符号和有符号的不同" class="headerlink" title="无符号和有符号的不同"></a>无符号和有符号的不同</h3><h4 id="无符号数比较（JA-JB-系列）"><a href="#无符号数比较（JA-JB-系列）" class="headerlink" title="- 无符号数比较（JA&#x2F;JB 系列）"></a>- 无符号数比较（JA&#x2F;JB 系列）</h4><ul>
@@ -388,405 +192,1021 @@
 </ul>
 <p>所以有时候我们可以修改<strong>标志寄存器</strong>就是前面的(CF,SF,ZF等),来执行想要的<strong>语句</strong></p>
 <p>其次条件判断语句可以用 if-else 来替换</p>
-<h2 id="switch-case-default"><a href="#switch-case-default" class="headerlink" title="switch()&#x2F;case&#x2F;default"></a>switch()&#x2F;case&#x2F;default</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">f</span> <span class="hljs-params">(<span class="hljs-type">int</span> a)</span>&#123;<br><br>	<span class="hljs-keyword">switch</span> (a)&#123;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;zero\n&quot;</span>); <span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;one\n&quot;</span>); <span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;two\n&quot;</span>); <span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">default</span>: <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;something unknown\n&quot;</span>); <span class="hljs-keyword">break</span>;<br>	&#125;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span>&#123;<br><br>	f(<span class="hljs-number">2</span>);<span class="hljs-comment">//test</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="switch-case-default"><a href="#switch-case-default" class="headerlink" title="switch()&#x2F;case&#x2F;default"></a>switch()&#x2F;case&#x2F;default</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">f</span> <span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (a)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>: <span class="built_in">printf</span> (<span class="string">&quot;zero\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">printf</span> (<span class="string">&quot;one\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>: <span class="built_in">printf</span> (<span class="string">&quot;two\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>: <span class="built_in">printf</span> (<span class="string">&quot;something unknown\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">	f(<span class="number">2</span>);<span class="comment">//test</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="X86-MSVC"><a href="#X86-MSVC" class="headerlink" title="X86 -MSVC"></a>X86 -MSVC</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>tv64 = -4 ; size = 4<br>a$ = 8 ; size = 4<br><br>f PROC<br>		push 	ebp<br>		mov 	ebp, esp<br>		push 	ecx<br>		mov 	eax, DWORD PTR _a$ [ebp]<br>		mov 	DWORD PTR tv64 [ebp], eax<br>		cmp 	DWORD PTR tv64[ebp], 0<br>		je 		SHORT $LN4@f<br>		cmp 	DWORD PTR tv64 [ebp], 1<br>		je 		SHORT $LN3@f<br>		cmp 	DWORD PTR tv64 [ebp], 2<br>		je 		SHORT $LN2@f<br>		jmp		SHORT $LN1@f<br>		<br>$LN4@f:<br>		push 	OFFSET $SG739 ;&#x27;zero&#x27;, OaH, 00H<br>		call 	_printf<br>		add 	esp, 4<br>		jmp 	SHORT $LN7@f<br>		<br>$LN3@f:<br>		push	OFFSET $SG741 ; &#x27;one&#x27;, Oан, 00H<br>		call 	_printf<br>		add 	esp, 4<br>		jmp 	SHORT $LN7@f<br>		<br>$LN2@f:<br>		push 	OFFSET $SG743; &#x27;two&#x27;, 0ан, 00H<br>		call 	_printf<br>		add 	esp, 4<br>		jmp 	SHORT $LN7@f<br>		<br>$LN1@f:<br>		push	OFFSET $SG745 ; &#x27;something unknown&#x27;, OaH, OOH<br>		call	_printf<br>		add 	esp, 4<br>		<br>$LN7@f:<br>		mov 	esp, ebp<br>		dod 	ebp<br>		ret 	0<br>_f   	ENDP<br><br></code></pre></td></tr></table></figure>
+<h3 id="X86-MSVC"><a href="#X86-MSVC" class="headerlink" title="X86 -MSVC"></a>X86 -MSVC</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tv64 = -4 ; size = 4</span><br><span class="line">a$ = 8 ; size = 4</span><br><span class="line"></span><br><span class="line">f PROC</span><br><span class="line">		push 	ebp</span><br><span class="line">		mov 	ebp, esp</span><br><span class="line">		push 	ecx</span><br><span class="line">		mov 	eax, DWORD PTR _a$ [ebp]</span><br><span class="line">		mov 	DWORD PTR tv64 [ebp], eax</span><br><span class="line">		cmp 	DWORD PTR tv64[ebp], 0</span><br><span class="line">		je 		SHORT $LN4@f</span><br><span class="line">		cmp 	DWORD PTR tv64 [ebp], 1</span><br><span class="line">		je 		SHORT $LN3@f</span><br><span class="line">		cmp 	DWORD PTR tv64 [ebp], 2</span><br><span class="line">		je 		SHORT $LN2@f</span><br><span class="line">		jmp		SHORT $LN1@f</span><br><span class="line">		</span><br><span class="line">$LN4@f:</span><br><span class="line">		push 	OFFSET $SG739 ;&#x27;zero&#x27;, OaH, 00H</span><br><span class="line">		call 	_printf</span><br><span class="line">		add 	esp, 4</span><br><span class="line">		jmp 	SHORT $LN7@f</span><br><span class="line">		</span><br><span class="line">$LN3@f:</span><br><span class="line">		push	OFFSET $SG741 ; &#x27;one&#x27;, Oан, 00H</span><br><span class="line">		call 	_printf</span><br><span class="line">		add 	esp, 4</span><br><span class="line">		jmp 	SHORT $LN7@f</span><br><span class="line">		</span><br><span class="line">$LN2@f:</span><br><span class="line">		push 	OFFSET $SG743; &#x27;two&#x27;, 0ан, 00H</span><br><span class="line">		call 	_printf</span><br><span class="line">		add 	esp, 4</span><br><span class="line">		jmp 	SHORT $LN7@f</span><br><span class="line">		</span><br><span class="line">$LN1@f:</span><br><span class="line">		push	OFFSET $SG745 ; &#x27;something unknown&#x27;, OaH, OOH</span><br><span class="line">		call	_printf</span><br><span class="line">		add 	esp, 4</span><br><span class="line">		</span><br><span class="line">$LN7@f:</span><br><span class="line">		mov 	esp, ebp</span><br><span class="line">		dod 	ebp</span><br><span class="line">		ret 	0</span><br><span class="line">_f   	ENDP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>学到第十三章</p>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
+</article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%85%B6%E5%AE%83/" class="category-chain-item">其它</a>
-  
-  
 
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/10/20/05_angr/">angr</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/10/04/01_ida/">ida使用文档</a></div></section></div>
 
-              
-  
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>逆向工程权威指南上</div>
-      <div>http://run521520.github.io/2025/10/10/reverse_books/</div>
-    </div>
-    <div class="license-meta">
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body utterances'>
       
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>youduck7</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2025年10月10日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-cc-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="utterances" repo="run521520/run521520.github.io" issue-term="pathname" theme="preferred-color-scheme"></div>
+
+    </section>
   </div>
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2025/10/20/05_angr/" title="angr">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">angr</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2025/10/04/01_ida/" title="ida使用文档">
-                        <span class="hidden-mobile">ida使用文档</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">youduck7</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<div style="margin-top:10px;text-align:center;"><span id="busuanzi_container_site_pv" style="display:inline-block;margin:0 10px;">本站总访问量 <span id="busuanzi_value_site_pv" style="color:#00d2ff;font-weight:bold;">-</span> 次</span><span id="busuanzi_container_site_uv" style="display:inline-block;margin:0 10px;">本站访客数 <span id="busuanzi_value_site_uv" style="color:#00d2ff;font-weight:bold;">-</span> 人</span></div></div></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
 
-            
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CPU%E7%AE%80%E4%BB%8B"><span class="toc-text">1. CPU简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86%E6%9E%B6%E6%9E%84"><span class="toc-text">指令集架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%80%E7%AE%80%E5%87%BD%E6%95%B0"><span class="toc-text">2. 最简函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8x86%E8%A1%A8%E7%8E%B0"><span class="toc-text">用x86表现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8ARM%E8%A1%A8%E7%8E%B0"><span class="toc-text">用ARM表现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8MIPS%E8%A1%A8%E7%8E%B0"><span class="toc-text">用MIPS表现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Hello-world"><span class="toc-text">3. Hello,world!</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#X86"><span class="toc-text">X86</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8MSVC%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96"><span class="toc-text">- 用MSVC生成汇编</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8GCC%E7%BC%96%E8%AF%91"><span class="toc-text">- 用GCC编译</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x86-64"><span class="toc-text">- x86-64</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#64%E4%BD%8D%E4%B8%8B%E7%9A%84MSVC%E7%BC%96%E8%AF%91%E5%99%A8"><span class="toc-text">- 64位下的MSVC编译器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GCC"><span class="toc-text">- GCC</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCC%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="toc-text">GCC的其他特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARM"><span class="toc-text">ARM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0%E5%BA%8F%E8%A8%80%E5%92%8C%E5%87%BD%E6%95%B0%E5%B0%BE%E5%A3%B0"><span class="toc-text">4. 函数序言和函数尾声</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%A0%88"><span class="toc-text">5. 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">- 简单介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-text">-栈的用途</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#X86-1"><span class="toc-text">- X86</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARM-1"><span class="toc-text">- ARM</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B"><span class="toc-text">说一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="toc-text">6. 条件转移指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8MSVC%E6%9D%A5%E7%BC%96%E8%AF%91f-signed"><span class="toc-text">用MSVC来编译f_signed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCC%E7%BC%96%E8%AF%91f-unsigned"><span class="toc-text">GCC编译f_unsigned</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%92%8C%E6%9C%89%E7%AC%A6%E5%8F%B7%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="toc-text">无符号和有符号的不同</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E6%AF%94%E8%BE%83%EF%BC%88JA-JB-%E7%B3%BB%E5%88%97%EF%BC%89"><span class="toc-text">- 无符号数比较（JA&#x2F;JB 系列）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E6%AF%94%E8%BE%83%EF%BC%88JG-JL-%E7%B3%BB%E5%88%97%EF%BC%89"><span class="toc-text">- 有符号数比较（JG&#x2F;JL 系列）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch-case-default"><span class="toc-text">switch()&#x2F;case&#x2F;default</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#X86-MSVC"><span class="toc-text">X86 -MSVC</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"http://run521520.github.io/2025/10/10/reverse_books/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
   
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"WCiAJOcmEvtC8mCKY347mmNi-MdYXbMMI","appKey":"Ds56gTbsyMSf1AJROtxNZAai","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://wciajocm.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
           }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
 
-    </article>
-  
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
 
-
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
         return;
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
         }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
         }
       }
-    });
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
   });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<!-- optional -->
 
-  <script>Fluid.plugins.codeWidget();</script>
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initUtterances() {
+      const el = document.querySelector("#comments #utterances");
+      if (!el) return;
+      
+      function load_utterances() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_utterances, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.utterances = initUtterances;
+    
+    // Initialize on page load
+    initUtterances();
+  })();
+</script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
     };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  };
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
+  utils.initPlugin(initServices, 'services');
 </script>
 
-
-  
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
   });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
 </script>
 
 
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-  
-<script src="/js/acg.js"></script>
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+<!-- inject -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

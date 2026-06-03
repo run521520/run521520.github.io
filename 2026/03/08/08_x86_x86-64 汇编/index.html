@@ -1,28 +1,29 @@
 
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
-
-
+<!DOCTYPE html><html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/baimao.jpg">
-  <link rel="icon" href="/img/baimao.jpg">
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="youduck7">
-  <meta name="keywords" content="">
+  <meta name="generator" content="Hexo 8.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>x86/x86-64汇编 - run521</title>
+
   
     <meta name="description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86&#x2F;x86-64汇编">
-<meta property="og:url" content="http://run521520.github.io/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:url" content="http://run521520.github.io/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/">
 <meta property="og:site_name" content="run521">
 <meta property="og:description" content="x86&#x2F;x86-64汇编使用 masm 语法，适用于在 Windows 上运行的程序 首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令 12345; 比如将寄存器BX的内容送到AX中; 机器指令1000100111011000 ;随便输的，但就是这样子; 汇编指令mov ax,bx  我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，">
 <meta property="og:locale" content="zh_CN">
@@ -30,263 +31,66 @@
 <meta property="article:modified_time" content="2026-04-19T05:02:39.931Z">
 <meta property="article:author" content="youduck7">
 <meta property="article:tag" content="语言">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
   
   
   
-  <title>x86/x86-64汇编 - run521</title>
+  <meta name="keywords" content="语言">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  <!-- feed -->
   
 
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
 
 
   
-<link rel="stylesheet" href="/css/acg.css">
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"run521520.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"python"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":3},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 8.0.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 80vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>youduck7</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/R1.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="x86/x86-64汇编"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-08 22:12" pubdate>
-          2026年3月8日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          17k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          143 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"youduck7","sameAs":[]},"dateCreated":"2026-03-08T22:12:41+08:00","dateModified":"2026-04-19T13:02:39+08:00","datePublished":"2026-03-08T22:12:41+08:00","description":"","headline":"x86/x86-64汇编","mainEntityOfPage":{"@type":"WebPage","@id":"http://run521520.github.io/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/"},"publisher":{"@type":"Organization","name":"youduck7","sameAs":[]},"url":"http://run521520.github.io/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/","keywords":"语言","image":[]}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
 
 
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">run521</div><div class="sub normal cap">CTF玩家</div><div class="sub hover cap" style="opacity:0"> 逆向工程 | 安全研究</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/04/02/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86/"><span class="title">常见加密方式</span></a><a class="item title" href="/2026/03/08/07_C-C/"><span class="title">C/C++</span></a><a class="item title" href="/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/"><span class="title">x86/x86-64汇编</span></a><a class="item title" href="/2026/03/15/03_VM/"><span class="title">VM</span></a><a class="item title" href="/2026/03/15/04_ida%E8%84%9A%E6%9C%AC/"><span class="title">ida脚本</span></a><a class="item title" href="/2026/03/25/2024%E5%BE%A1%E7%BD%91%E6%9D%AF/"><span class="title">2024御网杯</span></a><a class="item title" href="/2026/03/23/11-MYSQL/"><span class="title">MYSQL</span></a><a class="item title" href="/2025/10/04/01_ida/"><span class="title">ida使用文档</span></a><a class="item title" href="/2026/03/15/10-Linux/"><span class="title">Linux</span></a><a class="item title" href="/2025/10/04/dataStorage/"><span class="title">数据储存</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-03-08T14:12:41.000Z">2026-03-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-04-19T05:02:39.931Z">2026-04-19</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>x86/x86-64汇编</span></h1>
         
       </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
     </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">x86/x86-64汇编</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>使用 <code>masm</code> 语法，适用于在 Windows 上运行的程序</p>
+  </div>
+  </div><article class="md-text content"><h1 id="x86-x86-64汇编"><a href="#x86-x86-64汇编" class="headerlink" title="x86&#x2F;x86-64汇编"></a>x86&#x2F;x86-64汇编</h1><p>使用 <code>masm</code> 语法，适用于在 Windows 上运行的程序</p>
 <p>首先讲一下机器指令就是直接面向机器的语言，但是人脑子是很难记住这些指令的，所以就有了汇编指令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如将寄存器BX的内容送到AX中<br>; 机器指令<br>1000100111011000 ;随便输的，但就是这样子<br>; 汇编指令<br>mov ax,bx<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; 比如将寄存器BX的内容送到AX中</span><br><span class="line">; 机器指令</span><br><span class="line">1000100111011000 ;随便输的，但就是这样子</span><br><span class="line">; 汇编指令</span><br><span class="line">mov ax,bx</span><br></pre></td></tr></table></figure>
 
 <p>我们说了，机器指令是面向机器的，汇编指令是方便我们来编写的，最终还是要面向机器的，所以这时候就需要一个中间件来将这些汇编指令转换为机器指令，这个中间件就是<strong>编译器</strong></p>
 <p><strong><code>程序员 ---&gt; 汇编指令 ---&gt; 编译器 ---&gt; 机器码 ---&gt; 计算机</code></strong></p>
@@ -400,7 +204,7 @@
 <li><pre><code class="language-ass">MOV  EAX, 0xFFFFFFFF
 ADD  EAX, 1       ; EAX=0 → CF=1（溢出）
 JC   overflow     ; 处理进位
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-bullet">3.</span>   <span class="hljs-strong">**SF（Sign Flag，符号标志）**</span><br><br><span class="hljs-bullet">     1.</span>   运算结果的最高位为1时置1（表示负数）。<br><br><span class="hljs-bullet">     2.</span>   <span class="hljs-strong">**触发指令**</span>：<span class="hljs-code">`CMP`</span>, <span class="hljs-code">`SUB`</span>, <span class="hljs-code">`ADD`</span>等。<br><br><span class="hljs-bullet">     3.</span>   <span class="hljs-code">```ass</span><br><span class="hljs-code">          CMP  EAX, 0</span><br><span class="hljs-code">          JS   negative     ; EAX为负数时跳转</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.   **SF（Sign Flag，符号标志）**</span><br><span class="line"></span><br><span class="line">     1.   运算结果的最高位为1时置1（表示负数）。</span><br><span class="line"></span><br><span class="line">     2.   **触发指令**：`CMP`, `SUB`, `ADD`等。</span><br><span class="line"></span><br><span class="line">     3.   ```ass</span><br><span class="line">          CMP  EAX, 0</span><br><span class="line">          JS   negative     ; EAX为负数时跳转</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 </ol>
@@ -414,7 +218,7 @@ JC   overflow     ; 处理进位
 <li><pre><code class="language-ass">MOV  AL, 0x7F     ; 127（有符号正数）
 ADD  AL, 1        ; AL=0x80（-128）→ OF=1
 JO   handle_overflow
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-bullet">5.</span>   #### <span class="hljs-strong">**PF（Parity Flag，奇偶标志）**</span><br><br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**含义**</span>：结果低8位中1的个数为<span class="hljs-strong">**偶数**</span>时置1。<br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**触发指令**</span>：<span class="hljs-code">`TEST`</span>, <span class="hljs-code">`AND`</span>, <span class="hljs-code">`XOR`</span>等。<br><span class="hljs-bullet">     -</span>   <span class="hljs-strong">**逆向应用**</span>：<br><br><span class="hljs-code">     ```z80</span><br><span class="hljs-code">     MOV  AL, 0x0F     ; 二进制00001111（4个1 → 偶数）</span><br><span class="hljs-code">     TEST AL, AL       ; PF=1</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5.   #### **PF（Parity Flag，奇偶标志）**</span><br><span class="line"></span><br><span class="line">     -   **含义**：结果低8位中1的个数为**偶数**时置1。</span><br><span class="line">     -   **触发指令**：`TEST`, `AND`, `XOR`等。</span><br><span class="line">     -   **逆向应用**：</span><br><span class="line"></span><br><span class="line">     ```z80</span><br><span class="line">     MOV  AL, 0x0F     ; 二进制00001111（4个1 → 偶数）</span><br><span class="line">     TEST AL, AL       ; PF=1</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 </ol>
@@ -428,7 +232,7 @@ JO   handle_overflow
 <li><strong>触发指令</strong>：<code>ADD</code>, <code>SUB</code>（仅低4位运算时有效）。</li>
 <li><strong>逆向应用</strong>：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs z80">MOV  AL, 0x09     ; BCD码9<br>ADD  AL, 0x01     ; AL=0x0A → AF=1（需要调整）<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MOV  AL, 0x09     ; BCD码9</span><br><span class="line">ADD  AL, 0x01     ; AL=0x0A → AF=1（需要调整）</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>处理BCD码（如财务软件、旧系统逆向）。</li>
@@ -439,7 +243,7 @@ JO   handle_overflow
 <li><strong>控制指令</strong>：<code>STI</code>（置1）、<code>CLI</code>（清0）。</li>
 <li><strong>逆向应用</strong>：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs z80">CLI               ; 禁用中断<br>; 关键代码（防调试）<br>STI               ; 恢复中断<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CLI               ; 禁用中断</span><br><span class="line">; 关键代码（防调试）</span><br><span class="line">STI               ; 恢复中断</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>分析反调试代码（<code>CLI</code>禁用中断防止调试器接管）。</li>
@@ -450,7 +254,7 @@ JO   handle_overflow
 <li><strong>控制指令</strong>：通过<code>POPF</code>或调试寄存器间接设置。</li>
 <li><strong>逆向应用</strong>：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs z80">PUSHFD            ; 获取当前EFLAGS<br>OR   DWORD [ESP], 0x100 ; 设置TF=1<br>POPFD             ; 激活单步模式<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PUSHFD            ; 获取当前EFLAGS</span><br><span class="line">OR   DWORD [ESP], 0x100 ; 设置TF=1</span><br><span class="line">POPFD             ; 激活单步模式</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>实现单步执行（调试器核心功能）。</li>
@@ -461,7 +265,7 @@ JO   handle_overflow
 <li><strong>触发指令</strong>：<code>STD</code>, <code>CLD</code>, <code>REP MOVSB</code>等。</li>
 <li><strong>逆向应用</strong>：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs z80">CLD               ; 清0 DF<br>MOV  ESI, src     ; 源地址<br>MOV  EDI, dest    ; 目标地址<br>REP  MOVSB        ; 复制字符串（ESI→EDI递增）<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CLD               ; 清0 DF</span><br><span class="line">MOV  ESI, src     ; 源地址</span><br><span class="line">MOV  EDI, dest    ; 目标地址</span><br><span class="line">REP  MOVSB        ; 复制字符串（ESI→EDI递增）</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>分析字符串处理代码（如加密、解密循环）。</li>
@@ -917,7 +721,7 @@ JO   handle_overflow
 </li>
 </ul>
 <h3 id="3-5-控制转移指令（常用）"><a href="#3-5-控制转移指令（常用）" class="headerlink" title="3.5 控制转移指令（常用）"></a>3.5 控制转移指令（常用）</h3><p>用于改变程序执行流程，常配合 CMP&#x2F;TEST 指令的标志位结果：</p>
-<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Plain"><br>jmp（无条件跳转）、je（相等跳转，ZF=1）、jne（不相等跳转，ZF=0）、jg（大于跳转）、jl（小于跳转）、jge（大于等于跳转）、jle（小于等于跳转）、loop（循环跳转）、int（中断调用）、iret（中断返回）<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">jmp（无条件跳转）、je（相等跳转，ZF=1）、jne（不相等跳转，ZF=0）、jg（大于跳转）、jl（小于跳转）、jge（大于等于跳转）、jle（小于等于跳转）、loop（循环跳转）、int（中断调用）、iret（中断返回）</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-6-算数指令"><a href="#3-6-算数指令" class="headerlink" title="3.6 算数指令"></a>3.6 算数指令</h3><p>乘除法指令存在隐含寄存器约定，需注意无符号&#x2F;有符号区别及符号扩展操作：</p>
 <h4 id="乘法指令"><a href="#乘法指令" class="headerlink" title="乘法指令"></a>乘法指令</h4><ul>
@@ -933,7 +737,7 @@ JO   handle_overflow
   mov ecx,3
   mov ecx
   ; 这时 eax为15
-  <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><br>    - <br><br>- **<span class="hljs-string">`imul`</span>（有符号乘法）**<br><br>    - 三种格式：<br>                <br><br>        - 单操作：<span class="hljs-string">`imul r/m32`</span>（隐含被乘数 <span class="hljs-built_in">EAX</span>，结果 <span class="hljs-built_in">EDX</span>:<span class="hljs-built_in">EAX</span>）<br><br>        - 双操作：<span class="hljs-string">`imul r32, r/m32`</span>（r32 = r32 * r/m32）<br><br>        - 三操作：<span class="hljs-string">`imul r32, r/m32, imm`</span>（r32 = r/m32 * 立即数 <span class="hljs-string">`imm`</span>）<br><br>    - 注意：结果会进行有符号扩展，存于对应寄存器组合。<br><br>#### 除法指令<br><br>- **<span class="hljs-string">`div`</span>（无符号除法）**<br>    - 格式：<span class="hljs-string">`div r/m32`</span>（<span class="hljs-number">32</span>位模式）<br>    <br>    - 约定：被除数为 <span class="hljs-built_in">EDX</span>:<span class="hljs-built_in">EAX</span>（<span class="hljs-number">64</span>位组合），除数为 r/m32；商存于 <span class="hljs-built_in">EAX</span>，余数存于 <span class="hljs-built_in">EDX</span><br>    <br>    - 注意：使用前需将 <span class="hljs-built_in">EDX</span> 清零（常用 <span class="hljs-string">`xor edx, edx`</span>），避免高位干扰。<br>    <br>- **<span class="hljs-string">`idiv`</span> （有符号除法）**<br>- 格式：<span class="hljs-string">`idiv r/m32`</span>（<span class="hljs-number">32</span>位模式）<br>  <br>- 约定：与 <span class="hljs-keyword">div</span> 一致，但按有符号数处理<br>  <br>- 注意：使用前需进行符号扩展：<br>                <br>  <br>    - <span class="hljs-number">32</span>位：<span class="hljs-string">`cdq`</span>（将 <span class="hljs-built_in">EAX</span> 符号扩展到 <span class="hljs-built_in">EDX</span>）<br>    <br>    - <span class="hljs-number">64</span>位：<span class="hljs-string">`cqo`</span>（将 <span class="hljs-built_in">RAX</span> 符号扩展到 <span class="hljs-built_in">RDX</span>）<br><br>#### 示例（<span class="hljs-number">32</span>位 Intel 语法）<br><br><span class="hljs-string">```</span>asm<br><br><span class="hljs-comment">; 无符号乘法：5 * 2 = 10</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">5</span>    <span class="hljs-comment">; EAX = 5（被乘数）</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ecx</span>, <span class="hljs-number">2</span>    <span class="hljs-comment">; ECX = 2（乘数）</span><br><span class="hljs-keyword">mul</span> <span class="hljs-built_in">ecx</span>       <span class="hljs-comment">; EDX:EAX = 5*2 = 10 → EAX=10, EDX=0</span><br><br><span class="hljs-comment">; 有符号除法：-15 / 3 = -5</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span>, -<span class="hljs-number">15</span>  <span class="hljs-comment">; EAX = -15（被除数）</span><br><span class="hljs-keyword">cdq</span>           <span class="hljs-comment">; 将 EAX 符号扩展到 EDX → EDX=0xFFFFFFFF</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ecx</span>, <span class="hljs-number">3</span>    <span class="hljs-comment">; ECX = 3（除数）</span><br><span class="hljs-keyword">idiv</span> <span class="hljs-built_in">ecx</span>      <span class="hljs-comment">; EAX = -5（商）, EDX=0（余数）</span><br></code></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - </span><br><span class="line"></span><br><span class="line">- **`imul`（有符号乘法）**</span><br><span class="line"></span><br><span class="line">    - 三种格式：</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">        - 单操作：`imul r/m32`（隐含被乘数 EAX，结果 EDX:EAX）</span><br><span class="line"></span><br><span class="line">        - 双操作：`imul r32, r/m32`（r32 = r32 * r/m32）</span><br><span class="line"></span><br><span class="line">        - 三操作：`imul r32, r/m32, imm`（r32 = r/m32 * 立即数 `imm`）</span><br><span class="line"></span><br><span class="line">    - 注意：结果会进行有符号扩展，存于对应寄存器组合。</span><br><span class="line"></span><br><span class="line">#### 除法指令</span><br><span class="line"></span><br><span class="line">- **`div`（无符号除法）**</span><br><span class="line">    - 格式：`div r/m32`（32位模式）</span><br><span class="line">    </span><br><span class="line">    - 约定：被除数为 EDX:EAX（64位组合），除数为 r/m32；商存于 EAX，余数存于 EDX</span><br><span class="line">    </span><br><span class="line">    - 注意：使用前需将 EDX 清零（常用 `xor edx, edx`），避免高位干扰。</span><br><span class="line">    </span><br><span class="line">- **`idiv` （有符号除法）**</span><br><span class="line">- 格式：`idiv r/m32`（32位模式）</span><br><span class="line">  </span><br><span class="line">- 约定：与 div 一致，但按有符号数处理</span><br><span class="line">  </span><br><span class="line">- 注意：使用前需进行符号扩展：</span><br><span class="line">                </span><br><span class="line">  </span><br><span class="line">    - 32位：`cdq`（将 EAX 符号扩展到 EDX）</span><br><span class="line">    </span><br><span class="line">    - 64位：`cqo`（将 RAX 符号扩展到 RDX）</span><br><span class="line"></span><br><span class="line">#### 示例（32位 Intel 语法）</span><br><span class="line"></span><br><span class="line">```asm</span><br><span class="line"></span><br><span class="line">; 无符号乘法：5 * 2 = 10</span><br><span class="line">mov eax, 5    ; EAX = 5（被乘数）</span><br><span class="line">mov ecx, 2    ; ECX = 2（乘数）</span><br><span class="line">mul ecx       ; EDX:EAX = 5*2 = 10 → EAX=10, EDX=0</span><br><span class="line"></span><br><span class="line">; 有符号除法：-15 / 3 = -5</span><br><span class="line">mov eax, -15  ; EAX = -15（被除数）</span><br><span class="line">cdq           ; 将 EAX 符号扩展到 EDX → EDX=0xFFFFFFFF</span><br><span class="line">mov ecx, 3    ; ECX = 3（除数）</span><br><span class="line">idiv ecx      ; EAX = -5（商）, EDX=0（余数）</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
 </ul>
@@ -987,7 +791,7 @@ JO   handle_overflow
 <li><p><code>repne / repnz</code>：当 ZF &#x3D;&#x3D; 0 且 ECX !&#x3D; 0 时重复（适用于搜索）</p>
 </li>
 </ul>
-<h4 id="示例：实现-memcpy（32位）"><a href="#示例：实现-memcpy（32位）" class="headerlink" title="示例：实现 memcpy（32位）"></a>示例：实现 <code>memcpy</code>（32位）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>; 功能：将 source 地址的 length 个字节复制到 dest 地址<br>; 前提：方向标志 DF 已清零（cld 指令）<br>cld                 ; 清方向标志（EDI/ESI 自动递增）<br>mov esi, source     ; ESI = 源地址<br>mov edi, dest       ; EDI = 目的地址<br>mov ecx, length     ; ECX = 复制字节数<br>rep movsb           ; 重复复制，直到 ECX=0<br></code></pre></td></tr></table></figure>
+<h4 id="示例：实现-memcpy（32位）"><a href="#示例：实现-memcpy（32位）" class="headerlink" title="示例：实现 memcpy（32位）"></a>示例：实现 <code>memcpy</code>（32位）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">; 功能：将 source 地址的 length 个字节复制到 dest 地址</span><br><span class="line">; 前提：方向标志 DF 已清零（cld 指令）</span><br><span class="line">cld                 ; 清方向标志（EDI/ESI 自动递增）</span><br><span class="line">mov esi, source     ; ESI = 源地址</span><br><span class="line">mov edi, dest       ; EDI = 目的地址</span><br><span class="line">mov ecx, length     ; ECX = 复制字节数</span><br><span class="line">rep movsb           ; 重复复制，直到 ECX=0</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1004,16 +808,16 @@ JO   handle_overflow
 </li>
 </ol>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一个例子<br>; 计算 2^10次方<br><br>	mov eax,2<br>	mov ecx,9<br>s:	add eax,eax<br>	loop s<br>	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">; 下面有一个例子</span><br><span class="line">; 计算 2^10次方</span><br><span class="line"></span><br><span class="line">	mov eax,2</span><br><span class="line">	mov ecx,9</span><br><span class="line">s:	add eax,eax</span><br><span class="line">	loop s</span><br><span class="line">	; 这里先给寄存器eax赋值一个2，然后经过9次循环就是2^10次方了 </span><br></pre></td></tr></table></figure>
 
 <p>这个loop再<code>intel</code>中用不到</p>
 <h3 id="3-9-位操作指令"><a href="#3-9-位操作指令" class="headerlink" title="3.9 位操作指令"></a>3.9 位操作指令</h3><h4 id="and和or-按位与和按位或"><a href="#and和or-按位与和按位或" class="headerlink" title="and和or 按位与和按位或"></a><strong><code>and和or</code> 按位与和按位或</strong></h4><p>就是和Python语言中的and和or一样的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,01100011B<br>and al,00000001B<br>;每一位相应的位都执行“与”操作：两个对应的位都为1时结果为1，否则为0。<br>;这个时候al的值为00000001B,常用的就是指定对象的位设为0<br><br>mov al,01100011B<br>or 	al,00000000B<br><br>;每一位相应的位都执行“或”操作：两个对应的位中，只要有一个为1，结果为1。<br>;这样or就是指定对象的位设为1,al = 01100011B<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mov al,01100011B</span><br><span class="line">and al,00000001B</span><br><span class="line">;每一位相应的位都执行“与”操作：两个对应的位都为1时结果为1，否则为0。</span><br><span class="line">;这个时候al的值为00000001B,常用的就是指定对象的位设为0</span><br><span class="line"></span><br><span class="line">mov al,01100011B</span><br><span class="line">or 	al,00000000B</span><br><span class="line"></span><br><span class="line">;每一位相应的位都执行“或”操作：两个对应的位中，只要有一个为1，结果为1。</span><br><span class="line">;这样or就是指定对象的位设为1,al = 01100011B</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="xor-按位异或"><a href="#xor-按位异或" class="headerlink" title="xor 按位异或"></a><strong><code>xor </code>按位异或</strong></h4><p>每一位相应的位都执行“异或”操作：两个对应的位不相同，结果为1，否则为0。</p>
 <p><code>xor al,ah</code></p>
 <h4 id="not-按位取反"><a href="#not-按位取反" class="headerlink" title="not 按位取反"></a><code>not</code> 按位取反</h4><p>每一位都执行取反操作：1变成0，0变成1。</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">al</span> , <span class="hljs-number">11110000B</span><br><span class="hljs-keyword">not</span> <span class="hljs-built_in">al</span><br><span class="hljs-comment">; 则al的值为 00001111B</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al , 11110000B</span><br><span class="line">not al</span><br><span class="line">; 则al的值为 00001111B</span><br></pre></td></tr></table></figure>
 
 <h4 id="shl无符号左移"><a href="#shl无符号左移" class="headerlink" title="shl无符号左移"></a><code>shl</code>无符号左移</h4><p><code>shl al,1</code> 所有位向左移动1位，左移后空出的位置填充0，最左边的位丢弃。</p>
 <p>当然你也可以控制移动的位数</p>
@@ -1025,7 +829,7 @@ JO   handle_overflow
 <p>在<code>c</code>或<code>ida</code>中：</p>
 <p>通常，<code>not</code> 的优先级较高，其次是位移操作符 <code>shl</code>、<code>shr</code>、<code>sal</code> 和 <code>sar</code>，最后是按位逻辑操作符 <code>and</code>、<code>or</code>、<code>xor</code>。</p>
 <h3 id="3-10-转移指令"><a href="#3-10-转移指令" class="headerlink" title="3.10 转移指令"></a>3.10 转移指令</h3><p>操作符 <strong>offset</strong>在汇编中由编译器处理的符号，功能是取得标号的偏移地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 比如在汇编中获取该段或函数等的地址<br>main proc<br>	mov eax,offset main<br>	; 这个执行后eax的值为main函数的地址<br>main ENDP<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; 比如在汇编中获取该段或函数等的地址</span><br><span class="line">main proc</span><br><span class="line">	mov eax,offset main</span><br><span class="line">	; 这个执行后eax的值为main函数的地址</span><br><span class="line">main ENDP</span><br></pre></td></tr></table></figure>
 
 <p>**<code>jmp</code>**无条件转移指令，可以修改<code>ip</code>，也可以同时修改<code>cs和ip</code></p>
 <blockquote>
@@ -1038,7 +842,7 @@ JO   handle_overflow
 <ol>
 <li><p><code>jmp short 标号(转到标号处执行指令)</code></p>
 <p>这种是<strong>段内短转移</strong>，这个是修改<code>IP</code>所以只能修改到-128~127，标号是转移的目的地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	mov eax,0<br>	jmp short s	;执行该语句会越过add eax,1，所以eax的值为0<br>	add eax,1<br>s:	mov ecx,10 <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	mov eax,0</span><br><span class="line">	jmp short s	;执行该语句会越过add eax,1，所以eax的值为0</span><br><span class="line">	add eax,1</span><br><span class="line">s:	mov ecx,10 </span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>jmp near ptr 标号</code>这个是<strong>段内近转移</strong>和上面的功能类似实际是<code>修改IP：IP=ip+16位位移</code></p>
 </li>
@@ -1130,13 +934,13 @@ JO   handle_overflow
 </tr>
 </tbody></table>
 <h3 id="3-11dup-数组"><a href="#3-11dup-数组" class="headerlink" title="3. 11dup 数组"></a>3. 11dup 数组</h3><p>在汇编中也有类似数组的概念就是**<code>dup</code>**</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 下面有一段实例，在data数据段定义<br>.data<br>arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">; 下面有一段实例，在data数据段定义</span><br><span class="line">.data</span><br><span class="line">arr dd 16 dup (0) ; 这个意思就是定义一个连续的数据段，段长为16，且默认初始为0</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-12-FPU"><a href="#3-12-FPU" class="headerlink" title="3.12 FPU"></a>3.12 FPU</h3><h2 id="四、函数"><a href="#四、函数" class="headerlink" title="四、函数"></a>四、函数</h2><p>程序的基本单位是函数，函数的基本结构是栈，esp是顶，ebp是低</p>
 <p>一般用<code>call</code>指令来进入函数，在x32&#x2F;64dbg上的基本函数名字都是标明的</p>
 <p>在<code>dbg</code>中或其他的跳转指令中，鼠标点击那一行指令按<strong>回车</strong>即可进入到目标地址，按<strong>减号</strong>即可退回跳转</p>
 <p>返回值在<code>eax</code>里面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 函数的入口<br>push ebp<br>mov  ebp, esp<br>sub	 esp, 0x10	; 为栈存储数据分配空间<br><br>; 函数退出<br>mov esp, ebp<br>pop ebp<br>ret<br><br>; 这个退出还可以用<br>leave<br>ret	; 函数退出<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">; 函数的入口</span><br><span class="line">push ebp</span><br><span class="line">mov  ebp, esp</span><br><span class="line">sub	 esp, 0x10	; 为栈存储数据分配空间</span><br><span class="line"></span><br><span class="line">; 函数退出</span><br><span class="line">mov esp, ebp</span><br><span class="line">pop ebp</span><br><span class="line">ret</span><br><span class="line"></span><br><span class="line">; 这个退出还可以用</span><br><span class="line">leave</span><br><span class="line">ret	; 函数退出</span><br></pre></td></tr></table></figure>
 
 <p>一般的在内存函数看到 <code>ebp + xxx</code> 代表的是函数参数</p>
 <p><code>ebp - xxx</code> 这个一般的局部变量</p>
@@ -1144,20 +948,20 @@ JO   handle_overflow
 <ol>
 <li><p><code>cdecl</code></p>
 <p>参数从右到左一次压栈<code>push</code>，由调用者清理栈，且返回值在<code>eax</code>寄存器上，比如<code>printf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 调用代码<br>push 3<br>push 2<br>push 1<br>call my_func ; 调用这个函数<br>; 参数是这样子的 my_func(1,2,3)<br>add esp,0xc	; 	调用者清理栈(3*4=12)<br><br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,8<br>	; ...<br>	mov esp,ebp<br>	pop ebp<br>	ret<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">; 调用代码</span><br><span class="line">push 3</span><br><span class="line">push 2</span><br><span class="line">push 1</span><br><span class="line">call my_func ; 调用这个函数</span><br><span class="line">; 参数是这样子的 my_func(1,2,3)</span><br><span class="line">add esp,0xc	; 	调用者清理栈(3*4=12)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">my_func:</span><br><span class="line">	push ebp</span><br><span class="line">	mov  ebp,esp</span><br><span class="line">	sub  esp,8</span><br><span class="line">	; ...</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">	ret</span><br></pre></td></tr></table></figure>
 
 <p>注意这里的 <code>my_func</code>在执行完后栈中的数据，就是传入的参数是没有处理的，所以要在调用执行完函数后，手动来平衡一下栈，因为是在外面平衡栈的所以这种方式叫做<strong>外平栈</strong>(Windows)</p>
 </li>
 <li><p><code>stdcall</code></p>
 <p>参数从右到左一次压栈<code>push</code>，由被调用者清理(<code>retn X</code>)，返回值在<code>eax</code>，常见的函数是Windows下的**<code>API</code>**，<strong>内平栈</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 调用代码<br>push 3<br>push 2<br>push 1<br>call my_func ; 调用这个函数<br>; 参数是这样子的 my_func(1,2,3)<br>;.....<br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,8<br>	; ...<br>	mov esp,ebp<br>	pop ebp<br>	retn 0xc  ; 在函数内处理<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; 调用代码</span><br><span class="line">push 3</span><br><span class="line">push 2</span><br><span class="line">push 1</span><br><span class="line">call my_func ; 调用这个函数</span><br><span class="line">; 参数是这样子的 my_func(1,2,3)</span><br><span class="line">;.....</span><br><span class="line"></span><br><span class="line">my_func:</span><br><span class="line">	push ebp</span><br><span class="line">	mov  ebp,esp</span><br><span class="line">	sub  esp,8</span><br><span class="line">	; ...</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">	retn 0xc  ; 在函数内处理</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>fastcall</code></p>
 </li>
 </ol>
-<pre><code class="hljs"> 前两个参数通过寄存器**`ecx,edx`**，其余的参数从右向左压栈，栈清理和`stdcall`一样返回值在`eax`里面在`Windows`下都是**内平栈**
+<pre><code> 前两个参数通过寄存器**`ecx,edx`**，其余的参数从右向左压栈，栈清理和`stdcall`一样返回值在`eax`里面在`Windows`下都是**内平栈**
 
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ecx,1	; 第一个参数<br>mov edx,2	; 第二个参数<br>push 3		; 第三个参数，最右边的参数<br>call my_func<br><br>my_func:<br>	push ebp<br>	mov  ebp,esp<br>	sub  esp,0x10<br>	; 分配局部空间<br>	mov eax,ecx	; 第一个参数<br>	mov ebx,edx	; 第二个参数<br>	mov ecx,[ebp+8] ; 获取第三个参数<br>				   ; ebp		-&gt; ebp 的地址<br>				   ; ebp+4		-&gt; 调用函数的下一条指令的地址<br>				   ; ebp+8		-&gt; 第三个参数<br>	mov esp,ebp<br>	pop ebp<br>	retn 4			; 进栈的就一个参数，ecx,edx不算<br></code></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mov ecx,1	; 第一个参数</span><br><span class="line">mov edx,2	; 第二个参数</span><br><span class="line">push 3		; 第三个参数，最右边的参数</span><br><span class="line">call my_func</span><br><span class="line"></span><br><span class="line">my_func:</span><br><span class="line">	push ebp</span><br><span class="line">	mov  ebp,esp</span><br><span class="line">	sub  esp,0x10</span><br><span class="line">	; 分配局部空间</span><br><span class="line">	mov eax,ecx	; 第一个参数</span><br><span class="line">	mov ebx,edx	; 第二个参数</span><br><span class="line">	mov ecx,[ebp+8] ; 获取第三个参数</span><br><span class="line">				   ; ebp		-&gt; ebp 的地址</span><br><span class="line">				   ; ebp+4		-&gt; 调用函数的下一条指令的地址</span><br><span class="line">				   ; ebp+8		-&gt; 第三个参数</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">	retn 4			; 进栈的就一个参数，ecx,edx不算</span><br></pre></td></tr></table></figure>
 </code></pre>
 <ol start="4">
 <li><p><code>thiscall</code> (C++成员函数调用)，可内可外，一般的是内</p>
@@ -1165,12 +969,12 @@ JO   handle_overflow
 </li>
 </ol>
 <h2 id="五、栈与调用约定（概要）"><a href="#五、栈与调用约定（概要）" class="headerlink" title="五、栈与调用约定（概要）"></a>五、栈与调用约定（概要）</h2><h3 id="4-1-栈的基本特性"><a href="#4-1-栈的基本特性" class="headerlink" title="4.1 栈的基本特性"></a>4.1 栈的基本特性</h3><p>x86 架构中，栈默认向低地址方向生长：push 操作减小 ESP&#x2F;RSP(栈顶)，pop 操作增大 ESP&#x2F;RSP。</p>
-<h3 id="4-2-经典栈帧布局（带-EBP-的函数）"><a href="#4-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="4.2 经典栈帧布局（带 EBP 的函数）"></a>4.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm"><br>push ebp        ; 保存上一级栈帧基址<br>mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）<br>sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）<br>...             ; 函数体执行<br>mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）<br>pop ebp         ; 恢复上一级栈帧基址<br>ret             ; 函数返回<br></code></pre></td></tr></table></figure>
+<h3 id="4-2-经典栈帧布局（带-EBP-的函数）"><a href="#4-2-经典栈帧布局（带-EBP-的函数）" class="headerlink" title="4.2 经典栈帧布局（带 EBP 的函数）"></a>4.2 经典栈帧布局（带 EBP 的函数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">push ebp        ; 保存上一级栈帧基址</span><br><span class="line">mov ebp, esp    ; 建立当前栈帧基址（EBP = ESP）</span><br><span class="line">sub esp, &lt;localsize&gt;  ; 分配局部变量空间（localsize 为局部变量总大小）</span><br><span class="line">...             ; 函数体执行</span><br><span class="line">mov esp, ebp    ; 释放局部变量空间（恢复 ESP 到栈帧基址）</span><br><span class="line">pop ebp         ; 恢复上一级栈帧基址</span><br><span class="line">ret             ; 函数返回</span><br></pre></td></tr></table></figure>
 
 <p>这里说一下就是为什么栈的操作可以准确到确定的地址？</p>
 <p>这里又有两个寄存器来工作：<strong>段寄存器SS 和 寄存器 SP</strong></p>
 <p><strong>栈顶的段地址存放在SS中，偏移地址放在SP中，任意时刻，SS：SP指向栈顶元素，push和pop指令执行时CPU从SS和SP获取地址</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; 看一下下面的代码<br>mov ax,0H<br>mov ax,1000H	<br>mov ss,ax		;这里就是ax将获取的1000H给到段寄存器ss<br>mov sp,0010H	;这里是寄存器sp获取偏移地址<br>				;所以当前的栈顶地址为 ss:sp = 1010H<br>mov ax,001AH<br>mov bx,001BH	;给ax，bx赋值<br><br>push ax<br>push bx			;入栈，高地址先入栈<br>				;1010H	100FH	100EH	100DH	100CH<br>				;		00		1A		00		1B<br><br>sub ax,ax<br>sub bx,bx<br><br>pop bx<br>pop ax			;将值又返还给ax，bx<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; 看一下下面的代码</span><br><span class="line">mov ax,0H</span><br><span class="line">mov ax,1000H	</span><br><span class="line">mov ss,ax		;这里就是ax将获取的1000H给到段寄存器ss</span><br><span class="line">mov sp,0010H	;这里是寄存器sp获取偏移地址</span><br><span class="line">				;所以当前的栈顶地址为 ss:sp = 1010H</span><br><span class="line">mov ax,001AH</span><br><span class="line">mov bx,001BH	;给ax，bx赋值</span><br><span class="line"></span><br><span class="line">push ax</span><br><span class="line">push bx			;入栈，高地址先入栈</span><br><span class="line">				;1010H	100FH	100EH	100DH	100CH</span><br><span class="line">				;		00		1A		00		1B</span><br><span class="line"></span><br><span class="line">sub ax,ax</span><br><span class="line">sub bx,bx</span><br><span class="line"></span><br><span class="line">pop bx</span><br><span class="line">pop ax			;将值又返还给ax，bx</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1215,12 +1019,12 @@ JO   handle_overflow
 <h2 id="六、TEB、PEB和反调试"><a href="#六、TEB、PEB和反调试" class="headerlink" title="六、TEB、PEB和反调试"></a>六、TEB、PEB和反调试</h2><h3 id="5-2-TEB"><a href="#5-2-TEB" class="headerlink" title="5.2 TEB"></a>5.2 TEB</h3><p><code>TEB</code>（Thread Environment Block）是为每个线程分配的一个数据结构，用来存储线程的相关信息。每个线程都有一个独立的 TEB，它被用来存储多种信息，包括线程的本地存储、异常处理、TLS（线程局部存储）、栈指针等。每个线程都会通过 <code>fs:[0]</code> 获取指向其 TEB 的指针。</p>
 <p>在 Windows 操作系统中，<code>fs</code> 是一个<strong>段寄存器</strong>（Segment Register），它用于指向线程的<strong>线程环境块</strong>（TEB，Thread Environment Block）。<code>fs</code> 寄存器主要用于访问当前线程的局部存储区域，而不是全局数据。这使得线程能够高效地存储和访问其专有的信息，而不需要锁定整个进程的数据。</p>
 <p>在 32 位 Windows 操作系统中，<code>fs</code> 寄存器的默认值是指向当前线程的 TEB 的地址</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef struct _TEB &#123;<br>    <span class="hljs-type">NT_TIB</span> <span class="hljs-type">NtTib</span>;                          // +0x0000  <span class="hljs-type">TIB</span> (<span class="hljs-type">Thread</span> <span class="hljs-type">Information</span> <span class="hljs-type">Block</span>) 用于存储堆栈信息<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">EnvironmentPointer</span>;              // +0x001C  指向线程的环境块（通常为空）<br>    <span class="hljs-type">CLIENT_ID</span> <span class="hljs-type">ClientId</span>;                    // +0x0020  线程的 <span class="hljs-type">ClientId</span>（由线程 <span class="hljs-type">ID</span> 和进程 <span class="hljs-type">ID</span> 组成）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ActiveRpcHandle</span>;                 // +0x0028  当前线程的 <span class="hljs-type">RPC</span> 句柄<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ThreadLocalStoragePointer</span>;       // +0x002C  指向线程局部存储的指针<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">ProcessEnvironmentBlock</span>;         // +0x0030  指向进程环境块（<span class="hljs-type">PEB</span>）的指针<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">LastErrorValue</span>;                  // +0x0034  最后错误值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">CountOfOwnedCriticalSections</span>;    // +0x0038  当前线程拥有的临界区数量<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CsrClientThread</span>;                 // +0x003C  相关的 <span class="hljs-type">CsrClient</span> 线程<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">Win32ThreadInfo</span>;                 // +0x0040  线程信息<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">User32Reserved</span>[26];              // +0x0044  保留字段（26个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">UserReserved</span>[5];                 // +0x00AC  保留字段（5个 <span class="hljs-type">ULONG</span>）<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">WOW32Reserved</span>;                   // +0x00C0  32 位 <span class="hljs-type">Windows</span> 下的保留区域<br>    <span class="hljs-type">PVOID</span> <span class="hljs-type">CurrentTransactionHandle</span>;        // +0x00C4  当前事务的句柄<br>    // 其他字段...<br>&#125; <span class="hljs-type">TEB</span>;<br><br>typedef struct _CLIENT_ID &#123;<br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueProcess</span>;  // 进程<span class="hljs-type">ID</span><br>    <span class="hljs-type">HANDLE</span> <span class="hljs-type">UniqueThread</span>;   // 线程<span class="hljs-type">ID</span><br>&#125; <span class="hljs-type">CLIENT_ID</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _TEB &#123;</span><br><span class="line">    NT_TIB NtTib;                          // +0x0000  TIB (Thread Information Block) 用于存储堆栈信息</span><br><span class="line">    PVOID EnvironmentPointer;              // +0x001C  指向线程的环境块（通常为空）</span><br><span class="line">    CLIENT_ID ClientId;                    // +0x0020  线程的 ClientId（由线程 ID 和进程 ID 组成）</span><br><span class="line">    PVOID ActiveRpcHandle;                 // +0x0028  当前线程的 RPC 句柄</span><br><span class="line">    PVOID ThreadLocalStoragePointer;       // +0x002C  指向线程局部存储的指针</span><br><span class="line">    PVOID ProcessEnvironmentBlock;         // +0x0030  指向进程环境块（PEB）的指针</span><br><span class="line">    ULONG LastErrorValue;                  // +0x0034  最后错误值</span><br><span class="line">    ULONG CountOfOwnedCriticalSections;    // +0x0038  当前线程拥有的临界区数量</span><br><span class="line">    PVOID CsrClientThread;                 // +0x003C  相关的 CsrClient 线程</span><br><span class="line">    PVOID Win32ThreadInfo;                 // +0x0040  线程信息</span><br><span class="line">    ULONG User32Reserved[26];              // +0x0044  保留字段（26个 ULONG）</span><br><span class="line">    ULONG UserReserved[5];                 // +0x00AC  保留字段（5个 ULONG）</span><br><span class="line">    PVOID WOW32Reserved;                   // +0x00C0  32 位 Windows 下的保留区域</span><br><span class="line">    PVOID CurrentTransactionHandle;        // +0x00C4  当前事务的句柄</span><br><span class="line">    // 其他字段...</span><br><span class="line">&#125; TEB;</span><br><span class="line"></span><br><span class="line">typedef struct _CLIENT_ID &#123;</span><br><span class="line">    HANDLE UniqueProcess;  // 进程ID</span><br><span class="line">    HANDLE UniqueThread;   // 线程ID</span><br><span class="line">&#125; CLIENT_ID;</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="5-2-PEB"><a href="#5-2-PEB" class="headerlink" title="5.2 PEB"></a>5.2 PEB</h3><p><code>PEB</code>（Process Environment Block）是每个进程在 Windows 系统中都有的一个数据结构，包含了与进程有关的重要信息。Windows 内核将其保存在进程的虚拟地址空间中，通常位于进程的基址附近。<code>PEB</code> 结构在进程的生命周期中是唯一的。</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef struct _PEB &#123;<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">InheritedAddressSpace</span>;             // +0x000  是否继承地址空间<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">ReadImageFileExecOptions</span>;          // +0x001  读取映像文件执行选项<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">BeingDebugged</span>;                     // +0x002  是否正在调试<br>    <span class="hljs-type">UCHAR</span> <span class="hljs-type">Spare</span>;                             // +0x003  保留字段<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Mutant</span>;                            // +0x004  进程的 <span class="hljs-type">Mutant</span><br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageBaseAddress</span>;                  // +0x008  映像基地址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Ldr</span>;                               // +0x00C  加载器的地址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessParameters</span>;                 // +0x010  进程参数（指向 `<span class="hljs-type">RTL_USER_PROCESS_PARAMETERS</span>`）<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SubSystemData</span>;                     // +0x014  子系统数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessHeap</span>;                       // +0x018  进程堆<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebLock</span>;                       // +0x01C  快速 <span class="hljs-type">PEB</span> 锁<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebLockRoutine</span>;                // +0x020  快速 <span class="hljs-type">PEB</span> 锁例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FastPebUnlockRoutine</span>;              // +0x024  快速 <span class="hljs-type">PEB</span> 解锁例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">EnvironmentUpdateCount</span>;            // +0x028  环境更新计数<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">KernelCallbackTable</span>;               // +0x02C  内核回调表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SystemReserved</span>;                    // +0x030  系统保留区域<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">Spare2</span>;                            // +0x034  保留字段<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">FreeList</span>;                          // +0x038  空闲列表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionCounter</span>;               // +0x03C  <span class="hljs-type">TLS</span> 扩展计数器<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsBitmap</span>;                         // +0x040  <span class="hljs-type">TLS</span> 位图<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsBitmapBits</span>[2];                  // +0x044  <span class="hljs-type">TLS</span> 位图位<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ReadOnlySharedMemoryBase</span>;          // +0x04C  只读共享内存基址<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HotpatchInformation</span>;               // +0x050  热补丁信息<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ReadOnlyStaticServerData</span>;          // +0x054  只读静态服务器数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">AnsiCodePageData</span>;                  // +0x058  <span class="hljs-type">ANSI</span> 代码页数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OemCodePageData</span>;                   // +0x05C  <span class="hljs-type">OEM</span> 代码页数据<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">UnicodeCaseTableData</span>;              // +0x060  <span class="hljs-type">Unicode</span> 大小写转换表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NumberOfProcessors</span>;                // +0x064  处理器数量<br>    <br>    // 以下字段通常位于更高的内存偏移<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NtGlobalFlag</span>;                      // +0x068  <span class="hljs-type">NtGlobalFlag</span><br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">CriticalSectionTimeout</span>;            // +0x06C  临界区超时<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapSegmentReserve</span>;                // +0x070  堆段保留空间<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapSegmentCommit</span>;                 // +0x074  堆段提交空间<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapDeCommitTotalFreeThreshold</span>;    // +0x078  堆释放阈值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">HeapDeCommitFreeBlockThreshold</span>;    // +0x07C  堆释放块阈值<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">NumberOfHeaps</span>;                     // +0x080  堆的数量<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">MaximumNumberOfHeaps</span>;              // +0x084  最大堆数量<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessHeaps</span>;                      // +0x088  进程堆数组<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiSharedHandleTable</span>;              // +0x08C  <span class="hljs-type">GDI</span> 共享句柄表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ProcessStarterHelper</span>;              // +0x090  进程启动助手<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiDCAttributeList</span>;                // +0x094  <span class="hljs-type">GDI</span> <span class="hljs-type">DC</span> 属性列表<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">LoaderLock</span>;                        // +0x098  加载器锁<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSMajorVersion</span>;                    // +0x09C  操作系统主版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSMinorVersion</span>;                    // +0x0A0  操作系统次版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSBuildNumber</span>;                     // +0x0A4  操作系统构建号<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">OSPlatformId</span>;                      // +0x0A8  操作系统平台标识<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystem</span>;                    // +0x0AC  映像子系统标识<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystemMajorVersion</span>;        // +0x0B0  映像子系统主版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageSubsystemMinorVersion</span>;        // +0x0B4  映像子系统次版本<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">ImageProcessAffinityMask</span>;          // +0x0B8  映像进程亲和性掩码<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">GdiHandleBuffer</span>[34];               // +0x0BC  <span class="hljs-type">GDI</span> 句柄缓冲区<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">PostProcessInitRoutine</span>;            // +0x100  后处理初始化例程<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionBitmap</span>;                // +0x104  <span class="hljs-type">TLS</span> 扩展位图<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">TlsExpansionBitmapBits</span>[32];        // +0x108  <span class="hljs-type">TLS</span> 扩展位图的实际位<br>    <span class="hljs-type">ULONG</span> <span class="hljs-type">SessionId</span>;                         // +0x148  会话 <span class="hljs-type">ID</span><br>&#125; <span class="hljs-type">PEB</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _PEB &#123;</span><br><span class="line">    UCHAR InheritedAddressSpace;             // +0x000  是否继承地址空间</span><br><span class="line">    UCHAR ReadImageFileExecOptions;          // +0x001  读取映像文件执行选项</span><br><span class="line">    UCHAR BeingDebugged;                     // +0x002  是否正在调试</span><br><span class="line">    UCHAR Spare;                             // +0x003  保留字段</span><br><span class="line">    ULONG Mutant;                            // +0x004  进程的 Mutant</span><br><span class="line">    ULONG ImageBaseAddress;                  // +0x008  映像基地址</span><br><span class="line">    ULONG Ldr;                               // +0x00C  加载器的地址</span><br><span class="line">    ULONG ProcessParameters;                 // +0x010  进程参数（指向 `RTL_USER_PROCESS_PARAMETERS`）</span><br><span class="line">    ULONG SubSystemData;                     // +0x014  子系统数据</span><br><span class="line">    ULONG ProcessHeap;                       // +0x018  进程堆</span><br><span class="line">    ULONG FastPebLock;                       // +0x01C  快速 PEB 锁</span><br><span class="line">    ULONG FastPebLockRoutine;                // +0x020  快速 PEB 锁例程</span><br><span class="line">    ULONG FastPebUnlockRoutine;              // +0x024  快速 PEB 解锁例程</span><br><span class="line">    ULONG EnvironmentUpdateCount;            // +0x028  环境更新计数</span><br><span class="line">    ULONG KernelCallbackTable;               // +0x02C  内核回调表</span><br><span class="line">    ULONG SystemReserved;                    // +0x030  系统保留区域</span><br><span class="line">    ULONG Spare2;                            // +0x034  保留字段</span><br><span class="line">    ULONG FreeList;                          // +0x038  空闲列表</span><br><span class="line">    ULONG TlsExpansionCounter;               // +0x03C  TLS 扩展计数器</span><br><span class="line">    ULONG TlsBitmap;                         // +0x040  TLS 位图</span><br><span class="line">    ULONG TlsBitmapBits[2];                  // +0x044  TLS 位图位</span><br><span class="line">    ULONG ReadOnlySharedMemoryBase;          // +0x04C  只读共享内存基址</span><br><span class="line">    ULONG HotpatchInformation;               // +0x050  热补丁信息</span><br><span class="line">    ULONG ReadOnlyStaticServerData;          // +0x054  只读静态服务器数据</span><br><span class="line">    ULONG AnsiCodePageData;                  // +0x058  ANSI 代码页数据</span><br><span class="line">    ULONG OemCodePageData;                   // +0x05C  OEM 代码页数据</span><br><span class="line">    ULONG UnicodeCaseTableData;              // +0x060  Unicode 大小写转换表</span><br><span class="line">    ULONG NumberOfProcessors;                // +0x064  处理器数量</span><br><span class="line">    </span><br><span class="line">    // 以下字段通常位于更高的内存偏移</span><br><span class="line">    ULONG NtGlobalFlag;                      // +0x068  NtGlobalFlag</span><br><span class="line">    ULONG CriticalSectionTimeout;            // +0x06C  临界区超时</span><br><span class="line">    ULONG HeapSegmentReserve;                // +0x070  堆段保留空间</span><br><span class="line">    ULONG HeapSegmentCommit;                 // +0x074  堆段提交空间</span><br><span class="line">    ULONG HeapDeCommitTotalFreeThreshold;    // +0x078  堆释放阈值</span><br><span class="line">    ULONG HeapDeCommitFreeBlockThreshold;    // +0x07C  堆释放块阈值</span><br><span class="line">    ULONG NumberOfHeaps;                     // +0x080  堆的数量</span><br><span class="line">    ULONG MaximumNumberOfHeaps;              // +0x084  最大堆数量</span><br><span class="line">    ULONG ProcessHeaps;                      // +0x088  进程堆数组</span><br><span class="line">    ULONG GdiSharedHandleTable;              // +0x08C  GDI 共享句柄表</span><br><span class="line">    ULONG ProcessStarterHelper;              // +0x090  进程启动助手</span><br><span class="line">    ULONG GdiDCAttributeList;                // +0x094  GDI DC 属性列表</span><br><span class="line">    ULONG LoaderLock;                        // +0x098  加载器锁</span><br><span class="line">    ULONG OSMajorVersion;                    // +0x09C  操作系统主版本</span><br><span class="line">    ULONG OSMinorVersion;                    // +0x0A0  操作系统次版本</span><br><span class="line">    ULONG OSBuildNumber;                     // +0x0A4  操作系统构建号</span><br><span class="line">    ULONG OSPlatformId;                      // +0x0A8  操作系统平台标识</span><br><span class="line">    ULONG ImageSubsystem;                    // +0x0AC  映像子系统标识</span><br><span class="line">    ULONG ImageSubsystemMajorVersion;        // +0x0B0  映像子系统主版本</span><br><span class="line">    ULONG ImageSubsystemMinorVersion;        // +0x0B4  映像子系统次版本</span><br><span class="line">    ULONG ImageProcessAffinityMask;          // +0x0B8  映像进程亲和性掩码</span><br><span class="line">    ULONG GdiHandleBuffer[34];               // +0x0BC  GDI 句柄缓冲区</span><br><span class="line">    ULONG PostProcessInitRoutine;            // +0x100  后处理初始化例程</span><br><span class="line">    ULONG TlsExpansionBitmap;                // +0x104  TLS 扩展位图</span><br><span class="line">    ULONG TlsExpansionBitmapBits[32];        // +0x108  TLS 扩展位图的实际位</span><br><span class="line">    ULONG SessionId;                         // +0x148  会话 ID</span><br><span class="line">&#125; PEB;</span><br></pre></td></tr></table></figure>
 
 <p>这些是<code>PEB</code>的封装，你可以在<code>ob或xdbg</code>查看它，或有关进程的软件等来查看</p>
 <p>常用的就是<code>0x2,0x68</code>是关于是否调试，值为零显示没有调试，否则为调试</p>
@@ -1232,416 +1036,1025 @@ JO   handle_overflow
 <p>由<code>asm</code> -&gt; <code>exe</code> 就是进行程序的生成</p>
 <p>比如一个C文件  —-&gt; 编译  —–&gt; obj   —–&gt; 链接器   ——&gt; 可执行文件exe</p>
 <p>在Linux中编译器产生的文件时 o</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:codesg<br>codesg segment<br>		mov ax,0123H<br>		mov bx,0456H<br>		add ax,bx<br>		add ax,ax<br>		<br>		mov ax,4c00H ;这两句是程序返回，由CPU执行<br>		int 21H<br>		<br>codesg ends<br>end<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">		mov ax,0123H</span><br><span class="line">		mov bx,0456H</span><br><span class="line">		add ax,bx</span><br><span class="line">		add ax,ax</span><br><span class="line">		</span><br><span class="line">		mov ax,4c00H ;这两句是程序返回，由CPU执行</span><br><span class="line">		int 21H</span><br><span class="line">		</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
 <p>一段简单的程序，观察一下便会发现，从上面的讲述中源程序包括<strong>汇编代码和伪指令</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs assembly">XXX segment<br>	;<br>	;<br>	;<br>XXX ends<br>	<br>; 第一种伪指令 segment和ends，这是在写可被编译器编译的汇编代码时用到的，用于定义一个段，segment用于说明一个段的开始 ends用于说明一个段的结束，前面的XXX是段名<br><br>end<br>;是一个汇编程序结束标记，编译器在编译的时候碰到end就停止编译，上面ends是混写的end segment<br><br>assume<br><br>;这条伪指令代表‘假设’，它假设某一段寄存器和程序中的某一个具体的段相联系<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">XXX segment</span><br><span class="line">	;</span><br><span class="line">	;</span><br><span class="line">	;</span><br><span class="line">XXX ends</span><br><span class="line">	</span><br><span class="line">; 第一种伪指令 segment和ends，这是在写可被编译器编译的汇编代码时用到的，用于定义一个段，segment用于说明一个段的开始 ends用于说明一个段的结束，前面的XXX是段名</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line">;是一个汇编程序结束标记，编译器在编译的时候碰到end就停止编译，上面ends是混写的end segment</span><br><span class="line"></span><br><span class="line">assume</span><br><span class="line"></span><br><span class="line">;这条伪指令代表‘假设’，它假设某一段寄存器和程序中的某一个具体的段相联系</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
+</article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%B1%87%E7%BC%96/" class="category-chain-item">汇编</a>
-  
-  
 
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E8%AF%AD%E8%A8%80/" class="print-no-link">#语言</a>
-      
-    </div>
-  
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/03/15/09_%E6%B7%B7%E6%B7%86/">混淆</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/03/08/06_Python/">Python</a></div></section></div>
 
-              
-  
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>x86/x86-64汇编</div>
-      <div>http://run521520.github.io/2026/03/08/08_x86_x86-64 汇编/</div>
-    </div>
-    <div class="license-meta">
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body utterances'>
       
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>youduck7</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2026年3月8日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-cc-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="utterances" repo="run521520/run521520.github.io" issue-term="pathname" theme="preferred-color-scheme"></div>
+
+    </section>
   </div>
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2026/03/15/09_%E6%B7%B7%E6%B7%86/" title="混淆">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">混淆</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2026/03/08/06_Python/" title="Python">
-                        <span class="hidden-mobile">Python</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">youduck7</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<div style="margin-top:10px;text-align:center;"><span id="busuanzi_container_site_pv" style="display:inline-block;margin:0 10px;">本站总访问量 <span id="busuanzi_value_site_pv" style="color:#00d2ff;font-weight:bold;">-</span> 次</span><span id="busuanzi_container_site_uv" style="display:inline-block;margin:0 10px;">本站访客数 <span id="busuanzi_value_site_uv" style="color:#00d2ff;font-weight:bold;">-</span> 人</span></div></div></footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
 
-            
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#x86-x86-64%E6%B1%87%E7%BC%96"><span class="toc-text">x86&#x2F;x86-64汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-text">一、寄存器基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AF%84%E5%AD%98%E5%99%A8%E4%BD%8D%E5%AE%BD%E4%B8%8E%E6%9E%B6%E6%9E%84%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="toc-text">1.1 寄存器位宽与架构对应关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%8832%E4%BD%8D-64%E4%BD%8D%EF%BC%89%E5%8F%8A%E6%A0%B8%E5%BF%83%E7%94%A8%E9%80%94"><span class="toc-text">1.2 通用寄存器（32位&#x2F;64位）及核心用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E4%B8%8E%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89"><span class="toc-text">1.3 指令指针与标志寄存器（特殊寄存器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">1.4 段寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">1.5 标志寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-IF%EF%BC%88Interrupt-Flag%EF%BC%8C%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%EF%BC%89"><span class="toc-text">7. IF（Interrupt Flag，中断标志）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-TF%EF%BC%88Trap-Flag%EF%BC%8C%E9%99%B7%E9%98%B1%E6%A0%87%E5%BF%97%EF%BC%89"><span class="toc-text">8. TF（Trap Flag，陷阱标志）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-DF%EF%BC%88Direction-Flag%EF%BC%8C%E6%96%B9%E5%90%91%E6%A0%87%E5%BF%97%EF%BC%89"><span class="toc-text">9. DF（Direction Flag，方向标志）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%AF%B4%E6%98%8E"><span class="toc-text">关键说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AF%AD%E6%B3%95"><span class="toc-text">二、汇编程序结构与语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%A8%8B%E5%BA%8F%E6%AE%B5-%E8%8A%82%E5%88%92%E5%88%86"><span class="toc-text">2.1 程序段&#x2F;节划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Intel-%E4%B8%8E-AT-T-%E8%AF%AD%E6%B3%95%E5%B7%AE%E5%BC%82"><span class="toc-text">2.2 Intel 与 AT&amp;T 语法差异</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E6%91%98%E8%A6%81"><span class="toc-text">三、常用汇编指令摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="toc-text">3.1 数据传送指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%A0%88%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="toc-text">3.2 栈操作指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%B0%83%E7%94%A8%E4%B8%8E%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="toc-text">3.3 调用与返回指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%AF%94%E8%BE%83%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4"><span class="toc-text">3.4 比较与测试指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-text">3.5 控制转移指令（常用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E7%AE%97%E6%95%B0%E6%8C%87%E4%BB%A4"><span class="toc-text">3.6 算数指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%98%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="toc-text">乘法指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="toc-text">add加法指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sub%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="toc-text">sub减法指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E3%80%81%E8%87%AA%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">自增、自减运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%9D%97%E5%86%85%E5%AD%98%E6%8C%87%E4%BB%A4"><span class="toc-text">3.7 字符串与块内存指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4"><span class="toc-text">核心字符串指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rep-%E7%B3%BB%E5%88%97%E5%89%8D%E7%BC%80%EF%BC%88%E9%87%8D%E5%A4%8D%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="toc-text">rep 系列前缀（重复控制）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%AE%9E%E7%8E%B0-memcpy%EF%BC%8832%E4%BD%8D%EF%BC%89"><span class="toc-text">示例：实现 memcpy（32位）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-BX-%E5%92%8Cloop%E6%8C%87%E4%BB%A4"><span class="toc-text">3.8 [BX]和loop指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BX"><span class="toc-text">[BX]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loop"><span class="toc-text">loop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-%E4%BD%8D%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="toc-text">3.9 位操作指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#and%E5%92%8Cor-%E6%8C%89%E4%BD%8D%E4%B8%8E%E5%92%8C%E6%8C%89%E4%BD%8D%E6%88%96"><span class="toc-text">and和or 按位与和按位或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xor-%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96"><span class="toc-text">xor 按位异或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#not-%E6%8C%89%E4%BD%8D%E5%8F%96%E5%8F%8D"><span class="toc-text">not 按位取反</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shl%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%B7%A6%E7%A7%BB"><span class="toc-text">shl无符号左移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shr%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="toc-text">shr无符号右移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sal%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%B7%A6%E7%A7%BB"><span class="toc-text">sal有符号左移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rol-%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="toc-text">rol 有符号右移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rol-%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB"><span class="toc-text">rol 循环左移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ror%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB"><span class="toc-text">ror循环右移</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-10-%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="toc-text">3.10 转移指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-11dup-%E6%95%B0%E7%BB%84"><span class="toc-text">3. 11dup 数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-12-FPU"><span class="toc-text">3.12 FPU</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%87%BD%E6%95%B0"><span class="toc-text">四、函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%A0%88%E4%B8%8E%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A%EF%BC%88%E6%A6%82%E8%A6%81%EF%BC%89"><span class="toc-text">五、栈与调用约定（概要）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="toc-text">4.1 栈的基本特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%BB%8F%E5%85%B8%E6%A0%88%E5%B8%A7%E5%B8%83%E5%B1%80%EF%BC%88%E5%B8%A6-EBP-%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">4.2 经典栈帧布局（带 EBP 的函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-x86-64-%E5%B8%B8%E8%A7%81%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="toc-text">4.3 x86-64 常见调用约定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81TEB%E3%80%81PEB%E5%92%8C%E5%8F%8D%E8%B0%83%E8%AF%95"><span class="toc-text">六、TEB、PEB和反调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-TEB"><span class="toc-text">5.2 TEB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-PEB"><span class="toc-text">5.2 PEB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F"><span class="toc-text">写一个程序</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"http://run521520.github.io/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
   
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"WCiAJOcmEvtC8mCKY347mmNi-MdYXbMMI","appKey":"Ds56gTbsyMSf1AJROtxNZAai","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://wciajocm.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
           }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
 
-    </article>
-  
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
 
-
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
         return;
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
         }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
         }
       }
-    });
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
   });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<!-- optional -->
 
-  <script>Fluid.plugins.codeWidget();</script>
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initUtterances() {
+      const el = document.querySelector("#comments #utterances");
+      if (!el) return;
+      
+      function load_utterances() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_utterances, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.utterances = initUtterances;
+    
+    // Initialize on page load
+    initUtterances();
+  })();
+</script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
     };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  };
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
+  utils.initPlugin(initServices, 'services');
 </script>
 
-
-  
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
   });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
 </script>
 
 
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-  
-<script src="/js/acg.js"></script>
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+<!-- inject -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

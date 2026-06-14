@@ -1,0 +1,1303 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 8.0.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>通过Frida-Labs学习Frida - youduck7</title>
+
+  
+    <meta name="description" content="环境是： 12345Python 3.9.7frida 15.2.2MuMu模拟器  Frida01用模拟器打开该程序，没有什么线索，用Jadx打开来看一下，这里： 快速找到主活动，然后看一下代码： 123456String string &#x3D; editText.getText().toString();if (TextUtils.isDigitsOnly(string)) &#123;    Ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过Frida-Labs学习Frida">
+<meta property="og:url" content="http://run521520.github.io/2026/06/14/10_Frida-Labs-WP/">
+<meta property="og:site_name" content="youduck7">
+<meta property="og:description" content="环境是： 12345Python 3.9.7frida 15.2.2MuMu模拟器  Frida01用模拟器打开该程序，没有什么线索，用Jadx打开来看一下，这里： 快速找到主活动，然后看一下代码： 123456String string &#x3D; editText.getText().toString();if (TextUtils.isDigitsOnly(string)) &#123;    Ma">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/001.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/002.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/003.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/004.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/005.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/006.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/007.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/008.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/009.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/010.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/011.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/012.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/013.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/014.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/015.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/016.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/017.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/018.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/019.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/020.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/021.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/026.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/024.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/023.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/022.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/025.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/027.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/028.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/029.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/030.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/031.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/032.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/033.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/034.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/035.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/036.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/037.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/038.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/039.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/040.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/041.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/042.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/043.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/044.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/045.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/046.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/047.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/049.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/048.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/050.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/051.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/052.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/053.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/054.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/055.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/056.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/057.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/058.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/059.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/060.png">
+<meta property="og:image" content="http://run521520.github.io/images/posts/frida-labs/061.png">
+<meta property="article:published_time" content="2026-06-14T10:30:00.000Z">
+<meta property="article:modified_time" content="2026-06-14T10:25:22.828Z">
+<meta property="article:author" content="youduck7">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Frida">
+<meta property="article:tag" content="安卓逆向">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://run521520.github.io/images/posts/frida-labs/001.png">
+  
+  
+  
+  <meta name="keywords" content="CTF,Frida,安卓逆向">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"youduck7","sameAs":[]},"dateCreated":"2026-06-14T18:30:00+08:00","dateModified":"2026-06-14T18:25:22+08:00","datePublished":"2026-06-14T18:30:00+08:00","description":"","headline":"通过Frida-Labs学习Frida","mainEntityOfPage":{"@type":"WebPage","@id":"http://run521520.github.io/2026/06/14/10_Frida-Labs-WP/"},"publisher":{"@type":"Organization","name":"youduck7","sameAs":[]},"url":"http://run521520.github.io/2026/06/14/10_Frida-Labs-WP/","keywords":"CTF, Frida, 安卓逆向","thumbnailUrl":"/images/posts/frida-labs/cover.webp","image":1}</script>
+  
+</head>
+<body><div id="l_cover"></div><div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/img/img12.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">youduck7</div><div class="sub normal cap">CTF玩家</div><div class="sub hover cap" style="opacity:0"> 逆向工程 | 安全研究</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2026/06/14/10_Frida-Labs-WP/"><span class="title">通过Frida-Labs学习Frida</span></a><a class="item title" href="/2026/06/03/%E5%BE%A1%E7%BD%91%E6%9D%AF2026/"><span class="title">2026御网杯</span></a><a class="item title" href="/2026/04/02/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86/"><span class="title">常见加密方式</span></a><a class="item title" href="/2026/03/08/07_C-C/"><span class="title">C/C++</span></a><a class="item title" href="/2026/03/08/08_x86_x86-64%20%E6%B1%87%E7%BC%96/"><span class="title">x86/x86-64汇编</span></a><a class="item title" href="/2026/03/15/03_VM/"><span class="title">VM</span></a><a class="item title" href="/2026/03/15/04_ida%E8%84%9A%E6%9C%AC/"><span class="title">ida脚本</span></a><a class="item title" href="/2026/03/25/2024%E5%BE%A1%E7%BD%91%E6%9D%AF/"><span class="title">2024御网杯</span></a><a class="item title" href="/2026/03/23/11-MYSQL/"><span class="title">MYSQL</span></a><a class="item title" href="/2025/10/04/01_ida/"><span class="title">ida使用文档</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E9%80%86%E5%90%91/">逆向</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2026-06-14T10:30:00.000Z">2026-06-14</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-06-14T10:25:22.828Z">2026-06-14</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>通过Frida-Labs学习Frida</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>环境是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Python 3.9.7</span><br><span class="line">frida 15.2.2</span><br><span class="line">MuMu模拟器</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Frida01"><a href="#Frida01" class="headerlink" title="Frida01"></a>Frida01</h1><p>用模拟器打开该程序，没有什么线索，用Jadx打开来看一下，这里：<br><img src="/images/posts/frida-labs/001.png"></p>
+<p>快速找到主活动，然后看一下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">string</span> <span class="operator">=</span> editText.getText().toString();</span><br><span class="line"><span class="keyword">if</span> (TextUtils.isDigitsOnly(string)) &#123;</span><br><span class="line">    MainActivity.<span class="built_in">this</span>.check(i, Integer.parseInt(string));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Toast.makeText(MainActivity.<span class="built_in">this</span>.getApplicationContext(), <span class="string">&quot;Enter a valid number !!&quot;</span>, <span class="number">1</span>).show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个判断是判断输入的是不是<strong>数字</strong>，不是的话直接报错。<br>第二个是将输入的内容给到<strong>check</strong>函数，这里还有一个i，这个i是一个随机数</p>
+<p><strong>看一下check函数</strong><br><img src="/images/posts/frida-labs/002.png"><br>我也不知道为什么是一个注释模样的，但是换到<strong>smali模式</strong><br><img src="/images/posts/frida-labs/003.png"></p>
+<p>所以这个注释对应的就是smali的代码：</p>
+<p>分析一下就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void check(int r4, int r5) &#123;</span><br><span class="line">            r3 = this;</span><br><span class="line">            int r4 = r4 * 2</span><br><span class="line">            int r4 = r4 + 4</span><br><span class="line">            r0 = 1</span><br><span class="line">            if (r4 != r5) goto L53</span><br><span class="line">            android.content.Context r4 = r3.getApplicationContext()</span><br><span class="line">            java.lang.String r5 = &quot;Yey you guessed it right&quot;</span><br><span class="line">            android.widget.Toast r4 = android.widget.Toast.makeText(r4, r5, r0)</span><br><span class="line">            r4.show()</span><br><span class="line">            java.lang.StringBuilder r4 = new java.lang.StringBuilder</span><br><span class="line">            r4.&lt;init&gt;()</span><br><span class="line">            r5 = 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你输入的数 &#x3D;&#x3D; 2 * i + 4<br>用frida来hook这个<strong>check</strong>函数，来获取调用<strong>check</strong>函数的参数计算一下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">MainActivityClass</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x1.MainActivity&quot;</span>);</span><br><span class="line">        <span class="title class_">MainActivityClass</span>.<span class="property">check</span>.<span class="property">implementation</span> = <span class="keyword">function</span> (<span class="params">a, b</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;check called with arguments: &quot;</span> + a + <span class="string">&quot;, &quot;</span> + b)</span><br><span class="line">            <span class="keyword">var</span> result = <span class="variable language_">this</span>.<span class="title function_">check</span>(a, b)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/posts/frida-labs/004.png"><br>可以看到这个值是 84 ，那计算一下 84 * 2 + 4 &#x3D; 172<br>输入：<strong>172</strong><br><img src="/images/posts/frida-labs/005.png"></p>
+<p>正确了，你也可以看一下这个<strong>FRIDA{BABY_HOOK_0x1}</strong> 是怎么来的，这里我就不分析了，<br>当然你也可以用MT管理器来修改那个跳转，那样子也行<br><img src="/images/posts/frida-labs/006.png"></p>
+<p>把 <strong>if-ne 换成 if-eq</strong><br><img src="/images/posts/frida-labs/007.png"></p>
+<p>看一下也是可以的，继续</p>
+<h1 id="Frida02"><a href="#Frida02" class="headerlink" title="Frida02"></a>Frida02</h1><p><img src="/images/posts/frida-labs/008.png"></p>
+<p>直接一个 <strong>HOOK ME！</strong><br>用jadx打开看一下：<br><img src="/images/posts/frida-labs/009.png"></p>
+<p>这里有一个函数是 <code>get_flag</code> 但是不能被动触发，这里需要用到<code>Java.choose</code>来主动触发，找到这个类的实例然后主动调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">MainActivityClass</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x2.MainActivity&quot;</span>);</span><br><span class="line">        <span class="title class_">Java</span>.<span class="title function_">choose</span>(<span class="string">&quot;com.ad2001.frida0x2.MainActivity&quot;</span>, &#123;</span><br><span class="line">            <span class="attr">onMatch</span>: <span class="keyword">function</span> (<span class="params">instance</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;找到实例了&quot;</span>);</span><br><span class="line">                instance.<span class="title function_">get_flag</span>(<span class="number">4919</span>)</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onComplete</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/010.png"></p>
+<p><img src="/images/posts/frida-labs/011.png"></p>
+<p>当然，你也可以分析一下算法，就是这串字符串<strong>q7mBQegjhpfIAr0OgfLvH0t&#x2F;D0Xi0ieG0vd+8ZVW+b4&#x3D;</strong> 经过<strong>base64解密和AES解密</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">encrypted_base64 = <span class="string">&quot;q7mBQegjhpfIAr0OgfLvH0t/D0Xi0ieG0vd+8ZVW+b4=&quot;</span></span><br><span class="line">key = <span class="string">b&quot;HILLBILLWILLBINN&quot;</span></span><br><span class="line">iv = <span class="string">b&quot;\x00&quot;</span> * <span class="number">16</span></span><br><span class="line">encrypted_data = base64.b64decode(encrypted_base64)</span><br><span class="line">cipher = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">decrypted_bytes = cipher.decrypt(encrypted_data)</span><br><span class="line"></span><br><span class="line">pad_len = decrypted_bytes[-<span class="number">1</span>]</span><br><span class="line">decrypted_bytes = decrypted_bytes[:-pad_len]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;解密结果: <span class="subst">&#123;decrypted_bytes.decode(<span class="string">&#x27;utf-8&#x27;</span>)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/012.png"></p>
+<h1 id="Frida03"><a href="#Frida03" class="headerlink" title="Frida03"></a>Frida03</h1><p><img src="/images/posts/frida-labs/013.png"><br>没什么变化，老样子看一下这个代码：<br><img src="/images/posts/frida-labs/014.png"></p>
+<p>这里第一个判断是 <code>Checker.code == 512</code><br><img src="/images/posts/frida-labs/015.png"><br>所以这里我们需要将 这个 <strong>code</strong>的值改一下，应为这个是<strong>static</strong>所以直接改不用获取实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Checker</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x3.Checker&quot;</span>)</span><br><span class="line">        <span class="title class_">Checker</span>.<span class="property">code</span>.<span class="property">value</span> = <span class="number">512</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Checker.code 已设为:&quot;</span>, <span class="title class_">Checker</span>.<span class="property">code</span>.<span class="property">value</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里加一个<code>function clear() { console.log(&quot;\x1B[2J\x1B[3J\x1B[H&quot;); }</code> 可以在右边的终端中调用该函数<code>clear()</code>这个函数的作用类似于<code>cls或clear</code>清空终端的内容</p>
+<p><img src="/images/posts/frida-labs/016.png"><br><img src="/images/posts/frida-labs/017.png"></p>
+<p>这里的算法什么的，我就不分析了</p>
+<h1 id="Frida04"><a href="#Frida04" class="headerlink" title="Frida04"></a>Frida04</h1><p><img src="/images/posts/frida-labs/018.png"></p>
+<p><img src="/images/posts/frida-labs/019.png"></p>
+<p>在Jadx中主活动也没有找到有用的线索，所以这里用字符串搜索一下，但是也没什么线索，这里就只剩下，一个一个找把，发现<br><img src="/images/posts/frida-labs/020.png"></p>
+<p>这里要是用<code>Java.choose</code>的话，在堆中是找不到实例，直接调用的，因为这个类没有用过，所以堆中就不会有，那我们可以自己创建一个实例，这里用<code>$new()</code><br><img src="/images/posts/frida-labs/021.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Check</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x4.Check&quot;</span>)</span><br><span class="line">        <span class="keyword">var</span> res = <span class="title class_">Check</span>.$new().<span class="title function_">get_flag</span>(<span class="number">1337</span>)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;FLAG: &quot;</span> + res)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Frida05"><a href="#Frida05" class="headerlink" title="Frida05"></a>Frida05</h1><p><img src="/images/posts/frida-labs/026.png"></p>
+<p>用Jadx打开：</p>
+<p><img src="/images/posts/frida-labs/024.png"></p>
+<p>发现这个<strong>flag</strong>函数，没有被调用，这里有两种方法，一种是从堆用找到实例，另一种就是间接获取实例用<strong>onCreate</strong>这个函数，但是这个要用<strong>spawn</strong>才能<strong>HOOK</strong>的住<strong>onCreate</strong>函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="title class_">Java</span>.<span class="title function_">choose</span>(<span class="string">&quot;com.ad2001.frida0x5.MainActivity&quot;</span>, &#123;</span><br><span class="line">            <span class="attr">onMatch</span>: <span class="keyword">function</span> (<span class="params">instance</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;找到 MainActivity 实例&quot;</span>)</span><br><span class="line">                instance.<span class="title function_">flag</span>(<span class="number">1337</span>)</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onComplete</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/023.png"></p>
+<p><img src="/images/posts/frida-labs/022.png"><br><img src="/images/posts/frida-labs/025.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Main</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x5.MainActivity&quot;</span>)</span><br><span class="line">        <span class="title class_">Main</span>.<span class="property">onCreate</span>.<span class="property">implementation</span> = <span class="keyword">function</span> (<span class="params">savedInstanceState</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">onCreate</span>(savedInstanceState)  <span class="comment">// 先正常执行 onCreate</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">flag</span>(<span class="number">1337</span>)                     <span class="comment">// this 就是 MainActivity 实例</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;在 onCreate 里调用了 flag(1337)&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Frida06"><a href="#Frida06" class="headerlink" title="Frida06"></a>Frida06</h1><p><img src="/images/posts/frida-labs/027.png"></p>
+<p>用Jadx打开，看一下代码：</p>
+<p><img src="/images/posts/frida-labs/028.png"></p>
+<p>这次有点不一样了，可以看一下这个<strong>get_flag</strong>函数，我们可以通过在堆中找到实例，或者间接获取这个实例，但是这个参数是一个类<strong>Checker A</strong><br><img src="/images/posts/frida-labs/029.png"></p>
+<p>可以看一下这个类<strong>Checker</strong>是个普通的类，可以用<code>$new()</code> 来创造一个实例，然后调用<strong>get_flag</strong>函数的时候参数写入自己创建的实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Main</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x6.MainActivity&quot;</span>)</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Checker</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x6.Checker&quot;</span>).$new()</span><br><span class="line">        <span class="title class_">Checker</span>.<span class="property">num1</span>.<span class="property">value</span> = <span class="number">1234</span></span><br><span class="line">        <span class="title class_">Checker</span>.<span class="property">num2</span>.<span class="property">value</span> = <span class="number">4321</span></span><br><span class="line">        <span class="title class_">Java</span>.<span class="title function_">choose</span>(<span class="string">&quot;com.ad2001.frida0x6.MainActivity&quot;</span>, &#123;</span><br><span class="line">            <span class="attr">onMatch</span>: <span class="keyword">function</span> (<span class="params">instance</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;调用 get_flag 函数&quot;</span>)</span><br><span class="line">                instance.<span class="title function_">get_flag</span>(<span class="title class_">Checker</span>)</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onComplete</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/030.png"></p>
+<p><img src="/images/posts/frida-labs/031.png"></p>
+<h1 id="Frida07"><a href="#Frida07" class="headerlink" title="Frida07"></a>Frida07</h1><p><img src="/images/posts/frida-labs/032.png"></p>
+<p>用Jadx打开：<br><img src="/images/posts/frida-labs/033.png"></p>
+<p>在<strong>onCreate</strong>函数中创建一个<strong>Checker</strong>对象，然后传入<strong>flag</strong>函数中，但是这个对象不符合，需要自己创建一个<strong>Checker</strong>对象，然后替换到原本的<strong>Checker</strong>对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">MainClass</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x7.MainActivity&quot;</span>)</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Checker</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.ad2001.frida0x7.Checker&quot;</span>).$new(<span class="number">1234</span>, <span class="number">4321</span>)</span><br><span class="line"></span><br><span class="line">        <span class="title class_">MainClass</span>.<span class="property">flag</span>.<span class="property">implementation</span> = <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;调用 flag 函数，参数是 Checker 对象&quot;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">flag</span>(<span class="title class_">Checker</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/034.png"></p>
+<p><img src="/images/posts/frida-labs/035.png"></p>
+<h1 id="Frida08"><a href="#Frida08" class="headerlink" title="Frida08"></a>Frida08</h1><p><img src="/images/posts/frida-labs/036.png"><br>用Jadx打开这个：</p>
+<p><img src="/images/posts/frida-labs/037.png"></p>
+<p>发现将输入的值给到<strong>native</strong>层函数，然后返回值来判断对错，用IDA打开frida0x8.so，找到对应的函数，这里再在JNI中 :<br>				C&#x2F;C++    ———– JNI ————-JAVA<br>java调用c&#x2F;c++就是native层是通过中间的 JNI 来实现的，不用管JNI是什么，要知道的是native层的函数名字映射到JAVA层，可能不一样，通常有两种方式：</p>
+<ol>
+<li>第一种就是 包名_类名_函数名</li>
+<li>通过注册，这里是在一个函数内实现的<br><img src="/images/posts/frida-labs/038.png"></li>
+</ol>
+<p>这里是第一种方式<br>这里要用的就是<strong>HOOK</strong> Native层的函数</p>
+<p>首先要知道用的是那个so文件，然后在这个so文件中找到对应的函数地址指针</p>
+<p>这里用 <code>Module.findExportByName(so文件,函数名)</code> 这里会返回一个值就是该函数的指针地址</p>
+<p>然后用<code>Interceptor.attach(函数指针,{自定义操作})</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> libc = <span class="string">&quot;libfrida0x8.so&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> funcName = <span class="string">&quot;Java_com_ad2001_frida0x8_MainActivity_cmpstr&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> func = <span class="title class_">Module</span>.<span class="title function_">findExportByName</span>(libc,funcName)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(func)&#123;</span><br><span class="line">	<span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(func,&#123;</span><br><span class="line">		<span class="attr">onEnter</span>:<span class="keyword">function</span>(<span class="params">args</span>)&#123;</span><br><span class="line">			<span class="comment">//....</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">onLeave</span>:<span class="keyword">function</span>(<span class="params">retval</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>onEnter:function(args){}</code> 是执行目标函数前的操作<br>这里的<code>onLeave:function(retval){}</code> 是执行目标函数后的操作<br>这里的<strong>args和retval</strong>分别是函数的参数和返回值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onEnter:function(args)&#123;&#125;</span><br><span class="line">		|</span><br><span class="line">		|</span><br><span class="line">		|</span><br><span class="line">	目标函数执行</span><br><span class="line">		|</span><br><span class="line">		|</span><br><span class="line">		|</span><br><span class="line">onLeave:function(retval)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们把函数的返回值改为1，就可以了，但是测试一下会发现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;libfrida0x8.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> funcName = <span class="string">&quot;Java_com_ad2001_frida0x8_MainActivity_cmpstr&quot;</span></span><br><span class="line">        <span class="keyword">var</span> func = <span class="title class_">Module</span>.<span class="title function_">findExportByName</span>(libc, funcName)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(func) <span class="comment">// 0x71a720c908c0</span></span><br><span class="line">        <span class="keyword">if</span> (func) &#123;</span><br><span class="line">            <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(func, &#123;</span><br><span class="line">                <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123;</span><br><span class="line">                    retval.<span class="title function_">replace</span>(<span class="number">0x1</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/039.png"><br>和想象中的不一样，没有正确的flag，再仔细看一下，这个程序在判断通过后，会打印你的输入，我们改变了通过，所以程序打印了我们的输入<br>在函数中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__android_log_print(<span class="number">3</span>, <span class="string">&quot;input &quot;</span>, &amp;unk_6B0, s1);</span><br><span class="line">__android_log_print(<span class="number">3</span>, <span class="string">&quot;Password&quot;</span>, &amp;unk_6B0, s2);</span><br></pre></td></tr></table></figure>
+<p>可以利用这个在模拟器日志上查看，但是这个明显是作者测试用的，在实际中没有，那怎么办<br>我们可以注意到<br><img src="/images/posts/frida-labs/040.png"></p>
+<p>这是一个比较的，将输入的值和目标值比较一下<br><img src="/images/posts/frida-labs/041.png"></p>
+<p>我们可以用frida在这里<strong>HOOK</strong>一下，偏移地址是<strong>0x9DD</strong><br>s1给到rdi，s2给到rsi，所以打印一下看看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;libfrida0x8.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> base = <span class="title class_">Module</span>.<span class="title function_">getBaseAddress</span>(libc)</span><br><span class="line">        <span class="keyword">var</span> strcmp_call = base.<span class="title function_">add</span>(<span class="number">0x9DD</span>)</span><br><span class="line">        <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(strcmp_call, &#123;</span><br><span class="line">            <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;s1(input)    = &quot;</span> + <span class="title class_">Memory</span>.<span class="title function_">readUtf8String</span>(<span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">rdi</span>))</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;s2(password) = &quot;</span> + <span class="title class_">Memory</span>.<span class="title function_">readUtf8String</span>(<span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">rsi</span>))</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;---&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/042.png"></p>
+<p>看一下，然后拿到这个<strong>FRIDA{NATIVE_LAND}去试一下</strong><br><img src="/images/posts/frida-labs/043.png"></p>
+<p>没问题了</p>
+<h1 id="Frida09"><a href="#Frida09" class="headerlink" title="Frida09"></a>Frida09</h1><p><img src="/images/posts/frida-labs/044.png"></p>
+<p>用Jadx打开看一下：<br><img src="/images/posts/frida-labs/045.png"></p>
+<p>要这个<strong>check_flag</strong>函数返回值是1337，但是这是一个native函数，所以用ida打开看一下：<br><img src="/images/posts/frida-labs/046.png"><br>返回值是1，这里修改成1337就没问题了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;liba0x9.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> funcName = <span class="string">&quot;Java_com_ad2001_a0x9_MainActivity_check_1flag&quot;</span></span><br><span class="line">        <span class="keyword">var</span> func = <span class="title class_">Module</span>.<span class="title function_">findExportByName</span>(libc, funcName)</span><br><span class="line">        <span class="keyword">if</span> (func) &#123;</span><br><span class="line">            <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(func, &#123;</span><br><span class="line">                <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123;</span><br><span class="line">                    retval.<span class="title function_">replace</span>(<span class="number">1337</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/posts/frida-labs/047.png"></p>
+<h1 id="Frida0A"><a href="#Frida0A" class="headerlink" title="Frida0A"></a>Frida0A</h1><p><img src="/images/posts/frida-labs/049.png"></p>
+<p><img src="/images/posts/frida-labs/048.png"></p>
+<p>没什么信息，其次就是这个<strong>Hello Hackers</strong>这个我在jadx和mt管理器上没搜到，所以可以猜一下，要不是混淆了，但是可能性不大，要不就在native层，去看一下：<br><img src="/images/posts/frida-labs/050.png"></p>
+<p><strong>Hello Hackers</strong> 在Native层</p>
+<p><img src="/images/posts/frida-labs/051.png"><br>看一下这个函数，参数和是 3 触发计算flag</p>
+<p>这里要用的是调用native层的函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;libfrida0xa.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> base = <span class="title class_">Module</span>.<span class="title function_">getBaseAddress</span>(libc)</span><br><span class="line">        <span class="comment">// 此时 RCX = 解密后的 flag 缓冲区</span></span><br><span class="line">        <span class="keyword">var</span> get_flag = base.<span class="title function_">add</span>(<span class="number">0x2076A</span>)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>()</span><br><span class="line">        <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(get_flag, &#123;</span><br><span class="line">            <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;flag = &quot;</span> + <span class="title class_">Memory</span>.<span class="title function_">readUtf8String</span>(<span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">rcx</span>))</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 主动调用 get_flag(1, 2)，1+2=3 满足条件触发解密</span></span><br><span class="line">        <span class="keyword">var</span> call_get_flag = <span class="keyword">new</span> <span class="title class_">NativeFunction</span>(base.<span class="title function_">add</span>(<span class="number">0x206B0</span>), <span class="string">&#x27;void&#x27;</span>, [<span class="string">&#x27;int&#x27;</span>, <span class="string">&#x27;int&#x27;</span>])</span><br><span class="line">        <span class="title function_">call_get_flag</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是<strong>hook</strong><code>__android_log_print</code> 这个函数，因为里面的第三个参数就是flag，寄存器是<strong>rcx</strong><br>然后就是调用该函数了<br><code>var call_get_flag = new NativeFunction(base.add(0x206B0), &#39;void&#39;, [&#39;int&#39;, &#39;int&#39;])</code><br>第一个参数是函数的地址，第二个是返回类型，第三个是参数的类型</p>
+<p><img src="/images/posts/frida-labs/052.png"></p>
+<h1 id="Frida0B"><a href="#Frida0B" class="headerlink" title="Frida0B"></a>Frida0B</h1><p><img src="/images/posts/frida-labs/053.png"><br>没什么信息，看ida：</p>
+<p><img src="/images/posts/frida-labs/054.png"></p>
+<p>但是看一下汇编：</p>
+<p><img src="/images/posts/frida-labs/055.png"></p>
+<p>看一下，这里是直接跳过代码到结束<br><img src="/images/posts/frida-labs/056.png"></p>
+<p>这里我们直接把比较的指令给<strong>nop</strong>再看一下<br><img src="/images/posts/frida-labs/057.png"></p>
+<p>没问题了，这里还是之前的方法，在<code>__android_log_print</code>hook，来打印这个flag，但是我在做的时候忘记一个问题了，我们目前看到的是手动<code>nop</code>跳转逻辑的，但是在app中并不是现在的逻辑，还是之前的逻辑，就是不会执行，直接跳到结束，所以在这里我们要修改<strong>Native</strong>层的字节码，来改变逻辑</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;libfrida0xb.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> base = <span class="title class_">Module</span>.<span class="title function_">getBaseAddress</span>(libc)</span><br><span class="line">        <span class="comment">// hook getFlag 函数入口确认调用</span></span><br><span class="line">        <span class="keyword">var</span> get_flag = base.<span class="title function_">add</span>(<span class="number">0x17181</span>)</span><br><span class="line">        <span class="keyword">var</span> get_flag_entry = base.<span class="title function_">add</span>(<span class="number">0x170B0</span>)</span><br><span class="line">        <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(get_flag, &#123;</span><br><span class="line">            <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;flag = &quot;</span> + <span class="title class_">Memory</span>.<span class="title function_">readUtf8String</span>(<span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">rcx</span>))</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">var</span> addr = <span class="title function_">ptr</span>(get_flag_entry)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">0x10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> tmp = <span class="title class_">Instruction</span>.<span class="title function_">parse</span>(addr)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(tmp.<span class="property">address</span> + <span class="string">&quot;:&quot;</span> + tmp)</span><br><span class="line">            addr = addr.<span class="title function_">add</span>(tmp.<span class="property">size</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/058.png"></p>
+<p>看一下有很多的<strong>nop</strong>是因为当前我们<strong>nop</strong>掉了那个比较，但是原来的没有，退出ida，恢复原样，重新运行脚本，看一下：<br><img src="/images/posts/frida-labs/059.png"></p>
+<p>这才是正常的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[2206123<span class="attr">SC</span>::<span class="attr">PID</span>::<span class="number">23883</span>]-&gt; <span class="title function_">main</span>()</span><br><span class="line"><span class="number">0x71a718d180b0</span>:push rbp</span><br><span class="line"><span class="number">0x71a718d180b1</span>:mov rbp, rsp</span><br><span class="line"><span class="number">0x71a718d180b4</span>:sub rsp, <span class="number">0x50</span></span><br><span class="line"><span class="number">0x71a718d180b8</span>:mov qword ptr [rbp - <span class="number">0x18</span>], rdi</span><br><span class="line"><span class="number">0x71a718d180bc</span>:mov qword ptr [rbp - <span class="number">0x20</span>], rsi</span><br><span class="line"><span class="number">0x71a718d180c0</span>:mov dword ptr [rbp - <span class="number">0x24</span>], <span class="number">0xdeadbeef</span>    看一下这个</span><br><span class="line"><span class="number">0x71a718d180c7</span>:cmp dword ptr [rbp - <span class="number">0x24</span>], <span class="number">0x539</span>         要不改这两个值的大小</span><br><span class="line"><span class="number">0x71a718d180ce</span>:jne <span class="number">0x71a718d181a6</span>                        要不把这个jne改为je</span><br><span class="line"><span class="number">0x71a718d180d4</span>:mov qword ptr [rbp - <span class="number">0x30</span>], <span class="number">0</span></span><br><span class="line"><span class="number">0x71a718d180dc</span>:lea rax, [rip - <span class="number">0x9eb3</span>]</span><br><span class="line"><span class="number">0x71a718d180e3</span>:mov qword ptr [rbp - <span class="number">0x38</span>], rax</span><br><span class="line"><span class="number">0x71a718d180e7</span>:mov rax, qword ptr [rbp - <span class="number">0x38</span>]</span><br><span class="line"><span class="number">0x71a718d180eb</span>:mov qword ptr [rbp - <span class="number">8</span>], rax</span><br><span class="line"><span class="number">0x71a718d180ef</span>:mov qword ptr [rbp - <span class="number">0x10</span>], <span class="number">0xffffffffffffffff</span></span><br><span class="line"><span class="number">0x71a718d180f7</span>:mov rdi, qword ptr [rbp - <span class="number">8</span>]</span><br><span class="line"><span class="number">0x71a718d180fb</span>:mov rsi, qword ptr [rbp - <span class="number">0x10</span>]</span><br><span class="line"><span class="number">0x71a718d180ff</span>:call <span class="number">0x71a718d32f00</span></span><br><span class="line"><span class="number">0x71a718d18104</span>:mov qword ptr [rbp - <span class="number">0x40</span>], rax</span><br><span class="line"><span class="number">0x71a718d18108</span>:mov rdi, qword ptr [rbp - <span class="number">0x40</span>]</span><br><span class="line"><span class="number">0x71a718d1810c</span>:add rdi, <span class="number">1</span></span><br><span class="line"><span class="number">0x71a718d18110</span>:call <span class="number">0x71a718d32f10</span></span><br><span class="line"><span class="number">0x71a718d18115</span>:mov qword ptr [rbp - <span class="number">0x48</span>], rax</span><br><span class="line"><span class="number">0x71a718d18119</span>:mov qword ptr [rbp - <span class="number">0x30</span>], <span class="number">0</span></span><br><span class="line"><span class="number">0x71a718d18121</span>:mov rax, qword ptr [rbp - <span class="number">0x30</span>]</span><br><span class="line"><span class="number">0x71a718d18125</span>:cmp rax, qword ptr [rbp - <span class="number">0x40</span>]</span><br><span class="line"><span class="number">0x71a718d18129</span>:jae <span class="number">0x71a718d1815c</span></span><br><span class="line"><span class="number">0x71a718d1812f</span>:mov rax, qword ptr [rbp - <span class="number">0x38</span>]</span><br><span class="line"><span class="number">0x71a718d18133</span>:mov rcx, qword ptr [rbp - <span class="number">0x30</span>]</span><br><span class="line"><span class="number">0x71a718d18137</span>:movsx eax, byte ptr [rax + rcx]</span><br><span class="line"><span class="number">0x71a718d1813b</span>:xor eax, <span class="number">0x2c</span></span><br><span class="line"><span class="number">0x71a718d1813e</span>:mov dl, al</span><br><span class="line"><span class="number">0x71a718d18140</span>:mov rax, qword ptr [rbp - <span class="number">0x48</span>]</span><br><span class="line">[2206123<span class="attr">SC</span>::<span class="attr">PID</span>::<span class="number">23883</span>]-&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/posts/frida-labs/060.png"></p>
+<p>把 <code>0f 85</code> 改成<code>0f 84</code>就可以了</p>
+<p><img src="/images/posts/frida-labs/061.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> libc = <span class="string">&quot;libfrida0xb.so&quot;</span></span><br><span class="line">        <span class="keyword">var</span> base = <span class="title class_">Module</span>.<span class="title function_">getBaseAddress</span>(libc)</span><br><span class="line">        <span class="comment">// hook getFlag 函数入口确认调用</span></span><br><span class="line">        <span class="keyword">var</span> get_flag = base.<span class="title function_">add</span>(<span class="number">0x17181</span>)</span><br><span class="line">        <span class="keyword">var</span> get_flag_entry = base.<span class="title function_">add</span>(<span class="number">0x170B0</span>)</span><br><span class="line">        <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(get_flag, &#123;</span><br><span class="line">            <span class="attr">onEnter</span>: <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;flag = &quot;</span> + <span class="title class_">Memory</span>.<span class="title function_">readUtf8String</span>(<span class="variable language_">this</span>.<span class="property">context</span>.<span class="property">rcx</span>))</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onLeave</span>: <span class="keyword">function</span> (<span class="params">retval</span>) &#123; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> addr = <span class="title function_">ptr</span>(get_flag_entry)</span><br><span class="line">        <span class="title class_">Memory</span>.<span class="title function_">patchCode</span>(addr.<span class="title function_">add</span>(<span class="number">0x1E</span>), <span class="number">2</span>, <span class="keyword">function</span> (<span class="params">code</span>) &#123;</span><br><span class="line">            <span class="comment">// addr 是要写入的地址</span></span><br><span class="line">            <span class="comment">// len 写入到长度</span></span><br><span class="line">            <span class="comment">// code是对象</span></span><br><span class="line">            code.<span class="title function_">writeByteArray</span>([<span class="number">0x0f</span>, <span class="number">0x84</span>])</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">0x20</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> tmp = <span class="title class_">Instruction</span>.<span class="title function_">parse</span>(addr)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(tmp.<span class="property">address</span> + <span class="string">&quot;：&quot;</span> + tmp)</span><br><span class="line">            addr = addr.<span class="title function_">add</span>(tmp.<span class="property">size</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clear</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;\x1B[2J\x1B[3J\x1B[H&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+</article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+</div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/06/03/%E5%BE%A1%E7%BD%91%E6%9D%AF2026/">2026御网杯</a></div></section></div>
+
+
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="utterances" repo="run521520/run521520.github.io" issue-term="pathname" theme="preferred-color-scheme"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">youduck7</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<div style="margin-top:10px;text-align:center;"><span id="vercount_container_site_pv" style="display:inline-block;margin:0 10px;">本站总访问量 <span id="vercount_value_site_pv" style="color:#00d2ff;font-weight:bold;">-</span> 次</span><span id="vercount_container_site_uv" style="display:inline-block;margin:0 10px;">本站访客数 <span id="vercount_value_site_uv" style="color:#00d2ff;font-weight:bold;">-</span> 人</span></div></div></footer>
+<script defer src="https://vercount.one/js"></script>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right"><div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida01"><span class="toc-text">Frida01</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida02"><span class="toc-text">Frida02</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida03"><span class="toc-text">Frida03</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida04"><span class="toc-text">Frida04</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida05"><span class="toc-text">Frida05</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida06"><span class="toc-text">Frida06</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida07"><span class="toc-text">Frida07</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida08"><span class="toc-text">Frida08</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida09"><span class="toc-text">Frida09</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida0A"><span class="toc-text">Frida0A</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida0B"><span class="toc-text">Frida0B</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  window.canonical["param"] = {"permalink":"http://run521520.github.io/2026/06/14/10_Frida-Labs-WP/","checklink":"/js/plugins/video.js"};
+  // Fix: Ensure page is at the correct top position on data load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'auto';
+  }
+  (function() {
+    const scrollHandler = () => {
+      const wikiCover = document.querySelector('#l_cover .l_cover.wiki');
+      const startEl = document.getElementById('start');
+      if (wikiCover && startEl) {
+        window.scrollTo(0, startEl.offsetTop);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    if (document.readyState !== 'loading') scrollHandler();
+    else document.addEventListener('DOMContentLoaded', scrollHandler);
+  })();
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      // 倒序遍历避免 splice 后的索引问题
+      for (let index = this.list.length - 1; index >= 0; index--) {
+        const e = this.list[index];
+        if (e.name === name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 已加载样式缓存
+    _loadedStyles: new Set(),
+
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      // 如果样式已加载，直接返回 null
+      if (utils._loadedStyles.has(href)) {
+        return null;
+      }
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      // 标记样式为已加载 (在创建元素后立即标记，防止重复创建)
+      utils._loadedStyles.add(href);
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 已加载脚本缓存
+    _loadedScripts: new Set(),
+
+    // 已加载元素缓存 (使用 WeakSet 追踪元素实例,避免 PJAX 导航时的状态混淆)
+    _loadedElements: new WeakSet(),
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      // 如果脚本已加载，直接返回
+      if (utils._loadedScripts.has(src)) {
+        resolve();
+        return;
+      }
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        utils._loadedScripts.add(src);
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // PJAX 事件监听器管理
+    _pjaxListeners: new Set(),
+    
+    jq: (fn, pjax = true) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+      if (pjax && !fn._pjax_registered) {
+        document.addEventListener('pjax:complete', fn);
+        fn._pjax_registered = true;
+        utils._pjaxListeners.add(fn); // 追踪监听器以便清理
+      }
+    },
+    
+    // 清理所有 PJAX 事件监听器
+    cleanupPjaxListeners: () => {
+      utils._pjaxListeners.forEach(fn => {
+        document.removeEventListener('pjax:complete', fn);
+        fn._pjax_registered = false;
+      });
+      utils._pjaxListeners.clear();
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length === 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      // 检查元素实例是否已加载 (而不是检查属性)
+      if (el && utils._loadedElements.has(el)) {
+        return;
+      }
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            // 标记元素实例为已加载
+            if (el) utils._loadedElements.add(el);
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+
+    // 插件初始化管理器 - 统一处理 DOMContentLoaded 和 pjax:complete 事件
+    _pluginInitializers: [],
+    _pluginCleanups: new Map(), // 存储每个插件的清理函数
+    
+    initPlugin: (initFn, name, options = {}) => {
+      if (!initFn || typeof initFn !== 'function') return;
+      
+      // 避免重复注册
+      const pluginName = name || initFn.name;
+      if (utils._pluginInitializers.some(p => p.name === pluginName)) return;
+      
+      // 包装初始化函数，添加防重复执行的保护
+      const wrappedInit = () => {
+        try {
+          // 在执行前先清理旧的资源
+          if (utils._pluginCleanups.has(pluginName)) {
+            const cleanup = utils._pluginCleanups.get(pluginName);
+            if (typeof cleanup === 'function') {
+              cleanup();
+            }
+          }
+          
+          // 执行初始化，可能返回清理函数
+          const cleanup = initFn();
+          
+          // 如果初始化函数返回了清理函数，保存它
+          if (typeof cleanup === 'function') {
+            utils._pluginCleanups.set(pluginName, cleanup);
+          }
+        } catch (error) {
+          console.error(`[Plugin ${pluginName}] 初始化失败:`, error);
+        }
+      };
+      
+      utils._pluginInitializers.push({ 
+        fn: wrappedInit, 
+        name: pluginName,
+        options: options 
+      });
+      
+      // 如果 DOM 已经加载完成，立即执行
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        wrappedInit();
+      } else {
+        // 否则等待 DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', wrappedInit, { once: true });
+      }
+    },
+
+    // 重新初始化所有插件（用于 PJAX 等场景）
+    reinitPlugins: () => {
+      utils._pluginInitializers.forEach(plugin => {
+        // 跳过标记为不需要重新初始化的插件
+        if (plugin.options.skipReinit) return;
+        
+        try {
+          plugin.fn();
+        } catch (error) {
+          console.error(`[Plugin ${plugin.name}] 重新初始化失败:`, error);
+        }
+      });
+    },
+    
+    // 清理所有插件资源
+    cleanupPlugins: () => {
+      utils._pluginCleanups.forEach((cleanup, name) => {
+        try {
+          cleanup();
+        } catch (error) {
+          console.error(`[Plugin ${name}] 清理失败:`, error);
+        }
+      });
+      utils._pluginCleanups.clear();
+    },
+    
+    // 清理所有资源（用于页面卸载或重置）
+    cleanupAll: () => {
+      utils.cleanupPlugins();
+      utils.cleanupPjaxListeners();
+    },
+  };
+
+  // 自动处理 PJAX 事件
+  document.addEventListener('pjax:before', () => {
+    // 在导航前清理旧的 PJAX 监听器（如果需要重新注册）
+    // 注意：这里不清理，因为监听器应该是持久的
+    // utils.cleanupPjaxListeners();
+  });
+  
+  document.addEventListener('pjax:complete', () => {
+    utils.reinitPlugins();
+  });
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script>
+  (function() {
+    const lazyload = false;
+    
+    function initUtterances() {
+      const el = document.querySelector("#comments #utterances");
+      if (!el) return;
+      
+      function load_utterances() {
+        try {
+          el.innerHTML = '';
+        } catch (error) {
+          console.error(error);
+        }
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.async = true;
+        for (const key of Object.keys(el.attributes)) {
+          const attr = el.attributes[key];
+          if (['class', 'id'].includes(attr.name) === false) {
+            script.setAttribute(attr.name, attr.value);
+          }
+        }
+        el.appendChild(script);
+      }
+      
+      util.viewportLazyload(el, load_utterances, lazyload);
+    }
+    
+    // Store in global stellar namespace for PJAX reinitialization
+    window.stellar = window.stellar || {};
+    window.stellar.initComments = window.stellar.initComments || {};
+    window.stellar.initComments.utterances = initUtterances;
+    
+    // Initialize on page load
+    initUtterances();
+  })();
+</script>
+
+
+
+
+<script defer>
+  const initServices = () => {
+    // 用于存储需要清理的资源
+    let timers = [];
+    
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        const cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(cardlinks);
+          });
+        }
+      } else if (id == 'ghinfo') {
+        const els = document.querySelectorAll('.ds-ghinfo');
+        if (els.length > 0) {
+          utils.js(js, { defer: true });
+        }
+      } else if (id == 'voice') {
+        const voiceAudios = document.querySelectorAll('.voice>audio');
+        if (voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        const videos = document.querySelectorAll('.video>video');
+        if (videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        const files = document.querySelectorAll('.chat-file');
+        if (files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || id == 'memos' || id == 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          }, false);
+        }
+      }
+    }
+
+    // search
+    if (ctx.search && typeof searchFunc === 'function') {
+      const $inputArea = $("input#search-input");
+      if ($inputArea.length > 0 && !$inputArea[0]._searchInitialized) {
+        const path = ctx.search.path.startsWith('/') ? ctx.root + ctx.search.path.substring(1) : ctx.root + ctx.search.path;
+        const filter = $inputArea.attr('data-filter') || '';
+        searchFunc(path, filter, 'search-wrapper', 'search-input', 'search-result');
+        // 标记为已初始化，防止重复绑定
+        $inputArea[0]._searchInitialized = true;
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+    let firstAdjustInterval = null;
+    let mainInterval = null;
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      const date = new Date();
+      const sec = date.getSeconds();
+      firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+      timers.push(firstAdjustInterval);
+
+      function firstAdjustTime() {
+        NowTime();
+        if (firstAdjustInterval) {
+          clearInterval(firstAdjustInterval);
+          firstAdjustInterval = null;
+        }
+        mainInterval = setInterval(NowTime, 1000 * 60);
+        timers.push(mainInterval);
+      }
+
+      function NowTime() {
+        for (let i = 0; i < phoneTimes.length; ++i) {
+          const timeSpan = phoneTimes[i];
+          const date = new Date();
+          const hour = date.getHours();
+          const min = date.getMinutes();
+          timeSpan.innerHTML = check(hour) + ":" + check(min);
+        }
+      };
+
+      function check(val) {
+        if (val < 10) {
+          return ("0" + val);
+        }
+        return (val);
+      }
+    }
+
+    // chat quote - 存储事件监听器以便清理
+    const quoteClickHandlers = new Map();
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      const handler = function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      };
+      quote.addEventListener('click', handler);
+      quoteClickHandlers.set(quote, handler); // 保存处理器引用
+    });
+
+    // 返回清理函数，用于清理定时器和观察器
+    return () => {
+      // 清理所有定时器（包括可能未完成的 firstAdjustInterval）
+      timers.forEach(timer => {
+        if (timer) clearInterval(timer);
+      });
+      timers = [];
+      if (firstAdjustInterval) {
+        clearInterval(firstAdjustInterval);
+        firstAdjustInterval = null;
+      }
+      if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = null;
+      }
+      
+      // 断开观察器
+      if (chat_quote_obverser) {
+        chat_quote_obverser.disconnect();
+      }
+      
+      // 移除所有 click 事件监听器
+      quoteClickHandlers.forEach((handler, quote) => {
+        quote.removeEventListener('click', handler);
+      });
+      quoteClickHandlers.clear();
+    };
+  };
+
+  utils.initPlugin(initServices, 'services');
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  utils.initPlugin(() => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  }, 'swiper');
+</script>
+<script>
+  utils.initPlugin(() => {
+    const codeElements = document.querySelectorAll('.code');
+    if (codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js', { defer: true }).then(() => {
+        if (typeof createCopyButtons === 'function') {
+          createCopyButtons(codeElements);
+        }
+      });
+    }
+  }, 'copycode');
+</script>
+
+
+<!-- inject -->
+<script defer src="https://vercount.one/js"></script>
+</div><div class="page-loading-bar"><img src="https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"haru01","display":{"position":"right","width":150,"height":300,"h_offset":0,"v_offset":0},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
